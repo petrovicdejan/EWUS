@@ -1,0 +1,6 @@
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\bin\Debug\EWUS_Expertdatabase.Common.dll
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\bin\Debug\EWUS_Expertdatabase.Common.pdb
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\obj\Debug\EWUS_Expertdatabase.Common.csprojResolveAssemblyReference.cache
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\obj\Debug\EWUS_Expertdatabase.Common.csproj.CoreCompileInputs.cache
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\obj\Debug\EWUS_Expertdatabase.Common.dll
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Common\obj\Debug\EWUS_Expertdatabase.Common.pdb

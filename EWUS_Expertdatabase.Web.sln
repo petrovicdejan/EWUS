@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWUS_Expertdatabase.Web", "EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.csproj", "{C449BA1E-6C6C-4FB9-A04D-94AAA001CCE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWUS_Expertdatabase.Data", "EWUS_Expertdatabase.Data\EWUS_Expertdatabase.Data.csproj", "{15C60774-C140-4B26-8E10-62AD14876272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWUS_Expertdatabase.Model", "EWUS_Expertdatabase.Model\EWUS_Expertdatabase.Model.csproj", "{93C15C64-506C-4E5B-8023-F7E168B3F6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWUS_Expertdatabase.Common", "EWUS_Expertdatabase.Common\EWUS_Expertdatabase.Common.csproj", "{03FA8CCA-07F6-43B9-BEC5-EE9030977B18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C449BA1E-6C6C-4FB9-A04D-94AAA001CCE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C449BA1E-6C6C-4FB9-A04D-94AAA001CCE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C449BA1E-6C6C-4FB9-A04D-94AAA001CCE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C449BA1E-6C6C-4FB9-A04D-94AAA001CCE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C60774-C140-4B26-8E10-62AD14876272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C60774-C140-4B26-8E10-62AD14876272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C60774-C140-4B26-8E10-62AD14876272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C60774-C140-4B26-8E10-62AD14876272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C15C64-506C-4E5B-8023-F7E168B3F6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C15C64-506C-4E5B-8023-F7E168B3F6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C15C64-506C-4E5B-8023-F7E168B3F6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C15C64-506C-4E5B-8023-F7E168B3F6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FA8CCA-07F6-43B9-BEC5-EE9030977B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FA8CCA-07F6-43B9-BEC5-EE9030977B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FA8CCA-07F6-43B9-BEC5-EE9030977B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FA8CCA-07F6-43B9-BEC5-EE9030977B18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C2A3CBD-6D6A-426B-90D6-835AD4653382}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://beograd:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EWUS_Expertdatabase.Data\\EWUS_Expertdatabase.Data.csproj
+		SccProjectName1 = EWUS_Expertdatabase.Data
+		SccLocalPath1 = EWUS_Expertdatabase.Data
+		SccProjectUniqueName2 = EWUS_Expertdatabase.Model\\EWUS_Expertdatabase.Model.csproj
+		SccProjectName2 = EWUS_Expertdatabase.Model
+		SccLocalPath2 = EWUS_Expertdatabase.Model
+		SccProjectUniqueName3 = EWUS_Expertdatabase.Web\\EWUS_Expertdatabase.Web.csproj
+		SccProjectName3 = EWUS_Expertdatabase.Web
+		SccLocalPath3 = EWUS_Expertdatabase.Web
+		SccProjectUniqueName4 = EWUS_Expertdatabase.Common\\EWUS_Expertdatabase.Common.csproj
+		SccProjectName4 = EWUS_Expertdatabase.Common
+		SccLocalPath4 = EWUS_Expertdatabase.Common
+	EndGlobalSection
+EndGlobal
