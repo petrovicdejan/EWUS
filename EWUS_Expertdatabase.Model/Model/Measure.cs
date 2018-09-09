@@ -28,6 +28,8 @@ namespace EWUS_Expertdatabase.Model
         /// </summary>
         public Classification OperationType { get; set; }
 
+        public int? OperationTypeId { get; set; }
+
         /// <summary>
         ///     Get or set savings of the measure
         /// </summary>

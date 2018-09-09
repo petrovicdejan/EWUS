@@ -1,0 +1,12 @@
+﻿@if (ViewBag.IsPopup)
+{
+    @Html.Raw("</div><div class='modal-footer'>");
+}
+
+@Html.Hidden("IsPopup", (object)ViewBag.IsPopup)
+@Html.Raw("<button tabindex='1000' data-tabindex='1000' type='submit' value='Register' data-localized='SUBMIT' class='btn btn-primary'>Submit</button>")
+
+@if (ViewBag.IsPopup)
+{
+    @Html.Raw("</div>")
+}

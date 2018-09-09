@@ -1,11 +1,10 @@
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.pdb
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.dll
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.pdb
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.xml
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.xml
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csprojResolveAssemblyReference.cache
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.dll
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.pdb

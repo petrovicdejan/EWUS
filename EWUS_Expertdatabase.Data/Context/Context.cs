@@ -3,9 +3,9 @@ using System.Data.Entity;
 
 namespace EWUS_Expertdatabase.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class EWUSDbContext : DbContext
     {
-        public ApplicationDbContext() : base("ApplicationDbContext")
+        public EWUSDbContext() : base("EWUS_Expertdatabase")
         {
 
         }

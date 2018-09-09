@@ -53,14 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\Context.cs" />
-    <Compile Include="Migrations\201809071414103_InitialCreate.cs" />
-    <Compile Include="Migrations\201809071414103_InitialCreate.Designer.cs">
-      <DependentUpon>201809071414103_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201809091112222_InitialCreate.cs" />
+    <Compile Include="Migrations\201809091112222_InitialCreate.Designer.cs">
+      <DependentUpon>201809091112222_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repository\ClassificationRepository.cs" />
-    <Compile Include="Repository\MeasureRepository.cs" />
-    <Compile Include="Repository\ProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,18 +65,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EWUS_Expertdatabase.Common\EWUS_Expertdatabase.Common.csproj">
-      <Project>{03fa8cca-07f6-43b9-bec5-ee9030977b18}</Project>
-      <Name>EWUS_Expertdatabase.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EWUS_Expertdatabase.Model\EWUS_Expertdatabase.Model.csproj">
       <Project>{93c15c64-506c-4e5b-8023-f7e168b3f6c5}</Project>
       <Name>EWUS_Expertdatabase.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809071414103_InitialCreate.resx">
-      <DependentUpon>201809071414103_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809091112222_InitialCreate.resx">
+      <DependentUpon>201809091112222_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

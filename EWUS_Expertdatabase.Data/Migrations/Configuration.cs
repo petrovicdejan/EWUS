@@ -5,14 +5,14 @@ namespace EWUS_Expertdatabase.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EWUS_Expertdatabase.Data.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EWUS_Expertdatabase.Data.EWUSDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(EWUS_Expertdatabase.Data.ApplicationDbContext context)
+        protected override void Seed(EWUS_Expertdatabase.Data.EWUSDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
