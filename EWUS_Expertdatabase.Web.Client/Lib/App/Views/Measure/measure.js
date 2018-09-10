@@ -1,18 +1,18 @@
 ﻿(function ($) {
     $(document).ready(function () {
+
+        var dataDocumentItems = null;
+        if (IsNullOrEmpty(dcMeasure) == false) {
+            var data = JSON.parse(base64.decode(dcMeasure));
+
+            if (IsNullOrUndefined(data) == false)
+                dataDocumentItems = data.DocumentItems;
+        }
+
         
-        var data = null;
 
-        if (!IsNullOrUndefined(documentInstance) && !IsNullOrWhiteSpace(documentInstance))
-            data = JSON.parse(base64.decode(documentInstance));
-
-        var idDocumentInstance = 0;
-
-        if (!IsNullOrUndefined(data) && data.length > 0)
-            idDocumentInstance = data[0].Id;
-
-        publicApp.initializeDropZoneApp("measureDropZone", "measurePreview", idDocumentInstance, objectId, "Measure");
-        publicApp.fillDropZoneApp(data, "measureDropZone", objectId, "Measure");  
+        publicApp.initializeDropZoneApp("measureDropZone", "measurePreview", objectId, "Measure");
+        publicApp.fillDropZoneApp(dataDocumentItems, "measureDropZone", objectId, "Measure");  
         
         var colModel = [
             {
@@ -73,7 +73,7 @@
 
                 var data = [];
 
-                var url = sRootUrl + "api/Measure";
+                var url = sRootUrl + "Measure/GetMeasures";
 
                 publicApp.getWebApi(url, function returnText(rData) {
 

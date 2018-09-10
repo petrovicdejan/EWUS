@@ -18,7 +18,7 @@ namespace EWUS_Expertdatabase.Model
         
         public Collection<DocumentItem> DocumentItems { get; set; }
         
-        public Reference RefersTo { get; set; }
+        //public Reference RefersTo { get; set; }
     }
     
     public class DocumentItem : CoreObject
@@ -28,11 +28,11 @@ namespace EWUS_Expertdatabase.Model
 
         }
         
-        [IgnoreDataMember]
-        [XmlIgnore]
-        protected DocumentInstance DocumentInstance { get; set; }
+        //[IgnoreDataMember]
+        //[XmlIgnore]
+        //protected DocumentInstance DocumentInstance { get; set; }
         
-        public long DocumentInstanceId { get; set; }
+        //public long DocumentInstanceId { get; set; }
         
         public byte[] BinaryValue { get; set; }
         

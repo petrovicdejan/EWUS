@@ -801,7 +801,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
     </div>
 }
 
-@helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "") { 
+@helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "", string typeName = "") { 
     <div class="field-set">
         <div class="field-group float-label-control">
             <label id="label-@label" >@label</label>

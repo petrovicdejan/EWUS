@@ -1,0 +1,41 @@
+﻿
+@section HeaderOptions {
+
+    <!-- jqGrid -->
+    <link href="~/Scripts/jqGrid/css/trirand/ui.jqgrid-bootstrap.css" rel="stylesheet">
+}
+
+    <div class="page-title">
+        <div class="row">
+            <div class="title_left">
+                <h3 style="color:black">Maßnahmenkatalog</h3>
+            </div>
+        </div>       
+
+        <div class="pull-left" style=" margin-bottom:10px;">
+            <button class="assign-role-link btn btn-primary btn-outline" data-url="/Measure/Measure" id="buttonAddMeasure" onclick="publicApp.openModalForm(this); false;"><i class="fa fa-circle-thin"></i> <span>Neu Wartungsfirma</span> </button>
+        </div>
+    </div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="gridContainer" style="margin-top:3%;">
+            <table id="jqGrid"></table>
+            <div id="jqGridPagerr"></div>
+        </div>
+    </div>
+</div>
+
+@section ScriptLibs {
+    <script src="~/Scripts/jqGrid/js/trirand/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/js/trirand/jquery.jqGrid.min.js"></script>
+
+    <script>
+        $.jgrid.defaults.width = 100;
+        $.jgrid.defaults.responsive = true;
+        $.jgrid.defaults.styleUI = 'Bootstrap';
+    </script>
+    <script src="~/Lib/App/Views/Measure/measureIndex.js"></script>
+}

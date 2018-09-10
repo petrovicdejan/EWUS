@@ -44,7 +44,7 @@ else
 <!-- jqGrid -->
 <link href="~/Scripts/jqGrid/css/trirand/ui.jqgrid-bootstrap.css" rel="stylesheet">
 
-@using (Html.BeginForm("Measure", "Party", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "Measure", posturl = "api/Measure", dataname = "Measure", objectid = ViewBag.Id }))
+@using (Html.BeginForm("Measure", "Party", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "Measure", posturl = "Measure/SaveMeasure", dataname = "Measure", objectid = ViewBag.Id }))
 {
     <div class="validation-summary-errors-sw" style="margin-top:10px;display:none;">
         <div class="alert alert-danger">
@@ -80,7 +80,7 @@ else
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "api/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired:true)
+                            @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired:true)
                         </div>
                     </div>
                     <div class="row">

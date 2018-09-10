@@ -4,14 +4,16 @@ using EWUS_Expertdatabase.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 
 namespace EWUS_Expertdatabase.Business
 {
     public class AddAttachment
     {
-        public static Result<DocumentInstance> InsertAttachment(long documentInstanceId, long RefersTo_Id, string RefersTo_Type_Name, IEnumerable<Item> documentItems)
+        public static Result<DocumentInstance> InsertAttachment(long documentInstanceId, long RefersTo_Id, string RefersTo_Type_Name, IEnumerable<Item> documentItems, string objectGuid = "", string objectTypeName = "")
         {
             Result<DocumentInstance> output = new Result<DocumentInstance>();
             output.Status = ResultStatus.OK;
@@ -52,7 +54,7 @@ namespace EWUS_Expertdatabase.Business
 
                         if (documentInstance == null)
                         {
-                            originalDocumentInstance.RefersTo = new Reference(RefersTo_Id, RefersTo_Type_Name);
+                            //originalDocumentInstance.RefersTo = new Reference(RefersTo_Id, RefersTo_Type_Name);
                             ctx.DocumentInstances.Add(originalDocumentInstance);
                         }
                         else
@@ -64,6 +66,8 @@ namespace EWUS_Expertdatabase.Business
                         
                         ctx.SaveChanges();
                         output.Status = ResultStatus.OK;
+
+                       
                     }
                 }
             }

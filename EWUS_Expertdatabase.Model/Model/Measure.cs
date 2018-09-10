@@ -49,6 +49,11 @@ namespace EWUS_Expertdatabase.Model
         ///     Get or set collection of measure's links
         /// </summary>
         public Collection<MeasureLink> MeasureLinks { get; set; }
+
+        /// <summary>
+        ///     Get or set document
+        /// </summary>
+        public Collection<DocumentItem> DocumentItems { get; set; }
     }
     
     public class MeasurePicture : CoreObject

@@ -76,7 +76,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
         [Route("insert/contentstream")]
         //[AllowAnonymous]
-        public HttpResponseMessage InsertContentStream(string number)
+        public HttpResponseMessage InsertContentStream(string tag, string number)
         {
             Field objField = null;
             Item objItem = new Item();
@@ -116,7 +116,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             HttpResponseMessage response = CreateResponse(null, string.Empty, false);
 
-            string folder = Path.Combine(ConfigurationManager.AppSettings["SharedFolder"]);
+            string folder = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag]);
 
             if (!Directory.Exists(folder))
             {
@@ -125,7 +125,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             var streamInput = objItem.GetValue("InputStream") as Stream;
             var fileName = objItem.GetValue("ObjectId") as String;
-            var path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder"], fileName);
+            var path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName);
 
             using (var fileStream = File.Create(path))
             {
@@ -140,7 +140,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
         [Route("download/contentstream")]
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage DownloadContentStream(string number, string key="")
+        public HttpResponseMessage DownloadContentStream(string tag, string number, string key="")
         {
             HttpResponseMessage response = new HttpResponseMessage();
             response.StatusCode = HttpStatusCode.BadRequest;
@@ -157,7 +157,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
                 if (!string.IsNullOrWhiteSpace(objectId))
                     fileName = objectId;
 
-                var localFilePath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder"], fileName);
+                var localFilePath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName);
 
                 if (!File.Exists(localFilePath))
                 {
@@ -211,7 +211,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             //string output = null;
 
-            response.StatusCode = Utilities.ToHttpCode(item.Status);
+            response.StatusCode = Utils.ToHttpCode(item.Status);
 
             object input = (withWrap) ? item : item.Value;
 

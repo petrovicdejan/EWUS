@@ -63,7 +63,7 @@
         setGridOptions.deleteRows('jqGrid');
 
         var data = [];
-        var url = sRootUrl + 'api/Measure';
+        var url = sRootUrl + 'Measure/GetMeasures';
 
         publicApp.getWebApi(url, function returnText(rData) {
 

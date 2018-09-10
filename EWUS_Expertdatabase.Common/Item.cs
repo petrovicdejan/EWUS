@@ -439,7 +439,7 @@ namespace EWUS_Expertdatabase.Common
                     }
                     else if (toProp.PropertyType == typeof(String[]))
                     {
-                        Object value = Utilities.JsonStringToObject(field.GetValue().ToString(), typeof(String[]));
+                        Object value = Utils.JsonStringToObject(field.GetValue().ToString(), typeof(String[]));
 
                         toProp.SetValue(to, value, null);
                     }
@@ -751,7 +751,7 @@ namespace EWUS_Expertdatabase.Common
         {
             try
             {
-                return Utilities.JsonStringToObject(Value.ToString(), typeof(ItemCollection)) as IEnumerable<Item>;
+                return Utils.JsonStringToObject(Value.ToString(), typeof(ItemCollection)) as IEnumerable<Item>;
             }
             catch (Exception ex)
             {
@@ -763,7 +763,7 @@ namespace EWUS_Expertdatabase.Common
         {
             try
             {
-                return Utilities.JsonStringToObject(Value.ToString(), typeof(FieldCollection)) as IEnumerable<Field>;
+                return Utils.JsonStringToObject(Value.ToString(), typeof(FieldCollection)) as IEnumerable<Field>;
             }
             catch (Exception ex)
             {
@@ -819,49 +819,6 @@ namespace EWUS_Expertdatabase.Common
             catch (Exception ex)
             {
                 return null;
-            }
-        }
-    }
-
-
-    public class Utilities
-    {
-        public static HttpStatusCode ToHttpCode(ResultStatus status)
-        {
-            if (status == ResultStatus.OK)
-                return HttpStatusCode.OK;
-            else if (status == ResultStatus.Created)
-                return HttpStatusCode.Created;
-            else if (status == ResultStatus.BadRequest)
-                return HttpStatusCode.BadRequest;
-            else if (status == ResultStatus.NotFound)
-                return HttpStatusCode.NotFound;
-            else
-                return HttpStatusCode.InternalServerError;
-        }
-
-        /// <summary>
-        /// Deserializes a JSON formatted string to an object of the defined type
-        /// </summary>
-        /// <param name="jsonString">JSON formatted string</param>
-        /// <param name="objType">The type of the object which the jsonString is to be Deserialized to.</param>
-        /// <returns>Deserialized object</returns>
-        /// <exception cref="System.Runtime.Serialization.SerializationException"></exception>
-        public static object JsonStringToObject(string jsonString, Type objType)
-        {
-            try
-            {
-                DataContractJsonSerializer js = new DataContractJsonSerializer(objType);
-                byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonString);
-                using (MemoryStream jsonStream = new MemoryStream(jsonBytes))
-                {
-
-                    return js.ReadObject(jsonStream);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
         }
     }

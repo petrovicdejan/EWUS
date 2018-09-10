@@ -7,7 +7,9 @@
 
         return $.ajax({
             url: sUri,
-            dataType: "json",
+            cache: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
             async: bAsync, 
             headers: GetWebApiHeaders(),
             success: function (data, textStatus, xhr) {
@@ -91,6 +93,7 @@
         $.ajax({
             url: sUri,
             type: type,
+            cache: false,
             dataType: 'json',
             data: data,
             async: isAsync,
@@ -118,7 +121,7 @@
         try {
             if (bCloseModalDialog)
                 closeModalDialog();
-            if (data.Success) {
+            //if (data.Success) {
                 var nextLink = "";
 
                 TryCatchWraper(function () {
@@ -144,9 +147,9 @@
                         + " RecordsAffected: "
                         + data.RecordsAffected + "</span>");
                 }
-            } else {
-                webApiPostOnSuccessFalse("ErrorGeneral", data, bShowAlert);
-            }
+            //} else {
+            //    webApiPostOnSuccessFalse("ErrorGeneral", data, bShowAlert);
+            //}
         } catch (e) {
             console.log('webApiPost: ' + e.message);
         }
@@ -833,6 +836,7 @@
 
                         $.ajax({
                             url: url,
+                            cache: false,
                             dataType: "json",
                             headers: GetWebApiHeaders(),
                             success: function (data, textStatus, xhr) {
@@ -2741,9 +2745,16 @@
         i.Name = $(form).attr("dataname");
 
         i.Fields = getFormFields(form, true);
+
+        var dataObject = new Object();
+        dataObject.Id = objectId;
+        $.each(i.Fields, function (index, value) {
+            dataObject[value.Name] = value.Value;
+        });
+
         var url = sRootUrl + $(form).attr("posturl");
 
-        webApiPost(url, i, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, true, formId);
+        webApiPost(url, dataObject, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, true, formId);
 
         return false;
     }
@@ -2803,10 +2814,11 @@
         $.each(gridModel, function (index, value) {
             var p = new Object();
 
-            p.Fields = new Array();
+            //p.Fields = new Array();
             $.each(columnNames, function (ind, val) {
-                if (val != "Actions") {                   
-                    p.Fields.push({ Name: val, Value: value[val] });
+                if (!IsNullOrEmpty(val) && !IsNullOrWhiteSpace(val) && val != "Actions") {                   
+                    //p.Fields.push({ Name: val, Value: value[val] });
+                    p[val] = value[val]; 
                 }
             });    
 
@@ -2823,26 +2835,26 @@
     function getFromDropzone(fields) {
 
         var f = new Object();
-        f.Name = "DocumentInstances";
+        f.Name = "DocumentItems";
         f.FieldType = "ItemCollection";
         f.DataType = "AttachmentCollection";
-        f.Id = $("div[data-dropzone='true']").attr("data-document-instance-id");
+        f.Id = $("div[data-dropzone='true']").attr("data-refers-to-id");
 
         f.IsEnumerable = true;
         var items = [];
         items.length = 0;
         var inx = 0;
 
-        fields.push({ Name: "Object_Id", Value: $("div[data-dropzone='true']").attr("data-document-instance-id") });
-        fields.push({ Name: "RefersTo_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
+        fields.push({ Name: "Object_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
+        //fields.push({ Name: "RefersTo_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
+        //fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
 
         $("div[data-dropzone='true']").find(".dz-preview").each(function (index) {
             var el = $(this).find(".dz-details");
             if (!IsNullOrUndefined(el) && !IsNullOrUndefined($(this).attr("data-mimetype"))) {
 
                 var p = new Object();
-                p.Fields = new Array();
+                //p.Fields = new Array();
 
                 var dropZone = new Object();
                 dropZone.DocumentName = $(el.find(".dz-filename")).find("[data-dz-name]")[0].innerText;
@@ -2851,7 +2863,8 @@
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
 
-                p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
+                //p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
+                p = dropZone; 
 
                 items[inx] = p;
                 inx++;
@@ -2944,20 +2957,20 @@
         if (sValue == null || sValue == 'undefined')
             sValue = null;
 
-        var typeName = $(sSelector).attr("data-type-name");
-        if (IsNullOrWhiteSpace(typeName) == false) {
-            var reference = new Object();
-            reference.TypeName = typeName;
-            reference.Id = sValue;
+        //var typeName = $(sSelector).attr("data-type-name");
+        //if (IsNullOrWhiteSpace(typeName) == false) {
+        //    var reference = new Object();
+        //    reference.TypeName = typeName;
+        //    reference.Id = sValue;
 
+        //    return {
+        //        Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
+        //    }
+        //} else {
             return {
-                Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
+                Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
             }
-        } else {
-            return {
-                Name: $(sSelector).attr("data-filed-name"), Value: sValue
-            }
-        };
+        //};
     }
 
     function getSelected(sSelector) {
@@ -2965,7 +2978,7 @@
         return $(sId).val();
     }
 
-    function initializeDropZone(idDropZone,idPreview,documentInstanceId,refersToId,refersToTypeName) {
+    function initializeDropZone(idDropZone,idPreview,refersToId,refersToTypeName) {
         var firstTime = myAttachZone == null;
 
         if (!firstTime) {
@@ -2979,22 +2992,21 @@
             previewNode.parentNode.removeChild(previewNode);
 
             myAttachZone = new Dropzone(document.querySelector("#" + idDropZone), {
-                url: sRootUrl + "api/insert/contentstream?Tag=1",
+                url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,
                 addOpenLinks: true,
                 sendFileId: true,
                 clickable: "#" + idDropZone ,
                 acceptedFiles: "image/jpeg,image/png,image/jpg",
                 addDescription: true,
+                objectTypeName: refersToTypeName,
                 removedfile: function (file) {
                     var i = new Object();
-                    i.Name = "DocumentInstance";
                     i.ObjectId = file.id;
-                    i.TypeName = "DocumentInstance";
 
                     $.ajax({
                         type: 'POST',
-                        url: sRootUrl + "api/command/DocumentItem",
+                        url: sRootUrl + "document/DeleteDocument",
                         data: JSON.stringify(i),
                         headers: GetWebApiHeaders(),
                         contentType: 'application/json; charset=utf-8',
@@ -3012,11 +3024,10 @@
                 file.previewElement.setAttribute("data-objectid", file.id);
                 file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
 
-                $('#iddropzone').attr("data-document-instance-id", documentInstanceId);
                 $('#iddropzone').attr("data-refers-to-id", refersToId);
                 $('#iddropzone').attr("data-refers-to-type-name", refersToTypeName);
 
-                var fileNew = documentInstanceId == 0 ? true : false;
+                var fileNew = refersToId == 0 ? true : false;
 
                 var eventArgs = new Object();
                 eventArgs.FileIsNew = fileNew;
@@ -3036,8 +3047,7 @@
             var data = dcDocument;
 
             if (!IsNullOrUndefined(data)) {
-                var documentInstanceId = data.Id;
-                $.each(data.DocumentItems, function (index, value) {
+                $.each(data, function (index, value) {
 
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
@@ -3048,12 +3058,11 @@
                     myAttachZone.files.push(mockfilee);
                     myAttachZone.emit("addedfile", mockfilee);
                     if (isImage(value.DocumentName)) {
-                        myAttachZone.createThumbnailFromUrl(mockfilee, sRootUrl + "api/download/contentstream?Number=" + value.ObjectId);
+                        myAttachZone.createThumbnailFromUrl(mockfilee, sRootUrl + "document/download/contentstream?Tag=" + refersToTypeName + "&Number=" + value.ObjectId);
                     }
 
                     myAttachZone.emit("complete", mockfilee);
 
-                    $('#' + idDropZone).attr("data-document-instance-id", documentInstanceId);
                     $('#' + idDropZone).attr("data-refers-to-id", refersToId);
                     $('#' + idDropZone).attr("data-refers-to-type-name", refersToTypeName);
 
@@ -3120,11 +3129,11 @@
         onSelectChangeApp: function (sender, sId) {
             onSelectChange(sender, sId);
         },
-        initializeDropZoneApp: function (idDropZone, idPreview, documentInstanceId, refersToId, refersToTypeName) {
-            initializeDropZone(idDropZone, idPreview, documentInstanceId, refersToId, refersToTypeName);
+        initializeDropZoneApp: function (idDropZone, idPreview, refersToId, refersToTypeName) {
+            initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName);
         },
-        fillDropZoneApp: function (dcDocument, idDropZone, documentInstanceId, refersToId, refersToTypeName) {
-            FillDocumentDropzone(dcDocument, idDropZone, documentInstanceId, refersToId, refersToTypeName);
+        fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
+            FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
         }
     }
 
@@ -3319,6 +3328,10 @@ function logConsole(msg, error) {
     if (typeof console != "undefined") {
         console.log(msg, error);
     }
+}
+
+function TryCatchWraper(func) {
+    try { func(); } catch (ex) { logConsole("TryCatchWraper", ex); }
 }
 
 function setFocus(sSelector) {

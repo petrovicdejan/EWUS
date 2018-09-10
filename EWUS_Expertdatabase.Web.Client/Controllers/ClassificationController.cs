@@ -7,11 +7,11 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
     public class ClassificationController : Controller
     {
         // GET: GetClassificationsByType
-        [Route("GetClassificationsByType/{type:alpha}")]
-        public JsonResult GetClassificationsByType(string type)
+        [Route("GetClassificationsByType/{name:alpha}")]
+        public JsonResult GetClassificationsByType(string name)
         {
             var classification = new ClassificationRepository();
-            return Json(classification.GetClassificationsByType(type), JsonRequestBehavior.AllowGet);
+            return Json(classification.GetClassificationsByType(name), JsonRequestBehavior.AllowGet);
         }
     }
 }

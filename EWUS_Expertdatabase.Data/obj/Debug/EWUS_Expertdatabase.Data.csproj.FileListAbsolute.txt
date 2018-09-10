@@ -10,6 +10,8 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debu
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csprojResolveAssemblyReference.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.InitialCreate.resources
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version01.resources
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version02.resources
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.GenerateResource.Cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.dll

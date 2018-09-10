@@ -1,0 +1,817 @@
+﻿@helper LookupEditor(string name, 
+                     string path, 
+                     string label, 
+                     string objectType, 
+                     string uri, 
+                     string tabIndex, 
+                     string description, 
+                     bool isRequired = false,
+                     string dataLocalizedPlaceholder = null,
+                     string dataLocalizedLabel=null, 
+                     string dataLocalizedDescription = null, 
+                     string alternateName = "",
+                     string searchMethodName = "getSearchByScope",
+                     bool showOptions = true)
+{
+    string searchMethod = searchMethodName + "(this)";
+
+    <div class="field-set" style="padding-bottom: 20px">
+        <div class="field-contener">
+            <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
+                <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
+                       data-remote="remote_@name" data-recent="recent_@name"
+                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false" class="typeahead2"
+                       data-representing-type="Lookup"
+                       data-type-name="@objectType"
+                       placeholder="@label"
+                       data-localized-placeholder="@dataLocalizedPlaceholder"
+                       data-name="@path"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>   }
+                       data-path="@path" />
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;@if (showOptions == false) { <text>display:none;</text>}" >
+                    <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                </a>
+                <input id="@name-Url" type="hidden" value="" />
+                <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri" >
+                    <li><a onclick="@searchMethod" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                    <li><a onclick="@searchMethod" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                    <li class="divider"></li>
+                    <li><a onclick="@searchMethod" data-fileds="Name,Number" data-localized="All">All</a></li>
+                </ul>
+                <br />
+                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                    @description
+                </small>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var remote_@(name)_Uri = eval("@searchMethodName" + "($('#@name-ddl li a').first())");
+
+        var recent_@name = getRecent('recent-@name');
+
+        function map_@(name)(result) {
+            return $.map(result, function (i) {
+                if ($(".modal-body").find(".tt-dropdown-menu").css("position") != "relative") {
+                    $(".modal-body").find(".tt-dropdown-menu").css({ "position": "relative" });
+                }
+                return {
+                    number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.Type, typeName: i.TypeName,
+                    tokens: [' 0 ', i.Name, i.Number]
+                };
+            });
+        };
+
+        var remote_@name = getRemote(remote_@(name)_Uri, function () {
+            var value = $('#@name').val();
+            if (!value || value.length == 0 || value == '')
+                return "";
+            var uri = $('#@name-Url').val();
+
+            uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+            return uri;
+        }, map_@name);
+    </script>
+}
+
+@helper LookupEditorWithUri(string name, string path, string label, string objectType, string uri, string tabIndex, string description, bool isRequired = false, string dataLocalizedPlaceholder = null, string dataLocalizedLabel = null, string dataLocalizedDescription = null)
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
+                <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
+                       data-remote="remote_@name" data-recent="recent_@name"
+                       data-filed-name="@path" type="text" data-edit="false" class="typeahead2"
+                       data-representing-type="Lookup"
+                       data-type-name="@objectType"
+                       placeholder="@label"
+                       data-localized-placeholder="@dataLocalizedPlaceholder"
+                       data-name="@path"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>    }
+                       data-path="@path" />
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;">
+                    <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                </a>
+                <br />
+                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                    @description
+                </small>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var remote_@(name)_Uri = sRootUrl + "@uri";
+
+        var recent_@name = getRecent('recent-@name');
+
+        function map_@(name)(result) {
+            return $.map(result, function (i) {
+                if ($(".modal-body").find(".tt-dropdown-menu").css("position") != "relative") {
+                    $(".modal-body").find(".tt-dropdown-menu").css({ "position": "relative" });
+                }
+                return {
+                    number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.Type, typeName: i.TypeName,
+                    tokens: [' 0 ', i.Name, i.Number]
+                };
+            });
+        };
+
+        var remote_@name = getRemote(remote_@(name)_Uri, function () {
+            var value = $('#@name').val();
+            if (!value || value.length == 0 || value == '')
+                return "";
+            var uri = remote_@(name)_Uri;
+            
+            uri = uri.replace("%QUERY", "'" +encodeURIComponent(value.toLowerCase()) + "'");
+             
+            return uri;
+        }, map_@name);
+    </script>
+}
+
+@helper BoolEditor(string name, string path, string label, string tabIndex, string localizedKey = "")
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group field-flow">
+                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                <input id="@name" data-filed-name="@path" type="hidden" name="@name" value="${@path}" data-edit="false">
+                <span for="@name" data-localized="@localizedKey">@label</span>
+                <input id="@name-Yes" onclick="onRadioButtonClick(this, 'Yes')" data-filed-name="@name" type="radio" name="@name" value="Yes" data-edit="false">
+                <label for="@name-Yes" data-localized="Yes">Yes</label>
+                <input id="@name-No" onclick="onRadioButtonClick(this, 'No')" data-filed-name="@name" type="radio" name="@name" value="No" data-edit="false">
+                <label for="@name-No" data-localized="No">No</label>
+                <input tabindex="@tabIndex" data-tabindex="@tabIndex" id="@name-Null" onclick="onRadioButtonClick(this, 'Null')" data-filed-name="@name" type="radio" name="@name" value="Null" data-edit="false" checked>
+                <label for="@name-Null" data-localized="Undefined">Undefined</label>
+            </div>
+        </div>
+    </div>
+}
+
+@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null)
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control">
+                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                       data-edit="false"
+                       data-localized-placeholder="@placeholderLocalized"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@requiredplaceholder" </text> } 
+                       type="text"
+                       @if (type == "number") { <text> data-val-number="@name must be a number" </text>  } 
+                       >
+                <label for="@name" data-localized="@labelLocalized">@label</label>
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                @if (description != null)
+                {
+                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                    @description
+                </small>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@helper HeaderDisplay(string title, string caption,string dataLocalizedTitle=null, string dataLocalizedCaption = null)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 data-localized="@dataLocalizedTitle">@title</h2>
+        <h4 data-localized="@dataLocalizedCaption">@caption</h4>
+    </div>
+}
+
+@helper SubmitScript(string formName)
+{
+    <script>
+        $('#@formName').submit(function (e) {
+            onFormSubmit($(this), e);
+        });
+    </script>
+}
+
+<!--Note you will need to call GetTags on the View-->
+@helper FilterTags()
+{
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-outline">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTags" data-localized="Tags">Tags</a>
+                </h4>
+            </div>
+            <div id="collapseTags" class="panel-collapse collapse in">
+                <ul class="tag-list" style="padding: 0px;"></ul>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+
+    </div>
+}
+
+@helper FilterCategories()
+{
+    <div id="outlineCategory" class="panel panel-outline" style="display:none;">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="filterCategory" data-toggle="collapse" data-parent="#accordion" href="#collapseCategory" data-localized="Category">Category</a>
+            </h4>
+        </div>
+        <div id="collapseCategory" class="panel-collapse collapse in" style="margin-top:40px;">
+            <div id="treeviewCategoryContainer">
+                <input id="selectedCategoryId" type="hidden" value="" />
+                <input id="selectedCategoryName" type="hidden" value="" />
+                <div id="treeviewCategory">
+                    <div id="jsTreeContainerCategory" style="background:#fff;width:100%">
+                        <div id="searchWrapCategory"></div>
+                        <div id="treeWrapCategory">
+                            <div id="treeViewPlugInCategory"></div>
+                        </div>
+                        <div id="jsTreeBtnCategory" style="margin-top:20px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@helper FilterTextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null)
+{
+    <div class="panel panel-outline">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="Filter_@name" data-toggle="collapse" data-parent="#accordion" href="#collapse_@name" data-localized="@labelLocalized">@label</a>
+            </h4>
+        </div>
+        <div id="collapse_@name" class="panel-collapse collapse in">
+            <div class="field-set">
+                <div class="field-contener">
+                    <div class="field-group float-label-control">
+                        <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                        <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                               data-edit="false"
+                               data-localized-placeholder="@placeholderLocalized"
+                               @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@requiredplaceholder" </text>  }
+                               type="text"
+                               @if (type == "number") { <text> data-val-number="@name must be a number" </text>   }>
+                        
+                        <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                        @if (description != null)
+                        {
+                            <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                                @description
+                            </small>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+        @helper FilterEditor(string name, string label, string objectType, string uri, string tabIndex, string description, string dataLocalizedLabel = "", string dataFields = "")
+        {
+        <div class="panel panel-outline">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" id="Filter_@name" data-toggle="collapse" data-parent="#accordion" href="#collapse_@name" data-localized="@dataLocalizedLabel">@label</a>
+                </h4>
+            </div>
+            <div id="collapse_@name" class="panel-collapse collapse in">
+
+                <div id="Filter_@name" class="field-set">
+                    <div class="field-contener">
+                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                            <input id="@name" name="@name" tabindex="30"
+                                   data-remote="remote_@name" data-recent="recent_@name"
+                                   data-filed-name="@name" type="text" data-edit="false" class="typeahead2"
+                                   data-representing-type="Lookup"
+                                   data-type-name="@objectType"
+                                   placeholder="@label"
+                                   data-name="@name"
+                                   data-path="@name" />
+                            <input id="@name-Url" type="hidden" value="" />
+                            
+                            <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri" style="display:none;">
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                                <li class="divider"></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                            </ul>
+                            <br />
+                            <small id="@name-Description" class="field-description" style="padding-top:5px;">
+
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            if(IsNullOrWhiteSpace("@dataFields") == false){
+                $('#@name-ddl li a').first().attr("data-fileds","@dataFields");
+                $('#@name-ddl li a').first().text("@dataFields");
+            }
+
+            var remote_@(name)_Uri = getSearchByScope($('#@name-ddl li a').first());
+
+            var recent_@name = getRecent('recent-@name');
+
+
+            function map_@(name)(result) {
+                return $.map(result, function (i) {
+                    return {
+                        @if (string.IsNullOrWhiteSpace(dataFields)) { dataFields = "Name"; }
+                        number: i.Number, name: i.@dataFields, id: i.Id, lId: i.LocalId, type: i.RootType,
+                        tokens: [' 0 ', i.@dataFields, i.Number]
+                    };
+                });
+            };
+
+            var remote_@name = getRemote(remote_@(name)_Uri, function () {
+                var value = $('#@name').val();
+                if (!value || value.length == 0 || value == '')
+                    return "";
+                var uri = $('#@name-Url').val();
+
+                uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+                return uri;
+            }, map_@name);
+
+            setUpClearOnInput("#Filter_@name ");
+            setUpTypeHead("#Filter_@name ");
+
+        </script>
+
+}
+
+        @helper FilterProduct(string searchUri = null, string panelCollapse = "panel-collapse collapse in")
+        {
+if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Product?Tag=1&SearchTerm="; }
+
+        <div class="panel panel-outline">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" id="filterProduct" data-localized="filterProduct" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Product</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="@panelCollapse">
+
+                <div id="filterProduct" class="field-set">
+                    <div class="field-contener">
+                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                            <input id="LeftProduct" name="LeftProduct" tabindex="30"
+                                   data-remote="remote_LeftProduct" data-recent="recent_LeftProduct"
+                                   data-filed-name="Product" type="text" data-edit="false" class="typeahead2"
+                                   data-representing-type="Lookup"
+                                   data-type-name="ObjectType"
+                                   placeholder="Select Target"
+                                   data-name="Product"
+                                   data-path="Product" />
+                            <input id="LeftProduct-Url" type="hidden" value="" />
+
+                            <ul id="LeftProduct-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                                <li class="divider"></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                            </ul>
+
+                            <br />
+                            <small id="LeftProduct-Description" class="field-description" style="padding-top:5px;">
+
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+
+            var remote_LeftProduct_Uri = getSearchByScope($('#LeftProduct-ddl li a').first());
+
+            var recent_LeftProduct = getRecent('recent-LeftProduct');
+
+
+            function map_LeftProduct(result) {
+                return $.map(result, function (i) {
+                    return {
+                        number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.RootType,
+                        tokens: [' 0 ', i.Name, i.Number]
+                    };
+                });
+            };
+
+            var remote_LeftProduct = getRemote(remote_LeftProduct_Uri, function () {
+                var value = $('#LeftProduct').val();
+                if (!value || value.length == 0 || value == '')
+                    return "";
+                var uri = $('#LeftProduct-Url').val();
+
+                uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+                return uri;
+            }, map_LeftProduct);
+
+            setUpClearOnInput("#filterProduct ");
+            setUpTypeHead("#filterProduct ");
+
+        </script>
+}
+
+        @helper FilterOrganizationUnit(string searchUri = null)
+        {
+if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/OrganizationUnit?Tag=1&SearchTerm="; }
+
+        <div class="panel panel-outline">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" id="filterOrganizationUnit" data-localized="filterOrganizationUnit" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">OrganizationUnit</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+
+                <div id="filterOrganizationUnit" class="field-set">
+                    <div class="field-contener">
+                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                            <input id="LeftOrganizationUnit" name="LeftOrganizationUnit" tabindex="30"
+                                   data-remote="remote_LeftOrganizationUnit" data-recent="recent_LeftOrganizationUnit"
+                                   data-filed-name="OrganizationUnit" type="text" data-edit="false" class="typeahead2"
+                                   data-representing-type="Lookup"
+                                   data-type-name="OrganizationUnit"
+                                   placeholder="Select Target"
+                                   data-name="OrganizationUnit"
+                                   data-path="OrganizationUnit" />
+                            <input id="LeftOrganizationUnit-Url" type="hidden" value="" />
+
+                            <ul id="LeftOrganizationUnit-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                                <li class="divider"></li>
+                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                            </ul>
+
+                            <br />
+                            <small id="LeftOrganizationUnit-Description" class="field-description" style="padding-top:5px;">
+
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+
+            var remote_LeftOrganizationUnit_Uri = getSearchByScope($('#LeftOrganizationUnit-ddl li a').first());
+
+            var recent_LeftOrganizationUnit = getRecent('recent-LeftOrganizationUnit');
+
+
+            function map_LeftOrganizationUnit(result) {
+                return $.map(result, function (i) {
+                    return {
+                        number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.TypeName,
+                        tokens: [' 0 ', i.Name, i.Number]
+                    };
+                });
+            };
+
+            var remote_LeftOrganizationUnit = getRemote(remote_LeftOrganizationUnit_Uri, function () {
+                var value = $('#LeftOrganizationUnit').val();
+                if (!value || value.length == 0 || value == '')
+                    return "";
+                var uri = $('#LeftOrganizationUnit-Url').val();
+
+                uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+                return uri;
+            }, map_LeftOrganizationUnit);
+
+            setUpClearOnInput("#filterOrganizationUnit ");
+            setUpTypeHead("#filterOrganizationUnit ");
+
+        </script>
+}
+
+        @helper AmountEditor(string name, string label, string placeholder, string tabIndex, string labelLocalized = "", string placeholderLocalized = "")
+        {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
+                           data-representing-type="Amount"
+                           data-filed-name="@name" data-currency-code="" type="text"
+                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
+                    <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                        <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                    </a>
+                    <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs">
+                    </ul>
+                    <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            $('#' + '@name' + 'DropDownButton').hide();
+            GetCurrencyList($('#@name'), onItem@(name)CurrencyData@(tabIndex));
+
+            function onItem@(name)CurrencyData@(tabIndex)(data)
+            {
+                if (IsNullOrUndefined(data))
+                    return;
+
+                try {
+
+                    $dd = $('#@name'+ '-DropDown');
+
+                    var classificationDefault;
+
+                    $.each(data, function (key, item) {
+                        //<i class="fa fa-eur"></i>
+                        var onckc = "onCurrencyCodeClick('#@name', '"+item.Value+"', '"+item.Extension+"', '"+item.LocalId+"')";
+                        $('<li><a onclick="'+onckc+'"> '+item.Caption + ' ' + item.Extension + '</a></li>').appendTo($dd);
+
+                        if (item.IsDefaultValue)
+                            classificationDefault = item;
+                    });
+
+                    var defaultCurrency = getDefaultCurrency('#@name', classificationDefault);
+                    eval("onCurrencyCodeClick('#@name', '" + defaultCurrency.Value + "', '" + defaultCurrency.Extension + "', '" + defaultCurrency.LocalId + "')")
+
+                    $('#@name' + '-DropDownButton').show();
+
+                } catch (e) {
+
+                }
+            }
+        </script>
+}
+
+
+
+        @helper DateEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string labelLocalized = "", string placeholderLocalized = "")
+        {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control field-date">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
+                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date" class="date2"
+                           @if (isRequired == true) { <text> data-val-required="@name Is Required" </text>    }
+                           data-val="true">
+                    <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+
+}
+
+        @helper ValidPeriodEditor(string name, string label, string placeholder, string description, string tabindex, string localizedLabel = "", string localizedPlaceholder = "")
+        {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-path="ValidPeriod" data-edit="true" valid="true"></i>
+                    <input id="@name" type="text" data-representing-type="DatePeriod" name="@name" data-name="@name"
+                           data-path="@name"
+                           data-tabindex="@tabindex"
+                           tabindex="@tabindex"
+                           placeholder="@placeholder"
+                           data-localized-placeholder="@localizedPlaceholder"
+                           data-filed-name="@name"
+                           class="field-dataperiod"
+                           data-val="true" data-edit="false">
+                    <label for="@name" data-localized="@localizedLabel">@label</label>
+                    <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@name"></span>
+                    <small id="Description-@name" class="field-description" style="display:none;padding-top:5px;">
+                        @description
+                    </small>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                var el = $('#@name');
+                dFormat = getDateFormat(el);
+
+                el.daterangepicker({
+                    format: dFormat,
+                    showDropdowns: true,
+                    showWeekNumbers: true
+                });
+            });
+        </script>
+}
+
+        @helper TextAreaEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string localizedLabel = "", string localizedPlaceholder = "",string localizedrequired="")
+        {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input id="@name" data-filed-name="@name" type="hidden" name="@name"
+                           data-representing-type="MultilineText"
+                           placeholder="@placeholder"                       
+                           data-edit="false"
+                           data-localized-placeholder="@localizedPlaceholder">
+                    <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
+                              onchange="onTextAreaChange(this)"
+                              data-representing-type="MultiLineText"
+                              type="text"
+                              data-localized-placeholder="@localizedPlaceholder"
+                              cols="4"
+                              @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@localizedrequired" </text>    }
+                              placeholder="@placeholder" data-edit="false"></textarea>
+                    <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+
+}
+
+
+
+        @helper QuantityEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "")
+        {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
+                           data-filed-name="@name"
+                           placeholder="@placeholder"
+                           data-localized-placeholder="@placeholderLocalized"
+                           type="text" data-edit="false"
+                           data-representing-type="Quantity"
+                           data-name="@name"
+                           data-url="@uri"
+                           data-val="true" />
+                    <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                        <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
+                    </a>
+                    <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+                    <label for="@(name)" data-localized="@labelLocalized">@label</label>
+                </div>
+            </div>
+        </div>
+        <script>
+            function on@(name)QuantityUnitOfMeasureList(data) {
+                if (IsNullOrUndefined(data))
+                    return;
+
+                try{
+                    $dd = $('#' + '@(name)' + 'DropDown');
+
+                    $.each(data, function (key, item) {
+                        //<i class="fa fa-eur"></i>
+                        var onckc = "onQuantityUnitOfMeasureClick('#@(name)', '"+item.LocalId+"', '"+item.Name+"')";
+                        $('<li><a onclick="'+onckc+'"> '+item.Name + '</a></li>').appendTo($dd);
+                        if (item.IsDefaultValue){
+                            if (IsNullOrWhiteSpace(item.Name) == false)
+                                $('#' + '@(name)').attr("data-unit-of-measure-name", item.Name);
+
+                            if (IsNullOrUndefined(item.LocalId) == false)
+                                $('#' + '@(name)').attr("data-unit-of-measure-id", item.LocalId);
+
+                            $('#' + '@(name)' + 'Code').text(item.Name);
+                        }
+                    });
+
+                    $('#' + '@(name)' + 'DropDownButton').show();
+                }catch(ex){
+
+                }
+            }
+            $(function () {
+                try{
+                    $('#' + '@(name)' + 'DropDownButton').hide();
+                    GetQuantityUnitOfMeasureList($('#@(name)'), on@(name)QuantityUnitOfMeasureList);
+                }catch(ex){
+
+                }
+            });
+        </script>
+}
+
+        @helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "",string dataValueIdentifier = "",string dataFormat = "",string dataFormatSelection = "",string dataTypeName="")
+        {
+        <div class="field-set" style="padding-bottom:40px;">
+            <div class="field-contener">
+                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                <input id="@name"
+                       data-filed-name="@name"
+                       data-representing-type="Select"
+                       type="hidden">
+                <span class="field-flow-caption" data-localized="@labelLocalized">@label</span>
+                <select id="@(name)-ddl"
+                        data-filed-name="@name"
+                        data-tabindex="@tabindex"
+                        tabindex="@tabindex"
+                        data-localized-placeholder="@placeholderLocalized"
+                        placeholder="@placeholder"
+                        data-value-identifier ="@dataValueIdentifier"
+                        name="@name"
+                        @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text>    }
+                        @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text>    }
+                        @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text>    }
+                        data-url="@uri"  
+                        style="width:90%"
+                        data-representing-type="Select"
+                        onchange="publicApp.onSelectChangeApp(this)"
+                        class="selectTwo"></select>
+
+                <div id="field-spinner"></div>
+
+            </div>
+        </div>
+}
+
+
+@helper FilterSelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "",string dataValueIdentifier = "")
+{
+    <div class="panel panel-outline">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="Filter_@name" data-toggle="collapse" data-parent="#accordion" href="#collapse_@name" data-localized="@labelLocalized">@label</a>
+            </h4>
+        </div>
+        <div id="collapse_@name" class="panel-collapse collapse in">
+            @WebHelpers.SelectEditor(name, placeholder, label, uri, tabindex, labelLocalized,placeholderLocalized,dataValueIdentifier)
+        </div>
+    </div>
+}
+@helper ExternalKeys(string typeId, string typeName) {
+    <div class="pull-left" style="margin-bottom:10px;">
+
+        <button id="add-ExtKeys" class="btn btn-primary btn-outline" data-type-id="@typeId" data-type-name="@typeName" onclick="addExternalKey(this); return false;"><i class="fa fa fa-plus"></i> <span data-localized="AddExternalKey">Add External Key</span></button>
+
+    </div>
+    <div class="pull-right" style="margin-bottom:10px;">
+
+        <button class="btn btn-primary btn-outline" onclick="getExtKeysData()"><i class="fa fa fa-refresh"></i> <span data-localized="Refresh">Refresh</span></button>
+
+    </div>
+    <div style="float:left;width:100%;margin-top:10px;margin-bottom:1px;">
+        <table id="grid-ExtKeys" data-type-id="@typeId" data-type-name="@typeName" class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th id="lName" data-column-id="Name" data-sortable="false" data-visible="true" data-width="160px" data-localized="ExtKeys_Name">Name</th>
+                    <th id="lKey" data-formatter="Key" data-column-id="Key" data-sortable="false" data-localized="ExtKeys_Key">Key</th>
+                    <th id="lScope" data-column-id="Scope" data-sortable="false" data-width="220px" data-localized="ExtKeys_Scope">Scope</th>
+                    <th id="lStatus" data-formatter="Lifecycle" data-column-id="Lifecycle" data-sortable="false" data-visible="true" data-width="100px" data-localized="ExtKeys_Status">Status</th>
+                    <th class="lCommands" data-column-id="commands" data-formatter="commands" data-sortable="false" data-visible="true" data-width="100px" data-localized="LabelActions">Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+}
+
+@helper jQGrid(string gridId, bool appearToolbar,string dataType = "") { 
+    
+    <div style="width:500%;position:static;">
+        <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text>    } ></table>
+         @if (appearToolbar == true) { <text> <div id="jqGridPager"></div> </text>    }
+        
+    </div>
+}
+
+@helper DropZoneEditor(string idDropZone,string idPreview,string label) { 
+    <div class="field-set">
+        <div class="field-group float-label-control">
+            <label id="label-@label" >@label</label>
+        </div>
+    </div>
+    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true">
+        <div class="dz-message">
+            Drop files here or click to upload image<br>
+        </div>
+        <div id="@idPreview" class="dz-preview dz-file-preview">
+            <div class="dz-details">
+                <div class="dz-filename"><span data-dz-name></span></div>
+                <div class="dz-size" data-dz-size></div>
+                <img data-dz-thumbnail />
+            </div>
+        </div>
+
+    </div>
+    
+}

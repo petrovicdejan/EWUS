@@ -1,0 +1,117 @@
+﻿@{
+    Layout = (string)ViewData["Layout"];
+}
+@if (ViewBag.IsPopup)
+{
+
+    <script>
+        var isModify = "@ViewBag.Id";
+        isModify > 0 ? setTitle("Modify Measure") : setTitle("New Mesure");
+
+        function setTitle(title) {
+            $('#modal_title').text(title);
+        }
+
+    </script>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 id="modal_title">@ViewBag.Title</h2>
+        <h4><b id="modal_desc">Please fill out the form below</b></h4>
+    </div>
+}
+else
+{
+    <h2>@ViewBag.Title</h2>
+}
+<style>
+    .modal-body {
+        width: 600px;
+    }
+</style>
+
+<!-- jqGrid -->
+<link href="~/Scripts/jqGrid/css/trirand/ui.jqgrid-bootstrap.css" rel="stylesheet">
+
+@using (Html.BeginForm("Measure", "Party", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "Measure", posturl = "api/Measure", dataname = "Measure", objectid = ViewBag.Id }))
+{
+    <div class="validation-summary-errors-sw" style="margin-top:10px;display:none;">
+        <div class="alert alert-danger">
+            <strong>Validation Errors</strong>
+            <div id="errorLoaderOuter"></div>
+            <ul class="list">
+                <li style="display:none"></li>
+            </ul>
+        </div>
+    </div>
+
+    if (ViewBag.IsPopup)
+    {
+        @Html.Raw("<div class='modal-body'>");
+    }
+
+    Html.AntiForgeryToken();
+
+    <div class="form-group">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("Name ", "Name", "Benennung", "Benennung", "1")
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("SerialNumber", "SerialNumber", "LaufendeNr", "LaufendeNr", "2")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection",dataTypeName: "OperationType")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "Investitionskosten", "Investitionskosten", "4")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("Description", "Description", "Beschreibung", "Beschreibung", "5")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("Saving", "Saving", "Einsparung", "Einsparung", "6")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.jQGrid("jqGridLink", true,"MeasureLinks")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.DropZoneEditor("measureDropZone","measurePreview","Measure Links")
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Html.Partial("_TaskPopupFooter");
+
+}
+<script>
+    var objectId = "@ViewBag.Id";
+    var objectTypeName = "@ViewBag.TypeName";
+    var dcMeasure = "@ViewBag.Input";
+    var documentInstance = "@ViewBag.DocumentInstance";
+    var myAttachZone = null;
+    var documentInstanceId = 0;
+</script>
+
+<script src="~/Scripts/jqGrid/js/trirand/i18n/grid.locale-en.js"></script>
+<script src="~/Scripts/jqGrid/js/trirand/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="~/Lib/App/Views/Measure/measure.js"></script>

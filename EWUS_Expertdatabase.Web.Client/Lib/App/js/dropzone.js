@@ -154,6 +154,7 @@
       dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
       dictRemoveFile: "Remove file",
       dictRemoveFileConfirmation: null,
+      objectTypeName: "",
       dictMaxFilesExceeded: "You can not upload any more files.",
       accept: function(file, done) {
         return done();
@@ -277,7 +278,12 @@
               file._openLink.addEventListener("click", function (e) {
                   e.preventDefault();
                   e.stopPropagation();
-                  window.open(sRootUrl + "api/download/contentstream?Number=" + file.id + "&Key=" + file.name);
+
+                  var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
+                  if (_ref3.options.objectTypeName != '')
+                      sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+
+                      window.open(sUrl);
                   _ref3.emit("openedfile", file);
               });
           }
@@ -1357,9 +1363,8 @@
       progressObj = (_ref = xhr.upload) != null ? _ref : xhr;
       progressObj.onprogress = updateProgress;
       headers = {
-        "Accept": "application/json",
-        "Cache-Control": "no-cache",
-        "X-Requested-With": "XMLHttpRequest"
+        "Cache-Control": "",
+        "X-Requested-With": ""
       };
       if (this.options.headers) {
         extend(headers, this.options.headers);
