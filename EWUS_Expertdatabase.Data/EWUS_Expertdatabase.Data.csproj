@@ -44,6 +44,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,17 +56,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\Context.cs" />
-    <Compile Include="Migrations\201809091112222_InitialCreate.cs" />
-    <Compile Include="Migrations\201809091112222_InitialCreate.Designer.cs">
-      <DependentUpon>201809091112222_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201809110811153_InitialCreate.cs" />
+    <Compile Include="Migrations\201809110811153_InitialCreate.Designer.cs">
+      <DependentUpon>201809110811153_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809101102302_Version01.cs" />
-    <Compile Include="Migrations\201809101102302_Version01.Designer.cs">
-      <DependentUpon>201809101102302_Version01.cs</DependentUpon>
+    <Compile Include="Migrations\201809111113259_Version1.cs" />
+    <Compile Include="Migrations\201809111113259_Version1.Designer.cs">
+      <DependentUpon>201809111113259_Version1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809101206304_Version02.cs" />
-    <Compile Include="Migrations\201809101206304_Version02.Designer.cs">
-      <DependentUpon>201809101206304_Version02.cs</DependentUpon>
+    <Compile Include="Migrations\201809111202291_Version02.cs" />
+    <Compile Include="Migrations\201809111202291_Version02.Designer.cs">
+      <DependentUpon>201809111202291_Version02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809111447438_Version03.cs" />
+    <Compile Include="Migrations\201809111447438_Version03.Designer.cs">
+      <DependentUpon>201809111447438_Version03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809111551045_Version04.cs" />
+    <Compile Include="Migrations\201809111551045_Version04.Designer.cs">
+      <DependentUpon>201809111551045_Version04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809111603062_Version05.cs" />
+    <Compile Include="Migrations\201809111603062_Version05.Designer.cs">
+      <DependentUpon>201809111603062_Version05.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809111622372_Version06.cs" />
+    <Compile Include="Migrations\201809111622372_Version06.Designer.cs">
+      <DependentUpon>201809111622372_Version06.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,14 +98,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809091112222_InitialCreate.resx">
-      <DependentUpon>201809091112222_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809110811153_InitialCreate.resx">
+      <DependentUpon>201809110811153_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809101102302_Version01.resx">
-      <DependentUpon>201809101102302_Version01.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809111113259_Version1.resx">
+      <DependentUpon>201809111113259_Version1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809101206304_Version02.resx">
-      <DependentUpon>201809101206304_Version02.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809111202291_Version02.resx">
+      <DependentUpon>201809111202291_Version02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809111447438_Version03.resx">
+      <DependentUpon>201809111447438_Version03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809111551045_Version04.resx">
+      <DependentUpon>201809111551045_Version04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809111603062_Version05.resx">
+      <DependentUpon>201809111603062_Version05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809111622372_Version06.resx">
+      <DependentUpon>201809111622372_Version06.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

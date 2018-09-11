@@ -7,36 +7,36 @@ using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Common
 {
-    public interface IRepository : IDisposable
-    {
-        object GetById(long Id);
-        
-        IEnumerable<object> GetAll();
+    //public interface IRepository : IDisposable
+    //{
+    //    object GetById(long Id);
 
-        Result Save(Item value);
+    //    IEnumerable<object> GetAll();
 
-        Result ExecuteCommand(Item value);
-    }
+    //    Result Save(Item value);
 
-    /// <summary>
-    ///     Represent IValueConverter type
-    /// </summary>
-    public interface IValueConverter
-    {
-        Type From { get; }
+    //    Result ExecuteCommand(Item value);
+    //}
 
-        Type To { get; }
+    ///// <summary>
+    /////     Represent IValueConverter type
+    ///// </summary>
+    //public interface IValueConverter
+    //{
+    //    Type From { get; }
 
-        bool TryToConvert(object from, out object to);
-    }
+    //    Type To { get; }
+
+    //    bool TryToConvert(object from, out object to);
+    //}
 
     public interface IType
     {
         Type Type { get; set; }
     }
 
-    public interface ICoreObject
-    {
+    //public interface ICoreObject
+    //{
 
-    }
+    //}
 }

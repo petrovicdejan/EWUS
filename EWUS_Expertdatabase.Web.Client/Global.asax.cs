@@ -1,8 +1,4 @@
-﻿using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using EWUS_Expertdatabase.Model;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -19,7 +15,17 @@ namespace EWUS_Expertdatabase.Web.Client
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutoMapper.Mapper.Initialize(cfg =>
+                                        {
+                                            cfg.CreateMap<Measure, MeasureViewModel>().ReverseMap();
+                                            cfg.CreateMap<Classification, ClassificationViewModel>().ReverseMap();
+                                            cfg.CreateMap<Project, ProjectViewModel>().ReverseMap();
+                                            cfg.CreateMap<MaintenanceCompany, MaintenanceCompanyViewModel>().ReverseMap();
+                                            cfg.CreateMap<Customer, CustomerViewModel>().ReverseMap();
+                                            cfg.CreateMap<Project, ProjectViewModel>().ReverseMap();
+                                        });
         }
-        
+
     }
 }

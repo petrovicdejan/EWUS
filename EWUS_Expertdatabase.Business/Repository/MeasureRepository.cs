@@ -1,13 +1,9 @@
 ﻿using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Model;
-using Microsoft.Win32.SafeHandles;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Transactions;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -122,7 +118,7 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(measure.Guid.ToString()) && measure.DocumentItems != null)
                 {
-                    Utils.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
+                    SaveFile.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
                 }
 
                 output = Result.ToResult<Measure>(ResultStatus.OK, typeof(Measure));

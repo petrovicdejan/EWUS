@@ -24,13 +24,6 @@ namespace EWUS_Expertdatabase.Web.Client
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            //var container = new UnityContainer();
-            //UnityServiceLocator locator = new UnityServiceLocator(container);
-            //ServiceLocator.SetLocatorProvider(() => locator);
-            //container.RegisterType<IRepository, MeasureRepository>("MeasureRepository");
-            //container.RegisterType<IRepository, ClassificationRepository>("ClassificationRepository");
-            //container.RegisterType<IRepository, DocumentItemRepository>("DocumentItemRepository");
         }
     }
 }

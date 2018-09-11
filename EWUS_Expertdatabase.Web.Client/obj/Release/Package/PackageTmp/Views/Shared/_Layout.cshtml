@@ -1,0 +1,103 @@
+﻿@using EWUS_Expertdatabase.Web;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>EWUS</title>
+
+    <link href="~/Scripts/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome -->
+    <link href="~/Scripts/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Scripts/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="~/Scripts/gentelella/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="~/Scripts/gentelella/build/css/custom.min.css" rel="stylesheet">
+
+    <link href="~/Lib/bootstrap-modal/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+    <link href="~/Lib/bootstrap-modal/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Lib/sweetalert/sweet-alert.css" />
+    <link rel="stylesheet" href="~/Lib/App/css/dropzone.css" />
+    <link rel="stylesheet" href="~/Lib/select2/select2.min.css">
+    <link href="~/Lib/App/css/main.css" rel="stylesheet" />
+    <link href="~/Lib/App/css/app.css" rel="stylesheet" />
+    <link href="~/Lib/summernote/summernote.css" rel="stylesheet" />
+    <link href="~/Lib/summernote/summernote-bs3.css" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <script type="text/javascript"> sRootUrl = "@PathHelper.FullyQualifiedApplicationPath(Request)";</script>
+
+    @RenderSection("HeaderOptions", false)
+
+</head>
+
+<body class="nav-md footer_fixed">
+    <div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
+    <div class="container body">
+        <div class="main_container">
+
+            <!-- sidebar menu -->
+            @Html.Partial("SideBar")
+            <!-- /sidebar menu -->
+            <!-- top navigation -->
+            @Html.Partial("TopNavigation")
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    EWUS project
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/Lib/App/js/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Lib/App/js/dropzone.js"></script>
+    <script type="text/javascript" src="~/Lib/base64/base64.js"></script>
+
+    <script type="text/javascript" src="~/Lib/bootstrap-modal/bootstrap-modalmanager.js"></script>
+    <script type="text/javascript" src="~/Lib/bootstrap-modal/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="~/Lib/sweetalert/sweet-alert.min.js"></script>
+
+    <script type="text/javascript" src="~/Lib/jqueryval/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="~/Lib/jqueryval/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Lib/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/Lib/select2/select2.min.js"></script>
+
+    <!-- FastClick -->
+    <script src="~/Scripts/gentelella/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Scripts/gentelella/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery custom content scroller -->
+    <script src="~/Scripts/gentelella/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Scripts/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/Scripts/gentelella/build/js/custom.min.js"></script>
+    <!-- app.js -->
+    <script src="~/Lib/App/js/app.js"></script>
+    <script src="~/Lib/Alert/alert.js"></script>
+
+
+    @RenderSection("ScriptLibs", false)
+</body>
+</html>

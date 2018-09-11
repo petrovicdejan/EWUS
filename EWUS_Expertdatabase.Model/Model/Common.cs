@@ -79,31 +79,6 @@ namespace EWUS_Expertdatabase.Model
             return r;
         }
 
-        //public static implicit operator Reference(string value)
-        //{
-        //    Reference a = new Reference();
-
-        //    if (string.IsNullOrWhiteSpace(value))
-        //        return a;
-
-        //    if (value.IsJsonString())
-        //    {
-        //        a = Utilities.JsonStringToObject(value, typeof(Reference)) as Reference;
-        //    }
-        //    else if (value.Split(';').Length == 2)
-        //    {
-        //        var keyPair = value.Split(';');
-        //        a.Id = keyPair[0].ToLong(0);
-        //        a.TypeName = keyPair[1];
-        //    }
-        //    else
-        //    {
-        //        a.Id = value.ToLong(0);
-        //    }
-
-        //    return a;
-        //}
-
         /// <summary>
         ///     Implicit conversion from refrable to reference
         /// </summary>

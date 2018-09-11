@@ -1,4 +1,5 @@
-﻿using EWUS_Expertdatabase.Business;
+﻿using AutoMapper;
+using EWUS_Expertdatabase.Business;
 using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Model;
 using Newtonsoft.Json;
@@ -27,23 +28,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             List<Measure> measures = measureRepo.GetAllMeasures();
 
             List<MeasureViewModel> lstMeasureViewModel = new List<MeasureViewModel>();
-
-            foreach (var measure in measures)
-            {
-                MeasureViewModel mvm = new MeasureViewModel();
-                mvm.Id = measure.Id;
-                mvm.Name = measure.Name;
-                mvm.OperationType = measure.OperationType;
-                mvm.OperationTypeId = measure.OperationTypeId;
-                mvm.Saving = measure.Saving;
-                mvm.SerialNumber = measure.SerialNumber;
-                mvm.Description = measure.Description;
-                mvm.InvestmentCost = measure.InvestmentCost;
-                mvm.MeasureLinks = measure.MeasureLinks;
-                mvm.DocumentItems = measure.DocumentItems;
-
-                lstMeasureViewModel.Add(mvm);
-            }
+            lstMeasureViewModel = Mapper.Map<List<Measure>, List<MeasureViewModel>>(measures);
 
             return Json(lstMeasureViewModel, JsonRequestBehavior.AllowGet);
         }
@@ -97,15 +82,8 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
         public ActionResult SaveMeasure(MeasureViewModel model)
         {
             Measure measure = new Measure();
-            measure.Id = model.Id;
-            measure.Name = model.Name;
-            measure.OperationTypeId = model.OperationTypeId;
-            measure.Saving = model.Saving;
-            measure.SerialNumber = model.SerialNumber;
-            measure.Description = model.Description;
-            measure.InvestmentCost = model.InvestmentCost;
-            measure.MeasureLinks = model.MeasureLinks;
-            measure.DocumentItems = model.DocumentItems;
+
+            measure = Mapper.Map<MeasureViewModel, Measure>(model);
 
             var measureRepo = new MeasureRepository();
             var item = measureRepo.SaveMeasure(measure);

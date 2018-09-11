@@ -154,7 +154,7 @@
     </div>
 }
 
-@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false)
+@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999)
 {
     <div class="field-set">
         <div class="field-contener">
@@ -162,17 +162,17 @@
                 <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                 <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                        data-edit="false"
-                       data-localized-placeholder="@placeholderLocalized"
                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> } 
                        type=@type
                        @if (type == "number") { <text> data-val-number="@name must be a number" </text>  } 
                        @if (isReadOnly == true) { <text> readonly </text>  } 
+                       @if (maxLength > 0) { <text> data-val-length ="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text>  } 
                        >
-                <label for="@name" data-localized="@labelLocalized">@label</label>
+                <label for="@name">@label</label>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 @if (description != null)
                 {
-                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                <small id="@name-Description" class="field-description" style="padding-top:5px;">
                     @description
                 </small>
                 }
@@ -638,10 +638,10 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                               type="text"
                               data-localized-placeholder="@localizedPlaceholder"
                               cols="4"
-                              @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@localizedrequired" </text>    }
+                              @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>    }
                               placeholder="@placeholder" data-edit="false"></textarea>
                     <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
-                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
                 </div>
             </div>
         </div>
@@ -794,7 +794,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
             <label id="label-@label" >@label</label>
         </div>
     </div>
-    <div id="gridContainer" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;height:@height" </text>    } >
+    <div id="gridContainer"  @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;height:@height" </text>    }>
         <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text>    } ></table>
          @if (appearToolbar == true) { <text> <div id="jqGridPager"></div> </text>    }
         
@@ -821,4 +821,31 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
     </div>
     
+}
+
+@helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999)
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                           data-edit="false"
+                           @if (isRequired == true) { <text> data-val-required="@name Is Required"</text> }
+                           type=@type
+                           @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                           @if (isReadOnly == true) { <text> readonly </text> }
+                           @if (isEmail == true) { <text> data-val-email="@name Is not in a valid format" data-val="true" </text> }
+                            @if (maxLength > 0) { <text> data-val-length ="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text>  }> 
+                    <label for="@name">@label</label>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    @if (description != null)
+                    {
+                        <small id="@name-Description" class="field-description" style="padding-top:5px;">
+                            @description
+                        </small>
+                    }
+                </div>
+            </div>
+        </div>
 }
