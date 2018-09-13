@@ -170,8 +170,8 @@ var publicApp = (function () {
             return false;
 
         var i = new Object();
-        i.ObjectId = objectId;
-        i.Name = objectType;
+        i.Id = objectId;
+        //i.Name = objectType;
 
         var sUri = $el.attr("data-url");
 
@@ -179,15 +179,16 @@ var publicApp = (function () {
             sUri = sRootUrl + 'api/' + objectType + '/' + objectId;
             metod = ""
         }
-
-        var type = 'DELETE'
-        if (sUri.indexOf("command") != -1) {
-            type = "POST";
+        else {
+            sUri = sRootUrl + sUri;
         }
+
+        var type = 'POST'
 
         ShowPageLoader();
         $.ajax({
             url: sUri,
+            cache: false,
             type: type,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
@@ -203,15 +204,15 @@ var publicApp = (function () {
                         nextLink = fOnSuccess(data);
                     }
 
-                    if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
-                        nextLink = "";
+                    //if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
+                    //    nextLink = "";
 
-                    alertshow(1, "Successfully Deleted", "Recommended Action",
-                        nextLink
-                        + "<br/><span class='pull-right'>" + "ExecuteTime"
-                        + data.FormatedExecuteTime
-                        + " RecordsAffected: "
-                        + data.RecordsAffected + "</span>");
+                    //alertshow(1, "Successfully Deleted", "Recommended Action",
+                    //    nextLink
+                    //    + "<br/><span class='pull-right'>" + "ExecuteTime"
+                    //    + data.FormatedExecuteTime
+                    //    + " RecordsAffected: "
+                    //    + data.RecordsAffected + "</span>");
                 } else {
 
                     alertshow(2, "FailedDeleting", getErrorMessageForUser(data));
@@ -3019,12 +3020,12 @@ var publicApp = (function () {
 
     function deleteObject(el, fOnSuccess) {
         swal({
-            title: "Are you sure?",
-            text: "You want be able to recover this item !!!",
+            title: "Löschen",
+            text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Confirm delete", closeOnConfirm: true,
-            cancelButtonText: "Cancel"
+            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            cancelButtonText: "Abbrechen"
         }, function () {
             publicApp.deleteWebApi(el, $(el).attr("data-type"), fOnSuccess);
         });
@@ -3090,7 +3091,7 @@ var publicApp = (function () {
             var maxfiles = null;
 
             try {
-                 maxfiles = Number.parseInt($("#" + idDropZone).attr('data-maxfiles'));
+                 maxfiles = parseInt($("#" + idDropZone).attr('data-maxfiles'));
             } catch(ex) {
 
             }            
@@ -3102,7 +3103,7 @@ var publicApp = (function () {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,
                 dictRemoveFile: "Löschen",
-                addOpenLinks: false,
+                addOpenLinks: true,
                 dictOpenLink: "Offnen",
                 sendFileId: true,
                 clickable: "#" + idDropZone,
@@ -3114,26 +3115,7 @@ var publicApp = (function () {
                 thumbnailWidth: 140,
                 thumbnailMethod: 'crop',
                 maxFiles: maxfiles,
-                //removedfile: function (file) {
-                //    var i = new Object();
-                //    i.ObjectId = file.id;
-
-                //    $.ajax({
-                //        type: 'POST',
-                //        url: sRootUrl + "document/DeleteDocument",
-                //        data: JSON.stringify(i),
-                //        headers: GetWebApiHeaders(),
-                //        contentType: 'application/json; charset=utf-8',
-                //    });
-
-                //    var res = undefined;
-                //    var _ref = file.previewElement;
-                //    if (_ref)
-                //        res = _ref.parentNode.removeChild(file.previewElement)
-
-                    
-                //    return (_ref) != null ? res : void 0;
-                //},
+                dictRemoveFileConfirmation: 'Question'
             });
 
             $("#addFile-" + idDropZone).click(function () {
@@ -3164,6 +3146,7 @@ var publicApp = (function () {
             }
         });
         myAttachZone.on("maxfilesreached", function (file) {
+            myAttachZone.removeEventListeners();
             $("#" + idDropZone).removeClass("dz-clickable");
             $("#" + idDropZone).unbind();
             $("#addFile-" + idDropZone).prop('disabled', true);
@@ -3184,7 +3167,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description
+                        description: value.Description, accepted: true
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3201,6 +3184,24 @@ var publicApp = (function () {
                 });
             }
         }
+    }
+
+    function callSwal(accepted, rejected) {
+        swal({
+            title: "Löschen",
+            text: "Soll der Datensatz wirklich gelöscht werden?",
+            type: "warning",
+            showCancelButton: true, confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            cancelButtonText: "Abbrechen"
+        },
+            function () {
+                return accepted();
+            },
+            function () {
+                return rejected();
+            }
+        )
     }
 
     return {
@@ -3269,6 +3270,10 @@ var publicApp = (function () {
         },
         windowResize: function () {
             windowResize();
+        }
+        ,
+        callSwallApp: function (accepted, rejected) {
+            callSwal(accepted, rejected);
         }
     }
 

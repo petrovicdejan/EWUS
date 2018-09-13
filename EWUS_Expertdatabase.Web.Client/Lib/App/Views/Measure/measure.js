@@ -93,7 +93,7 @@
                 }, false, false);
 
                 $("#jqGrid").jqGrid('setGridParam', { data: data }).trigger("reloadGrid");
-                $("#rowsNumber").text('Number of rows: ' + $('#jqGrid').getGridParam("reccount"));
+                $("#rowsNumber").text('Anzahl: ' + $('#jqGrid').getGridParam("reccount"));
 
             }, false, true);
         });

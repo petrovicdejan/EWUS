@@ -164,5 +164,80 @@ namespace EWUS_Expertdatabase.Business
                 return null;
             }
         }
+
+        public Result DeleteCustomerById(long Id)
+        {
+            Result output = new Result();
+            output.Status = ResultStatus.BadRequest;
+
+            try
+            {
+                using (var ctx = new EWUSDbContext())
+                {
+                    Customer customer = new Customer();
+                    InvolvedParty ip = ctx.InvolvedPartys.Where(x => x.Id == Id)
+                                            .Include(x => x.DocumentItems)
+                                            .FirstOrDefault();
+
+                    customer = (Customer)ip;
+
+                    try
+                    {
+                        ctx.InvolvedPartys.Remove(customer);
+
+                        ctx.SaveChanges();
+                    }
+                    catch 
+                    {
+                        output.ExceptionMessage = "Exception could not be performed !!!";
+                        output.Status = ResultStatus.Forbidden;
+                    }
+                }
+                output.Status = ResultStatus.OK;
+            }
+            catch
+            {
+                output.Status = ResultStatus.InternalServerError;
+            }
+
+            return output;
+        }
+
+        public Result DeleteMaintenanceCompanyById(long Id)
+        {
+            Result output = new Result();
+            output.Status = ResultStatus.BadRequest;
+
+            try
+            {
+                using (var ctx = new EWUSDbContext())
+                {
+                    MaintenanceCompany maintenanceCompany = new MaintenanceCompany();
+                    InvolvedParty ip = ctx.InvolvedPartys.Where(x => x.Id == Id)
+                        .FirstOrDefault();
+
+                    maintenanceCompany = (MaintenanceCompany)ip;
+
+                    try
+                    {
+                        ctx.InvolvedPartys.Remove(maintenanceCompany);
+
+                        ctx.SaveChanges();
+                    }
+                    catch
+                    {
+                        output.ExceptionMessage = "Exception could not be performed !!!";
+                        output.Status = ResultStatus.Forbidden;
+                    }
+                }
+                output.Status = ResultStatus.OK;
+            }
+            catch
+            {
+                output.Status = ResultStatus.InternalServerError;
+            }
+
+            return output;
+        }
     }
 }

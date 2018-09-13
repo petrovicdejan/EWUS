@@ -126,6 +126,43 @@ namespace EWUS_Expertdatabase.Business
             }
             return output;
         }
+
+        public Result DeleteMeasureById(long Id)
+        {
+            Result output = new Result();
+            output.Status = ResultStatus.BadRequest;
+
+            try
+            {
+                using (var ctx = new EWUSDbContext())
+                {
+                    Measure measure = ctx.Measures.Where(x => x.Id == Id)
+                            .Include(x => x.MeasureLinks)
+                            .Include(x => x.DocumentItems)
+                            .Include(x => x.OperationType)
+                            .FirstOrDefault();
+                    
+                    try
+                    {
+                        ctx.Measures.Remove(measure);
+
+                        ctx.SaveChanges();
+                    }
+                    catch
+                    {
+                        output.ExceptionMessage = "Exception could not be performed !!!";
+                        output.Status = ResultStatus.Forbidden;
+                    }
+                }
+                output.Status = ResultStatus.OK;
+            }
+            catch
+            {
+                output.Status = ResultStatus.InternalServerError;
+            }
+
+            return output;
+        }
     }
 
 }

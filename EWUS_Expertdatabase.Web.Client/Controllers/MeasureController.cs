@@ -94,5 +94,20 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             else
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
+
+        [HttpPost]
+        public ActionResult DeleteMeasure(long Id)
+        {
+            if (Id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            var measureRepo = new MeasureRepository();
+            var item = measureRepo.DeleteMeasureById(Id);
+
+            if (item.Success)
+                return Json(item);
+            else
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
+        }
     }
 }

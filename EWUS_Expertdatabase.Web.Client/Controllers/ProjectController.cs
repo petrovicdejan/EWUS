@@ -95,6 +95,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
 
+        [HttpPost]
         public ActionResult DeleteProject(long Id)
         {
             if (Id == 0)            
@@ -104,9 +105,9 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             var item = projectRepo.DeleteProjectById(Id);
 
             if (item.Success)
-                return Json(item.Value);
+                return Json(item);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
         }
     }
 }
