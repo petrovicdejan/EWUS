@@ -637,7 +637,8 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                               data-representing-type="MultiLineText"
                               type="text"
                               data-localized-placeholder="@localizedPlaceholder"
-                              cols="4"
+                              cols="8"
+                              rows="6"
                               @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>    }
                               placeholder="@placeholder" data-edit="false"></textarea>
                     <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
@@ -801,25 +802,64 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
     </div>
 }
 
-@helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "", string typeName = "") { 
+@helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null) { 
     <div class="field-set">
         <div class="field-group float-label-control">
-            <label id="label-@label" >@label</label>
+            <label id="label-@label">@label</label>
         </div>
+        <button class="btn-white btn btn-sm" id="addFile-@idDropZone" type="button">
+            <i class='fa fa-plus'></i><span> Neu</span>
+        </button>
     </div>
-    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true">
+    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles"</text>}>
+
         <div class="dz-message">
-            Drop files here or click to upload image<br>
+            Drop files ifre or click to upload image<br>
         </div>
-        <div id="@idPreview" class="dz-preview dz-file-preview">
+        @*<div id="@idPreview" class="dz-preview dz-file-preview">
             <div class="dz-details">
                 <div class="dz-filename"><span data-dz-name></span></div>
                 <div class="dz-size" data-dz-size></div>
                 <img data-dz-thumbnail />
             </div>
+        </div>*@
+        @if (showHeader)
+        {
+        <div class="row b-b-2" data-dz-showheader style="display:none;">
+            <div class="col-md-8"><strong>Name</strong></div>
+            <div class="col-md-3"><strong>Bild</strong></div>
+            <div class="col-md-1"></div>
+        </div>
+        }
+        <div class="table table-striped files " id="previews" >
+            <div id="@idPreview" class="row b-b-1 dz-preview">
+                <div class="col-md-8">
+                    <p class="dz-filename" data-dz-name></p>
+                    @if (showDescription)
+                    {
+                        <span data-dz-description></span>
+                    }
+                    <div class="dz-size" data-dz-size style="display:none;"></div>
+                </div>
+                    <div class="col-md-3">
+                        <span class=""><img data-dz-thumbnail /></span>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="actions">
+                            <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999;" type="button">
+                                <i class='fa fa-trash-o'></i>
+                            </button>
+                        </span>
+                    </div>
+            </div>
+            
         </div>
 
     </div>
+    
+
+
+
     
 }
 
@@ -835,7 +875,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                            type=@type
                            @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
                            @if (isReadOnly == true) { <text> readonly </text> }
-                           @if (isEmail == true) { <text> data-val-email="@name Is Required" data-val="true" </text> }
+                           @if (isEmail == true) { <text> data-val-email="@name Is not in a valid format" data-val="true" </text> }
                             @if (maxLength > 0) { <text> data-val-length ="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text>  }> 
                     <label for="@name">@label</label>
                     <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>

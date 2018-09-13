@@ -39,7 +39,7 @@
 
 </head>
 
-<body class="nav-md footer_fixed">
+<body class="nav-sm footer_fixed">
     <div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
     <div class="container body">
         <div class="main_container">
@@ -48,7 +48,23 @@
             @Html.Partial("SideBar")
             <!-- /sidebar menu -->
             <!-- top navigation -->
-            @Html.Partial("TopNavigation")
+            @*@Html.Partial("TopNavigation")*@
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        @if (IsSectionDefined("title"))
+                        {
+                            @RenderSection("title");
+                        }
+                        <div class="nav toggle" style="margin-left: 10px; display:none;">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
             <!-- /top navigation -->
             <!-- page content -->
             <div class="right_col" role="main">
@@ -59,10 +75,10 @@
             <!-- /page content -->
             <!-- footer content -->
             <footer>
-                <div class="pull-right">
-                    EWUS project
-                </div>
-                <div class="clearfix"></div>
+                @*<div class="pull-right">
+                        EWUS project
+                    </div>
+                    <div class="clearfix"></div*@>
             </footer>
             <!-- /footer content -->
         </div>
@@ -93,6 +109,7 @@
     <script src="~/Scripts/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="~/Scripts/gentelella/build/js/custom.min.js"></script>
+
     <!-- app.js -->
     <script src="~/Lib/App/js/app.js"></script>
     <script src="~/Lib/Alert/alert.js"></script>

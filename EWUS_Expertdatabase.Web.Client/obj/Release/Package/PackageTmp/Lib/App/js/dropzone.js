@@ -271,6 +271,8 @@
             node = _ref1[_j];
             node.innerHTML = this.filesize(file.size);
           }
+            if(this.previewsContainer.querySelector('[data-dz-showheader]'))
+                this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'block';
 
           if (this.options.addOpenLinks) {
               file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
@@ -291,14 +293,17 @@
 
           if (this.options.addRemoveLinks) {
 
-             file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
-              //file._removeLink = Dropzone.createElement("<button class=\"btn-white btn btn-xs pull-right dz-remove\" href=\"javascript:undefined;\" data-dz-remove title=\"" + this.options.dictRemoveFile + "\"><i class='fa fa-trash-o'></i></button>");
-            file.previewElement.appendChild(file._removeLink);
+              file.previewElement.querySelector('[data-dz-remove]').setAttribute("title", this.options.dictRemoveFile);
+            // file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
+            //  //file._removeLink = Dropzone.createElement("<button class=\"btn-white btn btn-xs pull-right dz-remove\" href=\"javascript:undefined;\" data-dz-remove title=\"" + this.options.dictRemoveFile + "\"><i class='fa fa-trash-o'></i></button>");
+            //file.previewElement.appendChild(file._removeLink);
           }
 
-          if (this.options.addDescription) {
-              var descriptionEl = Dropzone.createElement("<div class=\"dz-description\"><textarea id=\"description\" type=\"text\" placeholder=\"Beschreibung\" data-edit=\"true\" data-filed-name=\"Description\" data-float-label-set=\"true\" ></textarea></div>");
-              file.previewElement.appendChild(descriptionEl);
+            if (file.previewElement.querySelector('[data-dz-description]')){
+                
+              var descriptionEl = Dropzone.createElement("<div class=\"dz-description\"><textarea id=\"description\" type=\"text\" rows=\"4\" style=\"width:100%;\" data-edit=\"true\" data-filed-name=\"Description\" data-float-label-set=\"true\" ></textarea></div>");
+
+                file.previewElement.querySelector('[data-dz-description]').appendChild(descriptionEl);
               if (!IsNullOrUndefined(file.description)) {
                   $(".dz-description").find("#description").val(file.description);
               }
@@ -338,11 +343,21 @@
           try {
               if (file.previewElement) {
                   if ((_ref = file.previewElement) != null) {
-                      //_ref.parentNode.removeChild(file.previewElement);
+                      _ref.parentNode.removeChild(file.previewElement);
                       file.previewElement.style.display = "none";
                       file.previewElement.setAttribute("data-isdeleted", "true");
+                      if (this.files.length === 0)
+                          if (this.previewsContainer.querySelector('[data-dz-showheader]'))
+                              this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'none';
+
+                      if ((this.options.maxFiles != null && this.options.maxFiles!= undefined) && (this.files < this.maxFiles || this.files == 0)) {
+                          document.querySelector('#addFile-' + this.element.id).removeAttribute('disabled');
+                          this.setupEventListeners();
+                      }
                   }
-              }
+              } else {
+                 
+              } 
           }
           catch (e)
           {

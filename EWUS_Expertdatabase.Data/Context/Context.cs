@@ -32,7 +32,7 @@ namespace EWUS_Expertdatabase.Data
 
             //modelBuilder.Entity<InvolvedParty>().Property(x => x.Name).IsRequired();
             //modelBuilder.Entity<Measure>().Property(x => x.Name).IsRequired();
-            //modelBuilder.Entity<InvolvedParty>().Property(x => x.Name).IsRequired();
+            //modelBuilder.Entity<Measure>().Property(x => x.SerialNumber).IsRequired();
             //modelBuilder.Entity<Project>().Property(x => x.PropertyNumber).IsRequired();
             //modelBuilder.Entity<Project>().Property(x => x.Location).IsRequired();
             //modelBuilder.Entity<Project>().Property(x => x.ZipCode).IsRequired();

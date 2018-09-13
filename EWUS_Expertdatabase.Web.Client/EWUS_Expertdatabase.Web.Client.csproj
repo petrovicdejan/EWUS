@@ -207,11 +207,9 @@
     <Content Include="Lib\App\css\bootstrap.min.css" />
     <Content Include="Lib\App\css\dropzone.css" />
     <Content Include="Lib\App\css\main.css" />
-    <Content Include="Lib\App\js\acct.js" />
     <Content Include="Lib\App\js\app.js" />
     <Content Include="Lib\App\js\bootstrap.js" />
     <Content Include="Lib\App\js\bootstrap.min.js" />
-    <Content Include="Lib\App\js\draganddrop.js" />
     <Content Include="Lib\App\js\dropzone.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.min.js" />
@@ -740,6 +738,10 @@
     <ProjectReference Include="..\EWUS_Expertdatabase.Common\EWUS_Expertdatabase.Common.csproj">
       <Project>{03fa8cca-07f6-43b9-bec5-ee9030977b18}</Project>
       <Name>EWUS_Expertdatabase.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EWUS_Expertdatabase.Data\EWUS_Expertdatabase.Data.csproj">
+      <Project>{15c60774-c140-4b26-8e10-62ad14876272}</Project>
+      <Name>EWUS_Expertdatabase.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\EWUS_Expertdatabase.Model\EWUS_Expertdatabase.Model.csproj">
       <Project>{93C15C64-506C-4E5B-8023-F7E168B3F6C5}</Project>

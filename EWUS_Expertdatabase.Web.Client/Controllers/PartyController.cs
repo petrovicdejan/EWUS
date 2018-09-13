@@ -12,15 +12,17 @@ using System.Web.Mvc;
 
 namespace EWUS_Expertdatabase.Web.Client
 {
-    [RoutePrefix("Party")]
+    //[RoutePrefix("Party")]
     public class PartyController : Controller
     {
         // GET: Party
+        [Route("wartungsfirmen")]
         public ActionResult MaintenanceCompanyIndex()
         {
             return View();
         }
 
+        [Route("kunden")]
         public ActionResult CustomerIndex()
         {
             return View();
@@ -99,7 +101,7 @@ namespace EWUS_Expertdatabase.Web.Client
             if (item.Success)
                 return Json(item.Value);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
 
         [HttpPost]
@@ -115,7 +117,7 @@ namespace EWUS_Expertdatabase.Web.Client
             if (item.Success)
                 return Json(item.Value);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]

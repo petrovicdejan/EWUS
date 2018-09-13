@@ -98,7 +98,7 @@ namespace EWUS_Expertdatabase.Web.Client
             }
             catch (Exception ex)
             {
-                new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
             }
 
             return null;

@@ -1,6 +1,5 @@
 ﻿(function ($) {
     $(document).ready(function () {
-
         var dataDocumentItems = null;
         if (IsNullOrEmpty(dcMeasure) == false) {
             var data = JSON.parse(base64.decode(dcMeasure));
@@ -8,10 +7,10 @@
             if (IsNullOrUndefined(data) == false)
                 dataDocumentItems = data.DocumentItems;
         }
-
-        publicApp.initializeDropZoneApp("measureDropZone", "measurePreview", objectId, "Measure");
-        publicApp.fillDropZoneApp(dataDocumentItems, "measureDropZone", objectId, "Measure");  
         
+        publicApp.initializeDropZoneApp("measureDropZone", "measurePreview", objectId, "Measure");     
+        publicApp.fillDropZoneApp(dataDocumentItems, "measureDropZone", objectId, "Measure");  
+       
         var colModel = [
             {
                 label: 'Name',
@@ -40,6 +39,7 @@
                 },
                 search: false
             },
+            
         ];
 
         setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, 1500, 150, 15, fetchGridData);

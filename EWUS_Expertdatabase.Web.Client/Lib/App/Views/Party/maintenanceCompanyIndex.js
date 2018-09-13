@@ -20,25 +20,15 @@
             {
                 label: 'Email',
                 name: 'Email',
-                width: 15,
+                width: 12,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'],
                 }
-            },
-            {
-                label: '',
-                name: '',
-                width: 7,
-                formatter: function (cellvalue, options, rowObject) {
-                    return '<a href="#" class="btn btn-info btn-xs" onclick="publicApp.openModalForm(this)" data-url="/Party/EditMaintenanceCompany?key=' + rowObject.Id + '"><i class="fa fa-pencil"></i> Bearbeiten </a>';
-                },
-                editable: false,
-                search: false
             }
         ];
         
-        setGridOptions.setUpGrid("jqGrid_mci", "jqGridPager", colModel, 1500, 500, 15, fetchGridData);
+     setGridOptions.setUpGrid("jqGrid_mci", "jqGridPager", colModel, 1300, 0, 15, fetchGridData, false,"/Party/EditMaintenanceCompany?key=");
      
          function fetchGridData() {      
 
@@ -47,6 +37,7 @@
 
             publicApp.getWebApi(url, function onFetchData(rData) {
                 $('#jqGrid_mci').jqGrid('setGridParam', { data: rData }).trigger('reloadGrid');
+                $("#rowsNumber").text('Number of rows: ' + $('#jqGrid_mci').getGridParam("reccount"));
             }, false, false);            
          }    
 

@@ -1,5 +1,6 @@
-﻿var publicApp = (function () {
-
+﻿
+var publicApp = (function () {
+    $(window).resize(windowResize);
     function webApiGet(sUri, fOnData, bShowError, bAsync) {
         if (IsNullOrUndefined(bAsync)) {
             bAsync = true;
@@ -10,7 +11,7 @@
             cache: false,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            async: bAsync, 
+            async: bAsync,
             headers: GetWebApiHeaders(),
             success: function (data, textStatus, xhr) {
                 var mPagingTotal = xhr.getResponseHeader("m-paging-total");
@@ -25,7 +26,7 @@
     }
 
     function webApiPostOnError(header, xhr, textStatus, errorThrown, bShowAlert, fOnError, sUri, closeModal) {
-        if (xhr.status == 200 && xhr.responseText == "")
+        if (xhr.status == 200 && xhr.statusText == "")
             return;
         if (IsNullOrUndefined(header))
             header = "ErrorGeneral";
@@ -39,21 +40,12 @@
         else
             ClosePageLoader();
 
-        var nextLink = "";
-        TryCatchWraper(function () {
-            if ($.isFunction(fOnError))
-                nextLink = fOnError(data);//TODO Data
-        });
-        if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
-            nextLink = "";
-        if (bShowAlert && xhr.responseText) {
-            var r = JSON.parse(xhr.responseText);
+        if (bShowAlert && xhr.statusText) {
+            var r = xhr.statusText;
             if (IsNullOrUndefined(r)) {
                 alert(errorThrown);
             } else {
-                var m = r.ExceptionMessage
-
-                alert(m);
+                alert(r);
             }
         } else if (bShowAlert) {
             alert(errorThrown);
@@ -122,31 +114,31 @@
             if (bCloseModalDialog)
                 closeModalDialog();
             //if (data.Success) {
-                var nextLink = "";
+            var nextLink = "";
 
-                TryCatchWraper(function () {
-                    if ($.isFunction(fOnData)) {
-                        nextLink = fOnData(data);
-                    } else {
-                        var eventArgs = new Object();
-                        eventArgs.name = sFormId;
-                        eventArgs.data = data;
-                        eventArgs.url = sUri
-                        $(document).trigger("behaviorTask:afterSubmit", eventArgs);
-                    }
-                });
-
-                if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
-                    nextLink = "";
-
-                if (bShowAlert) {
-                    alertshow(1, "Successfully saved!", "Recommended Action",
-                        nextLink + "<br/>"
-                        + "<span class='pull-right'>Execute Time: "
-                        + data.FormatedExecuteTime
-                        + " RecordsAffected: "
-                        + data.RecordsAffected + "</span>");
+            TryCatchWraper(function () {
+                if ($.isFunction(fOnData)) {
+                    nextLink = fOnData(data);
+                } else {
+                    var eventArgs = new Object();
+                    eventArgs.name = sFormId;
+                    eventArgs.data = data;
+                    eventArgs.url = sUri
+                    $(document).trigger("behaviorTask:afterSubmit", eventArgs);
                 }
+            });
+
+            if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
+                nextLink = "";
+
+            if (bShowAlert) {
+                alertshow(1, "Successfully saved!", "Recommended Action",
+                    nextLink + "<br/>"
+                    + "<span class='pull-right'>Execute Time: "
+                    + data.FormatedExecuteTime
+                    + " RecordsAffected: "
+                    + data.RecordsAffected + "</span>");
+            }
             //} else {
             //    webApiPostOnSuccessFalse("ErrorGeneral", data, bShowAlert);
             //}
@@ -235,12 +227,12 @@
             }
         });
     }
-     
+
     function GetWebApiHeaders(data) {
 
         if (IsNullOrUndefined(data))
             data = new Object();
-        
+
         return data;
     }
 
@@ -340,6 +332,7 @@
     }
 
     function setModalDialogWithContent($modal, sUri, sContent, fFunc, aOptions, closeOnOusideClick) {
+        
         if (IsNullOrUndefined(sContent) == false)
             $modal.html(sContent);
 
@@ -347,14 +340,39 @@
             closeOnOusideClick = 'static';  // treba proslediti 'true' ukoliko zelimo da klik van forme gasi formu
 
         if (IsNullOrUndefined(aOptions))
-            aOptions = { Width: "640px" };
+            aOptions = {};
 
-        if ($modal.find(".modal-layout-2").length > 0) {
-            aOptions.Width = "880px";
+        var innerHeight = $(".modal-layout-2").height();
+        var innerWidth = $("#ajax-modal").width();
+        
+        aOptions.Width = $(window).width() * 0.9;
+        aOptions.Height = $(window).height() *0.95;
+        aOptions.MaxWidth = $(window).width() * 0.97;
+        //if (IsNullOrUndefined(aOptions))
+        //    aOptions = { Width: "640px" };
+
+        //if ($modal.find(".modal-layout-2").length > 0) {
+        //    aOptions.Width = $(window).width() * 0.9 + "px";
+        //}
+
+        if (innerHeight > aOptions.Height - 200 || innerHeight < 100) {
+            aOptions.MaxHeight = $(window).height() * 0.97;
+        } else {
+            aOptions.Height = innerHeight + 160;
+            aOptions.MaxHeight = innerHeight + 200;
+        }
+
+        if ($modal.find('.stretch').length > 0) {
+        } else {
+            aOptions.Width = innerWidth
+            aOptions.MaxWidth = innerWidth + 10;
         }
 
         if (aOptions.Height)
-            $modal.css("height", aOptions.Height);
+            $modal.css("height", aOptions.Height + "px");
+
+        if (aOptions.width)
+            $modal.css("width", aOptions.Width + "px");
 
         $('button.close').on('click', function () {
             closeModalDialog("eventX");
@@ -373,24 +391,22 @@
             if (currentKeyCodes[s])
                 currentKeyCodes[s] = false;
         });
-        
-        $modal.css({
-            "width": aOptions.Width,
-            "margin-top": Math.max(0, ($(window).height() - $modal.height()) / 2),
-            'max-width': aOptions.Width,
-            'left': function () {
-                return Math.max(0, ($(window).width() - $modal.width()) / 2) + "px";
-            }
-        });
 
+        $modal.css("top", Math.max(0, ($(window).height() - aOptions.Height) / 2) + "px");
+        $modal.css("max-width", aOptions.MaxWidth + "px");
+        $modal.css("width", aOptions.Width + "px");
+        $modal.css("left", Math.max(0, ($(window).width() - aOptions.Width) / 2) + "px");
+        setTimeout(function () { $modal.css("margin-top", "0px") },50);
 
         height = $modal.height();
-        $modal.css('max-height', $(window).height() * 0.9);
+        $modal.css('max-height', aOptions.MaxHeight + "px");
         var body = $modal.find('.modal-body')[0];
-        if ((height + 10) > ($(window).height() * 0.9))
-            $(body).css('height', $(window).height() * 0.57);
-        else
-            $(body).css('max-height', $(window).height() * 0.57);
+        //if ((height + 10) > ($(window).height() * 0.9)) {
+        //    //$(body).css('height', $(window).height() *0.57);
+        //} else
+        //    // $(body).css('max-height', $(window).height() * 0.57);
+
+        $(body).css('width', aOptions.Width + "px");
         $(body).css('overflow-y', 'auto');
         $modal.modal({
             backdrop: closeOnOusideClick
@@ -403,8 +419,59 @@
         var eventArgs = new Object();
         eventArgs.uri = sUri;
         $(document).trigger("modalDialog:Display", eventArgs);
+        $(document).on("bs.modal.resize", resizeModal);
+        $(document).trigger('bs.modal.resize');
     }
 
+    function resizeModal() {
+        var $modal = $('#ajax-modal');
+
+        var innerHeight = $(".modal-layout-2").height();
+        var innerWidth = $("#ajax-modal").width();
+
+        var aOptions = {};
+
+        aOptions.Height = $(window).height() * 0.95;
+        aOptions.MaxWidth = $(window).width() * 0.97;
+        aOptions.Width = $(window).width() * 0.9;
+
+        if (innerHeight > aOptions.Height-200) {
+            aOptions.MaxHeight = $(window).height() * 0.97;
+        } else {
+            aOptions.Height = innerHeight + 160;
+            aOptions.MaxHeight = innerHeight + 200;
+        }
+
+        if ($modal.find('.stretch').length > 0) {
+
+        } else {
+            aOptions.Width = innerWidth
+            aOptions.MaxHeight = innerWidth + 10;
+        }
+
+        if (aOptions.Height)
+            $modal.css("height", aOptions.Height + "px");
+
+        
+        if (aOptions.width)
+            $modal.css("width", aOptions.Width + "px");
+
+        $modal.css("top", Math.max(0, ($(window).height() - aOptions.Height) / 2) + "px");
+        $modal.css("max-width", aOptions.MaxWidth + "px");
+        $modal.css("width", aOptions.Width + "px");
+        $modal.css("left", Math.max(0, ($(window).width() - aOptions.Width) / 2) + "px");
+        setTimeout(function () { $modal.css("margin-top", "0px") }, 50);
+
+        $modal.css('max-height', aOptions.MaxHeight + "px");
+        var body = $modal.find('.modal-body')[0];
+        $(body).css('width', aOptions.Width + "px");
+        
+    }
+    function windowResize() {
+        if ($('#ajax-modal').length > 0) {
+            $(document).trigger("bs.modal.resize");
+        }
+    }
     var currentKeyCodes = new Object();
 
     function closeModalDialog(text) {
@@ -446,6 +513,7 @@
 
     function closeAjaxModalDialog(modal) {
 
+        $(document).off("bs.modal.resize");
         if (IsNullOrUndefined(modal))
             modal = '#ajax-modal';
 
@@ -468,6 +536,8 @@
             if (rootId)
                 id = "#" + rootId + " ";
         }
+        
+
         setUpClearOnInput(id);
         setUpTypeHead(id);
         setUpFloatLabels(id);
@@ -524,9 +594,12 @@
                 $el.attr("data-selected-end-date", picker.endDate.format(format));
             });
         });
-
+        
         setupValidate(id);
-       // setUpEditable(id);
+        // setUpEditable(id);
+
+       // $("#Name").trigger("click");
+        
     }
 
     function startsWithTwo(str, prefix) {
@@ -1484,7 +1557,7 @@
     catch (ex) {
 
     }
-    
+
     function loading_init() {
         var el = $('.loading-overlay');
         if (!el || !el.html()) {
@@ -1570,6 +1643,7 @@
     }
 
     function validateForm(elForm) {
+
         fnValidateDynamicContent($(elForm));
 
         var element = $(elForm);
@@ -1583,7 +1657,7 @@
         $(".pendingErrorLoader").remove();
         var fields = getInvalidFormElements(elForm, true);
         var list = $(".validation-summary-errors-sw ul");
-        if (list && fields && fields.length) {
+        if (list && fields && fields.length) {            
             list.empty();
             int = 0;
             if (val.pendingRequest > 0) {
@@ -1591,18 +1665,32 @@
                 $("<li />").html("There is some pending validation, wait for it to finish!<a href='#' class='alert-link' ></a>").appendTo(list);
                 int++;
             };
-            $.each(fields, function () {
-                if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
-                    $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
-                    int++;
-                }
-                setFocus("#" + this.id);
-                $("#" + this.id).blur();
+          
+                for (var i = 0; i < fields.length; i++) {
+                    //if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
+                    //    $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
+                    //    int++;
+                    //}
+                    setFocus("#" + fields[i].id);
+                    $("#" + fields[i].id).blur();
+                   
                     
-            });
+                }
+
+                //$.each(fields, function () {
+                //    if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
+                //        $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
+                //        int++;
+                //    }
+                //    setFocus("#" + this.id);
+                //    $("#" + this.id).blur();
+
+                //});
+                      
+          
             if (int > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
-               // location.href = "#innerBehaviorTaskHtml";
+                // location.href = "#innerBehaviorTaskHtml";
 
                 return false;
             }
@@ -1618,8 +1706,13 @@
 
             if ($(".validation-summary-errors-sw li").length > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
-               // location.href = "#innerBehaviorTaskHtml";
+                // location.href = "#innerBehaviorTaskHtml";
             }
+
+            setTimeout(function () {
+              var firstEl = $(".field-set:first .field-group").find("[data-val='true']"); 
+                firstEl.blur();
+            }, 200);            
 
             return false;
         }
@@ -1635,7 +1728,7 @@
                     var value = oData[val];
 
                     var bIsArry = $.isArray(value);
-                    
+
                     var name = val;
                     name = name.replace("m_", "");
                     var sSelector = "input[data-filed-name=" + name + "]";
@@ -1765,7 +1858,7 @@
 
     function getCurrencyFormat(el, defaultFormat, decimalPlaces) {
         var format = defaultFormat;
-        
+
         if (IsNullOrWhiteSpace(format) == false)
             return format;
 
@@ -1780,14 +1873,14 @@
             var lCode = 0;
             if (IsNullOrUndefined(LangCode) == false)
                 lCode = LangCode;
-            
+
             var decimalPartFormat = getDecimalPartFormat(decimalPlaces);
 
-            if (lCode == 1033) {              
+            if (lCode == 1033) {
                 format = "0,0" + decimalPartFormat;
                 numeral.language('en');
-            } else {               
-                format = "0,0" + decimalPartFormat;    
+            } else {
+                format = "0,0" + decimalPartFormat;
                 numeral.language('en');//
             }
         }
@@ -1869,7 +1962,7 @@
         var cListUrl = $el.attr("data-url");
         if (IsNullOrWhiteSpace(cListUrl) == false) {
             webApiGet(cListUrl, fOnData, false);
-        } 
+        }
         else {
             cListUrl = sRootUrl + "/api/Classification/DefaultUnitOfTime"
             webApiGet(cListUrl, fOnData, false);
@@ -2548,7 +2641,7 @@
         TryCatchWraper(function () { $(sSelector).autoNumeric('destroy'); });
         return currencyAmount;
     }
-    
+
     function getAmountField(sSelector) {
         var currencyAmount = getAmount(sSelector)
         return { Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(currencyAmount) }
@@ -2724,7 +2817,7 @@
         else
             return false;
     }
-     
+
     function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError) {
         if (IsNullOrUndefined(bShowAlertOnSuccess))
             bShowAlertOnSuccess = true;
@@ -2740,7 +2833,7 @@
         var i = new Object();
 
         var objectid = $(form).attr("objectid");
-        
+
         if (IsNullOrWhiteSpace(objectid) == false)
             i.ObjectId = objectid;
 
@@ -2810,7 +2903,7 @@
         var items = [];
         items.length = 0;
         var inx = 0;
-        
+
         var gridModel = jQuery("#" + gridId).jqGrid('getGridParam', 'data');
         var columnNames = $("#" + gridId).jqGrid('getGridParam', 'colNames');
 
@@ -2819,11 +2912,11 @@
 
             //p.Fields = new Array();
             $.each(columnNames, function (ind, val) {
-                if (!IsNullOrEmpty(val) && !IsNullOrWhiteSpace(val) && val != "Actions") {                   
+                if (!IsNullOrEmpty(val) && !IsNullOrWhiteSpace(val) && val != "Actions") {
                     //p.Fields.push({ Name: val, Value: value[val] });
-                    p[val] = value[val]; 
+                    p[val] = value[val];
                 }
-            });    
+            });
 
             items[inx] = p;
             inx++;
@@ -2853,21 +2946,21 @@
         //fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
 
         $("div[data-dropzone='true']").find(".dz-preview").each(function (index) {
-            var el = $(this).find(".dz-details");
+            var el = $(this);
             if (!IsNullOrUndefined(el) && !IsNullOrUndefined($(this).attr("data-mimetype"))) {
 
                 var p = new Object();
                 //p.Fields = new Array();
 
                 var dropZone = new Object();
-                dropZone.DocumentName = $(el.find(".dz-filename")).find("[data-dz-name]")[0].innerText;
-                dropZone.DocumentSize = $(el.find(".dz-size")).find("[data-dz-size]")[0].innerText;
+                dropZone.DocumentName = $(el.find(".dz-filename[data-dz-name]"))[0].innerText;
+                dropZone.DocumentSize = $(el.find(".dz-size[data-dz-size]"))[0].innerText;
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
 
                 //p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
-                p = dropZone; 
+                p = dropZone;
 
                 items[inx] = p;
                 inx++;
@@ -2935,7 +3028,7 @@
         }, function () {
             publicApp.deleteWebApi(el, $(el).attr("data-type"), fOnSuccess);
         });
-    }  
+    }
 
     function onSelectChange(sender, sId) {
         if (!sId) {
@@ -2970,9 +3063,9 @@
         //        Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
         //    }
         //} else {
-            return {
-                Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
-            }
+        return {
+            Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
+        }
         //};
     }
 
@@ -2981,46 +3074,73 @@
         return $(sId).val();
     }
 
-    function initializeDropZone(idDropZone,idPreview,refersToId,refersToTypeName) {
+    function initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName) {
         var firstTime = myAttachZone == null;
 
         if (!firstTime) {
             myAttachZone.destroy();
         }
-
+        
         var previewNode = document.querySelector("#" + idPreview);
         if (previewNode != null && previewNode != 'undefined') {
             previewNode.id = "";
             var previewTemplate = previewNode.parentNode.innerHTML;
             previewNode.parentNode.removeChild(previewNode);
 
+            var maxfiles = null;
+
+            try {
+                 maxfiles = Number.parseInt($("#" + idDropZone).attr('data-maxfiles'));
+            } catch(ex) {
+
+            }            
+            if (maxfiles == undefined || maxfiles == NaN)
+                maxfiles = null;
+
+            console.log(maxfiles);
             myAttachZone = new Dropzone(document.querySelector("#" + idDropZone), {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,
                 dictRemoveFile: "Löschen",
-                addOpenLinks: true,
+                addOpenLinks: false,
                 dictOpenLink: "Offnen",
                 sendFileId: true,
-                clickable: "#" + idDropZone ,
+                clickable: "#" + idDropZone,
                 acceptedFiles: "image/jpeg,image/png,image/jpg",
                 addDescription: true,
                 objectTypeName: refersToTypeName,
-                removedfile: function (file) {
-                    var i = new Object();
-                    i.ObjectId = file.id;
+                previewTemplate: previewTemplate,
+                thumbnailHeight: 120,
+                thumbnailWidth: 140,
+                thumbnailMethod: 'crop',
+                maxFiles: maxfiles,
+                //removedfile: function (file) {
+                //    var i = new Object();
+                //    i.ObjectId = file.id;
 
-                    $.ajax({
-                        type: 'POST',
-                        url: sRootUrl + "document/DeleteDocument",
-                        data: JSON.stringify(i),
-                        headers: GetWebApiHeaders(),
-                        contentType: 'application/json; charset=utf-8',
-                    });
-                    var _ref;
-                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                },
+                //    $.ajax({
+                //        type: 'POST',
+                //        url: sRootUrl + "document/DeleteDocument",
+                //        data: JSON.stringify(i),
+                //        headers: GetWebApiHeaders(),
+                //        contentType: 'application/json; charset=utf-8',
+                //    });
+
+                //    var res = undefined;
+                //    var _ref = file.previewElement;
+                //    if (_ref)
+                //        res = _ref.parentNode.removeChild(file.previewElement)
+
+                    
+                //    return (_ref) != null ? res : void 0;
+                //},
+            });
+
+            $("#addFile-" + idDropZone).click(function () {
+               $("#" + idDropZone).click();
             });
         }
+       
 
         myAttachZone.on("addedfile", function (file) {
 
@@ -3043,9 +3163,16 @@
                 $(document).trigger("fileUpload:addedFile", eventArgs);
             }
         });
+        myAttachZone.on("maxfilesreached", function (file) {
+            $("#" + idDropZone).removeClass("dz-clickable");
+            $("#" + idDropZone).unbind();
+            $("#addFile-" + idDropZone).prop('disabled', true);
+        });
+
+
     }
 
-    function FillDocumentDropzone(dcDocument,idDropZone,refersToId,refersToTypeName) {
+    function FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName) {
 
         if (!IsNullOrEmpty(dcDocument)) {
 
@@ -3065,8 +3192,8 @@
                     if (isImage(value.DocumentName)) {
                         myAttachZone.createThumbnailFromUrl(mockfilee, sRootUrl + "document/download/contentstream?Tag=" + refersToTypeName + "&Number=" + value.ObjectId);
                     }
-
                     myAttachZone.emit("complete", mockfilee);
+                    myAttachZone._updateMaxFilesReachedClass();
 
                     $('#' + idDropZone).attr("data-refers-to-id", refersToId);
                     $('#' + idDropZone).attr("data-refers-to-type-name", refersToTypeName);
@@ -3139,6 +3266,9 @@
         },
         fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
             FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
+        },
+        windowResize: function () {
+            windowResize();
         }
     }
 
@@ -3159,23 +3289,19 @@ function IsNullOrUndefined(sValue) {
         return true;
 }
 
-var setGridOptions = (function() {
-    function setUpGrid(gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow) {
-        
+var setGridOptions = (function () {
+    function setUpGrid(gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow, editUrl) {
+
         var widthGrid = width;
         var widthParent = $("#" + gridId).parent().width();
 
         if (Number(widthParent) != 0)
             widthGrid = widthParent;
 
-        var heightGrid = height;
+        var gridHeight = $(window).innerHeight() - 280;
 
-        var container = $("#" + gridId).parent();
-
-        var heightParent = container.height();
-
-        if (Number(heightParent) != 0)
-            heightGrid = heightParent;
+        if (height != 0)
+            gridHeight = height;
 
         $("#" + gridId).jqGrid({
             // data: mydata,
@@ -3183,13 +3309,37 @@ var setGridOptions = (function() {
             datatype: "local",
             colModel: colModel,
             width: widthGrid,
-            height: heightGrid,
+            height: gridHeight,
             autowidth: true,
+            pgbuttons: false,
+            pginput: false,
             shrinkToFit: true,
+            ondblClickRow: function (rowId) {
+
+                if (IsNullOrUndefined(editUrl))
+                    return;
+
+                var rowData = jQuery(this).getRowData(rowId);
+
+                if (IsNullOrUndefined(rowData))
+                    return;
+
+                var IdEdit = 0;
+
+                if (typeof rowData.Id === 'undefined')
+                    return;
+
+                var btn = document.createElement("button");
+                var url = editUrl + rowData.Id;
+                btn.setAttribute('data-url', url);
+
+                publicApp.openModalForm(btn);
+
+            },
             rowNum: rowsPerPage,
             pager: "#jqGridPager",
         });
-        
+
         delSettings = {
             afterShowForm: function ($form) {
                 // delete button: "#dData", cancel button: "#eData"
@@ -3223,8 +3373,8 @@ var setGridOptions = (function() {
                 addParams: {
                     keys: true,
                     position: "last"
-                },  
-                              
+                },
+
             });
 
         if (!IsNullOrUndefined(customButtonAddRow)) {
@@ -3242,11 +3392,14 @@ var setGridOptions = (function() {
             }
         }
 
-        
-
         //$("#" + gridId).jqGrid('setGridHeight', heightParent);
 
         $("#" + gridId).trigger("resize");
+
+        $(window).resize(function () {
+            if (height == 0)
+                $("#" + gridId).jqGrid('setGridHeight', $(window).innerHeight() - 280);
+        });
 
     }
 
@@ -3260,8 +3413,8 @@ var setGridOptions = (function() {
     }
 
     return {
-        setUpGrid: function (gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow) {
-            setUpGrid(gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow);
+        setUpGrid: function (gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow,editUrl) {
+            setUpGrid(gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow,editUrl);
         },
         deleteRows: function (gridId) {
             deleteRows(gridId);

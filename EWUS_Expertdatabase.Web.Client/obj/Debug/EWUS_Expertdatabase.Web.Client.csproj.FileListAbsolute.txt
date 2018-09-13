@@ -8,6 +8,7 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bi
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EntityFramework.SqlServer.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Business.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Common.dll
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Model.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.Agent.Intercept.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.DependencyCollector.dll
@@ -33,11 +34,12 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bi
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\System.Web.WebPages.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\System.Web.WebPages.Razor.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\WebGrease.dll
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Business.pdb
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Business.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Common.pdb
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Common.dll.config
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.pdb
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Model.pdb
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Model.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\AutoMapper.pdb
@@ -63,8 +65,6 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bi
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.WindowsServer.xml
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.Web.xml
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.pdb
-C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Data.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csprojResolveAssemblyReference.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.dll

@@ -6,7 +6,7 @@
 
     <script>
         var isModify = "@ViewBag.Id";
-        isModify > 0 ? setTitle("Bearbeiten") : setTitle("Neu");
+        isModify > 0 ? setTitle("Wartungsfirma erfassen/ändern") : setTitle("Wartungsfirma erfassen/ändern");
 
         function setTitle(title) {
             $('#modal_title').text(title);
@@ -25,7 +25,8 @@ else
 }
 <style>
     .modal-body {
-        width: 600px;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
     }
 </style>
 
@@ -33,7 +34,7 @@ else
 {
     if (ViewBag.IsPopup)
     {
-        @Html.Raw("<div class='modal-body'>");
+        @Html.Raw("<div class='modal-body modal-layout-2'>");
     }
 
     Html.AntiForgeryToken();

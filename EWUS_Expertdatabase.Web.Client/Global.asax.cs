@@ -1,4 +1,6 @@
-﻿using EWUS_Expertdatabase.Model;
+﻿using EWUS_Expertdatabase.Data;
+using EWUS_Expertdatabase.Model;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -25,6 +27,8 @@ namespace EWUS_Expertdatabase.Web.Client
                                             cfg.CreateMap<Customer, CustomerViewModel>().ReverseMap();
                                             cfg.CreateMap<Project, ProjectViewModel>().ReverseMap();
                                         });
+
+            //System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<EWUSDbContext, EWUS_Expertdatabase.Data.Migrations.Configuration>());
         }
 
     }

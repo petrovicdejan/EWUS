@@ -3464,4 +3464,13 @@ body.modal-open {
 html.ie10 body.modal-open {
     position: relative;
 }
-
+.b-b-2 {
+    border-bottom: 2px solid lightgray;
+}
+.b-b-1 {
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    padding-bottom:6px;
+    padding-top:6px;
+    margin-left:2px;
+}

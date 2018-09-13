@@ -4810,3 +4810,32 @@ input[type=range]:focus::-ms-fill-upper {
     line-height: 14px !important;
     overflow: visible !important;
 }
+
+/*.ui-th-column {
+    width:50px !important;
+    vertical-align:text-top !important;
+}*/
+.ui-jqgrid-labels {
+height:50px;
+}
+
+.ui-jqgrid-labels th {
+    vertical-align: super !important;
+}
+
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div {
+    height:19px !important;
+}
+
+.ui-jqdialog {
+    width:340px !important;
+}
+.ui-th-div {
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.ui-row-ltr td {
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}

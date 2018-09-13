@@ -12,10 +12,11 @@ using System.Web.Mvc;
 
 namespace EWUS_Expertdatabase.Web.Client.Controllers
 {
-    [System.Web.Http.RoutePrefix("Measure")]
+    //[System.Web.Http.RoutePrefix("Measure")]
     public class MeasureController : Controller
     {
         // GET: Measure
+        [Route("massnahmenkatalog")]
         public ActionResult MeasureIndex()
         {
             return View();
@@ -91,7 +92,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             if (item.Success)
                 return Json(item.Value);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
     }
 }

@@ -87,18 +87,18 @@ $.jgrid.regional["en"] = {
 		bClose: "Close"
 	},
 	del : {
-		caption: "Delete",
+        caption: "Loschen",
         msg: "Soll der Datensatz wirklich geloscht werden?",
 		bSubmit: "",
 		bCancel: ""
 	},
 	nav : {
 		edittext: "",
-		edittitle: "Edit selected row",
+        edittitle: "Bearbeiten",
 		addtext:"",
-		addtitle: "Add new row",
+		addtitle: "Neu",
 		deltext: "",
-		deltitle: "Delete selected row",
+        deltitle: "Loschen",
 		searchtext: "",
 		searchtitle: "Find records",
 		refreshtext: "",
@@ -108,9 +108,9 @@ $.jgrid.regional["en"] = {
 		viewtext: "",
 		viewtitle: "View selected row",
 		savetext: "",
-		savetitle: "Save row",
+        savetitle: "Ubernehmen",
 		canceltext: "",
-		canceltitle : "Cancel row editing",
+        canceltitle: "Stornieren",
 		selectcaption : "Actions..."
 	},
 	col : {

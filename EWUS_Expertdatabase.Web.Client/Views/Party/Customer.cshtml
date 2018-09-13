@@ -6,7 +6,7 @@
 
     <script>
         var isModify = "@ViewBag.Id";
-        isModify > 0 ? setTitle("Bearbeiten") : setTitle("Neu");
+        isModify > 0 ? setTitle("Kunde erfassen/ändern") : setTitle("Kunde erfassen/ändern");
 
         function setTitle(title) {
             $('#modal_title').text(title);
@@ -25,7 +25,12 @@ else
 }
 <style>
     .modal-body {
-        width: 600px;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        height: 400px;
+    }
+    #ajax-modal{
+        width:800px;
     }
 </style>
 
@@ -33,7 +38,7 @@ else
 {
     if (ViewBag.IsPopup)
     {
-        @Html.Raw("<div class='modal-body'>");
+        @Html.Raw("<div class='modal-body modal-layout-2'>");
     }
 
     Html.AntiForgeryToken();
@@ -46,7 +51,7 @@ else
         </div>
     </div>
     <div class="col-md-12" style="padding-top:10px;">
-        @WebHelpers.DropZoneEditor("customerDropZone", "customerPreview", "Logo", "300px")
+        @WebHelpers.DropZoneEditor("customerDropZone", "customerPreview", "Logo", "300px", showDescription: false )
 
     </div>
     @Html.Partial("_PopupFooter");

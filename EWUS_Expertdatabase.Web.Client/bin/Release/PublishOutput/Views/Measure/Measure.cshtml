@@ -1,6 +1,15 @@
 ﻿@{
     Layout = (string)ViewData["Layout"];
 }
+
+<style>
+    .ui-jqgrid-bdiv {
+        width:auto !important;
+        overflow-x:hidden !important;
+    }
+
+</style>
+
 @if (ViewBag.IsPopup)
 {
 
@@ -25,13 +34,9 @@ else
 }
 <style>
 
-    #ajax-modal {
-        max-width: 2000px !important;
-        width: 1200px !important;
-    }
 
     .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 160px);
         overflow-y: auto;
     }
   
@@ -41,62 +46,64 @@ else
 {
     if (ViewBag.IsPopup)
     {
-        @Html.Raw("<div class='modal-body modal-layout-2'>");
+        @Html.Raw("<div class='modal-body modal-layout-2 stretch'>");
     }
 
     Html.AntiForgeryToken();
 
-    <div class="form-group">
+<div class="form-group">
 
+    <div class="row">
+        <div class="col-md-6">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.TextEditor("Name", "Name", "Benennung", "Benennung", "1", isRequired: true)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.TextEditor("SerialNumber", "SerialNumber", "Laufende-Nr", "Laufende-Nr", "2", type: "number", isReadOnly: true)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "Investitionskosten [€]", "Investitionskosten [€]", "4", type: "number")
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.TextAreaEditor("Description", "Beschreibung", "Beschreibung", "5")
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.TextAreaEditor("Saving", "Einsparung", "Einsparung", "6")
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.jQGrid("jqGridLink", true, "MeasureLinks", "100%", "120%", "Documentlinks")
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @WebHelpers.DropZoneEditor("measureDropZone", "measurePreview", "Fotos und Grafiken", "300px")
-                        </div>
-                    </div>
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("Name", "Name", "Benennung", "Benennung", "1", isRequired: true)
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("SerialNumber", "SerialNumber", "Laufende-Nr", "Laufende-Nr", "2", type: "number", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "Investitionskosten [€]", "Investitionskosten [€]", "4", type: "number")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextAreaEditor("Description", "Beschreibung", "Beschreibung", "5")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextAreaEditor("Saving", "Einsparung", "Einsparung", "6")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.jQGrid("jqGridLink", true, "MeasureLinks", "100%", "120%", "Documentlinks")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.DropZoneEditor("measureDropZone", "measurePreview", "Fotos und Grafiken", "300px", showHeader: true, showDescription: true)
+                </div>
+            </div>
+        </div>
     </div>
+
+    
+
+</div>
 
 
     @Html.Partial("_PopupFooter");

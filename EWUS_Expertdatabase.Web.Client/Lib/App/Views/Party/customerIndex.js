@@ -12,26 +12,16 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 40,
+                width: 30,
                 key: true,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'], // ge = greater or equal to, le = less or equal to, eq = equal to
                 }
             },
-            {
-                label: '',
-                name: '',
-                width: 7,
-                formatter: function (cellvalue, options, rowObject) {
-                    return '<a href="#" class="btn btn-info btn-xs" onclick="publicApp.openModalForm(this)" data-url="/Party/EditCustomer?key=' + rowObject.Id + '"><i class="fa fa-pencil"></i> Bearbeiten </a>';
-                },
-                editable: false,
-                search: false
-            },
         ];
 
-        setGridOptions.setUpGrid("jqGrid_customer", "jqGridPager_customer", colModel, 1500, 500, 15, fetchGridData, "btnCustomAdd");
+        setGridOptions.setUpGrid("jqGrid_customer", "jqGridPager_customer", colModel, 1500, 0, 15, fetchGridData, "btnCustomAdd","/Party/EditCustomer?key=");
 
         function fetchGridData() {
 
@@ -41,6 +31,7 @@
 
             publicApp.getWebApi(url, function onFetchData(rData) {
                 $('#jqGrid_customer').jqGrid('setGridParam', { data: rData }).trigger('reloadGrid');
+                $("#rowsNumber").text('Number of rows: ' + $('#jqGrid_customer').getGridParam("reccount"));
             }, false, false);
         }
 

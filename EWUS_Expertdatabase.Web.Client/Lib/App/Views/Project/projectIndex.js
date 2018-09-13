@@ -8,9 +8,9 @@
             hidden: true
         },
         {
-            label: 'Name',
+            label: 'Projekt',
             name: 'Name',
-            width: 12,
+            width: 25,
             key: true,
             editable: true,
             searchoptions: {
@@ -18,9 +18,9 @@
             }
         },
         {
-            label: 'LiegenschaftsNr',
+            label: 'Liegenschafts-Nr',
             name: 'PropertyNumber',
-            width: 18,
+            width: 10,
             editable: true,
             searchoptions: {
                 sopt: ['cn', "ge", "le", "eq", 'bw'],
@@ -29,7 +29,7 @@
         {
             label: 'Liegenschaftstyp',
             name: 'PropertyType',
-            width: 19,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn', "ge", "le", "eq", 'bw'],
@@ -47,7 +47,7 @@
         {
             label: 'Region',
             name: 'Region',
-            width: 8,
+            width: 10,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -56,7 +56,7 @@
         {
             label: 'Standort',
             name: 'Location',
-            width: 10,
+            width: 12,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -74,43 +74,39 @@
         {
             label: 'Ort',
             name: 'City',
-            width: 8,
+            width: 12,            
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
             }
         },
         {
-            label: 'Investition Gesamt',
+            label: 'Investition [€]',
             name: 'InvestmentTotal',
-            width: 20,
+            width: 10,
+            formatter: 'number',
+            sorttype: "number",
+            align:'right',
             editable: true,
             searchoptions: {
-                sopt: ['cn'],
+                sopt: ['bw'],
             }
         },
         {
-            label: 'Einsparung Gesamt',
+            label: 'Einsparung [€/a]',
             name: 'SavingTotal',
-            width: 21,
+            align: 'right',
+            formatter: 'number',
+            sorttype: "number",
+            width: 10,
             editable: true,
             searchoptions: {
-                sopt: ['cn'],
+                sopt: ['bw'],
             }
         },
-        {
-            label: '',
-            name: '',
-            width: 15,
-            formatter: function (cellvalue, options, rowObject) {
-                return '<a href="#" class="btn btn-info btn-xs" onclick="publicApp.openModalForm(this)" data-url="/Project/ProjectEdit?key=' + rowObject.Id + '"><i class="fa fa-pencil"></i> Bearbeiten </a>';
-            },
-            editable: false,
-            search: false
-        }, ,
     ];
 
-    setGridOptions.setUpGrid("gridProject", "jqGridPager", colModel, 1500, 350, 15, fetchProjectData);
+    setGridOptions.setUpGrid("gridProject", "jqGridPager", colModel, 1500, 0, 15, fetchProjectData, false,"/Project/ProjectEdit?key=");
 
     function fetchProjectData() {
 
@@ -153,6 +149,8 @@
         });
 
         $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
+       
+        $("#rowsNumber").text('Number of rows: ' + $('#gridProject').getGridParam("reccount"));
     }
 
     return {

@@ -16,8 +16,7 @@
                 var url = sRootUrl + 'Project/GetProjects';
                 
                 publicApp.getWebApi(url, projectModule.applyProjectToGrid, false, false);
-
-                $("#gridProject").jqGrid('setGridParam', { data: data }).trigger("reloadGrid");
+                
             },false);
             
         });

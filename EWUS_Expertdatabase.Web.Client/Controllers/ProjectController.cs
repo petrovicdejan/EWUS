@@ -16,6 +16,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
     public class ProjectController : Controller
     {
         // GET: Project
+        [Route("projektliste")]
         public ActionResult ProjectIndex()
         {
             return View();
@@ -91,7 +92,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             if (item.Success)
                 return Json(item.Value);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
 
         public ActionResult DeleteProject(long Id)
@@ -105,7 +106,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             if (item.Success)
                 return Json(item.Value);
             else
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "An error has occured !!!");
         }
     }
 }

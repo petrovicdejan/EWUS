@@ -18,6 +18,8 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Rele
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.Migrations.Version04.resources
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.Migrations.Version05.resources
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.Migrations.Version06.resources
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.Migrations.Version07.resources
+C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.Migrations.Version08.resources
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.csproj.GenerateResource.Cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\obj\Release\EWUS_Expertdatabase.Data.dll

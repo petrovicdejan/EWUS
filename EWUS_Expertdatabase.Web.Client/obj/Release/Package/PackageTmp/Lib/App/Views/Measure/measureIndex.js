@@ -19,17 +19,19 @@
         {
             label: 'Laufende-Nr',
             name: 'SerialNumber',
+            align: 'right',
+            sorttype: "number",
             width: 7,
             key: true,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'], 
+                sopt: ['bw'], 
             }
         },
         {
             label: 'Massnahmenart',
             name: 'OperationType',
-            width: 12,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn', "ge", "le", "eq", 'bw'], 
@@ -38,25 +40,18 @@
         {
             label: 'Investitionskosten [€]',
             name: 'InvestmentCost',
+            align: 'right',
+            formatter: 'number',
+            sorttype: "number",
             width: 10,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'], 
+                sopt: ['bw'], 
             }
-        },
-        {
-            label: '',
-            name: '',
-            width: 15,
-            formatter: function (cellvalue, options, rowObject) {
-                return '<a href="#" class="btn btn-info btn-xs" onclick="publicApp.openModalForm(this)" data-url="/Measure/MeasureEdit?key=' + rowObject.Id + '"><i class="fa fa-pencil"></i> Bearbeiten </a>';
-            },
-            editable: false,
-            search: false
-        },
+        }
     ];
 
-    setGridOptions.setUpGrid("jqGrid", "jqGridPager", colModel, 1500, 350, 15, fetchGridData);
+    setGridOptions.setUpGrid("jqGrid", "jqGridPager", colModel, 1400, 0, 15, fetchGridData, false,"/Measure/MeasureEdit?key=");
 
     function fetchGridData() {
 
