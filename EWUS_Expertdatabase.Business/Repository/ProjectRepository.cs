@@ -110,9 +110,17 @@ namespace EWUS_Expertdatabase.Business
                 using (var ctx = new EWUSDbContext())
                 {
                     Project project = ctx.Projects.Where(x => x.Id == Id).FirstOrDefault();
-                    ctx.Projects.Remove(project);
 
-                    ctx.SaveChanges();
+                    try
+                    {
+                        ctx.Projects.Remove(project);
+                        ctx.SaveChanges();
+                    }
+                    catch
+                    {
+                        output.ExceptionMessage = "Exception could not be performed !!!";
+                        output.Status = ResultStatus.Forbidden;
+                    }
                 }
                 output.Status = ResultStatus.OK;
             }
@@ -123,5 +131,6 @@ namespace EWUS_Expertdatabase.Business
 
             return output;
         }
+        
     }
 }

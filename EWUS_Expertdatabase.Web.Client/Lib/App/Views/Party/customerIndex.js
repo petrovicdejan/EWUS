@@ -12,16 +12,26 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 30,
+                width: 45,
                 key: true,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'], // ge = greater or equal to, le = less or equal to, eq = equal to
                 }
             },
+            {
+                label: '',
+                name: '',
+                width: 1,
+                formatter: function (cellvalue, options, rowObject) {
+                    return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchGridData + ')" data-type="Customer" data-url="Party/DeleteCustomer/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
+                },
+                editable: false,
+                search: false
+            },
         ];
 
-        setGridOptions.setUpGrid("jqGrid_customer", "jqGridPager_customer", colModel, 1500, 0, 15, fetchGridData, "btnCustomAdd","/Party/EditCustomer?key=");
+        setGridOptions.setUpGrid("jqGrid_customer", "jqGridPager_customer", colModel, 1500, 0, 15, fetchGridData, "btnCustomAdd", "/Party/EditCustomer?key=");
 
         function fetchGridData() {
 
@@ -31,12 +41,12 @@
 
             publicApp.getWebApi(url, function onFetchData(rData) {
                 $('#jqGrid_customer').jqGrid('setGridParam', { data: rData }).trigger('reloadGrid');
-                $("#rowsNumber").text('Number of rows: ' + $('#jqGrid_customer').getGridParam("reccount"));
+                $('#rowsNumber').text('Anzahl: ' + $('#jqGrid_customer').getGridParam('reccount'));
             }, false, false);
         }
 
         function getDataForGrid() {
-            var colModel = jQuery("#jqGrid_customer").jqGrid('getGridParam', 'data');
+            var colModel = jQuery('#jqGrid_customer').jqGrid('getGridParam', 'data');
             return colModel;
         }
         

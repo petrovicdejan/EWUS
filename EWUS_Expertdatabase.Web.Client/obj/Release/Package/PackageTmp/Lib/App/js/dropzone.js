@@ -275,10 +275,11 @@
                 this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'block';
 
           if (this.options.addOpenLinks) {
-              file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
-              file.previewElement.appendChild(file._openLink);
+              //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
+              //file.previewElement.appendChild(file._openLink);
 
-              file._openLink.addEventListener("click", function (e) {
+              file._openLink = $(".dz-click-image");
+              $(".dz-click-image").dblclick(function (e) {
                   e.preventDefault();
                   e.stopPropagation();
 
@@ -1645,12 +1646,28 @@
     return elements;
   };
 
-  Dropzone.confirm = function(question, accepted, rejected) {
-    if (window.confirm(question)) {
-      return accepted();
-    } else if (rejected != null) {
-      return rejected();
-    }
+  Dropzone.confirm = function (question, accepted, rejected) {
+      publicApp.callSwallApp(accepted, rejected);
+      //swal({
+      //    title: "Soll der Datensatz wirklich gelöscht werden?",
+      //    text: "",
+      //    type: "warning",
+      //    showCancelButton: true, confirmButtonColor: "#DD6B55",
+      //    confirmButtonText: "Übernehmen", closeOnConfirm: true,
+      //    cancelButtonText: "Abbrechen"
+      //},
+      //  function () {
+      //      return accepted();
+      //    },
+      //  function () {
+      //      return rejected();
+      //    }
+      //)
+    //if (window.confirm(question)) {
+    //  return accepted();
+    //} else if (rejected != null) {
+    //  return rejected();
+    //}
   };
 
   Dropzone.isValidFile = function(file, acceptedFiles) {

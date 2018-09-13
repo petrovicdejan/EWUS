@@ -4839,3 +4839,7 @@ height:50px;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
 }
+
+.grid-col {
+    padding-right: 1% !important;
+}

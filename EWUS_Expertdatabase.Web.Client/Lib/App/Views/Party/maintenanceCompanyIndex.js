@@ -25,7 +25,17 @@
                     // show search options
                     sopt: ['cn'],
                 }
-            }
+            },
+            {
+                label: '',
+                name: '',
+                width: 1,
+                formatter: function (cellvalue, options, rowObject) {
+                    return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchGridData + ')" data-type="MaintenanceCompany" data-url="Party/DeleteMaintenanceCompany/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
+                },
+                editable: false,
+                search: false
+            },
         ];
         
      setGridOptions.setUpGrid("jqGrid_mci", "jqGridPager", colModel, 1300, 0, 15, fetchGridData, false,"/Party/EditMaintenanceCompany?key=");
@@ -37,7 +47,7 @@
 
             publicApp.getWebApi(url, function onFetchData(rData) {
                 $('#jqGrid_mci').jqGrid('setGridParam', { data: rData }).trigger('reloadGrid');
-                $("#rowsNumber").text('Number of rows: ' + $('#jqGrid_mci').getGridParam("reccount"));
+                $('#rowsNumber').text('Anzahl: ' + $('#jqGrid_mci').getGridParam('reccount'));
             }, false, false);            
          }    
 

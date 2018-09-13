@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EWUS_Expertdatabase.Business;
+using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Model;
 using Newtonsoft.Json;
 using System;
@@ -164,6 +165,36 @@ namespace EWUS_Expertdatabase.Web.Client
                 ViewBag.IsPopup = false;
                 return View("Customer");
             }
+        }
+        
+        [HttpPost]
+        public ActionResult DeleteCustomer(int Id)
+        {
+            if (Id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            var partyRepo = new PartyRepository();
+            var item = partyRepo.DeleteCustomerById(Id);
+
+            if (item.Success)
+                return Json(item);
+            else
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteMaintenanceCompany(int Id)
+        {
+            if (Id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            var partyRepo = new PartyRepository();
+            var item = partyRepo.DeleteMaintenanceCompanyById(Id);
+
+            if (item.Success)
+                return Json(item);
+            else
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
         }
     }
 }
