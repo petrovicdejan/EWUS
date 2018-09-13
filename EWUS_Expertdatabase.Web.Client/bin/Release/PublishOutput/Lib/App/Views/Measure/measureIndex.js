@@ -10,28 +10,33 @@
         {
             label: 'Benennung',
             name: 'Name',
-            width: 23,
+            width: 30,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'],
+                sopt: ['cn'],
             }
         },
         {
             label: 'Laufende-Nr',
             name: 'SerialNumber',
-            align: 'right',
+            align: 'left',
             sorttype: "number",
+<<<<<<< HEAD
+            width: 15,
+=======
+            classes: "grid-col",
             width: 7,
+>>>>>>> 2cad2428e6f22be7418e59a6020f557c967be791
             key: true,
             editable: true,
             searchoptions: {
-                sopt: ['bw'], 
+                sopt: ['cn'], 
             }
         },
         {
-            label: 'Massnahmenart',
+            label: 'Maßnahmenart',
             name: 'OperationType',
-            width: 8,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn', "ge", "le", "eq", 'bw'], 
@@ -40,15 +45,30 @@
         {
             label: 'Investitionskosten [€]',
             name: 'InvestmentCost',
-            align: 'right',
+            classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
+<<<<<<< HEAD
+            width: 15,
+=======
+            align: 'right',
             width: 10,
+>>>>>>> 2cad2428e6f22be7418e59a6020f557c967be791
             editable: true,
             searchoptions: {
-                sopt: ['bw'], 
+                sopt: ['bw', "ge", "le", "eq"], 
             }
-        }
+        },
+        {
+            label: '',
+            name: '',
+            width: 2,
+            formatter: function (cellvalue, options, rowObject) {
+                return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchGridData + ')" data-type="Measure" data-url="Measure/DeleteMeasure/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
+            },
+            editable: false,
+            search: false
+        },
     ];
 
     setGridOptions.setUpGrid("jqGrid", "jqGridPager", colModel, 1400, 0, 15, fetchGridData, false,"/Measure/MeasureEdit?key=");
@@ -81,7 +101,7 @@
         
         $('#jqGrid').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
 
-        $("#rowsNumber").text('Number of rows: ' + $('#jqGrid').getGridParam("reccount"));
+        $('#rowsNumber').text('Anzahl: ' + $('#jqGrid').getGridParam('reccount'));
 
     }
 

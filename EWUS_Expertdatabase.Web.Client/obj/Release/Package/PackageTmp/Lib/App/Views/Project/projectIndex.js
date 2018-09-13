@@ -14,7 +14,7 @@
             key: true,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'],
+                sopt: ['cn'],
             }
         },
         {
@@ -23,25 +23,25 @@
             width: 10,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'],
+                sopt: ['cn'],
             }
         },
         {
             label: 'Liegenschaftstyp',
             name: 'PropertyType',
-            width: 15,
+            width: 12,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'],
+                sopt: ['cn'],
             }
         },
         {
             label: 'Kunde',
             name: 'Customer',
-            width: 13,
+            width: 10,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'],
+                sopt: ['cn'],
             }
         },
         {
@@ -74,7 +74,7 @@
         {
             label: 'Ort',
             name: 'City',
-            width: 12,            
+            width: 10,            
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -84,25 +84,37 @@
             label: 'Investition [€]',
             name: 'InvestmentTotal',
             width: 10,
+            classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
             align:'right',
             editable: true,
             searchoptions: {
-                sopt: ['bw'],
+                sopt: ['bw', "ge", "le", "eq"],
             }
         },
         {
             label: 'Einsparung [€/a]',
             name: 'SavingTotal',
             align: 'right',
+            classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
             width: 10,
             editable: true,
             searchoptions: {
-                sopt: ['bw'],
+                sopt: ['bw', "ge", "le", "eq"],
             }
+        },
+        {
+            label: '',
+            name: '',
+            width: 3,
+            formatter: function (cellvalue, options, rowObject) {
+                return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectData + ')" data-type="Project" data-url="Project/DeleteProject/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
+            },
+            editable: false,
+            search: false
         },
     ];
 
@@ -114,48 +126,82 @@
        
         var url = sRootUrl + 'Project/GetProjects';
 
-        publicApp.getWebApi(url, applyProjectToGrid , false, false);
+        publicApp.getWebApi(url, function (rData) {
+            var data = [];
+            $.each(rData, function (inx, item) {
+                var row = new Object();
+                row.Id = item.Id;
+                row.Name = item.Name;
+                row.PropertyNumber = item.PropertyNumber;
+
+                if (!IsNullOrUndefined(item.Property)) {
+                    row.PropertyType = item.Property.Name;
+                }
+
+                if (!IsNullOrUndefined(item.Customer)) {
+                    row.Customer = item.Customer.Name;
+                }
+
+                if (!IsNullOrUndefined(item.Region)) {
+                    row.Region = item.Region.Name;
+                }
+
+                row.Location = item.Location;
+                row.ZipCode = item.ZipCode;
+                row.City = item.City;
+                row.InvestmentTotal = item.InvestmentTotal;
+                row.SavingTotal = item.SavingTotal;
+
+
+                data.push(row);
+            });
+
+            $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
+
+            $('#rowsNumber').text('Anzahl: ' + $('#gridProject').getGridParam('reccount'));
+
+        }, false, false);
     }
+        
+    //function applyProjectToGrid(rData) {
+    //    var data = [];
 
-    function applyProjectToGrid(rData) {
-        var data = [];
+    //    $.each(rData, function (inx, item) {
+    //        var row = new Object();
+    //        row.Id = item.Id;
+    //        row.Name = item.Name;
+    //        row.PropertyNumber = item.PropertyNumber;
 
-        $.each(rData, function (inx, item) {
-            var row = new Object();
-            row.Id = item.Id;
-            row.Name = item.Name;
-            row.PropertyNumber = item.PropertyNumber;
+    //        if (!IsNullOrUndefined(item.Property)) {
+    //            row.PropertyType = item.Property.Name;
+    //        }
 
-            if (!IsNullOrUndefined(item.Property)) {
-                row.PropertyType = item.Property.Name;
-            }
+    //        if (!IsNullOrUndefined(item.Customer)) {
+    //            row.Customer = item.Customer.Name;
+    //        }
 
-            if (!IsNullOrUndefined(item.Customer)) {
-                row.Customer = item.Customer.Name;
-            }
+    //        if (!IsNullOrUndefined(item.Region)) {
+    //            row.Region = item.Region.Name;
+    //        }
 
-            if (!IsNullOrUndefined(item.Region)) {
-                row.Region = item.Region.Name;
-            }
-
-            row.Location = item.Location;
-            row.ZipCode = item.ZipCode;
-            row.City = item.City;
-            row.InvestmentTotal = item.InvestmentTotal;
-            row.SavingTotal = item.SavingTotal;
+    //        row.Location = item.Location;
+    //        row.ZipCode = item.ZipCode;
+    //        row.City = item.City;
+    //        row.InvestmentTotal = item.InvestmentTotal;
+    //        row.SavingTotal = item.SavingTotal;
 
 
-            data.push(row);
-        });
+    //        data.push(row);
+    //    });
 
-        $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
+    //    $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
        
-        $("#rowsNumber").text('Number of rows: ' + $('#gridProject').getGridParam("reccount"));
-    }
+    //    $('#rowsNumber').text('Number of rows: ' + $('#gridProject').getGridParam('reccount'));
+    //}
 
-    return {
-        applyProjectToGrid: function (rData) {
-            applyProjectToGrid(rData)
-        },
-    }
+    //return {
+    //    applyProjectToGrid: function (rData) {
+    //        applyProjectToGrid(rData)
+    //    },
+    //}
 })();

@@ -87,7 +87,7 @@ $.jgrid.regional["en"] = {
 		bClose: "Close"
 	},
 	del : {
-        caption: "Loschen",
+        caption: "Löschen",
         msg: "Soll der Datensatz wirklich geloscht werden?",
 		bSubmit: "",
 		bCancel: ""
@@ -98,7 +98,7 @@ $.jgrid.regional["en"] = {
 		addtext:"",
 		addtitle: "Neu",
 		deltext: "",
-        deltitle: "Loschen",
+        deltitle: "Löschen",
 		searchtext: "",
 		searchtitle: "Find records",
 		refreshtext: "",
@@ -108,7 +108,7 @@ $.jgrid.regional["en"] = {
 		viewtext: "",
 		viewtitle: "View selected row",
 		savetext: "",
-        savetitle: "Ubernehmen",
+        savetitle: "Übernehmen",
 		canceltext: "",
         canceltitle: "Stornieren",
 		selectcaption : "Actions..."
@@ -126,7 +126,7 @@ $.jgrid.regional["en"] = {
 	},
 	formatter : {
 		integer : {thousandsSeparator: ",", defaultValue: '0'},
-		number : {decimalSeparator:".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00'},
+		number : {decimalSeparator:"", thousandsSeparator: ".", decimalPlaces: 0, defaultValue: '0.00'},
 		currency : {decimalSeparator:".", thousandsSeparator: ",", decimalPlaces: 2, prefix: "", suffix:"", defaultValue: '0.00'},
 		date : {
 			dayNames:   [
