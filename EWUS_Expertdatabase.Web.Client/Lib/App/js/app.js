@@ -1719,6 +1719,10 @@ var publicApp = (function () {
         }
     }
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
     function setForm(elForm, oData, behDefValues) {
 
         try {
@@ -2240,6 +2244,13 @@ var publicApp = (function () {
     }
     function setValue(value, sSelector, bDefault) {
         if (!IsNullOrUndefined(value)) {
+
+            if (typeof $(sSelector).attr('type') != 'undefined') {
+                if ($(sSelector).attr('type') === 'number') {
+                    value = numberWithCommas(value);
+                }
+            }
+
             $(sSelector).val(value);
             var sId = $(sSelector).attr('id')
             if ($('#' + sId + "-mlt").length)
@@ -3317,6 +3328,7 @@ var setGridOptions = (function () {
             height: gridHeight,
             autowidth: true,
             pgbuttons: false,
+            pginput: false, 
             shrinkToFit: true,
             ondblClickRow: function (rowId) {
 
@@ -3393,6 +3405,7 @@ var setGridOptions = (function () {
                 useDefValues: false,
                 useFormatter: false,
                 addRowParams: { extraparam: {} }
+            };
         }
 
         //$("#" + gridId).jqGrid('setGridHeight', heightParent);
@@ -3415,12 +3428,33 @@ var setGridOptions = (function () {
         }
     }
 
+    function deleteGridRows(gridId, el) {
+
+        swal({
+            title: "Löschen?",
+            text: "Soll der Datensatz wirklich gelöscht werden?",
+            type: "warning",
+            showCancelButton: true, confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            cancelButtonText: "Abbrechen"
+        }, function () {
+            var elem = $(el);
+            var idRow = elem.parent().parent().attr("id");
+
+            $('#' + gridId).jqGrid('delRowData', idRow);
+        });
+        
+    }
+
     return {
         setUpGrid: function (gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow,editUrl) {
             setUpGrid(gridId, pagerId, colModel, width, height, rowsPerPage, fetchGridData, customButtonAddRow,editUrl);
         },
         deleteRows: function (gridId) {
             deleteRows(gridId);
+        },
+        deleteRowById: function (gridId, rowId) {
+            deleteGridRows(gridId, rowId); 
         }
     };
 
