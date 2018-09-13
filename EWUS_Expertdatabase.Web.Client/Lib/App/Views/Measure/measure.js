@@ -22,25 +22,39 @@
             {
                 label: 'Link',
                 name: 'Link',
-                editable: true,
+                formatter: 'link',
+                editable: true,            
                 width: 15,
                 search:false
             },
             {
-                label: "",
-                name: "",
+                label: "Actions",
+                name: "Actions",
+                editable: false,
                 width: 10,
-                formatter: "actions",
-                formatoptions: {
-                    keys: true,
-                    editOptions: {},
-                    addOptions: {},
-                    delOptions: {}
-                },
-                search: false
-            },
+                formatter: function (rowId, cellval, colpos, rwdat, _act) {
+                    return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_jqg1' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
+                        "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_jqg1' style='float: left; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
+                        "<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this, \"save\"); '><span class='glyphicon glyphicon-save'></span></div>" +
+                        "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this, \"cancel\"); '><span class='glyphicon glyphicon-remove-circle'></span></div>";
+                }
+            }
+            //{
+            //    label: "",
+            //    name: "",
+            //    width: 10,
+            //    formatter: "actions",
+            //    formatoptions: {
+            //        keys: true,
+            //        editOptions: {},
+            //        addOptions: {},
+            //        delOptions: {}
+            //    },
+            //    search: false
+            //}
             
         ];
+        
 
         setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, 1500, 150, 15, fetchGridData);
 

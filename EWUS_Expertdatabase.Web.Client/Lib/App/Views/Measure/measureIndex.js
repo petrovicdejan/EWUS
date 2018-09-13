@@ -21,6 +21,7 @@
             name: 'SerialNumber',
             align: 'right',
             sorttype: "number",
+            classes: "grid-col",
             width: 7,
             key: true,
             editable: true,
@@ -29,7 +30,7 @@
             }
         },
         {
-            label: 'Massnahmenart',
+            label: 'Maßnahmenart',
             name: 'OperationType',
             width: 8,
             editable: true,
@@ -40,9 +41,10 @@
         {
             label: 'Investitionskosten [€]',
             name: 'InvestmentCost',
-            align: 'right',
+            classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
+            align: 'right',
             width: 10,
             editable: true,
             searchoptions: {
