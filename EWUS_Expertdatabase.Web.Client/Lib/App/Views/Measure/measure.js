@@ -22,7 +22,6 @@
             {
                 label: 'Link',
                 name: 'Link',
-                editable: true,
                 width: 15,
                 search:false
             },

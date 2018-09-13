@@ -3317,7 +3317,6 @@ var setGridOptions = (function () {
             height: gridHeight,
             autowidth: true,
             pgbuttons: false,
-            pginput: false,
             shrinkToFit: true,
             ondblClickRow: function (rowId) {
 
@@ -3394,7 +3393,6 @@ var setGridOptions = (function () {
                 useDefValues: false,
                 useFormatter: false,
                 addRowParams: { extraparam: {} }
-            }
         }
 
         //$("#" + gridId).jqGrid('setGridHeight', heightParent);
