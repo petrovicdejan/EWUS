@@ -21,12 +21,8 @@
             name: 'SerialNumber',
             align: 'left',
             sorttype: "number",
-<<<<<<< HEAD
             width: 15,
-=======
             classes: "grid-col",
-            width: 7,
->>>>>>> 2cad2428e6f22be7418e59a6020f557c967be791
             key: true,
             editable: true,
             searchoptions: {
@@ -48,12 +44,8 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-<<<<<<< HEAD
             width: 15,
-=======
             align: 'right',
-            width: 10,
->>>>>>> 2cad2428e6f22be7418e59a6020f557c967be791
             editable: true,
             searchoptions: {
                 sopt: ['bw', "ge", "le", "eq"], 
