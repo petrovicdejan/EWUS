@@ -28,9 +28,10 @@
                 search:false
             },
             {
-                label: "Actions",
-                name: "Actions",
+                label: "",
+                name: "",
                 editable: false,
+                search: false,
                 width: 10,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
                     return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_jqg1' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
