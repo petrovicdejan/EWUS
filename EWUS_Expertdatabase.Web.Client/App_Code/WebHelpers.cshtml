@@ -17,25 +17,28 @@
 
     <div class="field-set" style="padding-bottom: 20px">
         <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+            </div>
             <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
                 <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
                 <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
                        data-remote="remote_@name" data-recent="recent_@name"
-                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false" class="typeahead2"
+                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false" 
+                       class="typeahead2 form-control-ew-text"
                        data-representing-type="Lookup"
                        data-type-name="@objectType"
                        placeholder="@label"
                        data-localized-placeholder="@dataLocalizedPlaceholder"
                        data-name="@path"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>   }
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
                        data-path="@path" />
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;@if (showOptions == false) { <text>display:none;</text>}" >
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;@if (showOptions == false) { <text>display:none;</text>}">
                     <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
                 </a>
                 <input id="@name-Url" type="hidden" value="" />
-                <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri" >
+                <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri">
                     <li><a onclick="@searchMethod" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
                     <li><a onclick="@searchMethod" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
                     <li class="divider"></li>
@@ -81,20 +84,23 @@
 {
     <div class="field-set">
         <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+            </div>
             <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
                 <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
                 <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
-                       data-remote="remote_@name" data-recent="recent_@name"
-                       data-filed-name="@path" type="text" data-edit="false" class="typeahead2"
-                       data-representing-type="Lookup"
-                       data-type-name="@objectType"
-                       placeholder="@label"
-                       data-localized-placeholder="@dataLocalizedPlaceholder"
-                       data-name="@path"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>    }
-                       data-path="@path" />
+                        data-remote="remote_@name" data-recent="recent_@name"
+                        data-filed-name="@path" type="text" data-edit="false" 
+                        class="typeahead2-@name"
+                        data-representing-type="Lookup"
+                        data-type-name="@objectType"
+                        placeholder="@label"
+                        data-localized-placeholder="@dataLocalizedPlaceholder"
+                        data-name="@path"
+                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                        data-path="@path" />
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;">
                     <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
                 </a>
@@ -103,8 +109,8 @@
                     @description
                 </small>
             </div>
+            </div>
         </div>
-    </div>
     <script type="text/javascript">
         var remote_@(name)_Uri = sRootUrl + "@uri";
 
@@ -140,7 +146,6 @@
     <div class="field-set">
         <div class="field-contener">
             <div class="field-group field-flow">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                 <input id="@name" data-filed-name="@path" type="hidden" name="@name" value="${@path}" data-edit="false">
                 <span for="@name" data-localized="@localizedKey">@label</span>
                 <input id="@name-Yes" onclick="onRadioButtonClick(this, 'Yes')" data-filed-name="@name" type="radio" name="@name" value="Yes" data-edit="false">
@@ -158,23 +163,24 @@
 {
     <div class="field-set">
         <div class="field-contener">
-            <div class="field-group float-label-control">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+             <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                 <label for="@name">@label</label>
+            </div>
+            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
                 <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                        data-edit="false"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> } 
+                       class="form-control-ew-@type"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
                        type=@type
-                       @if (type == "number") { <text> data-val-number="@name must be a number" </text>  } 
-                       @if (isReadOnly == true) { <text> readonly </text>  } 
-                       @if (maxLength > 0) { <text> data-val-length ="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text>  } 
-                       >
-                <label for="@name">@label</label>
+                       @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                       @if (isReadOnly == true) { <text> readonly </text> }
+                       @if (maxLength > 0) { <text> data-val-length="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text> }>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 @if (description != null)
                 {
-                <small id="@name-Description" class="field-description" style="padding-top:5px;">
-                    @description
-                </small>
+                    <small id="@name-Description" class="field-description" style="padding-top:5px;">
+                        @description
+                    </small>
                 }
             </div>
         </div>
@@ -256,7 +262,6 @@
             <div class="field-set">
                 <div class="field-contener">
                     <div class="field-group float-label-control">
-                        <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                         <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                                data-edit="false"
                                data-localized-placeholder="@placeholderLocalized"
@@ -512,21 +517,22 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
         {
         <div class="field-set">
             <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
+                </div>
                 <div class="field-group float-label-control">
-                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                     <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
                            data-representing-type="Amount"
+                           class="form-control-ew-text"
                            data-filed-name="@name" data-currency-code="" type="text"
                            placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
                     <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
                         <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
                     </a>
-                    <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs">
-                    </ul>
-                    <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
+                    <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+                </div>
                 </div>
             </div>
-        </div>
         <script>
 
             $('#' + '@name' + 'DropDownButton').hide();
@@ -570,17 +576,19 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
         {
         <div class="field-set">
             <div class="field-contener">
-                <div class="field-group float-label-control field-date">
-                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                    <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
-                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date" class="date2"
-                           @if (isRequired == true) { <text> data-val-required="@name Is Required" </text>    }
-                           data-val="true">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
                     <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
+                </div>
+                <div class="field-group float-label-control field-date">
+                    <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
+                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
+                           class="date2 form-control-ew-text"
+                            @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
+                            data-val="true">
                     <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 </div>
+                </div>
             </div>
-        </div>
 
 }
 
@@ -588,25 +596,26 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
         {
         <div class="field-set">
             <div class="field-contener">
-                <div class="field-group float-label-control">
-                    <i class="fa field-icon fa-terminal" data-path="ValidPeriod" data-edit="true" valid="true"></i>
-                    <input id="@name" type="text" data-representing-type="DatePeriod" name="@name" data-name="@name"
-                           data-path="@name"
-                           data-tabindex="@tabindex"
-                           tabindex="@tabindex"
-                           placeholder="@placeholder"
-                           data-localized-placeholder="@localizedPlaceholder"
-                           data-filed-name="@name"
-                           class="field-dataperiod"
-                           data-val="true" data-edit="false">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
                     <label for="@name" data-localized="@localizedLabel">@label</label>
+                </div>
+                <div class="field-group float-label-control">
+                    <input id="@name" type="text" data-representing-type="DatePeriod" name="@name" data-name="@name"
+                            data-path="@name"
+                            data-tabindex="@tabindex"
+                            tabindex="@tabindex"
+                            placeholder="@placeholder"
+                            data-localized-placeholder="@localizedPlaceholder"
+                            data-filed-name="@name"
+                            class="field-dataperiod form-control-ew-text"
+                            data-val="true" data-edit="false">
                     <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@name"></span>
                     <small id="Description-@name" class="field-description" style="display:none;padding-top:5px;">
                         @description
                     </small>
                 </div>
+                </div>
             </div>
-        </div>
         <script>
             $(function () {
                 var el = $('#@name');
@@ -625,27 +634,28 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
         {
         <div class="field-set">
             <div class="field-contener">
-                <div class="field-group float-label-control">
-                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                    <input id="@name" data-filed-name="@name" type="hidden" name="@name"
-                           data-representing-type="MultilineText"
-                           placeholder="@placeholder"                       
-                           data-edit="false"
-                           data-localized-placeholder="@localizedPlaceholder">
-                    <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
-                              onchange="onTextAreaChange(this)"
-                              data-representing-type="MultiLineText"
-                              type="text"
-                              data-localized-placeholder="@localizedPlaceholder"
-                              cols="8"
-                              rows="6"
-                              @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>    }
-                              placeholder="@placeholder" data-edit="false"></textarea>
+                <div id="label-wrapper-@name" class="field-group float-label-control form-inline-element-wrapper label-wrapper">
                     <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
-                    <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
+              </div>
+                    <div class="field-group float-label-control form-inline-element-wrapper form-inline-element-wrapper-textarea">
+                        <input id="@name" data-filed-name="@name" type="hidden" name="@name"
+                               data-representing-type="MultilineText"
+                               placeholder="@placeholder"
+                               data-edit="false"
+                               data-localized-placeholder="@localizedPlaceholder">
+                        <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
+                                  onchange="onTextAreaChange(this)"
+                                  data-representing-type="MultiLineText"
+                                  type="text"
+                                  data-localized-placeholder="@localizedPlaceholder"
+                                  rows="3"
+                                  class="form-control-ew-textarea"
+                                  @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                                  placeholder="@placeholder" data-edit="false"></textarea>
+                        <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
+                    </div>
                 </div>
             </div>
-        </div>
 
 }
 
@@ -655,25 +665,27 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
         {
         <div class="field-set">
             <div class="field-contener">
-                <div class="field-group float-label-control">
-                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@(name)" data-localized="@labelLocalized">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper">
                     <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
-                           data-filed-name="@name"
-                           placeholder="@placeholder"
-                           data-localized-placeholder="@placeholderLocalized"
-                           type="text" data-edit="false"
-                           data-representing-type="Quantity"
-                           data-name="@name"
-                           data-url="@uri"
-                           data-val="true" />
+                            data-filed-name="@name"
+                            placeholder="@placeholder"
+                            class="form-control-ew-text"
+                            data-localized-placeholder="@placeholderLocalized"
+                            type="text" data-edit="false"
+                            data-representing-type="Quantity"
+                            data-name="@name"
+                            data-url="@uri"
+                            data-val="true" />
                     <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
                         <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
                     </a>
                     <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
-                    <label for="@(name)" data-localized="@labelLocalized">@label</label>
+                </div>
                 </div>
             </div>
-        </div>
         <script>
             function on@(name)QuantityUnitOfMeasureList(data) {
                 if (IsNullOrUndefined(data))
@@ -715,37 +727,42 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
         @helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "",string dataValueIdentifier = "",string dataFormat = "",string dataFormatSelection = "",string dataTypeName="", bool isRequired = false)
         {
-        <div class="field-set" style="padding-bottom:40px;">
+        <div class="field-set">
             <div class="field-contener">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                 <input id="@name"
                        data-filed-name="@name"
                        data-representing-type="Select"
                        type="hidden">
-                <span class="field-flow-caption" data-localized="@labelLocalized">@label</span>
-                <select id="@(name)-ddl"
-                        data-filed-name="@name"
-                        data-tabindex="@tabindex"
-                        tabindex="@tabindex"
-                        data-localized-placeholder="@placeholderLocalized"
-                        placeholder="@placeholder"
-                        data-value-identifier ="@dataValueIdentifier"
-                        name="@name"
-                        @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text>    }
-                        @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text>    }
-                        @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text>    }
-                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text>   }
-                        data-url="@uri"  
-                        style="width:90%"
-                        data-representing-type="Select"
-                        onchange="publicApp.onSelectChangeApp(this)"
-                        class="selectTwo"></select>
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label data-localized="@labelLocalized"
+                           for="@(name)-ddl">
+                        @label
+                    </label>                    
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper">
+                    <select id="@(name)-ddl"
+                            data-filed-name="@name"
+                            data-tabindex="@tabindex"
+                            tabindex="@tabindex"
+                            data-localized-placeholder="@placeholderLocalized"
+                            placeholder="@placeholder"
+                            data-value-identifier="@dataValueIdentifier"
+                            name="@name"
+                            @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
+                            @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
+                            @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
+                            @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                            data-url="@uri"
+                            style="width:90%"
+                            data-representing-type="Select"
+                            onchange="publicApp.onSelectChangeApp(this)"
+                            class="selectTwo form-control-ew-select"></select>
+                </div>
+                    <div id="field-spinner"></div>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
 
-                <div id="field-spinner"></div>
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-
+                </div>
             </div>
-        </div>
 }
 
 
@@ -790,12 +807,10 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 }
 
 @helper jQGrid(string gridId, bool appearToolbar,string dataType = "",string width = "",string height = "", string label = "") { 
-    <div class="field-set">
-        <div class="field-group float-label-control">
-            <label id="label-@label" >@label</label>
-        </div>
+    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; top: -190px;">
+        <label id="label-@label" >@label</label>
     </div>
-    <div id="gridContainer"  @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;height:@height" </text>    }>
+    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block;" </text>    }>
         <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text>    } ></table>
          @if (appearToolbar == true) { <text> <div id="jqGridPager"></div> </text>    }
         
@@ -804,7 +819,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
 @helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null) { 
     <div class="field-set">
-        <div class="field-group float-label-control">
+        <div class="field-group float-label-control" style="margin-bottom: 0;">
             <label id="label-@label">@label</label>
         </div>
         <button class="btn-white btn btn-sm" id="addFile-@idDropZone" type="button">
@@ -867,17 +882,19 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
     {
         <div class="field-set">
             <div class="field-contener">
-                <div class="field-group float-label-control">
-                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
-                           data-edit="false"
-                           @if (isRequired == true) { <text> data-val-required="@name Is Required"</text> }
-                           type=@type
-                           @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
-                           @if (isReadOnly == true) { <text> readonly </text> }
-                           @if (isEmail == true) { <text> data-val-email="@name Is not in a valid format" data-val="true" </text> }
-                            @if (maxLength > 0) { <text> data-val-length ="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text>  }> 
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
                     <label for="@name">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                            data-edit="false"
+                            class="form-control-ew-text"
+                            @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
+                            type=@type
+                            @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                            @if (isReadOnly == true) { <text> readonly </text> }
+                            @if (isEmail == true) { <text> data-val-email="@name Is not in a valid format" data-val="true" </text> }
+                            @if (maxLength > 0) { <text> data-val-length="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text> }>
                     <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                     @if (description != null)
                     {
