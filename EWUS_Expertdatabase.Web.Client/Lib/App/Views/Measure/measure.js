@@ -28,8 +28,6 @@
                 search:false
             },
             {
-                label: "Actions",
-                name: "Actions",
                 editable: false,
                 width: 10,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
