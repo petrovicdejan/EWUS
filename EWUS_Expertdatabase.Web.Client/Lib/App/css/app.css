@@ -895,11 +895,11 @@ ul.message-items {
        
         .float-label-control {
             position: relative;
-            margin-bottom: 0.9em;
+            margin-bottom: 0.3em;
         }
 
         .jqGridLink .ui-jqgrid-view.table-responsive {
-            max-height: 180px;
+            max-height: 215px;
         }
 
         .float-label-control ::-webkit-input-placeholder {
@@ -980,7 +980,7 @@ ui-jqgrid-view table-responsive
 
             .float-label-control label:not(.error) {
                 font-weight: normal;
-                font-size: 1.2em;
+                font-size: 0.9em;
             }
 
             .float-label-control.empty label:not(.error),
@@ -3153,8 +3153,8 @@ html, body {
 }
 
 #measureDropZone {
-    max-height: 557px;
-    height: 557px;
+    max-height: 540px;
+    height: 540px;
 }
 
 #customerDropZone {
@@ -3163,6 +3163,10 @@ html, body {
 
 #Measure .modal-footer, #Customer .modal-footer, #MaintenanceCompany .modal-footer {
     margin-top: 20px;
+}
+
+#Project .modal-footer {
+    margin-top: 10px;
 }
 
 .dropzone {
