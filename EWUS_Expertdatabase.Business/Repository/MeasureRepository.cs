@@ -4,7 +4,6 @@ using EWUS_Expertdatabase.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace EWUS_Expertdatabase.Business

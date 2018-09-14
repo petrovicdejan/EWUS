@@ -176,6 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ProjectMeasureController.cs" />
     <Compile Include="ViewModel\ClassificationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\DocumentItemViewModel.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Lib\App\Views\Party\customerIndex.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompany.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompanyIndex.js" />
+    <Content Include="Lib\App\Views\ProjectMeasure\projectMeasureIndex.js" />
     <Content Include="Lib\App\Views\Project\project.js" />
     <Content Include="Lib\App\Views\Project\projectIndex.js" />
     <Content Include="Lib\autonumeric\dist\autoNumeric.js" />
@@ -730,6 +732,7 @@
     <Content Include="Views\Party\MaintenanceCompanyIndex.cshtml" />
     <Content Include="Views\Project\Project.cshtml" />
     <Content Include="Views\Project\ProjectIndex.cshtml" />
+    <Content Include="Views\ProjectMeasure\ProjectMeasureIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
