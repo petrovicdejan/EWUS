@@ -2245,11 +2245,11 @@ var publicApp = (function () {
     function setValue(value, sSelector, bDefault) {
         if (!IsNullOrUndefined(value)) {
 
-            if (typeof $(sSelector).attr('type') != 'undefined') {
-                if ($(sSelector).attr('type') === 'number') {
-                    value = numberWithCommas(value);
-                }
-            }
+            //if (typeof $(sSelector).attr('type') != 'undefined') {
+            //    if ($(sSelector).attr('type') === 'number') {
+            //        value = numberWithCommas(value);
+            //    }
+            //}
 
             $(sSelector).val(value);
             var sId = $(sSelector).attr('id')

@@ -467,8 +467,6 @@ ul.message-items {
 }
 
 .field-set {
-    margin-bottom:2px;
-    padding-bottom:10px;
     min-height:33px;
 }
 
@@ -528,9 +526,39 @@ ul.message-items {
     padding-bottom: 10px;
 }
 
-.btn-default.btn-icon {
-    border: 0px;
-    color: #3498db;
+    .field-contener .form-inline-element-wrapper {
+        display: inline-block;
+        min-width: 22%;
+    }
+
+.field-contener .form-inline-element-wrapper.label-wrapper {
+    min-width: 30%;
+}
+
+.field-contener .form-inline-element-wrapper.control-wrapper {
+    width: 69%;
+}
+
+    .field-contener .form-inline-element-wrapper.control-wrapper .form-control-ew-text {
+        width: 100%;
+        min-width: 30%;
+    }
+
+    .field-contener .form-inline-element-wrapper.control-wrapper .form-control-ew-number {
+        width: auto;
+        min-width: 30%;
+    }
+
+.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+.row .half-form-wrapper {
+    padding-left: 0;
+}
+
+.row .half-form-wrapper .row-control-main-wrapper {
+    padding-left: 0;
 }
 
 .separator {
@@ -778,11 +806,9 @@ ul.message-items {
         }
 
             .field-contener textarea {
-                border: 0px;
-                border-bottom: 1px solid #999;
                 padding-left: 11px;
                 padding-bottom: 5px;
-                width: 90.5%;
+                width: 100%;
                 font-size: 1.2em;
             }
 
@@ -869,13 +895,17 @@ ul.message-items {
        
         .float-label-control {
             position: relative;
-            margin-bottom: 1.5em;
+            margin-bottom: 0.9em;
         }
 
-            .float-label-control ::-webkit-input-placeholder {
-                color: transparent;
-                font-size: 16pt; 
-            }
+        .jqGridLink .ui-jqgrid-view.table-responsive {
+            max-height: 180px;
+        }
+
+        .float-label-control ::-webkit-input-placeholder {
+            color: transparent;
+            font-size: 16pt;
+        }
 
             .float-label-control :-moz-placeholder {
                 color: transparent;
@@ -926,29 +956,22 @@ ul.message-items {
                 .inline-form .field-flow span {
                     z-index:0;
                 }
+ui-jqgrid-view table-responsive
 
-                .float-label-control input.tt-input:focus, .float-label-control input:focus,
-                .float-label-control textarea:focus {
-                    box-shadow: none;
-                    -webkit-box-shadow: none;
-                    border-bottom-width: 2px;
-                    padding-bottom: 0;
-                }
+.float-label-control input.tt-input:focus, .float-label-control input:focus,
+.float-label-control textarea:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-bottom-width: 2px;
+    padding-bottom: 0;
+}
 
                 .float-label-control textarea:focus {
                     padding-bottom: 4px;
                 }
 
             .float-label-control input.tt-input, .float-label-control input, .float-label-control textarea {
-                display: inline-block;
-                width: 90%;
                 padding: 0.1em 0em 1px 0em;
-                border: none;
-                border-bottom: 1px solid #aaa;
-                border-radius: 0px;
-                outline: none;
-                margin: 0px;
-                background: none;
             }
 
             .float-label-control textarea {
@@ -956,21 +979,8 @@ ul.message-items {
             }
 
             .float-label-control label:not(.error) {
-                position: absolute;
                 font-weight: normal;
-                top: -1.5em;
-                left: 0.08em;
-                color: #aaaaaa;
-                /*z-index: -1;*/
-                font-size: 0.85em;
-                -moz-animation: float-labels 300ms none ease-out;
-                -webkit-animation: float-labels 300ms none ease-out;
-                -o-animation: float-labels 300ms none ease-out;
-                -ms-animation: float-labels 300ms none ease-out;
-                -khtml-animation: float-labels 300ms none ease-out;
-                animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/
-                animation-play-state: running !important;
-                -webkit-animation-play-state: running !important;
+                font-size: 1.2em;
             }
 
             .float-label-control.empty label:not(.error),
@@ -1018,9 +1028,21 @@ ul.message-items {
             }
 
         .field-group input:not(.range-ctrl):focus, .field-grou input:not(.range-ctrl):hover, .field-group textarea:focus, .field-group textarea:hover {
-            border-top: 0px;
             border-bottom: 1px solid #5bc0de;
-        
+        }
+
+        .form-inline-element-wrapper-textarea {
+            width: 69%;
+        }
+
+        .form-inline-element-wrapper-textarea .form-control-ew-textarea {
+            resize: none;
+        }
+
+        .field-group textarea:focus {
+            outline-style: initial;
+            outline-width: initial; 
+            padding-left: 4px;
         }
 
         .field-group input:hover {
@@ -3126,6 +3148,21 @@ html, body {
 
 .dz-clickable.dropzone {
     cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#measureDropZone {
+    max-height: 557px;
+    height: 557px;
+}
+
+#customerDropZone {
+    max-height: 250px;
+}
+
+#Measure .modal-footer, #Customer .modal-footer, #MaintenanceCompany .modal-footer {
+    margin-top: 20px;
 }
 
 .dropzone {
@@ -3424,7 +3461,8 @@ circle.warning::before {
 }
 
 .modal-body {
-    /* padding: 20px 30px 30px 30px;*/
+    padding-top: 5px;
+    overflow: hidden !important;
 }
 
 .inmodal .modal-body {
@@ -3455,6 +3493,10 @@ circle.warning::before {
 .modal-footer {
     margin-top: 0;
     background-color: #F6F7F8;
+}
+
+#label-wrapper-ServicedObject, #label-wrapper-ChangesOfUsage, #label-wrapper-Remark {
+    min-width: 17%;
 }
 
 body.modal-open {

@@ -1648,21 +1648,6 @@
 
   Dropzone.confirm = function (question, accepted, rejected) {
       publicApp.callSwallApp(accepted, rejected);
-      //swal({
-      //    title: "Soll der Datensatz wirklich gelöscht werden?",
-      //    text: "",
-      //    type: "warning",
-      //    showCancelButton: true, confirmButtonColor: "#DD6B55",
-      //    confirmButtonText: "Übernehmen", closeOnConfirm: true,
-      //    cancelButtonText: "Abbrechen"
-      //},
-      //  function () {
-      //      return accepted();
-      //    },
-      //  function () {
-      //      return rejected();
-      //    }
-      //)
     //if (window.confirm(question)) {
     //  return accepted();
     //} else if (rejected != null) {

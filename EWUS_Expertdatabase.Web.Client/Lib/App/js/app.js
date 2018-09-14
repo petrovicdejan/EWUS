@@ -3281,8 +3281,7 @@ var publicApp = (function () {
         },
         windowResize: function () {
             windowResize();
-        }
-        ,
+        },
         callSwallApp: function (accepted, rejected) {
             callSwal(accepted, rejected);
         }
