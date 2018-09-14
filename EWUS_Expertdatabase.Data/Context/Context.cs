@@ -20,6 +20,8 @@ namespace EWUS_Expertdatabase.Data
         public DbSet<MeasureLink> MeasureLinks { get; set; }
         public DbSet<DocumentInstance> DocumentInstances { get; set; }
         public DbSet<DocumentItem> DocumentItems { get; set; }
+        //public DbSet<ProjectMeasure> ProjectMeasures { get; set; }
+        //public DbSet<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,6 +30,8 @@ namespace EWUS_Expertdatabase.Data
             modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<MaintenanceCompany>().ToTable("MaintenanceCompanies");
             modelBuilder.Entity<Individual>().ToTable("Individuals");
+
+            //modelBuilder.Entity<ProjectMeasure>().HasKey(pm => new { pm.ProjectId, pm.MeasureId });
 
             //modelBuilder.Entity<InvolvedParty>().Property(x => x.Name).IsRequired();
             //modelBuilder.Entity<Measure>().Property(x => x.Name).IsRequired();
