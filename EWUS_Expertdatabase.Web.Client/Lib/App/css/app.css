@@ -898,14 +898,18 @@ ul.message-items {
             margin-bottom: 0.3em;
         }
 
-        .jqGridLink .ui-jqgrid-view.table-responsive {
-            max-height: 215px;
-        }
+#Measure #addFile-measureDropZone {
+    margin-bottom: 3px;
+}
 
-        .float-label-control ::-webkit-input-placeholder {
-            color: transparent;
-            font-size: 16pt;
-        }
+#Measure .field-validation-error {
+    padding-left: 30%;
+}
+
+.float-label-control ::-webkit-input-placeholder {
+    color: transparent;
+    font-size: 16pt;
+}
 
             .float-label-control :-moz-placeholder {
                 color: transparent;
@@ -2351,7 +2355,6 @@ tbody[data-show-new-row="False"], tbody[data-show-new-row="false"] {
     }
 }
 
-
 @media screen and (min-width:1900px) {
     .minimalized {
         width: 88%;
@@ -3153,8 +3156,8 @@ html, body {
 }
 
 #measureDropZone {
-    max-height: 540px;
-    height: 540px;
+    max-height: 472px;
+    height: 472px;
 }
 
 #customerDropZone {
@@ -3162,20 +3165,44 @@ html, body {
 }
 
 #Measure .modal-footer, #Customer .modal-footer, #MaintenanceCompany .modal-footer {
-    margin-top: 20px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
 }
 
 #Project .modal-footer {
-    margin-top: 10px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
 }
 
-.dropzone {
-    border: 1px dashed #0087F7;
-    border-radius: 5px;
-    background: white;
-    min-height: 200px;
-    padding: 0px 0px;
+#Project input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
 }
+
+#Measure input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#Customer input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#MaintenanceCompany input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+    .dropzone {
+        border: 1px dashed #0087F7;
+        border-radius: 5px;
+        background: white;
+        min-height: 200px;
+        padding: 0px 0px;
+    }
 
 .inline-form .modal-body {
     min-height: 320px;
@@ -3469,6 +3496,10 @@ circle.warning::before {
     overflow: hidden !important;
 }
 
+#Project .modal-body {
+    padding-left: 0;
+}
+
 .inmodal .modal-body {
     background: #f8fafb;
 }
@@ -3519,4 +3550,10 @@ html.ie10 body.modal-open {
     padding-bottom:6px;
     padding-top:6px;
     margin-left:2px;
+}
+
+@media (max-height: 3000px) {
+    .modal-body {
+        overflow: auto !important;
+    }
 }

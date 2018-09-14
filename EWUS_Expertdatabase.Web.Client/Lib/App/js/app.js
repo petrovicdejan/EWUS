@@ -3075,7 +3075,7 @@ var publicApp = (function () {
             cancelButtonText: "Abbrechen"
         },
             function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
-            () => {}
+            function () {}
         )
     }
     function swalCall(options, fnSuccess, fnError) {

@@ -59,6 +59,7 @@
     <Compile Include="Model\InvolvedParty.cs" />
     <Compile Include="Model\Measure.cs" />
     <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\ProjectMeasure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

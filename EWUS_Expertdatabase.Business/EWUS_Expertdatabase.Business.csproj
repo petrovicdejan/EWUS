@@ -63,6 +63,7 @@
     <Compile Include="Repository\DocumentItemRepository.cs" />
     <Compile Include="Repository\MeasureRepository.cs" />
     <Compile Include="Repository\PartyRepository.cs" />
+    <Compile Include="Repository\ProjectMeasureRepository.cs" />
     <Compile Include="Repository\ProjectRepository.cs" />
   </ItemGroup>
   <ItemGroup>
