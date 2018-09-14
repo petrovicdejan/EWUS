@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿var measurejs = (function ($) {
     $(document).ready(function () {
         var dataDocumentItems = null;
         if (IsNullOrEmpty(dcMeasure) == false) {
@@ -35,10 +35,10 @@
                 search: false,
                 width: 10,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
-                    return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_jqg1' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
-                        "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_jqg1' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
-                        //"<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this, \"save\"); '><span class='glyphicon glyphicon-save'></span></div>" +
-                        "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this); '><span class='glyphicon glyphicon-trash'></span></div>";
+                    return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
+                        "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId+"' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
+                        "<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_" + cellval.rowId + "' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='measurejs.saveGridRow()'><span class='glyphicon glyphicon-save'></span></div>" +
+                        "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_" + cellval.rowId+"' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this); '><span class='glyphicon glyphicon-trash'></span></div>";
                 }
             }
             //{
@@ -67,7 +67,8 @@
                 buttonicon : 'glyphicon glyphicon-plus',
                 position: 'last',
                 onClickButton: function () {
-                    $("#jqGridLink").jqGrid('addRow', colModel);
+
+                    $("#jqGridLink").jqGrid('addRow', { position: "last"});
                 }
             }).navButtonAdd("#jqGridPager", {
                 caption: 'Übernehmen',
@@ -76,6 +77,15 @@
                 onClickButton: function () {
                     var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
                     $("#jqGridLink").saveRow(row);
+                    $("#jqGridLink").find(".ui-inline-save").each(function(ind, val) {
+                        val = $(val);
+                        val.hide();
+                    });
+                    $("#jqGridLink").find(".ui-inline-edit").each(function(ind, val) {
+                        val = $(val);
+                        val.show();
+                    });
+
                 }
             })
            
@@ -97,6 +107,7 @@
                 publicApp.setFormApp($("#Measure"), data);
             }
         }
+
 
         if (objectId == 0)
             $('#SerialNumber').val(maxSerialNumber);
@@ -132,6 +143,21 @@
 
             }, false, true);
         });
-    });   
+    });
 
+    function saveRow() {
+        var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
+        $("#jqGridLink").saveRow(row);
+        $("#jqGridLink").find(".ui-inline-save").each(function(ind, val) {
+            val = $(val);
+            val.hide();
+        });
+        $("#jqGridLink").find(".ui-inline-edit").each(function(ind, val) {
+            val = $(val);
+            val.show();
+        });
+    }
+    return {
+        saveGridRow: saveRow
+    }
 })(jQuery);
