@@ -3081,13 +3081,14 @@ var publicApp = (function () {
 =======
 >>>>>>> f06e094181359a20dc05305f3c38cfdb8f5c0001
     }
-    function swalCall(options, fnSuccess, fnError) {
-        if (fnError === undefined || fnError === null)
-            fnError = () => { };
-        if (fnSuccess === undefined || fnSuccess === null)
-            fnSuccess = () => { };
-        swal(options, fnSuccess, fnError);
-    }
+
+    //function swalCall(options, fnSuccess, fnError) {
+    //    if (fnError === undefined || fnError === null)
+    //        fnError = () => { };
+    //    if (fnSuccess === undefined || fnSuccess === null)
+    //        fnSuccess = () => { };
+    //    swal(options, fnSuccess, fnError);
+    //}
 
     function onSelectChange(sender, sId) {
         if (!sId) {
