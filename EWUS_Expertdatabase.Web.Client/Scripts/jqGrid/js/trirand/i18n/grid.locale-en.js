@@ -51,7 +51,7 @@ $.jgrid.regional["en"] = {
 		caption: "Search...",
 		Find: "Find",
 		Reset: "Reset",
-		odata: [{ oper:'eq', text:'equal'},{ oper:'ne', text:'not equal'},{ oper:'lt', text:'less'},{ oper:'le', text:'less or equal'},{ oper:'gt', text:'greater'},{ oper:'ge', text:'greater or equal'},{ oper:'bw', text:'begins with'},{ oper:'bn', text:'does not begin with'},{ oper:'in', text:'is in'},{ oper:'ni', text:'is not in'},{ oper:'ew', text:'ends with'},{ oper:'en', text:'does not end with'},{ oper:'cn', text:'contains'},{ oper:'nc', text:'does not contain'},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}, {oper:'bt', text:'between'}],
+        odata: [{ oper: 'eq', text: 'gleich' }, { oper: 'ne', text: 'nicht gleich' }, { oper: 'lt', text: 'weniger' }, { oper: 'le', text: 'kleiner gleich' }, { oper: 'gt', text: 'größer' }, { oper: 'ge', text: 'größer gleich' }, { oper: 'bw', text: 'beginnt mit' }, { oper: 'bn', text: 'does not begin with' }, { oper: 'in', text: 'is in' }, { oper: 'ni', text: 'is not in' }, { oper: 'ew', text: 'ends with' }, { oper: 'en', text: 'does not end with' }, { oper: 'cn', text:'enthält'},{ oper:'nc', text:'does not contain'},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}, {oper:'bt', text:'between'}],
 		groupOps: [{ op: "AND", text: "all" },{ op: "OR",  text: "any" }],
 		operandTitle : "Click to select search operation.",
 		resetTitle : "Reset Search Value"

@@ -3,6 +3,10 @@
 ################################################################################
 
 /.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/db.lock
+<<<<<<< HEAD
+.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
+.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide
+=======
 # User-specific files
 *.suo
 *.user
@@ -333,3 +337,4 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+>>>>>>> 9c687279b27dddea7f63d6581097fff5e0a22933
