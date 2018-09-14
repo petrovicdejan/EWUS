@@ -3078,13 +3078,13 @@ var publicApp = (function () {
         });
     }
 
-    function swalCall(options, fnSuccess, fnError) {
-        if (fnError === undefined || fnError === null)
-            fnError = () => { };
-        if (fnSuccess === undefined || fnSuccess === null)
-            fnSuccess = () => { };
-        swal(options, fnSuccess, fnError);
-    }
+    //function swalCall(options, fnSuccess, fnError) {
+    //    if (fnError === undefined || fnError === null)
+    //        fnError = () => { };
+    //    if (fnSuccess === undefined || fnSuccess === null)
+    //        fnSuccess = () => { };
+    //    swal(options, fnSuccess, fnError);
+    //}
 
     function onSelectChange(sender, sId) {
         if (!sId) {
