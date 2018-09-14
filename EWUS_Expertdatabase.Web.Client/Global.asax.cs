@@ -28,7 +28,7 @@ namespace EWUS_Expertdatabase.Web.Client
                                             cfg.CreateMap<Project, ProjectViewModel>().ReverseMap();
                                         });
 
-            //System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<EWUSDbContext, EWUS_Expertdatabase.Data.Migrations.Configuration>());
+            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<EWUSDbContext, EWUS_Expertdatabase.Data.Migrations.Configuration>());
         }
 
     }

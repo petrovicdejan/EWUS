@@ -1,4 +1,39 @@
-﻿var projectModule = (function () {
+﻿var projectTransform = function transformData(rData) {
+    var data = [];
+    $.each(rData, function (inx, item) {
+        var row = new Object();
+        row.Id = item.Id;
+        row.Name = item.Name;
+        row.PropertyNumber = item.PropertyNumber;
+
+        if (!IsNullOrUndefined(item.Property)) {
+            row.PropertyType = item.Property.Name;
+        }
+
+        if (!IsNullOrUndefined(item.Customer)) {
+            row.Customer = item.Customer.Name;
+        }
+
+        if (!IsNullOrUndefined(item.Region)) {
+            row.Region = item.Region.Name;
+        }
+
+        row.Location = item.Location;
+        row.ZipCode = item.ZipCode;
+        row.City = item.City;
+        row.InvestmentTotal = item.InvestmentTotal;
+        row.SavingTotal = item.SavingTotal;
+
+
+        data.push(row);
+    });
+
+    $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
+
+    $('#rowsNumber').text('Anzahl: ' + $('#gridProject').getGridParam('reccount'));
+
+}
+var projectModule = (function () {
     var colModel = [
         {
             label: 'Id',
@@ -74,7 +109,7 @@
         {
             label: 'Ort',
             name: 'City',
-            width: 10,            
+            width: 10,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -87,7 +122,7 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-            align:'right',
+            align: 'right',
             editable: true,
             searchoptions: {
                 sopt: ['bw', "ge", "le", "eq"],
@@ -118,51 +153,10 @@
         },
     ];
 
-    setGridOptions.setUpGrid("gridProject", "jqGridPager", colModel, 1500, 0, 15, fetchProjectData, false,"/Project/ProjectEdit?key=");
-
-    function fetchProjectData() {
-
-        setGridOptions.deleteRows('gridProject');
-       
-        var url = sRootUrl + 'Project/GetProjects';
-
-        publicApp.getWebApi(url, function (rData) {
-            var data = [];
-            $.each(rData, function (inx, item) {
-                var row = new Object();
-                row.Id = item.Id;
-                row.Name = item.Name;
-                row.PropertyNumber = item.PropertyNumber;
-
-                if (!IsNullOrUndefined(item.Property)) {
-                    row.PropertyType = item.Property.Name;
-                }
-
-                if (!IsNullOrUndefined(item.Customer)) {
-                    row.Customer = item.Customer.Name;
-                }
-
-                if (!IsNullOrUndefined(item.Region)) {
-                    row.Region = item.Region.Name;
-                }
-
-                row.Location = item.Location;
-                row.ZipCode = item.ZipCode;
-                row.City = item.City;
-                row.InvestmentTotal = item.InvestmentTotal;
-                row.SavingTotal = item.SavingTotal;
+    setGridOptions.setUpGrid("gridProject", "jqGridPager", colModel, 1500, 0, 15, fetchProjectData, false, "/Project/ProjectEdit?key=");
 
 
-                data.push(row);
-            });
 
-            $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
-
-            $('#rowsNumber').text('Anzahl: ' + $('#gridProject').getGridParam('reccount'));
-
-        }, false, false);
-    }
-        
     //function applyProjectToGrid(rData) {
     //    var data = [];
 
@@ -195,7 +189,7 @@
     //    });
 
     //    $('#gridProject').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
-       
+
     //    $('#rowsNumber').text('Number of rows: ' + $('#gridProject').getGridParam('reccount'));
     //}
 
@@ -204,4 +198,16 @@
     //        applyProjectToGrid(rData)
     //    },
     //}
+    
+    function fetchProjectData() {
+
+        setGridOptions.deleteRows('gridProject');
+
+        var url = sRootUrl + 'Project/GetProjects';
+
+        publicApp.getWebApi(url, projectTransform, false, false);
+    }
+    return {
+        fetchData: fetchProjectData
+    }
 })();

@@ -174,7 +174,7 @@
                        type="text"
                        @if (type == "number") { <text> data-val-number="@name must be a number" data-money="true" </text> }
                        @if (isReadOnly == true) { <text> readonly </text> }
-                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
+                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> } >
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 @if (description != null)
                 {
@@ -834,7 +834,7 @@
     <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles" </text> }>
 
         <div class="dz-message">
-            Drop files ifre or click to upload image<br>
+            Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
         </div>
         @*<div id="@idPreview" class="dz-preview dz-file-preview">
                 <div class="dz-details">
