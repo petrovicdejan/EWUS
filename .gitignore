@@ -1,3 +1,4 @@
+﻿=======
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
@@ -27,6 +28,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+.vs/
+EWUS_Expertdatabase.Web.Client/bin/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -337,4 +341,3 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
->>>>>>> 9c687279b27dddea7f63d6581097fff5e0a22933
