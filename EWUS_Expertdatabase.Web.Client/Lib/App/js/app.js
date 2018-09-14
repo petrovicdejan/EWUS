@@ -3073,10 +3073,13 @@ var publicApp = (function () {
             showCancelButton: true, confirmButtonColor: "#DD6B55",
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
+<<<<<<< HEAD
         },
             function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
             function () {}
         )
+=======
+>>>>>>> f06e094181359a20dc05305f3c38cfdb8f5c0001
     }
     function swalCall(options, fnSuccess, fnError) {
         if (fnError === undefined || fnError === null)
