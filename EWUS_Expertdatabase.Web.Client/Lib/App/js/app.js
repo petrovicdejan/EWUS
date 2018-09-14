@@ -1,6 +1,17 @@
 ﻿
 var publicApp = (function () {
     $(window).resize(windowResize);
+
+    const autoNumericOptionsEuro = {
+        digitGroupSeparator: '.',
+        decimalCharacter: ',',
+        decimalCharacterAlternative: '.',
+        decimalPlaces: 0,
+        currencySymbol: '\u202f€',
+        currencySymbolPlacement: AutoNumeric.options.currencySymbolPlacement.suffix,
+        roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
+    };
+
     function webApiGet(sUri, fOnData, bShowError, bAsync) {
         if (IsNullOrUndefined(bAsync)) {
             bAsync = true;
@@ -2221,6 +2232,9 @@ var publicApp = (function () {
         return $(sSelector).val();
     }
     function getValueField(sSelector) {
+        if ($(sSelector).attr('data-money') == 'true') {
+            return { Name: $(sSelector).attr("data-filed-name"), Value: AutoNumeric.getLocalized(sSelector) };
+        }
         return { Name: $(sSelector).attr("data-filed-name"), Value: getValue(sSelector) };
     }
     function setValueDisplay(value, oSelector) {
@@ -2258,6 +2272,9 @@ var publicApp = (function () {
             if (bDefault) {
                 $(sSelector).attr("data-default-value", value);
             }
+            if ($(sSelector).attr('data-money') == "true") {
+                var m = new AutoNumeric(sSelector, value, autoNumericOptionsEuro);
+            }
             TryCatchWraper(function () {
                 $(sSelector).keyup();
             });
@@ -2270,10 +2287,12 @@ var publicApp = (function () {
             if ($(sSelector).attr("data-representing-type") == "Amount") {
                 TryCatchWraper(function () {
                     $(sSelector + '.money2').autoNumeric('init');
+                    //var m = new AutoNumeric(sSelector + '.money2', autoNumericOptionsEuro);
                 });
 
                 TryCatchWraper(function () {
                     $(sSelector + '.money4').autoNumeric('init', { mDec: 4 });
+                    //var m = new AutoNumeric(sSelector + '.money2', autoNumericOptionsEuro);
                 });
             }
 
@@ -2644,7 +2663,11 @@ var publicApp = (function () {
     function getAmount(sSelector) {
         var currencyAmount = new Object();
         currencyAmount.Amount = $(sSelector).val();
-        TryCatchWraper(function () { currencyAmount.Amount = parseFloat($(sSelector).autoNumeric("get")); });
+        TryCatchWraper(function () {
+            var an = new AutoNumeric(sSelector);
+            currencyAmount.Amount = an.getNumber();
+            //currencyAmount.Amount = parseFloat($(sSelector).autoNumeric("get"));
+        });
         currencyAmount.Code = $(sSelector).attr("data-currency-code");
         var currencyId = $(sSelector).attr("data-currency-id");
         if (IsNullOrWhiteSpace(currencyId) == false)
@@ -2663,10 +2686,10 @@ var publicApp = (function () {
             console.log(value);
             $(sSelector).val(value.Amount);
             $(sSelector).attr("data-default-value", value.Amount);
-            TryCatchWraper(function () {
-                $(sSelector).autoNumeric('init');
-                $(sSelector).autoNumeric('set', value.Amount);
-            });
+            //TryCatchWraper(function () {
+            //    $(sSelector).autoNumeric('init');
+            //    $(sSelector).autoNumeric('set', value.Amount);
+            //});
             $(sSelector).attr("data-currency-code", value.Code);
 
             var lId = value.CurrencyId;
@@ -3109,7 +3132,6 @@ var publicApp = (function () {
             if (maxfiles == undefined || maxfiles == NaN)
                 maxfiles = null;
 
-            console.log(maxfiles);
             myAttachZone = new Dropzone(document.querySelector("#" + idDropZone), {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,

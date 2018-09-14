@@ -23,6 +23,7 @@
                 label: 'Link',
                 name: 'Link',
                 formatter: 'link',
+                formatoptions: { target: '_blank'},
                 editable: true,            
                 width: 15,
                 search:false

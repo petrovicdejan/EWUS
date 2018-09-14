@@ -1,14 +1,14 @@
-﻿@helper LookupEditor(string name, 
-                     string path, 
-                     string label, 
-                     string objectType, 
-                     string uri, 
-                     string tabIndex, 
-                     string description, 
+﻿@helper LookupEditor(string name,
+                     string path,
+                     string label,
+                     string objectType,
+                     string uri,
+                     string tabIndex,
+                     string description,
                      bool isRequired = false,
                      string dataLocalizedPlaceholder = null,
-                     string dataLocalizedLabel=null, 
-                     string dataLocalizedDescription = null, 
+                     string dataLocalizedLabel = null,
+                     string dataLocalizedDescription = null,
                      string alternateName = "",
                      string searchMethodName = "getSearchByScope",
                      bool showOptions = true)
@@ -24,7 +24,7 @@
                 <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
                 <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
                        data-remote="remote_@name" data-recent="recent_@name"
-                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false" 
+                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false"
                        class="typeahead2 form-control-ew-text"
                        data-representing-type="Lookup"
                        data-type-name="@objectType"
@@ -90,16 +90,16 @@
             <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
                 <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
                 <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
-                        data-remote="remote_@name" data-recent="recent_@name"
-                        data-filed-name="@path" type="text" data-edit="false" 
-                        class="typeahead2-@name"
-                        data-representing-type="Lookup"
-                        data-type-name="@objectType"
-                        placeholder="@label"
-                        data-localized-placeholder="@dataLocalizedPlaceholder"
-                        data-name="@path"
-                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                        data-path="@path" />
+                       data-remote="remote_@name" data-recent="recent_@name"
+                       data-filed-name="@path" type="text" data-edit="false"
+                       class="typeahead2-@name"
+                       data-representing-type="Lookup"
+                       data-type-name="@objectType"
+                       placeholder="@label"
+                       data-localized-placeholder="@dataLocalizedPlaceholder"
+                       data-name="@path"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                       data-path="@path" />
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;">
                     <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
@@ -109,8 +109,8 @@
                     @description
                 </small>
             </div>
-            </div>
         </div>
+    </div>
     <script type="text/javascript">
         var remote_@(name)_Uri = sRootUrl + "@uri";
 
@@ -133,9 +133,9 @@
             if (!value || value.length == 0 || value == '')
                 return "";
             var uri = remote_@(name)_Uri;
-            
+
             uri = uri.replace("%QUERY", "'" +encodeURIComponent(value.toLowerCase()) + "'");
-             
+
             return uri;
         }, map_@name);
     </script>
@@ -159,20 +159,20 @@
     </div>
 }
 
-@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999, string nameForMessage = "")
+@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999, string nameForMessage = "")
 {
     <div class="field-set">
         <div class="field-contener">
-             <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                 <label for="@name">@label</label>
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name">@label</label>
             </div>
             <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
                 <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                        data-edit="false"
                        class="form-control-ew-@type"
                        @if (isRequired == true) { <text> data-val-required="@nameForMessage Eingabe erforderlich" data-val="true" </text> }
-                       type=@type
-                       @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                       type="text"
+                       @if (type == "number") { <text> data-val-number="@name must be a number" data-money="true" </text> }
                        @if (isReadOnly == true) { <text> readonly </text> }
                        @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
@@ -187,7 +187,7 @@
     </div>
 }
 
-@helper HeaderDisplay(string title, string caption,string dataLocalizedTitle=null, string dataLocalizedCaption = null)
+@helper HeaderDisplay(string title, string caption, string dataLocalizedTitle = null, string dataLocalizedCaption = null)
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -265,10 +265,10 @@
                         <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                                data-edit="false"
                                data-localized-placeholder="@placeholderLocalized"
-                               @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@requiredplaceholder" </text>  }
+                               @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" data-localized-required="@requiredplaceholder" </text> }
                                type="text"
-                               @if (type == "number") { <text> data-val-number="@name must be a number" </text>   }>
-                        
+                               @if (type == "number") { <text> data-val-number="@name must be a number" </text> }>
+
                         <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                         @if (description != null)
                         {
@@ -283,48 +283,48 @@
     </div>
 }
 
-        @helper FilterEditor(string name, string label, string objectType, string uri, string tabIndex, string description, string dataLocalizedLabel = "", string dataFields = "")
-        {
-        <div class="panel panel-outline">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" id="Filter_@name" data-toggle="collapse" data-parent="#accordion" href="#collapse_@name" data-localized="@dataLocalizedLabel">@label</a>
-                </h4>
-            </div>
-            <div id="collapse_@name" class="panel-collapse collapse in">
+@helper FilterEditor(string name, string label, string objectType, string uri, string tabIndex, string description, string dataLocalizedLabel = "", string dataFields = "")
+{
+    <div class="panel panel-outline">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="Filter_@name" data-toggle="collapse" data-parent="#accordion" href="#collapse_@name" data-localized="@dataLocalizedLabel">@label</a>
+            </h4>
+        </div>
+        <div id="collapse_@name" class="panel-collapse collapse in">
 
-                <div id="Filter_@name" class="field-set">
-                    <div class="field-contener">
-                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
-                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
-                            <input id="@name" name="@name" tabindex="30"
-                                   data-remote="remote_@name" data-recent="recent_@name"
-                                   data-filed-name="@name" type="text" data-edit="false" class="typeahead2"
-                                   data-representing-type="Lookup"
-                                   data-type-name="@objectType"
-                                   placeholder="@label"
-                                   data-name="@name"
-                                   data-path="@name" />
-                            <input id="@name-Url" type="hidden" value="" />
-                            
-                            <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri" style="display:none;">
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
-                                <li class="divider"></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
-                            </ul>
-                            <br />
-                            <small id="@name-Description" class="field-description" style="padding-top:5px;">
+            <div id="Filter_@name" class="field-set">
+                <div class="field-contener">
+                    <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                        <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                        <input id="@name" name="@name" tabindex="30"
+                               data-remote="remote_@name" data-recent="recent_@name"
+                               data-filed-name="@name" type="text" data-edit="false" class="typeahead2"
+                               data-representing-type="Lookup"
+                               data-type-name="@objectType"
+                               placeholder="@label"
+                               data-name="@name"
+                               data-path="@name" />
+                        <input id="@name-Url" type="hidden" value="" />
 
-                            </small>
-                        </div>
+                        <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri" style="display:none;">
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                            <li class="divider"></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                        </ul>
+                        <br />
+                        <small id="@name-Description" class="field-description" style="padding-top:5px;">
+
+                        </small>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <script type="text/javascript">
+        </div>
+    </div>
+
+    <script type="text/javascript">
 
             if(IsNullOrWhiteSpace("@dataFields") == false){
                 $('#@name-ddl li a').first().attr("data-fileds","@dataFields");
@@ -359,181 +359,181 @@
             setUpClearOnInput("#Filter_@name ");
             setUpTypeHead("#Filter_@name ");
 
-        </script>
+    </script>
 
 }
 
-        @helper FilterProduct(string searchUri = null, string panelCollapse = "panel-collapse collapse in")
-        {
-if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Product?Tag=1&SearchTerm="; }
+@helper FilterProduct(string searchUri = null, string panelCollapse = "panel-collapse collapse in")
+{
+    if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Product?Tag=1&SearchTerm="; }
 
-        <div class="panel panel-outline">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" id="filterProduct" data-localized="filterProduct" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Product</a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="@panelCollapse">
+    <div class="panel panel-outline">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="filterProduct" data-localized="filterProduct" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Product</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="@panelCollapse">
 
-                <div id="filterProduct" class="field-set">
-                    <div class="field-contener">
-                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
-                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
-                            <input id="LeftProduct" name="LeftProduct" tabindex="30"
-                                   data-remote="remote_LeftProduct" data-recent="recent_LeftProduct"
-                                   data-filed-name="Product" type="text" data-edit="false" class="typeahead2"
-                                   data-representing-type="Lookup"
-                                   data-type-name="ObjectType"
-                                   placeholder="Select Target"
-                                   data-name="Product"
-                                   data-path="Product" />
-                            <input id="LeftProduct-Url" type="hidden" value="" />
+            <div id="filterProduct" class="field-set">
+                <div class="field-contener">
+                    <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                        <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                        <input id="LeftProduct" name="LeftProduct" tabindex="30"
+                               data-remote="remote_LeftProduct" data-recent="recent_LeftProduct"
+                               data-filed-name="Product" type="text" data-edit="false" class="typeahead2"
+                               data-representing-type="Lookup"
+                               data-type-name="ObjectType"
+                               placeholder="Select Target"
+                               data-name="Product"
+                               data-path="Product" />
+                        <input id="LeftProduct-Url" type="hidden" value="" />
 
-                            <ul id="LeftProduct-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
-                                <li class="divider"></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
-                            </ul>
+                        <ul id="LeftProduct-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                            <li class="divider"></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                        </ul>
 
-                            <br />
-                            <small id="LeftProduct-Description" class="field-description" style="padding-top:5px;">
+                        <br />
+                        <small id="LeftProduct-Description" class="field-description" style="padding-top:5px;">
 
-                            </small>
-                        </div>
+                        </small>
                     </div>
                 </div>
-
             </div>
+
         </div>
-        <script>
+    </div>
+    <script>
 
-            var remote_LeftProduct_Uri = getSearchByScope($('#LeftProduct-ddl li a').first());
+        var remote_LeftProduct_Uri = getSearchByScope($('#LeftProduct-ddl li a').first());
 
-            var recent_LeftProduct = getRecent('recent-LeftProduct');
+        var recent_LeftProduct = getRecent('recent-LeftProduct');
 
 
-            function map_LeftProduct(result) {
-                return $.map(result, function (i) {
-                    return {
-                        number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.RootType,
-                        tokens: [' 0 ', i.Name, i.Number]
-                    };
-                });
-            };
+        function map_LeftProduct(result) {
+            return $.map(result, function (i) {
+                return {
+                    number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.RootType,
+                    tokens: [' 0 ', i.Name, i.Number]
+                };
+            });
+        };
 
-            var remote_LeftProduct = getRemote(remote_LeftProduct_Uri, function () {
-                var value = $('#LeftProduct').val();
-                if (!value || value.length == 0 || value == '')
-                    return "";
-                var uri = $('#LeftProduct-Url').val();
+        var remote_LeftProduct = getRemote(remote_LeftProduct_Uri, function () {
+            var value = $('#LeftProduct').val();
+            if (!value || value.length == 0 || value == '')
+                return "";
+            var uri = $('#LeftProduct-Url').val();
 
-                uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
-                return uri;
-            }, map_LeftProduct);
+            uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+            return uri;
+        }, map_LeftProduct);
 
-            setUpClearOnInput("#filterProduct ");
-            setUpTypeHead("#filterProduct ");
+        setUpClearOnInput("#filterProduct ");
+        setUpTypeHead("#filterProduct ");
 
-        </script>
+    </script>
 }
 
-        @helper FilterOrganizationUnit(string searchUri = null)
-        {
-if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/OrganizationUnit?Tag=1&SearchTerm="; }
+@helper FilterOrganizationUnit(string searchUri = null)
+{
+    if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/OrganizationUnit?Tag=1&SearchTerm="; }
 
-        <div class="panel panel-outline">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" id="filterOrganizationUnit" data-localized="filterOrganizationUnit" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">OrganizationUnit</a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse in">
+    <div class="panel panel-outline">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" id="filterOrganizationUnit" data-localized="filterOrganizationUnit" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">OrganizationUnit</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
 
-                <div id="filterOrganizationUnit" class="field-set">
-                    <div class="field-contener">
-                        <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
-                            <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
-                            <input id="LeftOrganizationUnit" name="LeftOrganizationUnit" tabindex="30"
-                                   data-remote="remote_LeftOrganizationUnit" data-recent="recent_LeftOrganizationUnit"
-                                   data-filed-name="OrganizationUnit" type="text" data-edit="false" class="typeahead2"
-                                   data-representing-type="Lookup"
-                                   data-type-name="OrganizationUnit"
-                                   placeholder="Select Target"
-                                   data-name="OrganizationUnit"
-                                   data-path="OrganizationUnit" />
-                            <input id="LeftOrganizationUnit-Url" type="hidden" value="" />
+            <div id="filterOrganizationUnit" class="field-set">
+                <div class="field-contener">
+                    <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                        <i class="fa fa-search field-icon" data-edit="true" valid="true"></i>
+                        <input id="LeftOrganizationUnit" name="LeftOrganizationUnit" tabindex="30"
+                               data-remote="remote_LeftOrganizationUnit" data-recent="recent_LeftOrganizationUnit"
+                               data-filed-name="OrganizationUnit" type="text" data-edit="false" class="typeahead2"
+                               data-representing-type="Lookup"
+                               data-type-name="OrganizationUnit"
+                               placeholder="Select Target"
+                               data-name="OrganizationUnit"
+                               data-path="OrganizationUnit" />
+                        <input id="LeftOrganizationUnit-Url" type="hidden" value="" />
 
-                            <ul id="LeftOrganizationUnit-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
-                                <li class="divider"></li>
-                                <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
-                            </ul>
+                        <ul id="LeftOrganizationUnit-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@searchUri" style="display:none;">
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                            <li class="divider"></li>
+                            <li><a onclick="getSearchByScope(this)" data-fileds="Name,Number" data-localized="All">All</a></li>
+                        </ul>
 
-                            <br />
-                            <small id="LeftOrganizationUnit-Description" class="field-description" style="padding-top:5px;">
+                        <br />
+                        <small id="LeftOrganizationUnit-Description" class="field-description" style="padding-top:5px;">
 
-                            </small>
-                        </div>
+                        </small>
                     </div>
                 </div>
-
             </div>
+
         </div>
-        <script>
+    </div>
+    <script>
 
-            var remote_LeftOrganizationUnit_Uri = getSearchByScope($('#LeftOrganizationUnit-ddl li a').first());
+        var remote_LeftOrganizationUnit_Uri = getSearchByScope($('#LeftOrganizationUnit-ddl li a').first());
 
-            var recent_LeftOrganizationUnit = getRecent('recent-LeftOrganizationUnit');
+        var recent_LeftOrganizationUnit = getRecent('recent-LeftOrganizationUnit');
 
 
-            function map_LeftOrganizationUnit(result) {
-                return $.map(result, function (i) {
-                    return {
-                        number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.TypeName,
-                        tokens: [' 0 ', i.Name, i.Number]
-                    };
-                });
-            };
+        function map_LeftOrganizationUnit(result) {
+            return $.map(result, function (i) {
+                return {
+                    number: i.Number, name: i.Name, id: i.Id, lId: i.LocalId, type: i.TypeName,
+                    tokens: [' 0 ', i.Name, i.Number]
+                };
+            });
+        };
 
-            var remote_LeftOrganizationUnit = getRemote(remote_LeftOrganizationUnit_Uri, function () {
-                var value = $('#LeftOrganizationUnit').val();
-                if (!value || value.length == 0 || value == '')
-                    return "";
-                var uri = $('#LeftOrganizationUnit-Url').val();
+        var remote_LeftOrganizationUnit = getRemote(remote_LeftOrganizationUnit_Uri, function () {
+            var value = $('#LeftOrganizationUnit').val();
+            if (!value || value.length == 0 || value == '')
+                return "";
+            var uri = $('#LeftOrganizationUnit-Url').val();
 
-                uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
-                return uri;
-            }, map_LeftOrganizationUnit);
+            uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
+            return uri;
+        }, map_LeftOrganizationUnit);
 
-            setUpClearOnInput("#filterOrganizationUnit ");
-            setUpTypeHead("#filterOrganizationUnit ");
+        setUpClearOnInput("#filterOrganizationUnit ");
+        setUpTypeHead("#filterOrganizationUnit ");
 
-        </script>
+    </script>
 }
 
-        @helper AmountEditor(string name, string label, string placeholder, string tabIndex, string labelLocalized = "", string placeholderLocalized = "")
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
-                </div>
-                <div class="field-group float-label-control">
-                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
-                           data-representing-type="Amount"
-                           class="form-control-ew-text"
-                           data-filed-name="@name" data-currency-code="" type="text"
-                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
-                    <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
-                        <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
-                    </a>
-                    <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
-                </div>
-                </div>
+@helper AmountEditor(string name, string label, string placeholder, string tabIndex, string labelLocalized = "", string placeholderLocalized = "")
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
             </div>
-        <script>
+            <div class="field-group float-label-control">
+                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
+                       data-representing-type="Amount"
+                       class="form-control-ew-text"
+                       data-filed-name="@name" data-currency-code="" type="text"
+                       placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
+                <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                    <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                </a>
+                <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
 
             $('#' + '@name' + 'DropDownButton').hide();
             GetCurrencyList($('#@name'), onItem@(name)CurrencyData@(tabIndex));
@@ -567,56 +567,56 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
                 }
             }
-        </script>
+    </script>
 }
 
 
 
-        @helper DateEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string labelLocalized = "", string placeholderLocalized = "")
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
-                </div>
-                <div class="field-group float-label-control field-date">
-                    <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
-                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
-                           class="date2 form-control-ew-text"
-                            @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
-                            data-val="true">
-                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                </div>
-                </div>
+@helper DateEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string labelLocalized = "", string placeholderLocalized = "")
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
             </div>
+            <div class="field-group float-label-control field-date">
+                <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
+                       placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
+                       class="date2 form-control-ew-text"
+                       @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
+                       data-val="true">
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
 
 }
 
-        @helper ValidPeriodEditor(string name, string label, string placeholder, string description, string tabindex, string localizedLabel = "", string localizedPlaceholder = "")
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="@name" data-localized="@localizedLabel">@label</label>
-                </div>
-                <div class="field-group float-label-control">
-                    <input id="@name" type="text" data-representing-type="DatePeriod" name="@name" data-name="@name"
-                            data-path="@name"
-                            data-tabindex="@tabindex"
-                            tabindex="@tabindex"
-                            placeholder="@placeholder"
-                            data-localized-placeholder="@localizedPlaceholder"
-                            data-filed-name="@name"
-                            class="field-dataperiod form-control-ew-text"
-                            data-val="true" data-edit="false">
-                    <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@name"></span>
-                    <small id="Description-@name" class="field-description" style="display:none;padding-top:5px;">
-                        @description
-                    </small>
-                </div>
-                </div>
+@helper ValidPeriodEditor(string name, string label, string placeholder, string description, string tabindex, string localizedLabel = "", string localizedPlaceholder = "")
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name" data-localized="@localizedLabel">@label</label>
             </div>
-        <script>
+            <div class="field-group float-label-control">
+                <input id="@name" type="text" data-representing-type="DatePeriod" name="@name" data-name="@name"
+                       data-path="@name"
+                       data-tabindex="@tabindex"
+                       tabindex="@tabindex"
+                       placeholder="@placeholder"
+                       data-localized-placeholder="@localizedPlaceholder"
+                       data-filed-name="@name"
+                       class="field-dataperiod form-control-ew-text"
+                       data-val="true" data-edit="false">
+                <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@name"></span>
+                <small id="Description-@name" class="field-description" style="display:none;padding-top:5px;">
+                    @description
+                </small>
+            </div>
+        </div>
+    </div>
+    <script>
             $(function () {
                 var el = $('#@name');
                 dFormat = getDateFormat(el);
@@ -627,66 +627,66 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                     showWeekNumbers: true
                 });
             });
-        </script>
+    </script>
 }
 
-        @helper TextAreaEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string localizedLabel = "", string localizedPlaceholder = "",string localizedrequired="")
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <div id="label-wrapper-@name" class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
-              </div>
-                    <div class="field-group float-label-control form-inline-element-wrapper form-inline-element-wrapper-textarea">
-                        <input id="@name" data-filed-name="@name" type="hidden" name="@name"
-                               data-representing-type="MultilineText"
-                               placeholder="@placeholder"
-                               data-edit="false"
-                               data-localized-placeholder="@localizedPlaceholder">
-                        <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
-                                  onchange="onTextAreaChange(this)"
-                                  data-representing-type="MultiLineText"
-                                  type="text"
-                                  data-localized-placeholder="@localizedPlaceholder"
-                                  rows="3"
-                                  class="form-control-ew-textarea"
-                                  @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                                  placeholder="@placeholder" data-edit="false"></textarea>
-                        <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
-                    </div>
-                </div>
+@helper TextAreaEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string localizedLabel = "", string localizedPlaceholder = "", string localizedrequired = "")
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div id="label-wrapper-@name" class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
             </div>
+            <div class="field-group float-label-control form-inline-element-wrapper form-inline-element-wrapper-textarea">
+                <input id="@name" data-filed-name="@name" type="hidden" name="@name"
+                       data-representing-type="MultilineText"
+                       placeholder="@placeholder"
+                       data-edit="false"
+                       data-localized-placeholder="@localizedPlaceholder">
+                <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
+                          onchange="onTextAreaChange(this)"
+                          data-representing-type="MultiLineText"
+                          type="text"
+                          data-localized-placeholder="@localizedPlaceholder"
+                          rows="3"
+                          class="form-control-ew-textarea"
+                          @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                          placeholder="@placeholder" data-edit="false"></textarea>
+                <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
 
 }
 
 
 
-        @helper QuantityEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "")
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="@(name)" data-localized="@labelLocalized">@label</label>
-                </div>
-                <div class="field-group float-label-control form-inline-element-wrapper">
-                    <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
-                            data-filed-name="@name"
-                            placeholder="@placeholder"
-                            class="form-control-ew-text"
-                            data-localized-placeholder="@placeholderLocalized"
-                            type="text" data-edit="false"
-                            data-representing-type="Quantity"
-                            data-name="@name"
-                            data-url="@uri"
-                            data-val="true" />
-                    <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
-                        <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
-                    </a>
-                    <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
-                </div>
-                </div>
+@helper QuantityEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", bool isReadOnly = false)
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@(name)" data-localized="@labelLocalized">@label</label>
             </div>
-        <script>
+            <div class="field-group float-label-control form-inline-element-wrapper">
+                <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
+                       data-filed-name="@name"
+                       placeholder="@placeholder"
+                       class="form-control-ew-text"
+                       data-localized-placeholder="@placeholderLocalized"
+                       type="number" data-edit="false"
+                       data-name="@name"
+                       data-url="@uri"
+                       data-val="true"
+                       @if (isReadOnly == true) { <text> readonly </text> } />
+                <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                    <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
+                </a>
+                <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
             function on@(name)QuantityUnitOfMeasureList(data) {
                 if (IsNullOrUndefined(data))
                     return;
@@ -722,51 +722,51 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
                 }
             });
-        </script>
+    </script>
 }
 
-        @helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "",string dataValueIdentifier = "",string dataFormat = "",string dataFormatSelection = "",string dataTypeName="", bool isRequired = false)
-        {
-        <div class="field-set">
-            <div class="field-contener">
-                <input id="@name"
-                       data-filed-name="@name"
-                       data-representing-type="Select"
-                       type="hidden">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label data-localized="@labelLocalized"
-                           for="@(name)-ddl">
-                        @label
-                    </label>                    
-                </div>
-                <div class="field-group float-label-control form-inline-element-wrapper">
-                    <select id="@(name)-ddl"
-                            data-filed-name="@name"
-                            data-tabindex="@tabindex"
-                            tabindex="@tabindex"
-                            data-localized-placeholder="@placeholderLocalized"
-                            placeholder="@placeholder"
-                            data-value-identifier="@dataValueIdentifier"
-                            name="@name"
-                            @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
-                            @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
-                            @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
-                            @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                            data-url="@uri"
-                            style="width:90%"
-                            data-representing-type="Select"
-                            onchange="publicApp.onSelectChangeApp(this)"
-                            class="selectTwo form-control-ew-select"></select>
-                </div>
-                    <div id="field-spinner"></div>
-                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-
-                </div>
+@helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", string dataValueIdentifier = "", string dataFormat = "", string dataFormatSelection = "", string dataTypeName = "", bool isRequired = false)
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <input id="@name"
+                   data-filed-name="@name"
+                   data-representing-type="Select"
+                   type="hidden">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label data-localized="@labelLocalized"
+                       for="@(name)-ddl">
+                    @label
+                </label>
             </div>
+            <div class="field-group float-label-control form-inline-element-wrapper">
+                <select id="@(name)-ddl"
+                        data-filed-name="@name"
+                        data-tabindex="@tabindex"
+                        tabindex="@tabindex"
+                        data-localized-placeholder="@placeholderLocalized"
+                        placeholder="@placeholder"
+                        data-value-identifier="@dataValueIdentifier"
+                        name="@name"
+                        @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
+                        @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
+                        @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
+                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                        data-url="@uri"
+                        style="width:90%"
+                        data-representing-type="Select"
+                        onchange="publicApp.onSelectChangeApp(this)"
+                        class="selectTwo form-control-ew-select"></select>
+            </div>
+            <div id="field-spinner"></div>
+            <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+
+        </div>
+    </div>
 }
 
 
-@helper FilterSelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "",string dataValueIdentifier = "")
+@helper FilterSelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", string dataValueIdentifier = "")
 {
     <div class="panel panel-outline">
         <div class="panel-heading">
@@ -775,11 +775,12 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
             </h4>
         </div>
         <div id="collapse_@name" class="panel-collapse collapse in">
-            @WebHelpers.SelectEditor(name, placeholder, label, uri, tabindex, labelLocalized,placeholderLocalized,dataValueIdentifier)
+            @WebHelpers.SelectEditor(name, placeholder, label, uri, tabindex, labelLocalized, placeholderLocalized, dataValueIdentifier)
         </div>
     </div>
 }
-@helper ExternalKeys(string typeId, string typeName) {
+@helper ExternalKeys(string typeId, string typeName)
+{
     <div class="pull-left" style="margin-bottom:10px;">
 
         <button id="add-ExtKeys" class="btn btn-primary btn-outline" data-type-id="@typeId" data-type-name="@typeName" onclick="addExternalKey(this); return false;"><i class="fa fa fa-plus"></i> <span data-localized="AddExternalKey">Add External Key</span></button>
@@ -806,18 +807,22 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 
 }
 
-@helper jQGrid(string gridId, bool appearToolbar,string dataType = "",string width = "",string height = "", string label = "") { 
-    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; top: -175px;">
-        <label id="label-@label" >@label</label>
+
+@helper jQGrid(string gridId, bool appearToolbar, string dataType = "", string width = "", string height = "", string label = "")
+{
+    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; top: -190px;">
+        <label id="label-@label">@label</label>
     </div>
-    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block;" </text>    }>
-        <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text>    } ></table>
-         @if (appearToolbar == true) { <text> <div id="jqGridPager"></div> </text>    }
-        
+    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block;" </text> }>
+        <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text> }></table>
+        @if (appearToolbar == true)
+        {<text> <div id="jqGridPager"></div> </text>}
+
     </div>
 }
 
-@helper DropZoneEditor(string idDropZone,string idPreview,string label,string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null) { 
+@helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null)
+{
     <div class="field-set">
         <div class="field-group float-label-control" style="margin-bottom: 0;">
             <label id="label-@label">@label</label>
@@ -826,27 +831,27 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
             <i class='fa fa-plus'></i><span> Neu</span>
         </button>
     </div>
-    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles"</text>}>
+    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles" </text> }>
 
         <div class="dz-message">
             Drop files ifre or click to upload image<br>
         </div>
         @*<div id="@idPreview" class="dz-preview dz-file-preview">
-            <div class="dz-details">
-                <div class="dz-filename"><span data-dz-name></span></div>
-                <div class="dz-size" data-dz-size></div>
-                <img data-dz-thumbnail />
-            </div>
-        </div>*@
+                <div class="dz-details">
+                    <div class="dz-filename"><span data-dz-name></span></div>
+                    <div class="dz-size" data-dz-size></div>
+                    <img data-dz-thumbnail />
+                </div>
+            </div>*@
         @if (showHeader)
         {
-        <div class="row b-b-2" data-dz-showheader style="display:none;">
-            <div class="col-md-8"><strong>Name</strong></div>
-            <div class="col-md-3"><strong>Bild</strong></div>
-            <div class="col-md-1"></div>
-        </div>
+            <div class="row b-b-2" data-dz-showheader style="display:none;">
+                <div class="col-md-8"><strong>Name</strong></div>
+                <div class="col-md-3"><strong>Bild</strong></div>
+                <div class="col-md-1"></div>
+            </div>
         }
-        <div class="table table-striped files " id="previews" >
+        <div class="table table-striped files " id="previews">
             <div id="@idPreview" class="row b-b-1 dz-preview">
                 <div class="col-md-8">
                     <p class="dz-filename" data-dz-name></p>
@@ -856,53 +861,53 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                     }
                     <div class="dz-size" data-dz-size style="display:none;"></div>
                 </div>
-                    <div class="col-md-3">
-                        <span class=""><img data-dz-thumbnail /></span>
-                    </div>
-                    <div class="col-md-1">
-                        <span class="actions">
-                            <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999;" type="button">
-                                <i class='fa fa-trash-o'></i>
-                            </button>
-                        </span>
-                    </div>
+                <div class="col-md-3">
+                    <span class=""><img data-dz-thumbnail /></span>
+                </div>
+                <div class="col-md-1">
+                    <span class="actions">
+                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999;" type="button">
+                            <i class='fa fa-trash-o'></i>
+                        </button>
+                    </span>
+                </div>
             </div>
-            
+
         </div>
 
     </div>
-    
 
 
 
-    
+
+
 }
 
 @helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999, string nameForMessage = "")
-    {
-        <div class="field-set">
-            <div class="field-contener">
-                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                    <label for="@name">@label</label>
-                </div>
-                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
-                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
-                            data-edit="false"
-                            class="form-control-ew-text"
-                            @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" </text> }
-                            type=@type
-                            @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
-                            @if (isReadOnly == true) { <text> readonly </text> }
-                            @if (isEmail == true) { <text> data-val-email="@nameForMessage ungültiges Format" data-val="true" </text> }
-                            @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
-                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                    @if (description != null)
-                    {
-                        <small id="@name-Description" class="field-description" style="padding-top:5px;">
-                            @description
-                        </small>
-                    }
-                </div>
+{
+    <div class="field-set">
+        <div class="field-contener">
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                <label for="@name">@label</label>
+            </div>
+            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                       data-edit="false"
+                       class="form-control-ew-text"
+                       @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" </text> }
+                       type=@type
+                       @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                       @if (isReadOnly == true) { <text> readonly </text> }
+                       @if (isEmail == true) { <text> data-val-email="@nameForMessage ungültiges Format" data-val="true" </text> }
+                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                @if (description != null)
+                {
+                    <small id="@name-Description" class="field-description" style="padding-top:5px;">
+                        @description
+                    </small>
+                }
             </div>
         </div>
+    </div>
 }
