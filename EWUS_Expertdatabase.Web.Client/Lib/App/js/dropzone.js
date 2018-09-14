@@ -277,9 +277,13 @@
           if (this.options.addOpenLinks) {
               //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
               //file.previewElement.appendChild(file._openLink);
+<<<<<<< HEAD
 
               file._openLink = $(".dz-click-image");
               file._openLink.dblclick(function (e) {
+=======
+              $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
+>>>>>>> e1cf51727aadacf780931f1fe044be4677abc55b
                   e.preventDefault();
                   e.stopPropagation();
 
