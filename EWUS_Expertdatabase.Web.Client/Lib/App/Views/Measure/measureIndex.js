@@ -44,7 +44,7 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-            width: 15,
+            width: 14,
             align: 'right',
             editable: true,
             searchoptions: {

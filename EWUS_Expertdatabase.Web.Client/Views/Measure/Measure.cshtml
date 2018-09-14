@@ -94,6 +94,7 @@ else
         </div>
         <div class="col-md-6 half-form-wrapper">
             <div class="row" style="padding-top: 5px;">
+
                 <div class="col-md-12 row-control-main-wrapper">
                     @WebHelpers.DropZoneEditor("measureDropZone", "measurePreview", "Fotos und Grafiken", "300px", showHeader: true, showDescription: true)
                 </div>
@@ -101,11 +102,13 @@ else
         </div>
     </div>
 
-
+    
 
 </div>
 
+
     @Html.Partial("_PopupFooter");
+
 }
 <script>
     var objectId = "@ViewBag.Id";

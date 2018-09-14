@@ -12,7 +12,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 45,
+                width: 35,
                 key: true,
                 searchoptions: {
                     // show search options

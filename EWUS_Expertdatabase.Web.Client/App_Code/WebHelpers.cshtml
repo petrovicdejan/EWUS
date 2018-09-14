@@ -159,7 +159,7 @@
     </div>
 }
 
-@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999)
+@helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "",bool isRequired = false,string labelLocalized=null,string placeholderLocalized=null,string requiredplaceholder=null, string type="text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999, string nameForMessage = "")
 {
     <div class="field-set">
         <div class="field-contener">
@@ -170,11 +170,11 @@
                 <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                        data-edit="false"
                        class="form-control-ew-@type"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                       @if (isRequired == true) { <text> data-val-required="@nameForMessage Eingabe erforderlich" data-val="true" </text> }
                        type=@type
                        @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
                        @if (isReadOnly == true) { <text> readonly </text> }
-                       @if (maxLength > 0) { <text> data-val-length="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text> }>
+                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 @if (description != null)
                 {
@@ -878,7 +878,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
     
 }
 
-@helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999)
+@helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999, string nameForMessage = "")
     {
         <div class="field-set">
             <div class="field-contener">
@@ -889,12 +889,12 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
                     <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                             data-edit="false"
                             class="form-control-ew-text"
-                            @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
+                            @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" </text> }
                             type=@type
                             @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
                             @if (isReadOnly == true) { <text> readonly </text> }
-                            @if (isEmail == true) { <text> data-val-email="@name Is not in a valid format" data-val="true" </text> }
-                            @if (maxLength > 0) { <text> data-val-length="The field @name must be a string with a maximum length of @maxLength !" data-val-length-max=@maxLength </text> }>
+                            @if (isEmail == true) { <text> data-val-email="@nameForMessage ungültiges Format" data-val="true" </text> }
+                            @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
                     <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                     @if (description != null)
                     {
