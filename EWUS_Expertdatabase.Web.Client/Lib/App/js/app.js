@@ -575,8 +575,9 @@ var publicApp = (function () {
             $(id).find('[data-money]').each(function (index) {
                 var th = $(this);
                 var an = AutoNumeric.getAutoNumericElement('input[name="' + th.attr('name') + '"][data-money]');
-                if(an === undefined || an === null)
-                    an = new AutoNumeric('input[name="' + th.attr('name') + '"][data-money]',0, autoNumericOptionsEuro);
+                if (an === undefined || an === null)
+                    an = new AutoNumeric('input[name="' + th.attr('name') + '"][data-money]', 0, autoNumericOptionsEuro);
+                th.blur();
             });
             
         })
@@ -2286,7 +2287,7 @@ var publicApp = (function () {
                 if (an === undefined || an === null)
                     an = new AutoNumeric(sSelector, value, autoNumericOptionsEuro);
 
-                an.setValue(value);
+                an.set(value);
             }
             TryCatchWraper(function () {
                 $(sSelector).keyup();
@@ -3066,25 +3067,27 @@ var publicApp = (function () {
     }
 
     function deleteObject(el, fOnSuccess) {
-        swal({
+        swalCall({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
-        }, function () {
-            publicApp.deleteWebApi(el, $(el).attr("data-type"), fOnSuccess);
-        });
+
+        },
+            function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
+            function () {}
+        )
     }
 
-    //function swalCall(options, fnSuccess, fnError) {
-    //    if (fnError === undefined || fnError === null)
-    //        fnError = () => { };
-    //    if (fnSuccess === undefined || fnSuccess === null)
-    //        fnSuccess = () => { };
-    //    swal(options, fnSuccess, fnError);
-    //}
+    function swalCall(options, fnSuccess, fnError) {
+        if (fnError === undefined || fnError === null)
+            fnError = function () { };
+        if (fnSuccess === undefined || fnSuccess === null)
+            fnSuccess = function () { };
+        swal(options, fnSuccess, fnError);
+    }
 
     function onSelectChange(sender, sId) {
         if (!sId) {
@@ -3241,7 +3244,7 @@ var publicApp = (function () {
     }
 
     function callSwal(accepted, rejected) {
-        swal({
+        swalCall({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
@@ -3249,12 +3252,8 @@ var publicApp = (function () {
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
-            function () {
-                return accepted();
-            },
-            function () {
-                return rejected();
-            }
+            accepted,
+            rejected
         )
     }
 
