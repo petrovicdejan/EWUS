@@ -807,7 +807,7 @@ if (string.IsNullOrWhiteSpace(searchUri)) { searchUri = "/api/Search/Organizatio
 }
 
 @helper jQGrid(string gridId, bool appearToolbar,string dataType = "",string width = "",string height = "", string label = "") { 
-    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; top: -190px;">
+    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; top: -175px;">
         <label id="label-@label" >@label</label>
     </div>
     <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block;" </text>    }>
