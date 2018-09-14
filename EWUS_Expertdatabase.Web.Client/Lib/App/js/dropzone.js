@@ -279,7 +279,7 @@
               //file.previewElement.appendChild(file._openLink);
 
               file._openLink = $(".dz-click-image");
-              $(".dz-click-image").dblclick(function (e) {
+              file._openLink.dblclick(function (e) {
                   e.preventDefault();
                   e.stopPropagation();
 

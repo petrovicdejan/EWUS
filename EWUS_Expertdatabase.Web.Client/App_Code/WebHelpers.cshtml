@@ -836,13 +836,6 @@
         <div class="dz-message">
             Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
         </div>
-        @*<div id="@idPreview" class="dz-preview dz-file-preview">
-                <div class="dz-details">
-                    <div class="dz-filename"><span data-dz-name></span></div>
-                    <div class="dz-size" data-dz-size></div>
-                    <img data-dz-thumbnail />
-                </div>
-            </div>*@
         @if (showHeader)
         {
             <div class="row b-b-2" data-dz-showheader style="display:none;">
@@ -861,7 +854,7 @@
                     }
                     <div class="dz-size" data-dz-size style="display:none;"></div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 dz-click-image">
                     <span class=""><img data-dz-thumbnail /></span>
                 </div>
                 <div class="col-md-1">

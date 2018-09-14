@@ -14,6 +14,7 @@ namespace EWUS_Expertdatabase.Business
     {
         public static void SaveFileInFolder(string objectGuid, string objectTypeName, Collection<DocumentItem> documentItems)
         {
+            Thread.Sleep(200);
             foreach (var docItem in documentItems)
             {
                 string path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName] + @"\" + docItem.ObjectId);
