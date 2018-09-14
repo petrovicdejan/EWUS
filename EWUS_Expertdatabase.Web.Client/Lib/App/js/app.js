@@ -575,8 +575,9 @@ var publicApp = (function () {
             $(id).find('[data-money]').each(function (index) {
                 var th = $(this);
                 var an = AutoNumeric.getAutoNumericElement('input[name="' + th.attr('name') + '"][data-money]');
-                if(an === undefined || an === null)
-                    an = new AutoNumeric('input[name="' + th.attr('name') + '"][data-money]',0, autoNumericOptionsEuro);
+                if (an === undefined || an === null)
+                    an = new AutoNumeric('input[name="' + th.attr('name') + '"][data-money]', 0, autoNumericOptionsEuro);
+                th.blur();
             });
             
         })
@@ -2286,7 +2287,7 @@ var publicApp = (function () {
                 if (an === undefined || an === null)
                     an = new AutoNumeric(sSelector, value, autoNumericOptionsEuro);
 
-                an.setValue(value);
+                an.set(value);
             }
             TryCatchWraper(function () {
                 $(sSelector).keyup();
@@ -3073,22 +3074,20 @@ var publicApp = (function () {
             showCancelButton: true, confirmButtonColor: "#DD6B55",
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
-<<<<<<< HEAD
+
         },
             function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
             function () {}
         )
-=======
->>>>>>> f06e094181359a20dc05305f3c38cfdb8f5c0001
     }
 
-    //function swalCall(options, fnSuccess, fnError) {
-    //    if (fnError === undefined || fnError === null)
-    //        fnError = () => { };
-    //    if (fnSuccess === undefined || fnSuccess === null)
-    //        fnSuccess = () => { };
-    //    swal(options, fnSuccess, fnError);
-    //}
+    function swalCall(options, fnSuccess, fnError) {
+        if (fnError === undefined || fnError === null)
+            fnError = function () { };
+        if (fnSuccess === undefined || fnSuccess === null)
+            fnSuccess = function () { };
+        swal(options, fnSuccess, fnError);
+    }
 
     function onSelectChange(sender, sId) {
         if (!sId) {
