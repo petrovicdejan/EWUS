@@ -277,9 +277,7 @@
           if (this.options.addOpenLinks) {
               //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
               //file.previewElement.appendChild(file._openLink);
-
-              file._openLink = $(".dz-click-image");
-              $(".dz-click-image").dblclick(function (e) {
+              $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
                   e.preventDefault();
                   e.stopPropagation();
 
