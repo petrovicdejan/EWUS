@@ -10,7 +10,7 @@
         {
             label: 'Projekt',
             name: 'Name',
-            width: 25,
+            width: 26,
             key: true,
             editable: true,
             searchoptions: {
@@ -20,7 +20,7 @@
         {
             label: 'Liegenschafts-Nr',
             name: 'PropertyNumber',
-            width: 10,
+            width: 12,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -38,7 +38,7 @@
         {
             label: 'Kunde',
             name: 'Customer',
-            width: 10,
+            width: 11,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -56,7 +56,7 @@
         {
             label: 'Standort',
             name: 'Location',
-            width: 12,
+            width: 10,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -83,7 +83,7 @@
         {
             label: 'Investition [€]',
             name: 'InvestmentTotal',
-            width: 10,
+            width: 12,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
@@ -100,7 +100,7 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-            width: 10,
+            width: 13,
             editable: true,
             searchoptions: {
                 sopt: ['bw', "ge", "le", "eq"],
@@ -109,7 +109,7 @@
         {
             label: '',
             name: '',
-            width: 3,
+            width: 4,
             formatter: function (cellvalue, options, rowObject) {
                 return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectData + ')" data-type="Project" data-url="Project/DeleteProject/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
             },
