@@ -50,7 +50,7 @@
             
             .navButtonAdd("#jqGridPager", {
                 caption: 'Neu',
-                buttonicon : 'glyphicon glyphicon-plus',
+                buttonicon : 'glyphicon glyphicon-plus pager-button',
                 position: 'last',
                 onClickButton: function () {
 
@@ -58,7 +58,7 @@
                 }
             }).navButtonAdd("#jqGridPager", {
                 caption: 'Übernehmen',
-                buttonicon: 'glyphicon glyphicon-download-alt',
+                buttonicon: 'glyphicon glyphicon-download-alt pager-button',
                 position: 'last',
                 onClickButton: function () {
                     var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
