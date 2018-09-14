@@ -3557,3 +3557,6 @@ html.ie10 body.modal-open {
         overflow: auto !important;
     }
 }
+.pager-button{
+    padding-left:10px;
+}
