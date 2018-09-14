@@ -7,7 +7,6 @@ namespace EWUS_Expertdatabase.Data
     {
         public EWUSDbContext() : base("EWUS_Expertdatabase")
         {
-            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<EWUSDbContext, Migrations.Configuration>());
         }
 
         public DbSet<Project> Projects { get; set; }

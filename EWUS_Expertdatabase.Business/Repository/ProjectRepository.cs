@@ -4,6 +4,8 @@ using System.Data.Entity;
 using EWUS_Expertdatabase.Model;
 using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Common;
+using System.Data.SqlClient;
+using System;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -116,10 +118,18 @@ namespace EWUS_Expertdatabase.Business
                         ctx.Projects.Remove(project);
                         ctx.SaveChanges();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        output.ExceptionMessage = "Exception could not be performed !!!";
-                        output.Status = ResultStatus.Forbidden;
+                        if (ex.HResult == -2146233087)
+                        {
+                            output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity; ;
+                            output.Status = ResultStatus.Forbidden;
+                        }
+                        else
+                        {
+                            output.ExceptionMessage = "Exception could not be performed !!!";
+                            output.Status = ResultStatus.InternalServerError;
+                        }
                     }
                 }
                 output.Status = ResultStatus.OK;
