@@ -3132,7 +3132,6 @@ var publicApp = (function () {
             if (maxfiles == undefined || maxfiles == NaN)
                 maxfiles = null;
 
-            console.log(maxfiles);
             myAttachZone = new Dropzone(document.querySelector("#" + idDropZone), {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,
