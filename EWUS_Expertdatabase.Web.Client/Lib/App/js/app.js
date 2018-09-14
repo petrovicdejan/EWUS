@@ -3397,22 +3397,25 @@ var setGridOptions = (function () {
 
         $("#" + gridId).navGrid("#" + pagerId, { edit: false, add: false, del: false, refresh: false, view: false, search: false }, {}, {}, delSettings);
 
+
         $("#" + gridId).inlineNav('#' + pagerId,
             // the buttons to appear on the toolbar of the grid
             {
                 edit: false,
-                add: true,
+                add: false,
                 del: true,
+                save: false,
                 cancel: false,
                 editParams: {
-                    keys: true,
+                    keys: false,
                 },
                 addParams: {
-                    keys: true,
+                    keys: false,
                     position: "last"
                 },
 
-            });
+            }
+        );
 
         if (!IsNullOrUndefined(customButtonAddRow)) {
             $("#" + customButtonAddRow).on("click", function (event) {
