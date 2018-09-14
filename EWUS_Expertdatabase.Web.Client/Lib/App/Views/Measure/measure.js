@@ -15,7 +15,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 25,
+                width: 24,
                 editable: true,
                 search: false              
             },
@@ -40,21 +40,7 @@
                         "<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_" + cellval.rowId + "' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='measurejs.saveGridRow()'><span class='glyphicon glyphicon-save'></span></div>" +
                         "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_" + cellval.rowId+"' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this); '><span class='glyphicon glyphicon-trash'></span></div>";
                 }
-            }
-            //{
-            //    label: "",
-            //    name: "",
-            //    width: 10,
-            //    formatter: "actions",
-            //    formatoptions: {
-            //        keys: true,
-            //        editOptions: {},
-            //        addOptions: {},
-            //        delOptions: {}
-            //    },
-            //    search: false
-            //}
-            
+            }            
         ];
         
 

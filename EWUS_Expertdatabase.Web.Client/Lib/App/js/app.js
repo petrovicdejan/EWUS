@@ -3066,18 +3066,18 @@ var publicApp = (function () {
     }
 
     function deleteObject(el, fOnSuccess) {
-        swalCall({
+        swal({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
-        },
-            function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
-            () => {}
-        )
+        }, function () {
+            publicApp.deleteWebApi(el, $(el).attr("data-type"), fOnSuccess);
+        });
     }
+
     function swalCall(options, fnSuccess, fnError) {
         if (fnError === undefined || fnError === null)
             fnError = () => { };
@@ -3241,7 +3241,7 @@ var publicApp = (function () {
     }
 
     function callSwal(accepted, rejected) {
-        swalCall({
+        swal({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
@@ -3249,8 +3249,12 @@ var publicApp = (function () {
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
-            accepted,
-            rejected
+            function () {
+                return accepted();
+            },
+            function () {
+                return rejected();
+            }
         )
     }
 
