@@ -53,8 +53,8 @@ $.jgrid.regional["en"] = {
 		Reset: "Reset",
         odata: [{ oper: 'eq', text: 'gleich' }, { oper: 'ne', text: 'nicht gleich' }, { oper: 'lt', text: 'weniger' }, { oper: 'le', text: 'kleiner gleich' }, { oper: 'gt', text: 'gr\u00f6\u00dfer' }, { oper: 'ge', text: 'gr\u00f6\u00dfer gleich' }, { oper: 'bw', text: 'beginnt mit' }, { oper: 'bn', text: 'does not begin with' }, { oper: 'in', text: 'is in' }, { oper: 'ni', text: 'is not in' }, { oper: 'ew', text: 'ends with' }, { oper: 'en', text: 'does not end with' }, { oper: 'cn', text:'enth\u00e4lt'},{ oper:'nc', text:'does not contain'},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}, {oper:'bt', text:'between'}],
 		groupOps: [{ op: "AND", text: "all" },{ op: "OR",  text: "any" }],
-		operandTitle : "Click to select search operation.",
-		resetTitle : "Reset Search Value"
+        operandTitle: "Art der Suche ausw\u00e4hlen.",
+        resetTitle: "Suchwert zur\u00fccksetzen"
 	},
 	edit : {
 		addCaption: "Add Record",

@@ -733,7 +733,7 @@
     </script>
 }
 
-@helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", string dataValueIdentifier = "", string dataFormat = "", string dataFormatSelection = "", string dataTypeName = "", bool isRequired = false)
+@helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", string dataValueIdentifier = "", string dataFormat = "", string dataFormatSelection = "", string dataTypeName = "", bool isRequired = false, string nameForMessage = "")
 {
     <div class="field-set">
         <div class="field-contener">
@@ -760,7 +760,7 @@
                         @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
                         @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
                         @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
-                        @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                        @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" data-val="true" </text> }
                         data-url="@uri"
                         style="width:90%"
                         data-representing-type="Select"
@@ -868,8 +868,8 @@
                 </div>
                 <div class="col-md-1">
                     <span class="actions">
-                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999;" type="button">
-                            <i class='fa fa-trash-o'></i>
+                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer" type="button">
+                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
                         </button>
                     </span>
                 </div>

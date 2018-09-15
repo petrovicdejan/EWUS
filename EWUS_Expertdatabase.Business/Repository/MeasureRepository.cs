@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -119,7 +120,10 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(measure.Guid.ToString()) && measure.DocumentItems != null)
                 {
-                    SaveFile.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
+                    });
                 }
 
                 output = Result.ToResult<Measure>(ResultStatus.OK, typeof(Measure));
