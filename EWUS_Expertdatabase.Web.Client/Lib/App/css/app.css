@@ -557,7 +557,7 @@ ul.message-items {
     padding-left: 0;
 }
 
-.row .half-form-wrapper .row-control-main-wrapper {
+.half-form-wrapper-measure .row-control-main-wrapper {
     padding-left: 0;
 }
 
@@ -865,13 +865,24 @@ ul.message-items {
         }
 
         .field-icon {
-            color: #999;
             padding-right: 5px;
             margin-right: 0px;
+            visibility: hidden;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 10px;
         }
 
+.field-icon.fa-icon-PropertyNumber {
+    top: 25px;
+}
 
-.field-flow-contener{position: relative;padding-bottom:20px;}
+
+.field-flow-contener {
+    position: relative;
+    padding-bottom: 20px;
+}
 .field-flow-caption {
      position: absolute; font-weight: normal; top: -1.5em; left: 20px; color: #aaaaaa; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important;
 }
@@ -899,7 +910,7 @@ ul.message-items {
         }
 
 #Measure #addFile-measureDropZone {
-    margin-bottom: 3px;
+    margin-bottom: 10px;
 }
 
 #Measure .field-validation-error {
@@ -3496,8 +3507,8 @@ circle.warning::before {
     overflow: hidden !important;
 }
 
-#Project .modal-body {
-    padding-left: 0;
+.modal-body {
+    padding-top: 15px;
 }
 
 .inmodal .modal-body {
