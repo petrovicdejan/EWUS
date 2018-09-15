@@ -45,7 +45,7 @@ var projectModule = (function () {
         {
             label: 'Projekt',
             name: 'Name',
-            width: 26,
+            width: 25,
             key: true,
             editable: true,
             searchoptions: {
@@ -55,7 +55,7 @@ var projectModule = (function () {
         {
             label: 'Liegenschafts-Nr',
             name: 'PropertyNumber',
-            width: 12,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -64,7 +64,7 @@ var projectModule = (function () {
         {
             label: 'Liegenschaftstyp',
             name: 'PropertyType',
-            width: 12,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -82,7 +82,7 @@ var projectModule = (function () {
         {
             label: 'Region',
             name: 'Region',
-            width: 10,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -100,7 +100,7 @@ var projectModule = (function () {
         {
             label: 'Plz',
             name: 'ZipCode',
-            width: 10,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],

@@ -274,28 +274,25 @@
             if(this.previewsContainer.querySelector('[data-dz-showheader]'))
                 this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'block';
 
-          if (this.options.addOpenLinks) {
-              //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
-              //file.previewElement.appendChild(file._openLink);
-<<<<<<< HEAD
+            if (this.options.addOpenLinks) {
+                //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
+                //file.previewElement.appendChild(file._openLink);
 
-              file._openLink = $(".dz-click-image");
-              file._openLink.dblclick(function (e) {
-=======
-              $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
->>>>>>> e1cf51727aadacf780931f1fe044be4677abc55b
-                  e.preventDefault();
-                  e.stopPropagation();
+                file._openLink = $(".dz-click-image");
+                file._openLink.dblclick(function (e) {
+                    $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
 
-                  var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
-                  if (_ref3.options.objectTypeName != '')
-                      sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+                        var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
+                        if (_ref3.options.objectTypeName != '')
+                            sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
 
-                      window.open(sUrl);
-                  _ref3.emit("openedfile", file);
-              });
-          }
-
+                        window.open(sUrl);
+                        _ref3.emit("openedfile", file);
+                    });
+                });
+            };
           if (this.options.addRemoveLinks) {
 
               file.previewElement.querySelector('[data-dz-remove]').setAttribute("title", this.options.dictRemoveFile);
