@@ -872,6 +872,7 @@ ul.message-items {
             width: 0;
             position: absolute;
             top: 10px;
+            left: 50%;
         }
 
 .field-icon.fa-icon-PropertyNumber {
@@ -985,12 +986,8 @@ ui-jqgrid-view table-responsive
                     padding-bottom: 4px;
                 }
 
-            .float-label-control input.tt-input, .float-label-control input, .float-label-control textarea {
+            .float-label-control input.tt-input, .float-label-control input {
                 padding: 0.1em 0em 1px 0em;
-            }
-
-            .float-label-control textarea {
-                padding: 0.1em 0em 5px 0em;
             }
 
             .float-label-control label:not(.error) {

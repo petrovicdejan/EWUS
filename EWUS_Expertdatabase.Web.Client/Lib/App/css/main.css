@@ -4799,7 +4799,11 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .tooltip {
-    left: 0px !important;
+    left: 35% !important;
+}
+
+.field-select-wrapper-ew .tooltip {
+    left: 0 !important;
 }
 
 .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single {
