@@ -14,7 +14,7 @@ namespace EWUS_Expertdatabase.Business
     {
         public static void SaveFileInFolder(string objectGuid, string objectTypeName, Collection<DocumentItem> documentItems)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             try
             {
                 foreach (var docItem in documentItems)
