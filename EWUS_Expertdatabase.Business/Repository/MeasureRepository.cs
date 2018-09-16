@@ -65,6 +65,33 @@ namespace EWUS_Expertdatabase.Business
             }
         }
 
+        public List<MeasurePoco> GetMeasuresNotRelatedWithProject(long projectId)
+        {
+            using (var context = new EWUSDbContext())
+            {
+                var measures = from m in context.Measures
+                               join pm in context.ProjectMeasures.Where(x => x.ProjectId == projectId) on
+                                            new { f1 = m.Id }
+                                            equals
+                                            new { f1 = pm.MeasureId } into cp
+                               from q1 in cp.DefaultIfEmpty()
+                               where q1.Measure == null
+                               select new MeasurePoco
+                               {
+                                   Id = m.Id,
+                                   Name = m.Name
+                               };
+
+                List<MeasurePoco> result = measures.ToList();
+                if (result != null)
+                {
+                    return result;
+                }
+
+                return null;
+            }
+        }
+
         public Result SaveMeasure(Measure editMeasure)
         {
             Result output = new Result();

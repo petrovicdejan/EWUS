@@ -860,7 +860,6 @@ var publicApp = (function () {
         TryCatchWraper(function () {
 
             $(id + '.selectTwo').each(function (i, el) {
-
                 var dataDefaultValue = $(this).attr("data-default-value");
                 var elementId = "#" + $(this).attr("Id");
 
@@ -979,6 +978,7 @@ var publicApp = (function () {
 
                                 sel.removeClass('loadinggif');
 
+                                el.html('');
                                 el.select2({
                                     id: function (bond) { return bond._id; },
                                     placeholder: placeholderText,
@@ -3112,20 +3112,9 @@ var publicApp = (function () {
         if (sValue == null || sValue == 'undefined')
             sValue = null;
 
-        //var typeName = $(sSelector).attr("data-type-name");
-        //if (IsNullOrWhiteSpace(typeName) == false) {
-        //    var reference = new Object();
-        //    reference.TypeName = typeName;
-        //    reference.Id = sValue;
-
-        //    return {
-        //        Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
-        //    }
-        //} else {
         return {
             Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
         }
-        //};
     }
 
     function getSelected(sSelector) {
@@ -3326,6 +3315,15 @@ var publicApp = (function () {
         },
         callSwallApp: function (accepted, rejected) {
             callSwal(accepted, rejected);
+        },
+        setSelectedApp: function (sValue, sSelector) {
+            setSelected(sValue, sSelector);
+        },
+        setUpSelectApp: function (id) {
+            setUpSelect(id);
+        },
+        getSelectedFieldApp: function (sSelector) {
+            return getSelectedField(sSelector);
         }
     }
 

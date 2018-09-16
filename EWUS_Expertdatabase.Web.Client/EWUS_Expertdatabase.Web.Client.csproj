@@ -182,6 +182,7 @@
     <Compile Include="ViewModel\DocumentItemViewModel.cs" />
     <Compile Include="ViewModel\MaintenanceCompanyViewModel.cs" />
     <Compile Include="ViewModel\MeasureViewModel.cs" />
+    <Compile Include="ViewModel\ProjectMeasureViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
     <Content Include="App_Code\PathHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

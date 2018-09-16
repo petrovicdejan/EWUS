@@ -19,7 +19,7 @@ namespace EWUS_Expertdatabase.Model
         /// <summary>
         ///     Get or set Email address of the InvolvedParty
         /// </summary>
-        //[MaxLength(50)]
+        [MaxLength(50)]
         public string Email { get; set; }
 
         /// <summary>
