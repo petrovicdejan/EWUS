@@ -13,6 +13,7 @@
 };
 
 var projectMeasureTransform = function transformData(rData) {
+    setGridOptions.deleteRows('gridProjectMeasure');
     var data = [];
     $.each(rData, function (inx, item) {
         var row = new Object();
@@ -21,12 +22,12 @@ var projectMeasureTransform = function transformData(rData) {
         row.PerformanseSheetNumber = item.PerformanseSheetNumber;
         row.MeasureName = item.MeasureName;
 
-        if (!IsNullOrUndefined(item.PerformanceSheetStatus)) {
-            row.PerformanceSheetStatus = item.PerformanceSheetStatus;
+        if (!IsNullOrUndefined(item.PerformanseSheetStatus)) {
+            row.PerformanceSheetStatus = item.PerformanseSheetStatus.Value;
         }
 
         if (!IsNullOrUndefined(item.MaintenanceCompany)) {
-            row.MaintenanceCompany = item.MaintenanceCompany;
+            row.MaintenanceCompany = item.MaintenanceCompany.Name;
         }
 
         if (!IsNullOrUndefined(item.OperationType)) {
@@ -69,7 +70,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 12,
+            width: 25,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -78,7 +79,7 @@ var projectModule = (function () {
         {
             label: 'Status',
             name: 'PerformanceSheetStatus',
-            width: 12,
+            width: 10,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -87,7 +88,7 @@ var projectModule = (function () {
         {
             label: 'Wartungsfirma',
             name: 'MaintenanceCompany',
-            width: 11,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -105,7 +106,7 @@ var projectModule = (function () {
         {
             label: 'Monetärer Aufwand [€]',
             name: 'InvestmentCost',
-            width: 12,
+            width: 10,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
@@ -118,7 +119,7 @@ var projectModule = (function () {
         {
             label: '',
             name: '',
-            width: 4,
+            width: 2,
             formatter: function (cellvalue, options, rowObject) {
                 return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectMeasureData + ')" data-type="Project" data-url="ProjectMeasure/DeleteProjectMeasure/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
             },
@@ -127,7 +128,7 @@ var projectModule = (function () {
         },
     ];
 
-    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/Project/ProjectEdit?key=");
+    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/ProjectMeasure/ProjectMeasureEdit?key=");
     
     $("#ProjectName").val(projectName);
 
@@ -151,37 +152,5 @@ var projectModule = (function () {
         var url = sRootUrl + 'ProjectMeasure/GetAllProjectMeasures/' + objectId;
 
         publicApp.getWebApi(url, projectMeasureTransform);
-        //publicApp.getWebApi(url, function (rData) {
-        //    var data = [];
-        //    $.each(rData, function (inx, item) {
-        //        var row = new Object();
-        //        row.Id = item.Id;
-        //        row.Name = item.Name;
-        //        row.PerformanseSheetNumber = item.PerformanseSheetNumber;
-        //        row.MeasureName = item.MeasureName;
-
-        //        if (!IsNullOrUndefined(item.PerformanceSheetStatus)) {
-        //            row.PerformanceSheetStatus = item.PerformanceSheetStatus;
-        //        }
-
-        //        if (!IsNullOrUndefined(item.MaintenanceCompany)) {
-        //            row.MaintenanceCompany = item.MaintenanceCompany;
-        //        }
-
-        //        if (!IsNullOrUndefined(item.OperationType)) {
-        //            row.OperationType = item.OperationType;
-        //        }
-
-        //        row.InvestmentCost = item.InvestmentCost;
-
-
-        //        data.push(row);
-        //    });
-
-        //    $('#gridProjectMeasure').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
-
-        //    $('#rowsNumber').text('Anzahl: ' + $('#gridProjectMeasure').getGridParam('reccount'));
-
-        //}, false, false);
     }
 })();

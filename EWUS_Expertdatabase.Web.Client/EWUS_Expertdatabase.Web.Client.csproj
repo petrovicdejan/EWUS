@@ -215,6 +215,7 @@
     <Content Include="Lib\App\js\dropzone.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.min.js" />
+    <Content Include="Lib\App\js\jquery-sortable.js" />
     <Content Include="Lib\App\js\jquery-ui.min.js" />
     <Content Include="Lib\App\js\jquery.min.js" />
     <Content Include="Lib\App\js\jquery.tmpl.min.js" />
@@ -224,6 +225,7 @@
     <Content Include="Lib\App\Views\Party\customerIndex.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompany.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompanyIndex.js" />
+    <Content Include="Lib\App\Views\ProjectMeasure\projectMeasure.js" />
     <Content Include="Lib\App\Views\ProjectMeasure\projectMeasureIndex.js" />
     <Content Include="Lib\App\Views\Project\project.js" />
     <Content Include="Lib\App\Views\Project\projectIndex.js" />
@@ -734,6 +736,7 @@
     <Content Include="Views\Project\Project.cshtml" />
     <Content Include="Views\Project\ProjectIndex.cshtml" />
     <Content Include="Views\ProjectMeasure\ProjectMeasureIndex.cshtml" />
+    <Content Include="Views\ProjectMeasure\ProjectMeasure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

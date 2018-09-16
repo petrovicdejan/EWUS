@@ -29,6 +29,7 @@ namespace EWUS_Expertdatabase.Web.Client
                                             cfg.CreateMap<Project, ProjectViewModel>().ReverseMap();
                                             cfg.CreateMap<ProjectMeasurePoco, ProjectMeasureViewModel>().ReverseMap();
                                             cfg.CreateMap<MeasurePoco, MeasureViewModel>().ReverseMap();
+                                            cfg.CreateMap<ProjectMeasurePoco, ProjectMeasure>().ReverseMap();
                                         });
 
             System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<EWUSDbContext, EWUS_Expertdatabase.Data.Migrations.Configuration>());

@@ -12,7 +12,7 @@ namespace EWUS_Expertdatabase.Model
         public ProjectMeasure()
         {
             //this.PerformanseSheetStatus = new Classification();
-            this.ProjectMeasurePerformance = new Collection<Model.ProjectMeasurePerformance>();
+            this.DocumentItems = new Collection<DocumentItem>();
         }
 
         public virtual Project Project { get; set; }
@@ -47,7 +47,7 @@ namespace EWUS_Expertdatabase.Model
 
         public string Remark { get; set; }
 
-        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformance { get; set; }
+        public Collection<DocumentItem> DocumentItems { get; set; }
     }
 
     public class ProjectMeasurePerformance : CoreObject

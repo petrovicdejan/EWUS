@@ -539,6 +539,10 @@ ul.message-items {
     width: 69%;
 }
 
+.field-contener .form-inline-element-wrapper.control-wrapper input[type='checkbox'] {
+    width: 5%;
+}
+
     .field-contener .form-inline-element-wrapper.control-wrapper .form-control-ew-text {
         width: 100%;
         min-width: 30%;
@@ -3184,6 +3188,12 @@ html, body {
     position: absolute;
 }
 
+#ProjectMeasure .modal-footer {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
 #Project input, select, textarea, .select2-selection {
     font-weight: normal !important;
     font-size: 0.9em !important;
@@ -3204,13 +3214,29 @@ html, body {
     font-size: 0.9em !important;
 }
 
-    .dropzone {
-        border: 1px dashed #0087F7;
-        border-radius: 5px;
-        background: white;
-        min-height: 200px;
-        padding: 0px 0px;
-    }
+#ProjectMeasure input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#projectMeasureList input, select, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#ProjectName {
+    background-color: whitesmoke;
+    border-bottom: none;
+    width: 40%;
+}
+
+.dropzone {
+    border: 1px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    min-height: 200px;
+    padding: 0px 0px;
+}
 
 .inline-form .modal-body {
     min-height: 320px;
@@ -3567,4 +3593,24 @@ html.ie10 body.modal-open {
 }
 .pager-button{
     padding-left:20px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ol.example li.placeholder {
+    position: relative;
+    /** More li styles **/
+}
+
+ol.example li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
 }

@@ -4,8 +4,11 @@ using EWUS_Expertdatabase.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -83,8 +86,8 @@ namespace EWUS_Expertdatabase.Business
                                           Name = pm.Name,
                                           PerformanseSheetNumber = pm.PerformanseSheetNumber,
                                           MeasureName = m.Name,
-                                          PerformanseSheetStatus = q3.Value,
-                                          MaintenanceCompany = q1.Name,
+                                          PerformanseSheetStatus = q3,
+                                          MaintenanceCompany = q1,
                                           OperationType = q2.Value,
                                           InvestmentCost = pm.InvestmenCost
                                       };
@@ -170,6 +173,134 @@ namespace EWUS_Expertdatabase.Business
             catch (Exception e)
             {
                 output.Status = ResultStatus.InternalServerError;
+            }
+
+            return output;
+        }
+
+        public ProjectMeasurePoco GetProjectMeasureById(long Id)
+        {
+            using (var context = new EWUSDbContext())
+            {
+                var projectMeasure = from pm in context.ProjectMeasures.Where(pm => pm.Id == Id)
+                                      join m in context.Measures on pm.MeasureId equals m.Id
+                                      join p in context.Projects on pm.ProjectId equals p.Id
+                                      join mc in context.MaintenanceCompanies on
+                                            new { f1 = pm.MaintenanceCompanyId }
+                                            equals
+                                            new { f1 = (int?)mc.Id } into cp
+                                      from q1 in cp.DefaultIfEmpty()
+                                      join ot in context.Classifications.Where(x => x.ClassificationType == "Massnahmenart") on
+                                            new { f1 = m.OperationTypeId }
+                                            equals
+                                            new { f1 = (int?)ot.Id } into ap
+                                      from q2 in ap.DefaultIfEmpty()
+                                      join ps in context.Classifications.Where(x => x.ClassificationType == "Leistungsblattstatus") on
+                                            new { f1 = pm.PerformanseSheetStatusId }
+                                            equals
+                                            new { f1 = (int?)ps.Id } into rp
+                                      from q3 in rp.DefaultIfEmpty()
+                                      select new ProjectMeasurePoco
+                                      {
+                                          Id = pm.Id,
+                                          Name = p.Name,
+                                          PerformanseSheetNumber = pm.PerformanseSheetNumber,
+                                          MeasureName = m.Name,
+                                          PerformanseSheetStatus = q3,
+                                          MaintenanceCompany = q1,
+                                          OperationType = q2.Value,
+                                          InvestmentCost = pm.InvestmenCost,
+                                          ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
+                                          Description = m.Description,
+                                          Specification = pm.Specification,
+                                          SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
+                                          SubmittedBy = pm.SubmittedBy,
+                                          Release = pm.Release,
+                                          Remark = pm.Remark,
+                                          DocumentItems = pm.DocumentItems,
+                                          ProjectId = p.Id,
+                                          MeasureId = m.Id
+                                      };
+
+                ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
+                IEnumerable<DocumentItem> documentItems = context.ProjectMeasures.Where(pm => pm.Id == Id).SelectMany(x => x.DocumentItems).OrderBy(x => x.Position).ToList();
+
+                Collection<DocumentItem> di = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
+
+                if (documentItems != null)
+                    result.DocumentItems = di;
+
+                if (result != null)
+                {
+                    return result;
+                }
+                return null;
+            }
+        }
+
+        public Result SaveProjectMeasure(ProjectMeasurePoco editProjectMeasure)
+        {
+            Result output = new Result();
+            output.Status = ResultStatus.BadRequest;
+
+            using (var ctx = new EWUSDbContext())
+            {
+                ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == editProjectMeasure.Id)
+                                                    .Include(x => x.DocumentItems).FirstOrDefault();
+
+                if (projectMeasure != null)
+                {
+                    Collection<DocumentItem> documentItems = new Collection<DocumentItem>();
+                    if (editProjectMeasure.DocumentItems != null && editProjectMeasure.DocumentItems.Count() > 0)
+                    {
+                        foreach (var edi in editProjectMeasure.DocumentItems)
+                        {
+                            var di = ctx.DocumentItems.Where(x => x.Id == edi.Id).FirstOrDefault();
+                            if (di == null)
+                            {
+                                ctx.DocumentItems.Add(edi);
+                                documentItems.Add(edi);
+                            }
+                            else
+                                documentItems.Add(di);
+                        }
+                    }
+                    //if (projectMeasure.DocumentItems != null)
+                    //{
+                    //    List<DocumentItem> documentItems = projectMeasure.DocumentItems.ToList();
+                    //    ctx.DocumentItems.RemoveRange(documentItems);
+                    //}
+
+                    projectMeasure.DocumentItems = documentItems;
+                    projectMeasure.InvestmenCost = editProjectMeasure.InvestmentCost;
+                    projectMeasure.MaintenanceCompanyId = editProjectMeasure.MaintenanceCompanyId;
+                    projectMeasure.ModificationDate = editProjectMeasure.ModificationDate;
+                    projectMeasure.Release = editProjectMeasure.Release;
+                    projectMeasure.PerformanseSheetNumber = editProjectMeasure.PerformanseSheetNumber;
+                    projectMeasure.PerformanseSheetStatusId = editProjectMeasure.PerformanseSheetStatusId;
+                    projectMeasure.Remark = editProjectMeasure.Remark;
+                    projectMeasure.Specification = editProjectMeasure.Specification;
+                    projectMeasure.SubmittedBy = editProjectMeasure.SubmittedBy;
+                    projectMeasure.SubmittedOnDate = editProjectMeasure.SubmittedOnDate;
+                }
+                else
+                {
+                    output.Status = ResultStatus.BadRequest;
+                }
+                
+                ctx.SaveChanges();
+
+
+                if (!string.IsNullOrEmpty(projectMeasure.Guid.ToString()) && projectMeasure.DocumentItems != null)
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(projectMeasure.Guid.ToString(), typeof(ProjectMeasure).Name, projectMeasure.DocumentItems);
+                    });
+                }
+
+                output = Result.ToResult<ProjectMeasure>(ResultStatus.OK, typeof(ProjectMeasure));
+                output.Value = new ProjectMeasure() { Id = projectMeasure.Id, Name = projectMeasure.Name };
             }
 
             return output;

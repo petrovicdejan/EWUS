@@ -2119,7 +2119,7 @@ var publicApp = (function () {
     function setDate(value, sSelector) {
         if (value != null) {
             var format = getDateFormat($(sSelector));
-            $(sSelector).val(moment(value.FormattedDate).format(format));
+            $(sSelector).val(moment(value).format(format));
         }
     }
     function getDateRangeField(sSelector, format) {
@@ -2495,32 +2495,20 @@ var publicApp = (function () {
             return value;
     }
     function setBoolean(value, sSelector) {
-        if (IsNullOrUndefined($(sSelector)[0]))
+        if (IsNullOrUndefined($(sSelector)))
             return;
-
-        var rdbId = "#" + $(sSelector)[0].id;
-
-        $(rdbId + '-Null').prop('checked', false);
-        $(rdbId + '-No').prop('checked', false);
-        $(rdbId + '-Yes').prop('checked', false);
-
-        if (value || typeof (value) == 'boolean') {
-            $(sSelector).val(value);
-
-            if (value == 'Yes' || (typeof (value) == 'boolean' && value == true) || value.toString().toLowerCase() == "true") {
-                $(rdbId + '-Yes').prop('checked', true);
-            } else {
-                $(rdbId + '-No').prop('checked', true);
-            }
-        } else {
-            $(rdbId + '-Null').prop('checked', true);
-        }
+        if (value)
+            $(sSelector).prop('checked', true);
     }
     function getBooleanDisplay(sSelector) {
         return $(sSelector).attr("data-string-value");
     }
     function getBoolean(sSelector) {
-        return getValue(sSelector);
+        var value = getValue(sSelector);
+        if (value = 'on')
+            return true;
+        else
+            return false;
     }
     function getBooleanField(sSelector) {
         return { Name: $(sSelector).attr("data-filed-name"), Value: getBoolean(sSelector) };
@@ -2927,7 +2915,7 @@ var publicApp = (function () {
     function getFormFieldsValues(el, fields) {
         var type = $(el).attr('type');
         var id = $(el).attr('id');
-        if ((type == "text" || type == "number" || type == "hidden")) {
+        if ((type == "text" || type == "number" || type == "hidden" || type == "checkbox")) {
 
 
             var value = getFormElementFiledValue(el);
@@ -2991,28 +2979,26 @@ var publicApp = (function () {
         var inx = 0;
 
         fields.push({ Name: "Object_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
 
         $("div[data-dropzone='true']").find(".dz-preview").each(function (index) {
             var el = $(this);
             if (!IsNullOrUndefined(el) && !IsNullOrUndefined($(this).attr("data-mimetype"))) {
 
                 var p = new Object();
-                //p.Fields = new Array();
 
                 var dropZone = new Object();
+                dropZone.Id = $(this).attr("data-entityId");
                 dropZone.DocumentName = $(el.find(".dz-filename[data-dz-name]"))[0].innerText;
                 dropZone.DocumentSize = $(el.find(".dz-size[data-dz-size]"))[0].innerText;
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
-
-                //p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
+                
                 p = dropZone;
 
                 items[inx] = p;
                 inx++;
+                dropZone.Position = inx;
             }
         });
 
@@ -3175,6 +3161,7 @@ var publicApp = (function () {
             if (file.status == "added") {
                 file.previewElement.setAttribute("data-mimetype", file.type);
                 file.previewElement.setAttribute("data-objectid", file.id);
+                file.previewElement.setAttribute("data-entityid", file.entityId);
                 file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
 
                 $('#iddropzone').attr("data-refers-to-id", refersToId);
@@ -3213,7 +3200,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true
+                        description: value.Description, accepted: true, entityId: value.Id
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3673,4 +3660,14 @@ function onTextAreaChange(sender) {
 
 function TryCatchWraper(func) {
     try { func(); } catch (ex) { logConsole("TryCatchWraper", ex); }
+}
+
+function onCheckBoxClick(sender, sId) {
+    if (!sId) {
+        sId = $(sender).attr("id");
+    }
+    var elm = document.getElementById(sId);
+    if (!elm)
+        return;
+    elm.setAttribute("data-edit", "true");
 }
