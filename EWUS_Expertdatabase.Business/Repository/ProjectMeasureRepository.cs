@@ -211,7 +211,7 @@ namespace EWUS_Expertdatabase.Business
                                           OperationType = q2.Value,
                                           InvestmentCost = pm.InvestmenCost,
                                           ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
-                                          Description = m.Description,
+                                          Description = pm.Description,
                                           Specification = pm.Specification,
                                           SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
                                           SubmittedBy = pm.SubmittedBy,
@@ -279,6 +279,7 @@ namespace EWUS_Expertdatabase.Business
                     projectMeasure.PerformanseSheetNumber = editProjectMeasure.PerformanseSheetNumber;
                     projectMeasure.PerformanseSheetStatusId = editProjectMeasure.PerformanseSheetStatusId;
                     projectMeasure.Remark = editProjectMeasure.Remark;
+                    projectMeasure.Description = editProjectMeasure.Description;
                     projectMeasure.Specification = editProjectMeasure.Specification;
                     projectMeasure.SubmittedBy = editProjectMeasure.SubmittedBy;
                     projectMeasure.SubmittedOnDate = editProjectMeasure.SubmittedOnDate;
