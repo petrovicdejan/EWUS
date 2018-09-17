@@ -3564,7 +3564,10 @@ circle.warning::before {
     background-color: #F6F7F8;
 }
 
-#label-wrapper-ServicedObject, #label-wrapper-ChangesOfUsage, #label-wrapper-Remark {
+#Project #label-wrapper-ServicedObject,
+#Project #label-wrapper-ChangesOfUsage,
+#Project #label-wrapper-Remark {
+    min-width: 17%;
 }
 
 body.modal-open {
