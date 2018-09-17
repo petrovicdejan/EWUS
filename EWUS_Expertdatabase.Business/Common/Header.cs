@@ -32,6 +32,8 @@ namespace EWUS_Expertdatabase.Business
             //cell.FixedHeight = 30;
             cell.CellEvent = new dot();
             cell.Border = Rectangle.NO_BORDER;
+            //cell.Padding = 5;
+            //cell.Image.ScaleToFitHeight = false;
             Paragraph p = new Paragraph();             
             p.Add(new Chunk(logoFirst, 0, 0));
             cell.AddElement(p);
