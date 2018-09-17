@@ -2121,7 +2121,8 @@ var publicApp = (function () {
         if (value != null) {
             var format = getDateFormat($(sSelector));
             $(sSelector).val(moment(value).format(format));
-            $(sSelector).datepicker({ format: format});
+            $(sSelector).datepicker({ format: format.toLowerCase() });
+            $(sSelector).datepicker('setDate', moment(value).format(format));
         }
     }
     function getDateRangeField(sSelector, format) {
