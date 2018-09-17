@@ -15,7 +15,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 24,
+                width: 15,
                 editable: true,
                 search: false              
             },
@@ -25,7 +25,7 @@
                 formatter: 'link',
                 formatoptions: { target: '_blank'},
                 editable: true,            
-                width: 15,
+                width: 25,
                 search:false
             },
             {
@@ -33,7 +33,7 @@
                 name: "",
                 editable: false,
                 search: false,
-                width: 10,
+                width: 7,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
                     return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
                         "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +

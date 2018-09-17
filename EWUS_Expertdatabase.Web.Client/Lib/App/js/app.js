@@ -3229,7 +3229,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
             accepted,
