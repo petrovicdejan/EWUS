@@ -19,9 +19,47 @@
     </div>
     <div class="row">
         <div class="col-md-6 row-control-main-wrapper">
-            @WebHelpers.SelectEditor("Measure", "Maßnahme hinzufügen", "Maßnahme hinzufügen", "Measure/GetMeasuresNotRelatedWithProject/" + ViewBag.Id, "2", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "Measure")
+            <div class="field-set">
+                <div class="field-contener field-select-wrapper-ew">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input id="Measure"
+                           data-filed-name="Measure"
+                           data-representing-type="Select"
+                           type="hidden">
+                    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                        <label for="Measure-ddl">
+                            Maßnahme hinzufügen
+                        </label>
+                    </div>
+                    <div class="field-group float-label-control form-inline-element-wrapper">
+                        <select id="Measure-ddl"
+                                data-filed-name="Measure"
+                                data-tabindex="2"
+                                tabindex="2"
+                                placeholder="Maßnahme hinzufügen"
+                                name="Measure"
+                                data-type-name="Measure"
+                                data-format="formatWithoutId"
+                                data-format-selection="formatWithoutIdSelection"
+                                data-url="Measure/GetMeasuresNotRelatedWithProject/@ViewBag.Id"
+                                style="width:90%"
+                                data-representing-type="Select"
+                                onchange="publicApp.onSelectChangeApp(this)"
+                                class="selectTwo form-control-ew-select"></select>
+
+
+                    </div>
+                    <a href="#" id="AddMeasureToProject" class="btn btn-xs"> Hinzufügen</a>
+                    <div id="field-spinner"></div>
+                    <span class="field-validation-valid" data-valmsg-for="Measure" data-valmsg-replace="true"></span>
+
+                </div>
+            </div>
+            
         </div>
-        <a href="#" id="AddMeasureToProject" class="btn btn-xs"> Hinzufügen</a>
+
+
+       
     </div>
 
     <div class="col-md-12">
@@ -33,7 +71,7 @@
 </div>
 
 @section ScriptLibs {
-    <script src="~/Scripts/jqGrid/js/trirand/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/js/trirand/i18n/grid.locale-de.js"></script>
     <script src="~/Scripts/jqGrid/js/trirand/jquery.jqGrid.min.js"></script>
 
     <script>

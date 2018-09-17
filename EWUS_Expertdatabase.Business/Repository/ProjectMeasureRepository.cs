@@ -200,11 +200,6 @@ namespace EWUS_Expertdatabase.Business
                                             equals
                                             new { f1 = (int?)ps.Id } into rp
                                       from q3 in rp.DefaultIfEmpty()
-                                      join ip in context.InvolvedPartys on
-                                            new { f1 = p.CustomerId }
-                                            equals
-                                            new { f1 = (int?)ip.Id } into qp
-                                      from q4 in qp.DefaultIfEmpty()
                                       select new ProjectMeasurePoco
                                       {
                                           Id = pm.Id,
@@ -227,8 +222,7 @@ namespace EWUS_Expertdatabase.Business
                                           MeasureId = m.Id,
                                           Location = p.Location,
                                           ZipCode = p.ZipCode,
-                                          City = p.City,
-                                          Logo = q4.Logo
+                                          City = p.City
                                       };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
@@ -274,7 +268,10 @@ namespace EWUS_Expertdatabase.Business
                                 documentItems.Add(edi);
                             }
                             else
+                            {
+                                di.Hide = edi.Hide;
                                 documentItems.Add(di);
+                            }
                         }
                     }
                     //if (projectMeasure.DocumentItems != null)

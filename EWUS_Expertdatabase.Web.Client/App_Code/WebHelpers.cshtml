@@ -271,10 +271,10 @@
             <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text>style="width:61%;"</text>}>
                 <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
             </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" @if (inline) { <text>style="max-width:50%;width:auto;"</text>}>
+            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" @if (inline) { <text>style="max-width:50%;width:auto;"</text>}>
                 <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                 <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
-                       placeholder="@placeholder" data-format-pattern="dd.mm.yyyy" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
+                       placeholder="@placeholder" data-format-pattern="DD.MM.YYYY" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
                        class="date2 form-control-ew-text"
                        @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
                        data-val="true"
@@ -441,7 +441,7 @@
     </div>
 }
 
-@helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null)
+@helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null, bool IsHidden = false)
 {
     <div class="field-set">
         <div class="field-group float-label-control" style="margin-bottom: 0;">
@@ -463,21 +463,42 @@
                 <div class="col-md-1"></div>
             </div>
         }
-        <ol class="dz-list">
+        <ol class="dz-list" style="padding-left:10px">
             <li id="@idPreview" class="dz-preview">
                 <div class="table table-striped files " id="previews">
                     <div class="row b-b-1">
-                        <div class="col-md-8">
+                        @if (IsHidden == true)
+                        {
+                        <div class="col-md-6">
                             <p class="dz-filename" data-dz-name></p>
                             @if (showDescription)
                             {
-                                <span data-dz-description></span>
+                            <span data-dz-description></span>
                             }
+                                <div class="dz-size" data-dz-size style="display:none;"></div>
+                            </div>
+                        }
+                        else
+                        {
+                        <div class="col-md-8">
+                            <p class="dz-filename" data-dz-name></p>
+                            @if (showDescription)
+                        {
+                        <span data-dz-description></span>
+                        }
                             <div class="dz-size" data-dz-size style="display:none;"></div>
                         </div>
+                        }
                         <div class="col-md-3 dz-click-image">
                             <span class=""><img data-dz-thumbnail /></span>
                         </div>
+                        @if (IsHidden == true)
+                        {
+                        <div class="col-md-2">
+                            <label>Ausblenden</label>
+                            <input class="dz-hide" type="checkbox">
+                        </div>
+                        }
                         <div class="col-md-1">
                             <span class="actions">
                                 <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer" type="button">

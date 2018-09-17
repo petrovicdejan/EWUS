@@ -7,7 +7,8 @@ var publicApp = (function () {
         decimalCharacter: ',',
         decimalCharacterAlternative: '.',
         decimalPlaces: 0,
-        currencySymbol: '\u202f€',
+        currencySymbol:'',
+            // '\u202f€',
         currencySymbolPlacement: AutoNumeric.options.currencySymbolPlacement.suffix,
         roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
     };
@@ -2121,7 +2122,8 @@ var publicApp = (function () {
         if (value != null) {
             var format = getDateFormat($(sSelector));
             $(sSelector).val(moment(value).format(format));
-            $(sSelector).datepicker({ format: format});
+            $(sSelector).datepicker({ format: format.toLowerCase() });
+            $(sSelector).datepicker('setDate', moment(value).format(format));
         }
     }
     function getDateRangeField(sSelector, format) {
@@ -2506,8 +2508,8 @@ var publicApp = (function () {
         return $(sSelector).attr("data-string-value");
     }
     function getBoolean(sSelector) {
-        var value = getValue(sSelector);
-        if (value = 'on')
+        var value = $(sSelector).is(":checked");;
+        if (value)
             return true;
         else
             return false;
@@ -2995,6 +2997,7 @@ var publicApp = (function () {
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
+                dropZone.Hide = $(el.find(".dz-hide")).is(":checked");
                 
                 p = dropZone;
 
@@ -3060,7 +3063,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
 
         },
@@ -3202,7 +3205,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true, entityId: value.Id
+                        description: value.Description, accepted: true, entityId: value.Id, isHidden: value.Hide
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3227,7 +3230,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
             accepted,
@@ -3339,7 +3342,7 @@ var setGridOptions = (function () {
         var widthGrid = width;
         var widthParent = $("#" + gridId).parent().width();
 
-        if (Number(widthParent) != 0)
+        if (Number(widthParent) != 0 && widthParent > widthGrid)
             widthGrid = widthParent;
 
         var gridHeight = $(window).innerHeight() - 280;
@@ -3354,7 +3357,7 @@ var setGridOptions = (function () {
             colModel: colModel,
             width: widthGrid,
             height: gridHeight,
-            autowidth: true,
+            autowidth: false,
             pgbuttons: false,
             pginput: false, 
             shrinkToFit: true,

@@ -995,7 +995,7 @@ ui-jqgrid-view table-responsive
             }
 
             .float-label-control label:not(.error) {
-                font-weight: normal;
+                font-weight: bold;
                 font-size: 0.9em;
             }
 
@@ -3564,7 +3564,10 @@ circle.warning::before {
     background-color: #F6F7F8;
 }
 
-#label-wrapper-ServicedObject, #label-wrapper-ChangesOfUsage, #label-wrapper-Remark {
+#Project #label-wrapper-ServicedObject,
+#Project #label-wrapper-ChangesOfUsage,
+#Project #label-wrapper-Remark {
+    min-width: 17%;
 }
 
 body.modal-open {
@@ -3615,4 +3618,7 @@ ol.dz-list li.placeholder:before {
 }
 .dz-list{
     list-style:none;
+}
+.label-wrapper label{
+    font-weight:bold;
 }
