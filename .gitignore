@@ -351,26 +351,6 @@ EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.C
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-shm
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
-.vs/config/applicationhost.config
-.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide
-.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-shm
-.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
-EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
-EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.csproj.CoreCompileInputs.cache
-EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
-EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
-EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
-
-.vs/EWUS_Expertdatabase.Web/v15/.suo
-.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Business.dll
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Business.pdb
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Common.dll
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Common.pdb
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Data.dll
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Data.pdb
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Model.dll
-EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Model.pdb
 
 EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
@@ -431,8 +411,4 @@ EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.C
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csprojAssemblyReference.cache
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.dll
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.pdb
-
-
-
 .vs/config/applicationhost.config
-
