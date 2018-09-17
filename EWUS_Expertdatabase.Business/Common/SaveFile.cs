@@ -1,6 +1,7 @@
 ﻿using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Drawing;
@@ -21,7 +22,7 @@ namespace EWUS_Expertdatabase.Business
                 {
                     string path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName] + @"\" + docItem.ObjectId);
                     string folderName = ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName];
-                    string viewFileName = string.Empty;
+                    string newFileName = string.Empty;
 
                     using (var stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
                     {
@@ -38,36 +39,25 @@ namespace EWUS_Expertdatabase.Business
                         else if (objectTypeName == "Customer")
                             filePrefix = "c";
 
-                        string newFileName = filePrefix + "_" + objectGuid + "_o_" + docItem.DocumentName.Substring(0, docItem.DocumentName.IndexOf('.')) + ".png";
-                        viewFileName = filePrefix + "_" + objectGuid + "_v_" + docItem.DocumentName.Substring(0, docItem.DocumentName.IndexOf('.')) + ".png";
+                        newFileName = filePrefix + "_" + objectGuid + "_o_" + docItem.DocumentName.Substring(0, docItem.DocumentName.IndexOf('.')) + ".png";
+                        string viewFileName = filePrefix + "_" + objectGuid + "_v_" + docItem.DocumentName.Substring(0, docItem.DocumentName.IndexOf('.')) + ".png";
                         string thumbnailFileName = filePrefix + "_" + objectGuid + "_t_" + docItem.DocumentName.Substring(0, docItem.DocumentName.IndexOf('.')) + ".png";
 
                         if (!File.Exists(Path.Combine(folderName, thumbnailFileName)))
                         {
-                            //copy to thumbnail
                             imgThumbnail.Save(Path.Combine(folderName, thumbnailFileName));
                         }
 
                         if (!File.Exists(Path.Combine(folderName, viewFileName)))
                         {
-                            //copy to thumbnail
                             imgView.Save(Path.Combine(folderName, viewFileName));
-                        }
-
-                        if (!File.Exists(Path.Combine(folderName, newFileName)))
-                        {
-                            //copy to original with new name
-                            using (var fileStream = File.Create(Path.Combine(folderName, newFileName)))
-                            {
-                                stream.CopyTo(fileStream);
-                            }
                         }
                     }
                     if (docItem.ObjectId.StartsWith("_"))
                     {
                         if (File.Exists(path))
                         {
-                            File.Delete(path);
+                            File.Move(path, Path.Combine(folderName, newFileName));
                         }
 
                         using (var ctx = new EWUSDbContext())
@@ -76,14 +66,14 @@ namespace EWUS_Expertdatabase.Business
 
                             if (di != null)
                             {
-                                di.ObjectId = viewFileName;
+                                di.ObjectId = newFileName;
                                 ctx.SaveChanges();
                             }
                         }
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
             }
         }

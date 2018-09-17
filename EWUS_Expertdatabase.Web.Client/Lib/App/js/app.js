@@ -2508,8 +2508,8 @@ var publicApp = (function () {
         return $(sSelector).attr("data-string-value");
     }
     function getBoolean(sSelector) {
-        var value = getValue(sSelector);
-        if (value = 'on')
+        var value = $(sSelector).is(":checked");;
+        if (value)
             return true;
         else
             return false;
@@ -3063,7 +3063,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
 
         },

@@ -40,6 +40,7 @@ C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\bin\Debug\En
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.xml
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csprojResolveAssemblyReference.cache
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.dll
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.pdb
