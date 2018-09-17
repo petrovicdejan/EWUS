@@ -35,7 +35,7 @@
             width: 15,
             editable: true,
             searchoptions: {
-                sopt: ['cn', "ge", "le", "eq", 'bw'], 
+                sopt: ['cn'], 
             }
         },
         {
