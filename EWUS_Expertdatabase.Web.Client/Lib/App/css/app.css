@@ -539,6 +539,10 @@ ul.message-items {
     width: 69%;
 }
 
+.field-contener .form-inline-element-wrapper.control-wrapper input[type='checkbox'] {
+    width: 5%;
+}
+
     .field-contener .form-inline-element-wrapper.control-wrapper .form-control-ew-text {
         width: 100%;
         min-width: 30%;
@@ -557,7 +561,7 @@ ul.message-items {
     padding-left: 0;
 }
 
-.row .half-form-wrapper .row-control-main-wrapper {
+.half-form-wrapper-measure .row-control-main-wrapper {
     padding-left: 0;
 }
 
@@ -865,13 +869,25 @@ ul.message-items {
         }
 
         .field-icon {
-            color: #999;
             padding-right: 5px;
             margin-right: 0px;
+            visibility: hidden;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 10px;
+            left: 50%;
         }
 
+.field-icon.fa-icon-PropertyNumber {
+    top: 25px;
+}
 
-.field-flow-contener{position: relative;padding-bottom:20px;}
+
+.field-flow-contener {
+    position: relative;
+    padding-bottom: 20px;
+}
 .field-flow-caption {
      position: absolute; font-weight: normal; top: -1.5em; left: 20px; color: #aaaaaa; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important;
 }
@@ -895,17 +911,21 @@ ul.message-items {
        
         .float-label-control {
             position: relative;
-            margin-bottom: 0.9em;
+            margin-bottom: 0.3em;
         }
 
-        .jqGridLink .ui-jqgrid-view.table-responsive {
-            max-height: 180px;
-        }
+#Measure #addFile-measureDropZone {
+    margin-bottom: 10px;
+}
 
-        .float-label-control ::-webkit-input-placeholder {
-            color: transparent;
-            font-size: 16pt;
-        }
+#Measure .field-validation-error {
+    padding-left: 30%;
+}
+
+.float-label-control ::-webkit-input-placeholder {
+    color: transparent;
+    font-size: 16pt;
+}
 
             .float-label-control :-moz-placeholder {
                 color: transparent;
@@ -970,17 +990,13 @@ ui-jqgrid-view table-responsive
                     padding-bottom: 4px;
                 }
 
-            .float-label-control input.tt-input, .float-label-control input, .float-label-control textarea {
+            .float-label-control input.tt-input, .float-label-control input {
                 padding: 0.1em 0em 1px 0em;
-            }
-
-            .float-label-control textarea {
-                padding: 0.1em 0em 5px 0em;
             }
 
             .float-label-control label:not(.error) {
                 font-weight: normal;
-                font-size: 1.2em;
+                font-size: 0.9em;
             }
 
             .float-label-control.empty label:not(.error),
@@ -2351,7 +2367,6 @@ tbody[data-show-new-row="False"], tbody[data-show-new-row="false"] {
     }
 }
 
-
 @media screen and (min-width:1900px) {
     .minimalized {
         width: 88%;
@@ -3153,8 +3168,8 @@ html, body {
 }
 
 #measureDropZone {
-    max-height: 557px;
-    height: 557px;
+    max-height: 472px;
+    height: 472px;
 }
 
 #customerDropZone {
@@ -3162,7 +3177,57 @@ html, body {
 }
 
 #Measure .modal-footer, #Customer .modal-footer, #MaintenanceCompany .modal-footer {
-    margin-top: 20px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+#Project .modal-footer {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+#ProjectMeasure .modal-footer {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+#Project input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#Measure input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#Customer input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#MaintenanceCompany input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#ProjectMeasure input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#projectMeasureList input, select, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#ProjectName {
+    background-color: whitesmoke;
+    border-bottom: none;
+    width: 40%;
 }
 
 .dropzone {
@@ -3465,6 +3530,10 @@ circle.warning::before {
     overflow: hidden !important;
 }
 
+.modal-body {
+    padding-top: 15px;
+}
+
 .inmodal .modal-body {
     background: #f8fafb;
 }
@@ -3515,4 +3584,36 @@ html.ie10 body.modal-open {
     padding-bottom:6px;
     padding-top:6px;
     margin-left:2px;
+}
+
+@media (max-height: 3000px) {
+    .modal-body {
+        overflow: auto !important;
+    }
+}
+.pager-button{
+    padding-left:20px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ol.dz-list li.placeholder {
+    position: relative;
+    /** More li styles **/
+}
+
+ol.dz-list li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
+.dz-list{
+    list-style:none;
 }

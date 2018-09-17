@@ -17,6 +17,7 @@ namespace EWUS_Expertdatabase.Model
             this.MeasurePictures = new Collection<MeasurePicture>();
             this.OperationType = new Classification();
             this.DocumentItems = new Collection<DocumentItem>();
+            this.ProjectMeasures = new Collection<ProjectMeasure>();
         }
 
         /// <summary>
@@ -55,6 +56,8 @@ namespace EWUS_Expertdatabase.Model
         ///     Get or set document
         /// </summary>
         public Collection<DocumentItem> DocumentItems { get; set; }
+
+        public Collection<ProjectMeasure> ProjectMeasures { get; set; }
     }
     
     public class MeasurePicture : CoreObject

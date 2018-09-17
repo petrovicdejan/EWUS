@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace EWUS_Expertdatabase.Model
             this.Region = new Classification();
             this.Property = new Classification();
             this.Customer = new Customer();
+            this.ProjectMeasures = new Collection<ProjectMeasure>();
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace EWUS_Expertdatabase.Model
         /// <summary>
         ///     Gets or set the ZipCode of the project
         /// </summary>
-        //[MaxLength(10)]
+        [MaxLength(10)]
         public string ZipCode { get; set; }
 
         /// <summary>
@@ -68,13 +70,13 @@ namespace EWUS_Expertdatabase.Model
         /// <summary>
         ///     Gets or set the Telephone of the responsible person in project
         /// </summary>
-        //[MaxLength(50)]
+        [MaxLength(50)]
         public string Telephone { get; set; }
 
         /// <summary>
         ///     Gets or set the contact person of the project
         /// </summary>
-        //[MaxLength(50)]
+        [MaxLength(50)]
         public string ContactPerson { get; set; }
 
         /// <summary>
@@ -94,7 +96,7 @@ namespace EWUS_Expertdatabase.Model
         /// <summary>
         ///     Gets or set the reference to PropertyNumber
         /// </summary>
-        //[MaxLength(10)]
+        [MaxLength(10)]
         public string PropertyNumber { get; set; }
 
         /// <summary>
@@ -103,5 +105,7 @@ namespace EWUS_Expertdatabase.Model
         public Customer Customer { get; set; }
 
         public int? CustomerId { get; set; }
+
+        public Collection<ProjectMeasure> ProjectMeasures { get; set; }
     }
 }

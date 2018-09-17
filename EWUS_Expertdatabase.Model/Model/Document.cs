@@ -28,12 +28,6 @@ namespace EWUS_Expertdatabase.Model
 
         }
         
-        //[IgnoreDataMember]
-        //[XmlIgnore]
-        //protected DocumentInstance DocumentInstance { get; set; }
-        
-        //public long DocumentInstanceId { get; set; }
-        
         public byte[] BinaryValue { get; set; }
         
         public string DocumentName { get; set; }
@@ -43,5 +37,9 @@ namespace EWUS_Expertdatabase.Model
         public string DocumentSize { get; set; }
         
         public string ObjectId { get; set; }
+        
+        public int Position { get; set; }
+
+        public bool Hide { get; set; }
     }
 }

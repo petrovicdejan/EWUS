@@ -92,6 +92,18 @@
     <Compile Include="Migrations\201809121419073_Version08.Designer.cs">
       <DependentUpon>201809121419073_Version08.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809151220128_Version09.cs" />
+    <Compile Include="Migrations\201809151220128_Version09.Designer.cs">
+      <DependentUpon>201809151220128_Version09.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809151231079_Version10.cs" />
+    <Compile Include="Migrations\201809151231079_Version10.Designer.cs">
+      <DependentUpon>201809151231079_Version10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809160823106_Version11.cs" />
+    <Compile Include="Migrations\201809160823106_Version11.Designer.cs">
+      <DependentUpon>201809160823106_Version11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +144,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809121419073_Version08.resx">
       <DependentUpon>201809121419073_Version08.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809151220128_Version09.resx">
+      <DependentUpon>201809151220128_Version09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809151231079_Version10.resx">
+      <DependentUpon>201809151231079_Version10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809160823106_Version11.resx">
+      <DependentUpon>201809160823106_Version11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

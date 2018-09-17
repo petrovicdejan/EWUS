@@ -10,7 +10,7 @@
         {
             label: 'Benennung',
             name: 'Name',
-            width: 30,
+            width: 26,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],

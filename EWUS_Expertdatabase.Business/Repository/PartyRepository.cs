@@ -3,7 +3,10 @@ using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,7 +140,10 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(customer.Guid.ToString()) && customer.DocumentItems != null)
                 {
-                    SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    });
                 }
 
                 output = Result.ToResult<Customer>(ResultStatus.OK, typeof(Customer));
@@ -187,15 +193,23 @@ namespace EWUS_Expertdatabase.Business
 
                         ctx.SaveChanges();
                     }
-                    catch 
+                    catch (Exception ex)
                     {
-                        output.ExceptionMessage = "Exception could not be performed !!!";
-                        output.Status = ResultStatus.Forbidden;
+                        if (ex.HResult == -2146233087)
+                        {
+                            output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity;
+                            output.Status = ResultStatus.Forbidden;
+                        }
+                        else
+                        {
+                            output.ExceptionMessage = "Exception could not be performed !!!";
+                            output.Status = ResultStatus.InternalServerError;
+                        }
                     }
                 }
                 output.Status = ResultStatus.OK;
             }
-            catch
+            catch (Exception e)
             {
                 output.Status = ResultStatus.InternalServerError;
             }
@@ -224,10 +238,18 @@ namespace EWUS_Expertdatabase.Business
 
                         ctx.SaveChanges();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        output.ExceptionMessage = "Exception could not be performed !!!";
-                        output.Status = ResultStatus.Forbidden;
+                        if (ex.HResult == -2146233087)
+                        {
+                            output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity;
+                            output.Status = ResultStatus.Forbidden;
+                        }
+                        else
+                        {
+                            output.ExceptionMessage = "Exception could not be performed !!!";
+                            output.Status = ResultStatus.InternalServerError;
+                        }
                     }
                 }
                 output.Status = ResultStatus.OK;

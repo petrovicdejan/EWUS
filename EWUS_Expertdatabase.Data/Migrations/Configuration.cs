@@ -5,7 +5,7 @@ namespace EWUS_Expertdatabase.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EWUS_Expertdatabase.Data.EWUSDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<EWUS_Expertdatabase.Data.EWUSDbContext>
     {
         public Configuration()
         {

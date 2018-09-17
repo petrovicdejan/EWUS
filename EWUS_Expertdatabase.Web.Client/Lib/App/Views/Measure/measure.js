@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿var measurejs = (function ($) {
     $(document).ready(function () {
         var dataDocumentItems = null;
         if (IsNullOrEmpty(dcMeasure) == false) {
@@ -15,7 +15,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 25,
+                width: 24,
                 editable: true,
                 search: false              
             },
@@ -23,6 +23,7 @@
                 label: 'Link',
                 name: 'Link',
                 formatter: 'link',
+                formatoptions: { target: '_blank'},
                 editable: true,            
                 width: 15,
                 search:false
@@ -34,31 +35,50 @@
                 search: false,
                 width: 10,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
-                    return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_jqg1' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
-                        "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_jqg1' style='float: left; cursor: pointer; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
-                        "<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this, \"save\"); '><span class='glyphicon glyphicon-save'></span></div>" +
-                        "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_jqg1' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this, \"cancel\"); '><span class='glyphicon glyphicon-remove-circle'></span></div>";
+                    return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
+                        "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
+                        "<div title='Übernehmen' class='ui-pg-div ui-inline-save' id='jSaveButton_" + cellval.rowId + "' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='measurejs.saveGridRow()'><span class='glyphicon glyphicon-save'></span></div>" +
+                        "<div title='Stornieren' class='ui-pg-div ui-inline-cancel' id='jCancelButton_" + cellval.rowId+"' style='float: left; display: none; ' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this); '><span class='glyphicon glyphicon-trash'></span></div>";
                 }
-            }
-            //{
-            //    label: "",
-            //    name: "",
-            //    width: 10,
-            //    formatter: "actions",
-            //    formatoptions: {
-            //        keys: true,
-            //        editOptions: {},
-            //        addOptions: {},
-            //        delOptions: {}
-            //    },
-            //    search: false
-            //}
-            
+            }            
         ];
         
 
-        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, 1500, 150, 15, fetchGridData);
+        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, 1500, 150, 15, fetchGridData, null);
 
+        $("#jqGridLink")
+            
+            .navButtonAdd("#jqGridPager", {
+                caption: 'Neu',
+                buttonicon : 'glyphicon glyphicon-plus',
+                position: 'last',
+                id: 'pager-add-btn',
+                onClickButton: function () {
+
+                    $("#jqGridLink").jqGrid('addRow', { position: "last" });
+                    $("#pager-add-btn").addClass('ui-disabled');
+                }
+            }).navButtonAdd("#jqGridPager", {
+                caption: 'Übernehmen',
+                buttonicon: 'glyphicon glyphicon-download-alt pager-button',
+                position: 'last',
+                id: 'pager-save-btn',
+                onClickButton: function () {
+                    var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
+                    $("#jqGridLink").saveRow(row);
+                    $("#jqGridLink").find(".ui-inline-save").each(function(ind, val) {
+                        val = $(val);
+                        val.hide();
+                    });
+                    $("#jqGridLink").find(".ui-inline-edit").each(function(ind, val) {
+                        val = $(val);
+                        val.show();
+                    });
+                    $("#pager-add-btn").removeClass('ui-disabled');
+
+                }
+            })
+           
         function fetchGridData() {
         }
 
@@ -77,6 +97,7 @@
                 publicApp.setFormApp($("#Measure"), data);
             }
         }
+
 
         if (objectId == 0)
             $('#SerialNumber').val(maxSerialNumber);
@@ -112,6 +133,21 @@
 
             }, false, true);
         });
-    });   
+    });
 
+    function saveRow() {
+        var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
+        $("#jqGridLink").saveRow(row);
+        $("#jqGridLink").find(".ui-inline-save").each(function(ind, val) {
+            val = $(val);
+            val.hide();
+        });
+        $("#jqGridLink").find(".ui-inline-edit").each(function(ind, val) {
+            val = $(val);
+            val.show();
+        });
+    }
+    return {
+        saveGridRow: saveRow
+    }
 })(jQuery);

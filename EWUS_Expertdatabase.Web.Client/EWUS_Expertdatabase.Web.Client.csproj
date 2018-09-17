@@ -176,12 +176,17 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\ReportController.cs" />
+=======
+    <Compile Include="Controllers\ProjectMeasureController.cs" />
+>>>>>>> 61444ce007eb846027799ff578c09c1296929676
     <Compile Include="ViewModel\ClassificationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\DocumentItemViewModel.cs" />
     <Compile Include="ViewModel\MaintenanceCompanyViewModel.cs" />
     <Compile Include="ViewModel\MeasureViewModel.cs" />
+    <Compile Include="ViewModel\ProjectMeasureViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
     <Content Include="App_Code\PathHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -217,6 +222,7 @@
     <Content Include="Lib\App\js\dropzone.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.js" />
     <Content Include="Lib\App\js\jquery-2.1.1.min.js" />
+    <Content Include="Lib\App\js\jquery-sortable.js" />
     <Content Include="Lib\App\js\jquery-ui.min.js" />
     <Content Include="Lib\App\js\jquery.min.js" />
     <Content Include="Lib\App\js\jquery.tmpl.min.js" />
@@ -226,8 +232,21 @@
     <Content Include="Lib\App\Views\Party\customerIndex.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompany.js" />
     <Content Include="Lib\App\Views\Party\maintenanceCompanyIndex.js" />
+    <Content Include="Lib\App\Views\ProjectMeasure\projectMeasure.js" />
+    <Content Include="Lib\App\Views\ProjectMeasure\projectMeasureIndex.js" />
     <Content Include="Lib\App\Views\Project\project.js" />
     <Content Include="Lib\App\Views\Project\projectIndex.js" />
+    <Content Include="Lib\autonumeric\dist\autoNumeric.js" />
+    <Content Include="Lib\autonumeric\dist\autoNumeric.min.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumeric.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericDefaultSettings.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericEnum.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericEvents.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericHelper.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericOptions.js" />
+    <Content Include="Lib\autonumeric\src\AutoNumericPredefinedOptions.js" />
+    <Content Include="Lib\autonumeric\src\main.js" />
+    <Content Include="Lib\autonumeric\yarnfix.js" />
     <Content Include="Lib\base64\b64.js" />
     <Content Include="Lib\base64\base64.js" />
     <Content Include="Lib\bootstrap-modal\bootstrap-modal-bs3patch.css" />
@@ -240,6 +259,16 @@
     <Content Include="Lib\images\user.png" />
     <Content Include="Lib\jqueryval\jquery.unobtrusive-ajax.js" />
     <Content Include="Lib\jqueryval\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Lib\autonumeric\AUTHORS" />
+    <Content Include="Lib\autonumeric\CHANGELOG.md" />
+    <Content Include="Lib\autonumeric\dist\autoNumeric.min.js.gz" />
+    <Content Include="Lib\autonumeric\dist\autoNumeric.min.js.map" />
+    <Content Include="Lib\autonumeric\doc\CONTRIBUTING.md" />
+    <Content Include="Lib\autonumeric\doc\HowToUpgradeToV4.md" />
+    <Content Include="Lib\autonumeric\LICENSE" />
+    <Content Include="Lib\autonumeric\package.json" />
+    <Content Include="Lib\autonumeric\README.md" />
+    <Content Include="Lib\autonumeric\yarn.lock" />
     <None Include="Lib\jqueryval\jquery.validate-vsdoc.js" />
     <Content Include="Lib\jqueryval\jquery.validate.js" />
     <Content Include="Lib\jqueryval\jquery.validate.min.js" />
@@ -715,6 +744,8 @@
     <Content Include="Views\Party\MaintenanceCompanyIndex.cshtml" />
     <Content Include="Views\Project\Project.cshtml" />
     <Content Include="Views\Project\ProjectIndex.cshtml" />
+    <Content Include="Views\ProjectMeasure\ProjectMeasureIndex.cshtml" />
+    <Content Include="Views\ProjectMeasure\ProjectMeasure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

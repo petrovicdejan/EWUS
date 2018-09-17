@@ -1,6 +1,17 @@
 ﻿
 var publicApp = (function () {
     $(window).resize(windowResize);
+
+    const autoNumericOptionsEuro = {
+        digitGroupSeparator: '.',
+        decimalCharacter: ',',
+        decimalCharacterAlternative: '.',
+        decimalPlaces: 0,
+        currencySymbol: '\u202f€',
+        currencySymbolPlacement: AutoNumeric.options.currencySymbolPlacement.suffix,
+        roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
+    };
+
     function webApiGet(sUri, fOnData, bShowError, bAsync) {
         if (IsNullOrUndefined(bAsync)) {
             bAsync = true;
@@ -561,6 +572,16 @@ var publicApp = (function () {
         //});
 
         TryCatchWraper(function () {
+            $(id).find('[data-money]').each(function (index) {
+                var th = $(this);
+                var an = AutoNumeric.getAutoNumericElement('input[name="' + th.attr('name') + '"][data-money]');
+                if (an === undefined || an === null)
+                    an = new AutoNumeric('input[name="' + th.attr('name') + '"][data-money]', 0, autoNumericOptionsEuro);
+                th.blur();
+            });
+            
+        })
+        TryCatchWraper(function () {
             $(id + '.field-date input').each(function (index) {
                 var $el = $(this);
                 var format = getDateFormat($el);
@@ -839,7 +860,6 @@ var publicApp = (function () {
         TryCatchWraper(function () {
 
             $(id + '.selectTwo').each(function (i, el) {
-
                 var dataDefaultValue = $(this).attr("data-default-value");
                 var elementId = "#" + $(this).attr("Id");
 
@@ -958,6 +978,7 @@ var publicApp = (function () {
 
                                 sel.removeClass('loadinggif');
 
+                                el.html('');
                                 el.select2({
                                     id: function (bond) { return bond._id; },
                                     placeholder: placeholderText,
@@ -1790,8 +1811,6 @@ var publicApp = (function () {
 
                         if (represent) {
 
-
-
                             if (represent == "Amount") {
                                 setAmountDisplay(value, el)
                             } else if (represent == "Lookup") {
@@ -2100,7 +2119,7 @@ var publicApp = (function () {
     function setDate(value, sSelector) {
         if (value != null) {
             var format = getDateFormat($(sSelector));
-            $(sSelector).val(moment(value.FormattedDate).format(format));
+            $(sSelector).val(moment(value).format(format));
         }
     }
     function getDateRangeField(sSelector, format) {
@@ -2221,6 +2240,10 @@ var publicApp = (function () {
         return $(sSelector).val();
     }
     function getValueField(sSelector) {
+        if ($(sSelector).attr('data-money') == 'true') {
+            var value = AutoNumeric.getLocalized(sSelector);
+            return { Name: $(sSelector).attr("data-filed-name"), Value: value };
+        }
         return { Name: $(sSelector).attr("data-filed-name"), Value: getValue(sSelector) };
     }
     function setValueDisplay(value, oSelector) {
@@ -2258,6 +2281,14 @@ var publicApp = (function () {
             if (bDefault) {
                 $(sSelector).attr("data-default-value", value);
             }
+            if ($(sSelector).attr('data-money') == "true") {
+
+                var an = AutoNumeric.getAutoNumericElement('input[name="' + $(sSelector).attr('name') + '"][data-money]');
+                if (an === undefined || an === null)
+                    an = new AutoNumeric(sSelector, value, autoNumericOptionsEuro);
+
+                an.set(value);
+            }
             TryCatchWraper(function () {
                 $(sSelector).keyup();
             });
@@ -2270,10 +2301,12 @@ var publicApp = (function () {
             if ($(sSelector).attr("data-representing-type") == "Amount") {
                 TryCatchWraper(function () {
                     $(sSelector + '.money2').autoNumeric('init');
+                    //var m = new AutoNumeric(sSelector + '.money2', autoNumericOptionsEuro);
                 });
 
                 TryCatchWraper(function () {
                     $(sSelector + '.money4').autoNumeric('init', { mDec: 4 });
+                    //var m = new AutoNumeric(sSelector + '.money2', autoNumericOptionsEuro);
                 });
             }
 
@@ -2462,32 +2495,20 @@ var publicApp = (function () {
             return value;
     }
     function setBoolean(value, sSelector) {
-        if (IsNullOrUndefined($(sSelector)[0]))
+        if (IsNullOrUndefined($(sSelector)))
             return;
-
-        var rdbId = "#" + $(sSelector)[0].id;
-
-        $(rdbId + '-Null').prop('checked', false);
-        $(rdbId + '-No').prop('checked', false);
-        $(rdbId + '-Yes').prop('checked', false);
-
-        if (value || typeof (value) == 'boolean') {
-            $(sSelector).val(value);
-
-            if (value == 'Yes' || (typeof (value) == 'boolean' && value == true) || value.toString().toLowerCase() == "true") {
-                $(rdbId + '-Yes').prop('checked', true);
-            } else {
-                $(rdbId + '-No').prop('checked', true);
-            }
-        } else {
-            $(rdbId + '-Null').prop('checked', true);
-        }
+        if (value)
+            $(sSelector).prop('checked', true);
     }
     function getBooleanDisplay(sSelector) {
         return $(sSelector).attr("data-string-value");
     }
     function getBoolean(sSelector) {
-        return getValue(sSelector);
+        var value = getValue(sSelector);
+        if (value = 'on')
+            return true;
+        else
+            return false;
     }
     function getBooleanField(sSelector) {
         return { Name: $(sSelector).attr("data-filed-name"), Value: getBoolean(sSelector) };
@@ -2644,7 +2665,11 @@ var publicApp = (function () {
     function getAmount(sSelector) {
         var currencyAmount = new Object();
         currencyAmount.Amount = $(sSelector).val();
-        TryCatchWraper(function () { currencyAmount.Amount = parseFloat($(sSelector).autoNumeric("get")); });
+        TryCatchWraper(function () {
+            var an = new AutoNumeric(sSelector);
+            currencyAmount.Amount = an.getNumber();
+            //currencyAmount.Amount = parseFloat($(sSelector).autoNumeric("get"));
+        });
         currencyAmount.Code = $(sSelector).attr("data-currency-code");
         var currencyId = $(sSelector).attr("data-currency-id");
         if (IsNullOrWhiteSpace(currencyId) == false)
@@ -2663,10 +2688,10 @@ var publicApp = (function () {
             console.log(value);
             $(sSelector).val(value.Amount);
             $(sSelector).attr("data-default-value", value.Amount);
-            TryCatchWraper(function () {
-                $(sSelector).autoNumeric('init');
-                $(sSelector).autoNumeric('set', value.Amount);
-            });
+            //TryCatchWraper(function () {
+            //    $(sSelector).autoNumeric('init');
+            //    $(sSelector).autoNumeric('set', value.Amount);
+            //});
             $(sSelector).attr("data-currency-code", value.Code);
 
             var lId = value.CurrencyId;
@@ -2890,7 +2915,7 @@ var publicApp = (function () {
     function getFormFieldsValues(el, fields) {
         var type = $(el).attr('type');
         var id = $(el).attr('id');
-        if ((type == "text" || type == "number" || type == "hidden")) {
+        if ((type == "text" || type == "number" || type == "hidden" || type == "checkbox")) {
 
 
             var value = getFormElementFiledValue(el);
@@ -2954,28 +2979,26 @@ var publicApp = (function () {
         var inx = 0;
 
         fields.push({ Name: "Object_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
 
         $("div[data-dropzone='true']").find(".dz-preview").each(function (index) {
             var el = $(this);
             if (!IsNullOrUndefined(el) && !IsNullOrUndefined($(this).attr("data-mimetype"))) {
 
                 var p = new Object();
-                //p.Fields = new Array();
 
                 var dropZone = new Object();
+                dropZone.Id = $(this).attr("data-entityId");
                 dropZone.DocumentName = $(el.find(".dz-filename[data-dz-name]"))[0].innerText;
                 dropZone.DocumentSize = $(el.find(".dz-size[data-dz-size]"))[0].innerText;
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
-
-                //p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
+                
                 p = dropZone;
 
                 items[inx] = p;
                 inx++;
+                dropZone.Position = inx;
             }
         });
 
@@ -3030,16 +3053,26 @@ var publicApp = (function () {
     }
 
     function deleteObject(el, fOnSuccess) {
-        swal({
+        swalCall({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
-        }, function () {
-            publicApp.deleteWebApi(el, $(el).attr("data-type"), fOnSuccess);
-        });
+
+        },
+            function() { return webApiDelete(el, $(el).attr("data-type"), fOnSuccess) },
+            function () {}
+        )
+    }
+
+    function swalCall(options, fnSuccess, fnError) {
+        if (fnError === undefined || fnError === null)
+            fnError = function () { };
+        if (fnSuccess === undefined || fnSuccess === null)
+            fnSuccess = function () { };
+        swal(options, fnSuccess, fnError);
     }
 
     function onSelectChange(sender, sId) {
@@ -3065,20 +3098,9 @@ var publicApp = (function () {
         if (sValue == null || sValue == 'undefined')
             sValue = null;
 
-        //var typeName = $(sSelector).attr("data-type-name");
-        //if (IsNullOrWhiteSpace(typeName) == false) {
-        //    var reference = new Object();
-        //    reference.TypeName = typeName;
-        //    reference.Id = sValue;
-
-        //    return {
-        //        Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
-        //    }
-        //} else {
         return {
             Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
         }
-        //};
     }
 
     function getSelected(sSelector) {
@@ -3109,7 +3131,6 @@ var publicApp = (function () {
             if (maxfiles == undefined || maxfiles == NaN)
                 maxfiles = null;
 
-            console.log(maxfiles);
             myAttachZone = new Dropzone(document.querySelector("#" + idDropZone), {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: true,
@@ -3140,6 +3161,7 @@ var publicApp = (function () {
             if (file.status == "added") {
                 file.previewElement.setAttribute("data-mimetype", file.type);
                 file.previewElement.setAttribute("data-objectid", file.id);
+                file.previewElement.setAttribute("data-entityid", file.entityId);
                 file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
 
                 $('#iddropzone').attr("data-refers-to-id", refersToId);
@@ -3178,7 +3200,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true
+                        description: value.Description, accepted: true, entityId: value.Id
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3198,7 +3220,7 @@ var publicApp = (function () {
     }
 
     function callSwal(accepted, rejected) {
-        swal({
+        swalCall({
             title: "Löschen",
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
@@ -3206,12 +3228,8 @@ var publicApp = (function () {
             confirmButtonText: "Übernehmen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
-            function () {
-                return accepted();
-            },
-            function () {
-                return rejected();
-            }
+            accepted,
+            rejected
         )
     }
 
@@ -3281,10 +3299,18 @@ var publicApp = (function () {
         },
         windowResize: function () {
             windowResize();
-        }
-        ,
+        },
         callSwallApp: function (accepted, rejected) {
             callSwal(accepted, rejected);
+        },
+        setSelectedApp: function (sValue, sSelector) {
+            setSelected(sValue, sSelector);
+        },
+        setUpSelectApp: function (id) {
+            setUpSelect(id);
+        },
+        getSelectedFieldApp: function (sSelector) {
+            return getSelectedField(sSelector);
         }
     }
 
@@ -3376,22 +3402,25 @@ var setGridOptions = (function () {
 
         $("#" + gridId).navGrid("#" + pagerId, { edit: false, add: false, del: false, refresh: false, view: false, search: false }, {}, {}, delSettings);
 
+
         $("#" + gridId).inlineNav('#' + pagerId,
             // the buttons to appear on the toolbar of the grid
             {
                 edit: false,
-                add: true,
+                add: false,
                 del: true,
+                save: false,
                 cancel: false,
                 editParams: {
-                    keys: true,
+                    keys: false,
                 },
                 addParams: {
-                    keys: true,
+                    keys: false,
                     position: "last"
                 },
 
-            });
+            }
+        );
 
         if (!IsNullOrUndefined(customButtonAddRow)) {
             $("#" + customButtonAddRow).on("click", function (event) {
@@ -3631,4 +3660,14 @@ function onTextAreaChange(sender) {
 
 function TryCatchWraper(func) {
     try { func(); } catch (ex) { logConsole("TryCatchWraper", ex); }
+}
+
+function onCheckBoxClick(sender, sId) {
+    if (!sId) {
+        sId = $(sender).attr("id");
+    }
+    var elm = document.getElementById(sId);
+    if (!elm)
+        return;
+    elm.setAttribute("data-edit", "true");
 }

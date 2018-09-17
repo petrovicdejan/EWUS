@@ -260,7 +260,8 @@
         if (this.previewsContainer) {
           file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
           file.previewTemplate = file.previewElement;
-          this.previewsContainer.appendChild(file.previewElement);
+          //this.previewsContainer.appendChild(file.previewElement);
+          this.previewsContainer.querySelector('.example').appendChild(file.previewElement);
           _ref = file.previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
@@ -274,24 +275,25 @@
             if(this.previewsContainer.querySelector('[data-dz-showheader]'))
                 this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'block';
 
-          if (this.options.addOpenLinks) {
-              //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
-              //file.previewElement.appendChild(file._openLink);
+            if (this.options.addOpenLinks) {
+                //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
+                //file.previewElement.appendChild(file._openLink);
 
-              file._openLink = $(".dz-click-image");
-              $(".dz-click-image").dblclick(function (e) {
-                  e.preventDefault();
-                  e.stopPropagation();
+                file._openLink = $(".dz-click-image");
+                file._openLink.dblclick(function (e) {
+                    $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
 
-                  var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
-                  if (_ref3.options.objectTypeName != '')
-                      sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+                        var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
+                        if (_ref3.options.objectTypeName != '')
+                            sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
 
-                      window.open(sUrl);
-                  _ref3.emit("openedfile", file);
-              });
-          }
-
+                        window.open(sUrl);
+                        _ref3.emit("openedfile", file);
+                    });
+                });
+            };
           if (this.options.addRemoveLinks) {
 
               file.previewElement.querySelector('[data-dz-remove]').setAttribute("title", this.options.dictRemoveFile);
@@ -1648,21 +1650,6 @@
 
   Dropzone.confirm = function (question, accepted, rejected) {
       publicApp.callSwallApp(accepted, rejected);
-      //swal({
-      //    title: "Soll der Datensatz wirklich gelöscht werden?",
-      //    text: "",
-      //    type: "warning",
-      //    showCancelButton: true, confirmButtonColor: "#DD6B55",
-      //    confirmButtonText: "Übernehmen", closeOnConfirm: true,
-      //    cancelButtonText: "Abbrechen"
-      //},
-      //  function () {
-      //      return accepted();
-      //    },
-      //  function () {
-      //      return rejected();
-      //    }
-      //)
     //if (window.confirm(question)) {
     //  return accepted();
     //} else if (rejected != null) {

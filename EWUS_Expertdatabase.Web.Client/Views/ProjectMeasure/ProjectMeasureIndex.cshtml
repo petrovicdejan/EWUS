@@ -1,0 +1,50 @@
+﻿
+@section HeaderOptions {
+
+    <!-- jqGrid -->
+    <link href="~/Scripts/jqGrid/css/trirand/ui.jqgrid-bootstrap.css" rel="stylesheet">
+}
+
+@section title {
+    <h3 style="color:black;margin-left:1.7%;margin-top:1%;">Projekt mit Maßnahme</h3>
+}
+
+<div class="clearfix"></div>
+
+<div class="row" id="projectMeasureList">
+    <div class="row">
+        <div class="col-md-6 row-control-main-wrapper">
+            @WebHelpers.TextEditor("ProjectName", "ProjectName", "Projektname", "Projektname", "1", isReadOnly: true)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 row-control-main-wrapper">
+            @WebHelpers.SelectEditor("Measure", "Maßnahme hinzufügen", "Maßnahme hinzufügen", "Measure/GetMeasuresNotRelatedWithProject/" + ViewBag.Id, "2", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "Measure")
+        </div>
+        <a href="#" id="AddMeasureToProject" class="btn btn-xs"> Hinzufügen</a>
+    </div>
+
+    <div class="col-md-12">
+        <div id="projectMeasureGridContainer" style="margin-top:1%; height:500%;">
+            <table id="gridProjectMeasure"></table>
+            <div id="jqGridPagerr"></div>
+        </div>
+    </div>
+</div>
+
+@section ScriptLibs {
+    <script src="~/Scripts/jqGrid/js/trirand/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/js/trirand/jquery.jqGrid.min.js"></script>
+
+    <script>
+        $.jgrid.defaults.width = 100;
+        $.jgrid.defaults.responsive = true;
+        $.jgrid.defaults.styleUI = 'Bootstrap';
+    </script>
+
+    <script>
+        var objectId = "@ViewBag.Id";
+        var projectName = "@ViewBag.ProjectName";
+    </script>
+    <script src="~/Lib/App/Views/ProjectMeasure/projectMeasureIndex.js"></script>
+}
