@@ -24,33 +24,35 @@ namespace EWUS_Expertdatabase.Business
         {
             iTextSharp.text.Image logoFirst = iTextSharp.text.Image.GetInstance(this.logoImg);
             iTextSharp.text.Image logoSecond = iTextSharp.text.Image.GetInstance(this.rightLogo);
+            
 
             PdfPTable table = new PdfPTable(2);
             
             table.DefaultCell.Border = Rectangle.NO_BORDER;
-            PdfPCell cell = new PdfPCell();
-            //cell.FixedHeight = 30;
+            PdfPCell cell = new PdfPCell(logoFirst,true);            
+            cell.FixedHeight = 25;
+
             cell.CellEvent = new dot();
             cell.Border = Rectangle.NO_BORDER;
-            //cell.Padding = 5;
-            //cell.Image.ScaleToFitHeight = false;
-            Paragraph p = new Paragraph();             
-            p.Add(new Chunk(logoFirst, 0, 0));
-            cell.AddElement(p);
+                     
+            //Paragraph p = new Paragraph();             
+            //p.Add(new Chunk(logoFirst, 0, -15));
+            //cell.AddElement(p);
             table.AddCell(cell);
-
-            PdfPCell cellTwo = new PdfPCell();
-            //cellTwo.FixedHeight = 30;
+            
+            PdfPCell cellTwo = new PdfPCell(logoSecond,true);
+            cellTwo.HorizontalAlignment = Element.ALIGN_RIGHT;
+            cellTwo.FixedHeight = 25;
             cellTwo.CellEvent = new dot();
             cellTwo.Border = Rectangle.NO_BORDER;
-            Paragraph p1 = new Paragraph();
-            p1.Add(new Chunk(logoSecond, 230, 0));
-            cellTwo.AddElement(p1);
+            //Paragraph p1 = new Paragraph();
+            //p1.Add(new Chunk(logoSecond, 180, -15));
+            //cellTwo.AddElement(p1);
             table.AddCell(cellTwo);
             
 
             table.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin; 
-            table.WriteSelectedRows(0, -1, document.LeftMargin, document.PageSize.Height-7, writer.DirectContent);
+            table.WriteSelectedRows(0, -1, document.LeftMargin, document.PageSize.Height-3, writer.DirectContent);
         }
     }
 
