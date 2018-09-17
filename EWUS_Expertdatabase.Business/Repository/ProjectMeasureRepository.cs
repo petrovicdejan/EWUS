@@ -215,10 +215,10 @@ namespace EWUS_Expertdatabase.Business
                                           MaintenanceCompany = q1,
                                           OperationType = q2.Value,
                                           InvestmentCost = pm.InvestmenCost,
-                                         // ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
+                                          ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
                                           Description = pm.Description,
                                           Specification = pm.Specification,
-                                        //  SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
+                                          SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
                                           SubmittedBy = pm.SubmittedBy,
                                           Release = pm.Release,
                                           Remark = pm.Remark,
@@ -237,7 +237,10 @@ namespace EWUS_Expertdatabase.Business
                 Collection<DocumentItem> cdi = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
 
                 if (documentItems != null)
+                {
+                    result.DocumentItems = new Collection<DocumentItem>();
                     result.DocumentItems = cdi;
+                }                   
 
                 if (result != null)
                 {
