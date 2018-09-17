@@ -53,6 +53,14 @@ namespace EWUS_Expertdatabase.Business
         public string Remark { get; set; }
 
         public Collection<DocumentItem> DocumentItems { get; set; }
+
+        public string Location { get; set; }
+
+        public string ZipCode { get; set; }
+
+        public string City { get; set; }
+
+        public string Logo { get; set; }
     }
 
     public class MeasurePoco

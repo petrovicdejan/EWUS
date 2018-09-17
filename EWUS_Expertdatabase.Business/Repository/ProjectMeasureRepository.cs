@@ -200,6 +200,11 @@ namespace EWUS_Expertdatabase.Business
                                             equals
                                             new { f1 = (int?)ps.Id } into rp
                                       from q3 in rp.DefaultIfEmpty()
+                                      join ip in context.InvolvedPartys on
+                                            new { f1 = p.CustomerId }
+                                            equals
+                                            new { f1 = (int?)ip.Id } into qp
+                                      from q4 in qp.DefaultIfEmpty()
                                       select new ProjectMeasurePoco
                                       {
                                           Id = pm.Id,
@@ -219,16 +224,20 @@ namespace EWUS_Expertdatabase.Business
                                           Remark = pm.Remark,
                                           DocumentItems = pm.DocumentItems,
                                           ProjectId = p.Id,
-                                          MeasureId = m.Id
+                                          MeasureId = m.Id,
+                                          Location = p.Location,
+                                          ZipCode = p.ZipCode,
+                                          City = p.City,
+                                          Logo = q4.Logo
                                       };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
                 IEnumerable<DocumentItem> documentItems = context.ProjectMeasures.Where(pm => pm.Id == Id).SelectMany(x => x.DocumentItems).OrderBy(x => x.Position).ToList();
 
-                Collection<DocumentItem> di = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
+                Collection<DocumentItem> cdi = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
 
                 if (documentItems != null)
-                    result.DocumentItems = di;
+                    result.DocumentItems = cdi;
 
                 if (result != null)
                 {
