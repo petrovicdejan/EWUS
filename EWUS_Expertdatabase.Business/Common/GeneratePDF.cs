@@ -87,7 +87,7 @@ namespace EWUS_Expertdatabase.Business.Common
                 
                 string table = " <table class='dotted' width='604' height='500'><tbody><tr><td width ='604' valign='top'> "
                     + "<p>" +item.Description +" </p>"
-                    + "<p align='center'> <img border='0' width='320' height='320' src='" + imagePath + "' /> </p> "
+                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='600' height='450' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
                     + " </tbody> "

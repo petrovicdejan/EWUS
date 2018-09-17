@@ -22,15 +22,15 @@ namespace EWUS_Expertdatabase.Business
 
         public override void OnEndPage(PdfWriter writer, Document document)
         {
+            document.SetMargins(30, 30, 500, 30);
             iTextSharp.text.Image logoFirst = iTextSharp.text.Image.GetInstance(this.logoImg);
             iTextSharp.text.Image logoSecond = iTextSharp.text.Image.GetInstance(this.rightLogo);
             
-
             PdfPTable table = new PdfPTable(2);
             
             table.DefaultCell.Border = Rectangle.NO_BORDER;
             PdfPCell cell = new PdfPCell(logoFirst,true);            
-            cell.FixedHeight = 25;
+            cell.FixedHeight = 30;
 
             cell.CellEvent = new dot();
             cell.Border = Rectangle.NO_BORDER;
@@ -42,7 +42,7 @@ namespace EWUS_Expertdatabase.Business
             
             PdfPCell cellTwo = new PdfPCell(logoSecond,true);
             cellTwo.HorizontalAlignment = Element.ALIGN_RIGHT;
-            cellTwo.FixedHeight = 25;
+            cellTwo.FixedHeight = 30;
             cellTwo.CellEvent = new dot();
             cellTwo.Border = Rectangle.NO_BORDER;
             //Paragraph p1 = new Paragraph();
@@ -50,7 +50,6 @@ namespace EWUS_Expertdatabase.Business
             //cellTwo.AddElement(p1);
             table.AddCell(cellTwo);
             
-
             table.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin; 
             table.WriteSelectedRows(0, -1, document.LeftMargin, document.PageSize.Height-3, writer.DirectContent);
         }
@@ -61,9 +60,9 @@ namespace EWUS_Expertdatabase.Business
         public void CellLayout(PdfPCell cell, Rectangle position, PdfContentByte[] canvases)
         {
             cell.Border = Rectangle.TOP_BORDER;
-            PdfContentByte cb = canvases[PdfPTable.LINECANVAS];
-            cb.SetLineDash(0, 7,1);
-            //cb.SetLineWidth(1f);
+            PdfContentByte cb = canvases[PdfPTable.BASECANVAS];
+            cb.SetLineDash(0, 2,2);
+           // cb.SetLineWidth(1);
             cb.Rectangle(position.Left, position.Bottom, position.Width, position.Height);
             cb.Stroke();
         }
