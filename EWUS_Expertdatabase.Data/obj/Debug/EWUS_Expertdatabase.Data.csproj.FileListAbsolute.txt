@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.pdb
@@ -51,6 +53,7 @@ C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CoreC
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CopyComplete
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.pdb
+>>>>>>> 507eb785f022225b4ddb8b45a9e2796e7bf5ea0e
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.pdb

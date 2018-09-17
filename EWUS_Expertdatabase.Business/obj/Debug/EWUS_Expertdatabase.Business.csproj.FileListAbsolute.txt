@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
+=======
+>>>>>>> 507eb785f022225b4ddb8b45a9e2796e7bf5ea0e
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.pdb
@@ -18,8 +23,6 @@ C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Model.d
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EntityFramework.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EntityFramework.SqlServer.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\itextsharp.xml
-C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
-C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CopyComplete
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.pdb

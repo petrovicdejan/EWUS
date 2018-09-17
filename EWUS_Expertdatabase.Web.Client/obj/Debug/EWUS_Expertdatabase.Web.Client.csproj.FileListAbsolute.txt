@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csprojAssemblyReference.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
+=======
+>>>>>>> 507eb785f022225b4ddb8b45a9e2796e7bf5ea0e
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\ApplicationInsights.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Web.Client.dll.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\EWUS_Expertdatabase.Web.Client.dll
@@ -68,8 +73,6 @@ C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.ServerTelemetryCha
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.WindowsServer.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\Microsoft.AI.Web.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\bin\itextsharp.xml
-C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csprojAssemblyReference.cache
-C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.csproj.CopyComplete
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Web.Client\obj\Debug\EWUS_Expertdatabase.Web.Client.pdb

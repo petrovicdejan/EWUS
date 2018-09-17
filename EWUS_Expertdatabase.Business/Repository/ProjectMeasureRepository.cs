@@ -231,7 +231,10 @@ namespace EWUS_Expertdatabase.Business
                 Collection<DocumentItem> cdi = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
 
                 if (documentItems != null)
+                {
+                    result.DocumentItems = new Collection<DocumentItem>();
                     result.DocumentItems = cdi;
+                }                   
 
                 if (result != null)
                 {
