@@ -361,6 +361,7 @@ EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.csproj.CoreCompi
 EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
+<<<<<<< HEAD
 .vs/EWUS_Expertdatabase.Web/v15/.suo
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
 EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Business.dll
@@ -410,3 +411,6 @@ EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.dll
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.pdb
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
 .vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
+=======
+.vs/config/applicationhost.config
+>>>>>>> 6d27cf4becb09ff3471570c1ebdefa38d683477f
