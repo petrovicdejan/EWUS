@@ -3605,12 +3605,15 @@ body.dragging, body.dragging * {
     z-index: 2000;
 }
 
-ol.example li.placeholder {
+ol.dz-list li.placeholder {
     position: relative;
     /** More li styles **/
 }
 
-ol.example li.placeholder:before {
+ol.dz-list li.placeholder:before {
     position: absolute;
     /** Define arrowhead **/
+}
+.dz-list{
+    list-style:none;
 }
