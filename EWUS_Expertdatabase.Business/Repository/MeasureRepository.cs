@@ -3,6 +3,7 @@ using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,6 +103,7 @@ namespace EWUS_Expertdatabase.Business
             using (var ctx = new EWUSDbContext())
             {
                 Measure measure = null;
+                Collection<DocumentItem> documentItems = new Collection<DocumentItem>();
                 if (editMeasure.Id > 0)
                 {
                     measure = ctx.Measures.Where(x => x.Id == editMeasure.Id)
@@ -109,6 +111,26 @@ namespace EWUS_Expertdatabase.Business
                             .Include(x => x.DocumentItems)
                             .Include(x => x.OperationType)
                             .FirstOrDefault();
+                    
+                    if (editMeasure.DocumentItems != null && editMeasure.DocumentItems.Count() > 0)
+                    {
+                        foreach (var edi in editMeasure.DocumentItems)
+                        {
+                            var di = ctx.DocumentItems.Where(x => x.Id == edi.Id).FirstOrDefault();
+                            if (di == null)
+                            {
+                                ctx.DocumentItems.Add(edi);
+                                documentItems.Add(edi);
+                            }
+                            else
+                            {
+                                di.Hide = edi.Hide;
+                                documentItems.Add(di);
+                            }
+                        }
+                    }
+
+
 
                     if (measure != null)
                     {
@@ -118,16 +140,17 @@ namespace EWUS_Expertdatabase.Business
                             ctx.MeasureLinks.RemoveRange(measureLinks);
                         }
 
-                        if (measure.DocumentItems != null)
-                        {
-                            List<DocumentItem> documents = measure.DocumentItems.ToList();
-                            ctx.DocumentItems.RemoveRange(documents);
-                        }
+                        //if (measure.DocumentItems != null)
+                        //{
+                        //    List<DocumentItem> documents = measure.DocumentItems.ToList();
+                        //    ctx.DocumentItems.RemoveRange(documents);
+                        //}
                     }
                 }
                 else
                 {
                     measure = new Measure();
+                    documentItems = editMeasure.DocumentItems;
                 }
                 
                 measure.Name = editMeasure.Name;
@@ -138,7 +161,7 @@ namespace EWUS_Expertdatabase.Business
                 measure.Description = editMeasure.Description;
                 measure.InvestmentCost = editMeasure.InvestmentCost;
                 measure.MeasureLinks = editMeasure.MeasureLinks;
-                measure.DocumentItems = editMeasure.DocumentItems;
+                measure.DocumentItems = documentItems;
 
                 if (measure.Id == 0)
                     ctx.Measures.Add(measure);

@@ -33,7 +33,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             byte[] bytes = GeneratePDF.MakePDF(html, css, header,logo,rightLogo,projectId);
 
-            string fileName = "ReportEWUS_" + DateTime.Now.Ticks;
+            string fileName = "ReportEWUS_" + DateTime.Now.Ticks + ".pdf";
 
             return File(bytes, "application/pdf", fileName);
         }

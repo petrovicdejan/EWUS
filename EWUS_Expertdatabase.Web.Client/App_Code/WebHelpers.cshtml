@@ -441,7 +441,7 @@
     </div>
 }
 
-@helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null, bool IsHidden = false)
+@helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null, bool IsHidden = false, string headerText = "Name")
 {
     <div class="field-set">
         <div class="field-group float-label-control" style="margin-bottom: 0;">
@@ -458,7 +458,7 @@
         @if (showHeader)
         {
             <div class="row b-b-2" data-dz-showheader style="display:none;">
-                <div class="col-md-8"><strong>Text</strong></div>
+                <div class="col-md-8"><strong>@headerText</strong></div>
                 <div class="col-md-3"><strong>Bild</strong></div>
                 <div class="col-md-1"></div>
             </div>
