@@ -128,7 +128,7 @@ var projectModule = (function () {
         },
     ];
 
-    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/ProjectMeasure/ProjectMeasureEdit?key=");
+    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/leistungsblatt/");
     
     $("#ProjectName").val(projectName);
 

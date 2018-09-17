@@ -38,13 +38,13 @@ namespace EWUS_Expertdatabase.Business
 
         public long MeasureId { get; set; }
 
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
         public string Description { get; set; }
 
         public string Specification { get; set; }
 
-        public DateTime SubmittedOnDate { get; set; }
+        public DateTime? SubmittedOnDate { get; set; }
 
         public string SubmittedBy { get; set; }
 
@@ -53,6 +53,14 @@ namespace EWUS_Expertdatabase.Business
         public string Remark { get; set; }
 
         public Collection<DocumentItem> DocumentItems { get; set; }
+
+        public string Location { get; set; }
+
+        public string ZipCode { get; set; }
+
+        public string City { get; set; }
+
+        public string Logo { get; set; }
     }
 
     public class MeasurePoco
