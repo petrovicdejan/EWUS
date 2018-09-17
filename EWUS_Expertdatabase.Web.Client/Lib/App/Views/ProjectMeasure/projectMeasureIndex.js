@@ -60,7 +60,7 @@ var projectModule = (function () {
         {
             label: 'LB-Nr',
             name: 'PerformanseSheetNumber',
-            width: 8,
+            width: 6,
             key: true,
             editable: true,
             searchoptions: {
@@ -70,7 +70,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 25,
+            width: 32,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -79,7 +79,7 @@ var projectModule = (function () {
         {
             label: 'Status',
             name: 'PerformanceSheetStatus',
-            width: 10,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -106,7 +106,7 @@ var projectModule = (function () {
         {
             label: 'Monetärer Aufwand [€]',
             name: 'InvestmentCost',
-            width: 10,
+            width: 11,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
@@ -119,7 +119,7 @@ var projectModule = (function () {
         {
             label: '',
             name: '',
-            width: 2,
+            width: 3,
             formatter: function (cellvalue, options, rowObject) {
                 return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectMeasureData + ')" data-type="Project" data-url="ProjectMeasure/DeleteProjectMeasure/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
             },
@@ -140,7 +140,7 @@ var projectModule = (function () {
             data.ProjectId = objectId;
             data.MeasureId = value.Value;
 
-            publicApp.postWebApi(sUrl, data, fetchProjectMeasureData, false);
+            publicApp.postWebApi(sUrl, data, fetchProjectMeasureData, false, true, fetchProjectMeasureData);
         }
 
     });

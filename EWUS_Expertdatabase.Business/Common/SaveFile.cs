@@ -73,7 +73,7 @@ namespace EWUS_Expertdatabase.Business
                     }
                 }
             }
-            catch(Exception ex)
+            catch
             {
             }
         }

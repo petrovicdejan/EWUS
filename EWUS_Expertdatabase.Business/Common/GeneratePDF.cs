@@ -18,7 +18,7 @@ namespace EWUS_Expertdatabase.Business.Common
 {
    public static class GeneratePDF
     {
-        public static byte[] MakePDF(string htmlString,string cssText,string header,string logo,string rightLogo)
+        public static byte[] MakePDF(string htmlString,string cssText,string header,string logo,string rightLogo,long projectId)
         {
             var memoryStream = new MemoryStream();
             var document = new iTextSharp.text.Document();
@@ -27,7 +27,7 @@ namespace EWUS_Expertdatabase.Business.Common
             writer.PageEvent = events;
 
             var projectMeasureRepo = new ProjectMeasureRepository();
-            ProjectMeasurePoco projectMeasurePoco = projectMeasureRepo.GetProjectMeasureById(10);
+            ProjectMeasurePoco projectMeasurePoco = projectMeasureRepo.GetProjectMeasureById(projectId);
 
             document.Open();
 

@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
 
+=======
+>>>>>>> 6c2ed3959c77d36793fb6704c72ef437962c36d1
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.pdb
@@ -22,9 +25,12 @@ C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Model.d
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EntityFramework.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\EntityFramework.SqlServer.xml
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\bin\Debug\itextsharp.xml
+C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CopyComplete
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.pdb
+<<<<<<< HEAD
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll.config
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.dll
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Business\bin\Debug\EWUS_Expertdatabase.Business.pdb
@@ -76,3 +82,5 @@ C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Business\obj\Deb
 C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.csproj.CopyComplete
 C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.dll
 C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Business\obj\Debug\EWUS_Expertdatabase.Business.pdb
+=======
+>>>>>>> 6c2ed3959c77d36793fb6704c72ef437962c36d1
