@@ -52,14 +52,17 @@
                 caption: 'Neu',
                 buttonicon : 'glyphicon glyphicon-plus',
                 position: 'last',
+                id: 'pager-add-btn',
                 onClickButton: function () {
 
-                    $("#jqGridLink").jqGrid('addRow', { position: "last"});
+                    $("#jqGridLink").jqGrid('addRow', { position: "last" });
+                    $("#pager-add-btn").addClass('ui-disabled');
                 }
             }).navButtonAdd("#jqGridPager", {
                 caption: 'Übernehmen',
                 buttonicon: 'glyphicon glyphicon-download-alt pager-button',
                 position: 'last',
+                id: 'pager-save-btn',
                 onClickButton: function () {
                     var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
                     $("#jqGridLink").saveRow(row);
@@ -71,6 +74,7 @@
                         val = $(val);
                         val.show();
                     });
+                    $("#pager-add-btn").removeClass('ui-disabled');
 
                 }
             })

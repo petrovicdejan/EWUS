@@ -31,7 +31,7 @@
         });
 
         $(function () {
-            $("ol.example").sortable({
+            $("ol.dz-list").sortable({
 
             });
 
