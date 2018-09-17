@@ -14,11 +14,11 @@ using System.Web.Mvc;
 
 namespace EWUS_Expertdatabase.Web.Client
 {
-    [RoutePrefix("projektmitmassnahmen")]
+    //[RoutePrefix("projektmitmassnahmen")]
     public class ProjectMeasureController : Controller
     {
         // GET: ProjectMeasure
-        [Route("{projectId:long}")]
+        [Route("projektmitmassnahmen/{projectId:long}")]
         public ActionResult ProjectMeasureIndex(long projectId)
         {
             ViewBag.Id = projectId;
@@ -70,15 +70,15 @@ namespace EWUS_Expertdatabase.Web.Client
                 return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
         }
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public ActionResult ProjectMeasureEdit(string key)
+        [Route("leistungsblatt/{Id:long}")]
+        public ActionResult ProjectMeasureEdit(long Id)
         {
             var projectMeasureRepo = new ProjectMeasureRepository();
-            ProjectMeasurePoco projectMeasure = projectMeasureRepo.GetProjectMeasureById(key.ToLong(0)) as ProjectMeasurePoco;
+            ProjectMeasurePoco projectMeasure = projectMeasureRepo.GetProjectMeasureById(Id) as ProjectMeasurePoco;
 
             ViewBag.Input = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(projectMeasure)));
 
-            ViewBag.Id = key.ToLong(0);
+            ViewBag.Id = Id;
             ViewBag.Title = "Leistungsblatt (LB) ";
             ViewBag.TypeName = "ProjectMeasure";
             ViewBag.ProjectId = projectMeasure.ProjectId;
