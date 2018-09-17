@@ -7,7 +7,8 @@ var publicApp = (function () {
         decimalCharacter: ',',
         decimalCharacterAlternative: '.',
         decimalPlaces: 0,
-        currencySymbol: '\u202f€',
+        currencySymbol:'',
+            // '\u202f€',
         currencySymbolPlacement: AutoNumeric.options.currencySymbolPlacement.suffix,
         roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
     };

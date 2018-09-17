@@ -995,7 +995,7 @@ ui-jqgrid-view table-responsive
             }
 
             .float-label-control label:not(.error) {
-                font-weight: normal;
+                font-weight: bold;
                 font-size: 0.9em;
             }
 
@@ -3618,4 +3618,7 @@ ol.dz-list li.placeholder:before {
 }
 .dz-list{
     list-style:none;
+}
+.label-wrapper label{
+    font-weight:bold;
 }

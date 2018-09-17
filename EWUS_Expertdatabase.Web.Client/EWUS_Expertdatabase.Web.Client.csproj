@@ -176,9 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
-
     <Compile Include="Controllers\ReportController.cs" />
-
     <Compile Include="Controllers\ProjectMeasureController.cs" />
     <Compile Include="ViewModel\ClassificationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
@@ -935,6 +933,7 @@
     <Content Include="Scripts\jqGrid\css\trirand\ui.jqgrid-bootstrap.css" />
     <Content Include="Scripts\jqGrid\css\trirand\ui.jqgrid-bootstrap4.css" />
     <Content Include="Scripts\jqGrid\css\trirand\ui.jqgrid.css" />
+    <Content Include="Scripts\jqGrid\js\trirand\i18n\grid.locale-de.js" />
     <Content Include="Scripts\jqGrid\js\trirand\i18n\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\js\trirand\i18n\grid.locale-sr-latin.js" />
     <Content Include="Scripts\jqGrid\js\trirand\i18n\grid.locale-sr.js" />
