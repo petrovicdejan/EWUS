@@ -38,13 +38,13 @@ namespace EWUS_Expertdatabase.Business
 
         public long MeasureId { get; set; }
 
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
         public string Description { get; set; }
 
         public string Specification { get; set; }
 
-        public DateTime SubmittedOnDate { get; set; }
+        public DateTime? SubmittedOnDate { get; set; }
 
         public string SubmittedBy { get; set; }
 

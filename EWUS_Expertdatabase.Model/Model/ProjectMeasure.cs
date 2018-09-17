@@ -15,9 +15,9 @@ namespace EWUS_Expertdatabase.Model
             this.DocumentItems = new Collection<DocumentItem>();
         }
 
-        public virtual Project Project { get; set; }
+        public Project Project { get; set; }
 
-        public virtual Measure Measure { get; set; }
+        public Measure Measure { get; set; }
         
         public long ProjectId { get; set; }
         

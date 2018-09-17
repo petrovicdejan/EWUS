@@ -114,7 +114,7 @@ namespace EWUS_Expertdatabase.Business
 
                 projectMeasure.ProjectId = editProjectMeasurePoco.ProjectId;
                 projectMeasure.MeasureId = editProjectMeasurePoco.MeasureId;
-                projectMeasure.ModificationDate = DateTime.Now.ToLocalTime();
+                //projectMeasure.ModificationDate = DateTime.Now.ToLocalTime();
                 projectMeasure.Release = true;
 
                 int maxPerformanseSheetNumber = 0;
