@@ -2996,6 +2996,7 @@ var publicApp = (function () {
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
+                dropZone.Hide = $(el.find(".dz-hide")).is(":checked");
                 
                 p = dropZone;
 
@@ -3203,7 +3204,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true, entityId: value.Id
+                        description: value.Description, accepted: true, entityId: value.Id, isHidden: value.Hide
                     };
 
                     myAttachZone.files.push(mockfilee);

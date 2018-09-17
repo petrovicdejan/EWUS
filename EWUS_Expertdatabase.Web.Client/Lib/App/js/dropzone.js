@@ -312,6 +312,11 @@
 
           }
 
+            if (file.isHidden) {
+                file.previewElement.querySelector('.dz-hide').setAttribute('checked', 'checked');
+            }
+
+
           removeFileEvent = (function(_this) {
             return function(e) {
               e.preventDefault();
