@@ -176,6 +176,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+
+    <Compile Include="Controllers\ReportController.cs" />
+
     <Compile Include="Controllers\ProjectMeasureController.cs" />
     <Compile Include="ViewModel\ClassificationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
@@ -199,6 +202,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PdfReports\Header.html" />
+    <Content Include="Content\PdfReports\report.css" />
+    <Content Include="Content\PdfReports\ReportEWUS.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -445,6 +451,8 @@
     <Content Include="Lib\fullcalendar\fullcalendar.min.js" />
     <Content Include="Lib\fullcalendar\moment.min.js" />
     <Content Include="Lib\images\img.jpg" />
+    <Content Include="Lib\images\logo.png" />
+    <Content Include="Lib\images\rightLogo.png" />
     <Content Include="Lib\images\user.png" />
     <Content Include="Lib\jqueryval\jquery.unobtrusive-ajax.js" />
     <Content Include="Lib\jqueryval\jquery.unobtrusive-ajax.min.js" />
@@ -974,6 +982,7 @@
     <Folder Include="Views\Classification\" />
     <Folder Include="Views\Customer\" />
     <Folder Include="Views\Document\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
