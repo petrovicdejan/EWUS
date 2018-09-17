@@ -28,6 +28,9 @@ else
         max-height: calc(100vh - 160px);
         overflow-y: auto;
     }
+    #addFile-projectMeasureDropZone {
+        margin-bottom: 5px;
+    }
 
 
 </style>
@@ -98,7 +101,23 @@ else
             </div>
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
-                    @WebHelpers.DateEditor("SubmittedOnDate", "LB eingereicht am", "LB eingereicht am", "11", inline: true)
+                    <div class="field-set">
+                        <div class="field-contener">
+                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="width:61%;" >
+                                <label for="Uri" id="label-SubmittedOnDate">LB eingereicht am</label>
+                            </div>
+                            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" style="width:38%;float:right;">
+                                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                                <input tabindex="11" data-tabindex="11" id="SubmittedOnDate" name="SubmittedOnDate" data-filed-name="SubmittedOnDate" type="text"
+                                        placeholder="LB eingereicht am" data-format-pattern="DD.MM.YYYY" data-edit="false" data-representing-type="Date"
+                                        class="date2 form-control-ew-text"
+                                        data-val="true"
+                                       style="">
+                                <span class="field-validation-valid" data-valmsg-for="SubmittedOnDate" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
                     <div class="field-set">
