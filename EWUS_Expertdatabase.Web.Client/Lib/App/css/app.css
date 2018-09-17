@@ -3565,7 +3565,6 @@ circle.warning::before {
 }
 
 #label-wrapper-ServicedObject, #label-wrapper-ChangesOfUsage, #label-wrapper-Remark {
-    min-width: 17%;
 }
 
 body.modal-open {
