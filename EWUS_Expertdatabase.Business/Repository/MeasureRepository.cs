@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -64,6 +65,33 @@ namespace EWUS_Expertdatabase.Business
             }
         }
 
+        public List<MeasurePoco> GetMeasuresNotRelatedWithProject(long projectId)
+        {
+            using (var context = new EWUSDbContext())
+            {
+                var measures = from m in context.Measures
+                               join pm in context.ProjectMeasures.Where(x => x.ProjectId == projectId) on
+                                            new { f1 = m.Id }
+                                            equals
+                                            new { f1 = pm.MeasureId } into cp
+                               from q1 in cp.DefaultIfEmpty()
+                               where q1.Measure == null
+                               select new MeasurePoco
+                               {
+                                   Id = m.Id,
+                                   Name = m.Name
+                               };
+
+                List<MeasurePoco> result = measures.ToList();
+                if (result != null)
+                {
+                    return result;
+                }
+
+                return null;
+            }
+        }
+
         public Result SaveMeasure(Measure editMeasure)
         {
             Result output = new Result();
@@ -119,7 +147,10 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(measure.Guid.ToString()) && measure.DocumentItems != null)
                 {
-                    SaveFile.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(measure.Guid.ToString(), typeof(Measure).Name, measure.DocumentItems);
+                    });
                 }
 
                 output = Result.ToResult<Measure>(ResultStatus.OK, typeof(Measure));

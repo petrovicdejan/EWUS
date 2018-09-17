@@ -1,4 +1,10 @@
-﻿(function ($) {
+﻿var openFormAddMeasure = function addMeasure(projectId) {
+    publicApp.modalDialogClose();
+    var sUrl = sRootUrl + 'projektmitmassnahmen/' + projectId;
+    window.location.href = sUrl;
+};
+
+(function ($) {
     $(document).ready(function () {
 
         GetProject(dcProject);

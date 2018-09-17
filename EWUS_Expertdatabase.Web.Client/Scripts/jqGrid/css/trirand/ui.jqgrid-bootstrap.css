@@ -769,11 +769,11 @@ a.g-menu-item, a.soptclass, a.clearsearchclass {
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
  
-.ui-jqgrid-pager .ui-pg-table .ui-pg-button:hover,
+/*.ui-jqgrid-pager .ui-pg-table .ui-pg-button:hover,
 .ui-jqgrid-toppager .ui-pg-table .ui-pg-button:hover
 {
 	background-color: #ddd;
-}
+}*/
 .ui-jqgrid-corner  {
 	 border-radius: 5px
 }

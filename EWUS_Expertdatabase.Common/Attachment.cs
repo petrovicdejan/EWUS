@@ -39,5 +39,11 @@ namespace EWUS_Expertdatabase.Common
 
         [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public int Position { get; set; }
+
+        [DataMember]
+        public bool Hide { get; set; }
     }
 }

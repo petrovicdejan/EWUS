@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Model
 {
-    public class ProjectMeasure
+    public class ProjectMeasure : CoreObject
     {
         public ProjectMeasure()
         {
-            this.PerformanseSheetStatus = new Classification();
-            this.ProjectMeasurePerformance = new Collection<Model.ProjectMeasurePerformance>();
+            //this.PerformanseSheetStatus = new Classification();
+            this.DocumentItems = new Collection<DocumentItem>();
         }
 
         public virtual Project Project { get; set; }
 
         public virtual Measure Measure { get; set; }
         
-        public int ProjectId { get; set; }
+        public long ProjectId { get; set; }
         
-        public int MeasureId { get; set; }
+        public long MeasureId { get; set; }
 
         public MaintenanceCompany MaintenanceCompany { get; set; }
 
@@ -33,15 +33,13 @@ namespace EWUS_Expertdatabase.Model
 
         public int PerformanseSheetNumber { get; set; }
 
-        public DateTime ModificationDate { get; set; }
-
-        public string Description { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
         public string Specification { get; set; }
 
         public int InvestmenCost { get; set; }
 
-        public DateTime SubmittedOnDate { get; set; }
+        public DateTime? SubmittedOnDate { get; set; }
 
         public string SubmittedBy { get; set; }
 
@@ -49,10 +47,10 @@ namespace EWUS_Expertdatabase.Model
 
         public string Remark { get; set; }
 
-        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformance { get; set; }
+        public Collection<DocumentItem> DocumentItems { get; set; }
     }
 
-    public class ProjectMeasurePerformance
+    public class ProjectMeasurePerformance : CoreObject
     {
         public ProjectMeasurePerformance()
         {
@@ -62,10 +60,6 @@ namespace EWUS_Expertdatabase.Model
         public ProjectMeasure ProjectMeasure { get; set; }
 
         public int ProjectMeasureId { get; set; }
-
-        public int Position { get; set; }
-
-        public bool Hide { get; set; }
 
         public DocumentItem DocumentItem { get; set; }
 

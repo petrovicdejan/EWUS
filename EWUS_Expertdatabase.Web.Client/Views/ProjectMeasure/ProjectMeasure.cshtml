@@ -1,0 +1,140 @@
+﻿@{
+    Layout = (string)ViewData["Layout"];
+}
+@if (ViewBag.IsPopup)
+{
+
+    <script>
+        var isModify = "@ViewBag.Id";
+        isModify > 0 ? setTitle("Leistungsblatt (LB)") : setTitle("Leistungsblatt (LB)");
+
+        function setTitle(title) {
+            $('#modal_title').text(title);
+        }
+
+    </script>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 id="modal_title">@ViewBag.Title</h2>
+    </div>
+}
+else
+{
+    <h2>@ViewBag.Title</h2>
+}
+<style>
+    .modal-body {
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+    }
+
+</style>
+
+@using (Html.BeginForm("ProjectMeasure", "ProjectMeasure", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "ProjectMeasure", posturl = "ProjectMeasure/SaveProjectMeasure", dataname = "ProjectMeasure", objectid = ViewBag.Id }))
+{
+    if (ViewBag.IsPopup)
+    {
+        @Html.Raw("<div class='modal-body modal-layout-2 stretch'>");
+    }
+
+    Html.AntiForgeryToken();
+
+<div class="form-group">
+
+    <div class="row">
+        <div class="col-md-6 half-form-wrapper-measure">
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("Name", "Name", "Projektname", "Projektname", "1", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("MeasureName", "MeasureName", "Maßnahmenbenennung", "Maßnahmenbenennung", "2", isReadOnly: true)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("PerformanseSheetNumber", "PerformanseSheetNumber", "LB-Nr", "LB-Nr", "3", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("OperationType", "OperationType", "Maßnahmenart", "Maßnahmenart", "4", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.SelectEditor("PerformanseSheetStatus", "Status", "Status", "Classification/GetClassificationsByType/Leistungsblattstatus", "5", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "PerformanseSheetStatus")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.SelectEditor("MaintenanceCompany", "Wartungsfirma", "Wartungsfirma", "Party/GetAllMaintenanceCompanies", "6", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "MaintenanceCompany")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DateEditor("ModificationDate", "Änderungsdatum", "Änderungsdatum", "7")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Description", "Maßnahmenbeschreibung", "Maßnahmenbeschreibung", "8", isReadOnly:true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Specification", "Spezifizierung", "Spezifizierung", "9")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "monetärer Aufwand", "monetärer Aufwand", "10", type: "number")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DateEditor("SubmittedOnDate", "LB eingereicht am", "LB eingereicht am", "11")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("SubmittedBy", "SubmittedBy", "durch", "durch", "12")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.BoolEditor("Release", "Release", "Freigabe", "13")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "14")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 half-form-wrapper-measure">
+            <div class="row" style="padding-top: 5px;">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DropZoneEditor("projectMeasureDropZone", "projectMeasurePreview", "Fotos und Grafiken", "300px", showHeader: true, showDescription: true)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @Html.Partial("_PopupFooter");
+
+}
+<script>
+    var objectId = "@ViewBag.Id";
+    var objectTypeName = "@ViewBag.TypeName";
+    var dcProjectMeasure = "@ViewBag.Input";
+    var projectId = "@ViewBag.ProjectId";
+    var myAttachZone = null;
+   
+</script>
+
+<script type="text/javascript" src="~/Lib/App/Views/ProjectMeasure/projectMeasure.js"></script>

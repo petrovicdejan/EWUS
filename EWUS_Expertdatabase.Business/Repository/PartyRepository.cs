@@ -140,7 +140,10 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(customer.Guid.ToString()) && customer.DocumentItems != null)
                 {
-                    SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    });
                 }
 
                 output = Result.ToResult<Customer>(ResultStatus.OK, typeof(Customer));
