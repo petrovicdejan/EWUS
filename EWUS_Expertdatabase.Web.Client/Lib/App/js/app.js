@@ -2113,6 +2113,7 @@ var publicApp = (function () {
         var date = getDateValue(sSelector);
         format = getDateFormat($(sSelector), format);
         var value = moment.utc(date, format).format();
+        $(sSelector).datepicker('remove');
 
         return { Name: $(sSelector).attr("data-filed-name"), Value: value + " " };
     }
@@ -2120,6 +2121,7 @@ var publicApp = (function () {
         if (value != null) {
             var format = getDateFormat($(sSelector));
             $(sSelector).val(moment(value).format(format));
+            $(sSelector).datepicker({ format: format});
         }
     }
     function getDateRangeField(sSelector, format) {
