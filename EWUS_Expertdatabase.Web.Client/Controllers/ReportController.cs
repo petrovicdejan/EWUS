@@ -11,7 +11,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
     public class ReportController : Controller
     {
         //GenerateReport
-        public FileContentResult GenerateReport()
+        public FileContentResult GenerateReport(long projectId)
         {
             string htmlString = System.Web.HttpContext.Current.Server.MapPath("~/Content/PdfReports/ReportEWUS.html");
 
@@ -31,7 +31,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             html = html.Replace("$$$CSS$$$", cssString);           
 
-            byte[] bytes = GeneratePDF.MakePDF(html, css, header,logo,rightLogo);
+            byte[] bytes = GeneratePDF.MakePDF(html, css, header,logo,rightLogo,projectId);
 
             string fileName = "ReportEWUS_" + DateTime.Now.Ticks;
 

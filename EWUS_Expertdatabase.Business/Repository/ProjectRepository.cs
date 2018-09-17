@@ -30,6 +30,20 @@ namespace EWUS_Expertdatabase.Business
             }
         }
 
+
+        public DocumentItem GetDocumentItemForProject(long projectId)
+        {
+            DocumentItem logoDoc = null;
+
+            using (var context = new EWUSDbContext())
+            {
+                List<DocumentItem> documentItemsList = context.Projects.Where(i => i.Id == projectId).Include(x => x.Customer).Select(x=> x.Customer).SelectMany(x => x.DocumentItems).ToList();
+                logoDoc = documentItemsList.FirstOrDefault();
+
+                return logoDoc;
+            }
+        }
+
         public Project GetProjectById(long Id)
         {
             using (var context = new EWUSDbContext())

@@ -146,6 +146,7 @@
             val = $(val);
             val.show();
         });
+        $("#pager-add-btn").removeClass('ui-disabled');
     }
     return {
         saveGridRow: saveRow
