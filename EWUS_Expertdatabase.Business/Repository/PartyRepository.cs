@@ -20,7 +20,7 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 List<InvolvedParty> involvedParties = new List<InvolvedParty>();
-                involvedParties = context.InvolvedPartys.AsNoTracking()
+                involvedParties = context.InvolvedPartys.AsNoTracking().OrderBy(x => x.Name)
                     .ToList();
 
                 IEnumerable<MaintenanceCompany> maintenanceCompanies = involvedParties.OfType<MaintenanceCompany>() as IEnumerable<MaintenanceCompany>;
@@ -38,7 +38,7 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 List<InvolvedParty> involvedParties = new List<InvolvedParty>();
-                involvedParties = context.InvolvedPartys.AsNoTracking()
+                involvedParties = context.InvolvedPartys.AsNoTracking().OrderBy(x => x.Name)
                     .ToList();
 
                 IEnumerable<Customer> customers = involvedParties.OfType<Customer>() as IEnumerable<Customer>;

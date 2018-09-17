@@ -15,7 +15,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 15,
+                width: 10,
                 editable: true,
                 search: false              
             },
@@ -25,7 +25,7 @@
                 formatter: 'link',
                 formatoptions: { target: '_blank'},
                 editable: true,            
-                width: 25,
+                width: 30,
                 search:false
             },
             {
