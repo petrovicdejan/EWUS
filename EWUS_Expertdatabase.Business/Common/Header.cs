@@ -29,6 +29,7 @@ namespace EWUS_Expertdatabase.Business
             
             table.DefaultCell.Border = Rectangle.NO_BORDER;
             PdfPCell cell = new PdfPCell();
+            //cell.FixedHeight = 30;
             cell.CellEvent = new dot();
             cell.Border = Rectangle.NO_BORDER;
             Paragraph p = new Paragraph();             
@@ -37,6 +38,7 @@ namespace EWUS_Expertdatabase.Business
             table.AddCell(cell);
 
             PdfPCell cellTwo = new PdfPCell();
+            //cellTwo.FixedHeight = 30;
             cellTwo.CellEvent = new dot();
             cellTwo.Border = Rectangle.NO_BORDER;
             Paragraph p1 = new Paragraph();
