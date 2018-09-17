@@ -3622,3 +3622,11 @@ ol.dz-list li.placeholder:before {
 .label-wrapper label{
     font-weight:bold;
 }
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
