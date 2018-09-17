@@ -22,6 +22,7 @@ namespace EWUS_Expertdatabase.Business.Common
         {
             var memoryStream = new MemoryStream();
             var document = new iTextSharp.text.Document();
+            document.SetMargins(30, 30, 70, 30);
             var writer = PdfWriter.GetInstance(document, memoryStream);
             Header events = new Header();
             writer.PageEvent = events;

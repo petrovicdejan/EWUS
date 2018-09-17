@@ -22,7 +22,6 @@ namespace EWUS_Expertdatabase.Business
 
         public override void OnEndPage(PdfWriter writer, Document document)
         {
-            document.SetMargins(30, 30, 500, 30);
             iTextSharp.text.Image logoFirst = iTextSharp.text.Image.GetInstance(this.logoImg);
             iTextSharp.text.Image logoSecond = iTextSharp.text.Image.GetInstance(this.rightLogo);
             
@@ -30,7 +29,7 @@ namespace EWUS_Expertdatabase.Business
             
             table.DefaultCell.Border = Rectangle.NO_BORDER;
             PdfPCell cell = new PdfPCell(logoFirst,true);            
-            cell.FixedHeight = 30;
+            cell.FixedHeight = 43;
 
             cell.CellEvent = new dot();
             cell.Border = Rectangle.NO_BORDER;
@@ -42,7 +41,7 @@ namespace EWUS_Expertdatabase.Business
             
             PdfPCell cellTwo = new PdfPCell(logoSecond,true);
             cellTwo.HorizontalAlignment = Element.ALIGN_RIGHT;
-            cellTwo.FixedHeight = 30;
+            cellTwo.FixedHeight = 43;
             cellTwo.CellEvent = new dot();
             cellTwo.Border = Rectangle.NO_BORDER;
             //Paragraph p1 = new Paragraph();
