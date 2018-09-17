@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll.config
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.pdb
@@ -53,7 +52,6 @@ C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CoreC
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CopyComplete
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.pdb
->>>>>>> 507eb785f022225b4ddb8b45a9e2796e7bf5ea0e
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll.config
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll
 C:\EWUSEXPERT\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.pdb
@@ -110,3 +108,33 @@ C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWU
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.dll
 C:\Dejan\Tmp\EWUS_Expertdatabase.Web\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.pdb
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll.config
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Data.pdb
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EntityFramework.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Model.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\System.ValueTuple.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Model.pdb
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EWUS_Expertdatabase.Model.dll.config
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EntityFramework.xml
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\bin\Debug\System.ValueTuple.xml
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csprojAssemblyReference.cache
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.InitialCreate.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version1.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version02.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version03.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version04.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version05.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version06.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version07.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version08.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version09.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version10.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.Migrations.Version11.resources
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.GenerateResource.cache
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.csproj.CopyComplete
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.dll
+C:\Users\dimitrije.jevtic\source\repos\EWUS\EWUS_Expertdatabase.Data\obj\Debug\EWUS_Expertdatabase.Data.pdb
