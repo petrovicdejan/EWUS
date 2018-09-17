@@ -280,18 +280,17 @@
                 //file.previewElement.appendChild(file._openLink);
 
                 file._openLink = $(".dz-click-image");
-                file._openLink.dblclick(function (e) {
-                    $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
 
-                        var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
-                        if (_ref3.options.objectTypeName != '')
-                            sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+                $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
+                    //e.preventDefault();
+                    //e.stopPropagation();
 
-                        window.open(sUrl);
-                        _ref3.emit("openedfile", file);
-                    });
+                    var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
+                    if (_ref3.options.objectTypeName != '')
+                        sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+
+                    window.open(sUrl);
+                    _ref3.emit("openedfile", file);
                 });
             };
           if (this.options.addRemoveLinks) {
