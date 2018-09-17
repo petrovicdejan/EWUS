@@ -342,6 +342,9 @@ ASALocalRun/
 .localhistory/
 *.ide-wal
 *.ide-wal
+<<<<<<< HEAD
+.vs/EWUS_Expertdatabase.Web/v15/.suo
+=======
 .vs/config/applicationhost.config
 EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.csproj.CoreCompileInputs.cache
@@ -360,4 +363,86 @@ EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.csproj.CoreCompi
 EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
 EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
+<<<<<<< HEAD
+.vs/EWUS_Expertdatabase.Web/v15/.suo
+.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Business.dll
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Business.pdb
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Common.dll
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Common.pdb
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Data.dll
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Data.pdb
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Business/bin/Debug/EWUS_Expertdatabase.Model.pdb
+<<<<<<< HEAD
+EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csproj.CoreCompileInputs.cache
+EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csprojAssemblyReference.cache
+=======
+EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.csproj.FileListAbsolute.txt
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
+EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.dll
+EWUS_Expertdatabase.Business/obj/Debug/EWUS_Expertdatabase.Business.pdb
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Common.dll
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Common.pdb
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Data.dll
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Data.pdb
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Common/bin/Debug/EWUS_Expertdatabase.Model.pdb
+<<<<<<< HEAD
+EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.csprojAssemblyReference.cache
+=======
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
+EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.dll
+EWUS_Expertdatabase.Common/obj/Debug/EWUS_Expertdatabase.Common.pdb
+EWUS_Expertdatabase.Data/bin/Debug/EWUS_Expertdatabase.Data.dll
+EWUS_Expertdatabase.Data/bin/Debug/EWUS_Expertdatabase.Data.pdb
+EWUS_Expertdatabase.Data/bin/Debug/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Data/bin/Debug/EWUS_Expertdatabase.Model.pdb
+<<<<<<< HEAD
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.CoreCompileInputs.cache
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.FileListAbsolute.txt
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.GenerateResource.Cache
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csprojAssemblyReference.cache
+=======
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.FileListAbsolute.txt
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.csproj.GenerateResource.Cache
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.dll
+EWUS_Expertdatabase.Data/obj/Debug/EWUS_Expertdatabase.Data.pdb
+EWUS_Expertdatabase.Model/bin/Debug/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Model/bin/Debug/EWUS_Expertdatabase.Model.pdb
+<<<<<<< HEAD
+EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
+EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csprojAssemblyReference.cache
+=======
+EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.csproj.FileListAbsolute.txt
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
+EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Model/obj/Debug/EWUS_Expertdatabase.Model.pdb
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Business.dll
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Business.pdb
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Common.dll
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Common.pdb
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Data.dll
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Data.pdb
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Model.dll
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Model.pdb
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Web.Client.dll
+EWUS_Expertdatabase.Web.Client/bin/EWUS_Expertdatabase.Web.Client.pdb
+<<<<<<< HEAD
+EWUS_Expertdatabase.Web.Client/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.CoreCompileInputs.cache
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csprojAssemblyReference.cache
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.dll
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.pdb
+=======
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.csproj.FileListAbsolute.txt
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.dll
+EWUS_Expertdatabase.Web.Client/obj/Debug/EWUS_Expertdatabase.Web.Client.pdb
+.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
+.vs/EWUS_Expertdatabase.Web/v15/Server/sqlite3/storage.ide-wal
+=======
 .vs/config/applicationhost.config
+>>>>>>> 6d27cf4becb09ff3471570c1ebdefa38d683477f
+>>>>>>> 11d61e0400f1efaba5ef849a614c1735010b5de5
