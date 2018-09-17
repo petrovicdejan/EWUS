@@ -3342,7 +3342,7 @@ var setGridOptions = (function () {
         var widthGrid = width;
         var widthParent = $("#" + gridId).parent().width();
 
-        if (Number(widthParent) != 0)
+        if (Number(widthParent) != 0 && widthParent > widthGrid)
             widthGrid = widthParent;
 
         var gridHeight = $(window).innerHeight() - 280;
@@ -3357,7 +3357,7 @@ var setGridOptions = (function () {
             colModel: colModel,
             width: widthGrid,
             height: gridHeight,
-            autowidth: true,
+            autowidth: false,
             pgbuttons: false,
             pginput: false, 
             shrinkToFit: true,
