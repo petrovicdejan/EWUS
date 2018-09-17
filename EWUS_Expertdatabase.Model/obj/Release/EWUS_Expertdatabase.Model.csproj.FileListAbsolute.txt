@@ -9,3 +9,15 @@ C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Rel
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.dll
 C:\EWUS_Expertdatabase\EWUS_Expertdatabase.Web\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.pdb
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EWUS_Expertdatabase.Model.dll.config
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EWUS_Expertdatabase.Model.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EWUS_Expertdatabase.Model.pdb
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EntityFramework.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EntityFramework.SqlServer.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EntityFramework.xml
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Release\EntityFramework.SqlServer.xml
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.csprojAssemblyReference.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.csproj.CopyComplete
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Release\EWUS_Expertdatabase.Model.pdb

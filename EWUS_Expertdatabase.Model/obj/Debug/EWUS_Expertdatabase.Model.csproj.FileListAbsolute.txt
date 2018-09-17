@@ -21,3 +21,15 @@ C:\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.Cor
 C:\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CopyComplete
 C:\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.dll
 C:\EWUS\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.pdb
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.dll.config
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EWUS_Expertdatabase.Model.pdb
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.xml
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csprojAssemblyReference.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CoreCompileInputs.cache
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.csproj.CopyComplete
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.dll
+C:\EWUSEXPERT\EWUS_Expertdatabase.Model\obj\Debug\EWUS_Expertdatabase.Model.pdb
