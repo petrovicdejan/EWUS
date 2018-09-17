@@ -200,11 +200,6 @@ namespace EWUS_Expertdatabase.Business
                                             equals
                                             new { f1 = (int?)ps.Id } into rp
                                       from q3 in rp.DefaultIfEmpty()
-                                      join ip in context.InvolvedPartys on
-                                            new { f1 = p.CustomerId }
-                                            equals
-                                            new { f1 = (int?)ip.Id } into qp
-                                      from q4 in qp.DefaultIfEmpty()
                                       select new ProjectMeasurePoco
                                       {
                                           Id = pm.Id,
@@ -215,10 +210,10 @@ namespace EWUS_Expertdatabase.Business
                                           MaintenanceCompany = q1,
                                           OperationType = q2.Value,
                                           InvestmentCost = pm.InvestmenCost,
-                                         // ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
+                                          ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
                                           Description = pm.Description,
                                           Specification = pm.Specification,
-                                        //  SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
+                                          SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
                                           SubmittedBy = pm.SubmittedBy,
                                           Release = pm.Release,
                                           Remark = pm.Remark,
@@ -227,8 +222,7 @@ namespace EWUS_Expertdatabase.Business
                                           MeasureId = m.Id,
                                           Location = p.Location,
                                           ZipCode = p.ZipCode,
-                                          City = p.City,
-                                          Logo = q4.Logo
+                                          City = p.City
                                       };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
@@ -271,7 +265,10 @@ namespace EWUS_Expertdatabase.Business
                                 documentItems.Add(edi);
                             }
                             else
+                            {
+                                di.Hide = edi.Hide;
                                 documentItems.Add(di);
+                            }
                         }
                     }
                     //if (projectMeasure.DocumentItems != null)

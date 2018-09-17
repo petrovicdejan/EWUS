@@ -71,6 +71,7 @@ namespace EWUS_Expertdatabase.Web.Client
         }
 
         [Route("leistungsblatt/{Id:long}")]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ProjectMeasureEdit(long Id)
         {
             var projectMeasureRepo = new ProjectMeasureRepository();
