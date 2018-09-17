@@ -176,11 +176,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Controllers\ReportController.cs" />
-=======
+
     <Compile Include="Controllers\ProjectMeasureController.cs" />
->>>>>>> 61444ce007eb846027799ff578c09c1296929676
     <Compile Include="ViewModel\ClassificationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\DocumentItemViewModel.cs" />
