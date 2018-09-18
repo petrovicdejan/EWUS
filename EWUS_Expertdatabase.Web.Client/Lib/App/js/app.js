@@ -3249,7 +3249,7 @@ var publicApp = (function () {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: addRemove,
                 dictRemoveFile: "Löschen",
-                addOpenLinks: false,
+                addOpenLinks: true,
                 dictOpenLink: "Offnen",
                 sendFileId: true,
                 clickable: exactdocumentSelector,
