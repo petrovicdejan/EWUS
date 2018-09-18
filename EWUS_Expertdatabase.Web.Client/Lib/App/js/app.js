@@ -3257,7 +3257,7 @@ var publicApp = (function () {
                 addDescription: true,
                 objectTypeName: refersToTypeName,
                 previewTemplate: previewTemplate,
-                thumbnailHeight: 100,
+                thumbnailHeight: 80,
                 thumbnailWidth: 140,
                 thumbnailMethod: 'crop',
                 maxFiles: maxfiles,
