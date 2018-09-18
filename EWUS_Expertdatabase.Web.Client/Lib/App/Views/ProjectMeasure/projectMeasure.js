@@ -47,7 +47,7 @@
             preview.css('display', 'block');
             $("#rows-container").append(preview);
             preview.find(".row-delete").click(function () {
-                preview.remove();
+                $(this).parent().parent().parent().remove();
             });
 
             
@@ -65,7 +65,7 @@
             preview.css('display', 'block');
             $("#rows-container").append(preview);
             preview.find(".row-delete").click(function () {
-                preview.remove();
+                $(this).parent().parent().parent().remove();
             });
             preview.find("#description").val(dataDocumentItems[i].Description);
             preview.find("#projectMeasureDropZone-check").attr('checked', dataDocumentItems[i].Hide);
