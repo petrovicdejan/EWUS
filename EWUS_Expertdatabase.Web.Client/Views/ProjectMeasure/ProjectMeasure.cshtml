@@ -20,7 +20,16 @@
                 <h2 id="modal_title">@ViewBag.Title</h2>
             </div>
             <div class="col-md-3">
-                <a class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" href="/Report/GenerateReport?projectId=@ViewBag.Id" id="generateReport" ><span>Maßnahmensteckbrief anzeigen</span> </a>
+
+                @if (@ViewBag.OpenInBrowser == "true")
+                {
+                    <a target="_blank" rel="noopener noreferrer" class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" href="/Report/GenerateReport?projectId=@ViewBag.Id" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
+                }
+                else
+                {
+                    <a class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" href="/Report/GenerateReport?projectId=@ViewBag.Id" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
+                }
+
             </div>
             <div class="col-md-4">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

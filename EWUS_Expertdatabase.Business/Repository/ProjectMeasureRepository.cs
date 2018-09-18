@@ -294,16 +294,20 @@ namespace EWUS_Expertdatabase.Business
                                        equals
                                        new { f1 = epmp.Id } into cp
                                     from q1 in cp.DefaultIfEmpty()
-                                    where q1.Id == 0
+                                    where q1 == null
                                     select new ProjectMeasurePerformance
                                     {
                                         Id = opmp.Id
                                     };
 
-                    IEnumerable<ProjectMeasurePerformance> collForDelete = forDelete.ToList();
-                    Collection<ProjectMeasurePerformance> delPmp = new ObservableCollection<ProjectMeasurePerformance>(collForDelete.ToList().Distinct());
-                    if (delPmp.Count > 0)
-                        ctx.ProjectMeasurePerformances.RemoveRange(delPmp);
+                    List<long> idForDelete = forDelete.Select(x => new ProjectMeasurePerformance { Id = x.Id }).Select(x => x.Id).ToList();
+                    //Collection<ProjectMeasurePerformance> delPmp = new ObservableCollection<ProjectMeasurePerformance>(collForDelete.ToList().Distinct());
+                    
+                    if (idForDelete.Count() > 0)
+                    {
+                        List<ProjectMeasurePerformance> collPmp = ctx.ProjectMeasurePerformances.Where(x => idForDelete.Contains(x.Id)).ToList();
+                        ctx.ProjectMeasurePerformances.RemoveRange(collPmp);
+                    }
 
                     projectMeasure.ProjectMeasurePerformances = projectMeasurePerformances;
                     projectMeasure.InvestmenCost = editProjectMeasure.InvestmentCost;
