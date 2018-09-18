@@ -3632,4 +3632,5 @@ input::-webkit-inner-spin-button {
 }
 .select2-results__options {
     max-height: 400px !important;
+    overflow-y: hidden !important;
 }

@@ -414,7 +414,7 @@
                         @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
                         @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" data-val="true" </text> }
                         data-url="@uri"
-                        style="width:90%"
+                        style="width:90%; height: auto;"
                         data-representing-type="Select"
                         onchange="publicApp.onSelectChangeApp(this)"
                         class="selectTwo form-control-ew-select"></select>
@@ -425,8 +425,6 @@
         </div>
     </div>
 }
-
-
 
 @helper jQGrid(string gridId, bool appearToolbar, string dataType = "", string width = "", string height = "", string label = "")
 {
