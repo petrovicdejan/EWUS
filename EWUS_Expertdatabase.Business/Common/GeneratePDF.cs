@@ -89,7 +89,7 @@ namespace EWUS_Expertdatabase.Business.Common
                 if (item.Hide)
                     continue;
                 
-                string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item.DocumentItem.ObjectId;
+                string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
                 
                 string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
                     + "<p style='padding-top:9px;margin-left:7px;'>" +item.Description +" </p>"

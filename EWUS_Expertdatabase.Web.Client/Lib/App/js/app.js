@@ -3249,7 +3249,7 @@ var publicApp = (function () {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
                 addRemoveLinks: addRemove,
                 dictRemoveFile: "Löschen",
-                addOpenLinks: false,
+                addOpenLinks: true,
                 dictOpenLink: "Offnen",
                 sendFileId: true,
                 clickable: exactdocumentSelector,
@@ -3258,7 +3258,7 @@ var publicApp = (function () {
                 objectTypeName: refersToTypeName,
                 previewTemplate: previewTemplate,
                 thumbnailHeight: 80,
-                thumbnailWidth: 140,
+                thumbnailWidth: 180,
                 thumbnailMethod: 'crop',
                 maxFiles: maxfiles,
                 dictRemoveFileConfirmation: 'Question'
@@ -3284,10 +3284,7 @@ var publicApp = (function () {
                 eventArgs.RefersToTypeName = refersToTypeName;
                 eventArgs.FileName = file.name;
                 eventArgs.ObjectId = file.id;
-                $(file.previewElement).find('.dzone-add').css('display', 'block');
-                $(file.previewElement).find('.dzone-add').on('click', function () {
-                    $(this).parent().parent().parent().click();
-                });
+
                 $(document).trigger("fileUpload:addedFile", eventArgs);
             }
         });
