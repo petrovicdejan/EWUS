@@ -2903,7 +2903,9 @@ var publicApp = (function () {
         if ($("div[data-dropzone='true']").length > 0) {
             getFromDropzone(fields);
         }
-
+        if ($("li[data-dropzone-extended='true']:not([data-preview])").length > 0) {
+            getFromExtendedDropzone(fields);
+        }
         if ($("table[data-jqGrid='true']").length > 0) {
             getjQGridData(fields);
         }
@@ -3006,7 +3008,13 @@ var publicApp = (function () {
             fields.push(f);
         }
     }
-
+    function getFromExtendedDropzone(el) {
+        var performancesField = {};
+        performancesField.Name = 'ProjectMeasurePerformance';
+        $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
+            console.log(val);
+        });
+    }
     function getFormElementFiledValue(el) {
 
         var represent = $(el).attr('data-representing-type');
@@ -3186,6 +3194,77 @@ var publicApp = (function () {
 
 
     }
+    function initializeMultipleDropZone(exactdocumentSelector, PreviewExact, refersToId, refersToTypeName) {
+        var myattachZ = null;
+
+        var previewNode = PreviewExact;
+        if (previewNode != null && previewNode != 'undefined') {
+            //previewNode.id = "";
+            var previewTemplate = previewNode.innerHTML;
+            //previewNode.parentNode.removeChild(previewNode);
+
+            var maxfiles = null;
+
+            try {
+                maxfiles = $(exactdocumentSelector).attr('data-maxfiles');
+            } catch (ex) {
+
+            }
+            if (maxfiles == undefined || maxfiles == NaN)
+                maxfiles = null;
+
+            myattachZ = new Dropzone(exactdocumentSelector, {
+                url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
+                addRemoveLinks: true,
+                dictRemoveFile: "Löschen",
+                addOpenLinks: true,
+                dictOpenLink: "Offnen",
+                sendFileId: true,
+                clickable: exactdocumentSelector,
+                acceptedFiles: "image/jpeg,image/png,image/jpg",
+                addDescription: true,
+                objectTypeName: refersToTypeName,
+                previewTemplate: previewTemplate,
+                thumbnailHeight: 80,
+                thumbnailWidth: 140,
+                thumbnailMethod: 'crop',
+                maxFiles: maxfiles,
+                dictRemoveFileConfirmation: 'Question'
+            }); 
+
+        }
+
+        myattachZ.on("addedfile", function (file) {
+
+            if (file.status == "added") {
+                file.previewElement.setAttribute("data-mimetype", file.type);
+                file.previewElement.setAttribute("data-objectid", file.id);
+                file.previewElement.setAttribute("data-entityid", file.entityId);
+                file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
+
+                $(exactdocumentSelector).attr("data-refers-to-id", refersToId);
+                $(exactdocumentSelector).attr("data-refers-to-type-name", refersToTypeName);
+
+                var fileNew = refersToId == 0 ? true : false;
+
+                var eventArgs = new Object();
+                eventArgs.FileIsNew = fileNew;
+                eventArgs.RefersToTypeName = refersToTypeName;
+                eventArgs.FileName = file.name;
+                eventArgs.ObjectId = file.id;
+
+                $(document).trigger("fileUpload:addedFile", eventArgs);
+            }
+        });
+        myattachZ.on("maxfilesreached", function (file) {
+            myattachZ.removeEventListeners();
+            $(exactdocumentSelector).removeClass("dz-clickable");
+            $(exactdocumentSelector).unbind();
+            $("#addFile-" + exactdocumentSelector).prop('disabled', true);
+        });
+
+
+    }
 
     function FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName) {
 
@@ -3295,6 +3374,9 @@ var publicApp = (function () {
         },
         fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
             FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
+        },
+        initializeMultipleDropZoneApp: function (exactSelector, idPreview, refersToId, refersToTypeName) {
+            initializeMultipleDropZone(exactSelector, idPreview, refersToId, refersToTypeName);
         },
         windowResize: function () {
             windowResize();

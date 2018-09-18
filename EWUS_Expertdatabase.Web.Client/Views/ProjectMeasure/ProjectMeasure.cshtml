@@ -41,6 +41,16 @@ else
         margin-bottom: 5px;
     }
 
+    #dz-projectMeasureDropZone-preview .table{
+        margin-bottom:0px;
+    }
+    #dz-projectMeasureDropZone {
+        overflow-y: hidden;
+        min-height:120px;
+        max-height:120px;
+    }
+
+
 
 </style>
 
@@ -162,7 +172,7 @@ else
         <div class="col-md-6 half-form-wrapper-measure">
             <div class="row" style="padding-top: 5px;">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.DropZoneEditor("projectMeasureDropZone", "projectMeasurePreview", "Text, Fotos und Grafiken für Maßnahmensteckbrief", "300px", showHeader: true, showDescription: true, IsHidden:true, headerText: "Text")
+                    @WebHelpers.PerformanceEditor("projectMeasureDropZone", "projectMeasurePreview", "Text, Fotos und Grafiken für Maßnahmensteckbrief","15", "dz-projectMeasureDropZone", showHeader: true, headerText: "Text")
                 </div>
             </div>
         </div>

@@ -161,10 +161,10 @@
 {
     <div class="field-set">
         <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text>style="width:61%;"</text>}>
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
                 <label for="@name">@label</label>
             </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" @if (inline) { <text>style="max-width:50%;width:auto;"</text>}>
+            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
                 <i class="fa field-icon fa-terminal fa-icon-@name" data-edit="true" valid="true"></i>
                 <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
                        data-edit="false"
@@ -173,7 +173,7 @@
                        type="text"
                        @if (type == "number") { <text> data-val-number="@name must be a number" data-money="true" </text> }
                        @if (isReadOnly == true) { <text> readonly </text> }
-                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> } >
+                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
                 @if (description != null)
                 {
@@ -268,17 +268,17 @@
 {
     <div class="field-set">
         <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text>style="width:61%;"</text>}>
+            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
                 <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
             </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" @if (inline) { <text>style="max-width:50%;width:auto;"</text>}>
+            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
                 <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
                 <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
                        placeholder="@placeholder" data-format-pattern="DD.MM.YYYY" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
                        class="date2 form-control-ew-text"
                        @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
                        data-val="true"
-                       @if (inline) { <text>style="max-width:50%;"</text>}>
+                       @if (inline) { <text> style="max-width:50%;" </text> }>
                 <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
             </div>
         </div>
@@ -309,7 +309,7 @@
                           rows="3"
                           class="form-control-ew-textarea"
                           @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                          @if (isReadOnly == true) { <text> readonly </text> } 
+                          @if (isReadOnly == true) { <text> readonly </text> }
                           placeholder="@placeholder" data-edit="false"></textarea>
                 <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
             </div>
@@ -469,35 +469,35 @@
                     <div class="row b-b-1">
                         @if (IsHidden == true)
                         {
-                        <div class="col-md-6">
-                            <p class="dz-filename" data-dz-name></p>
-                            @if (showDescription)
-                            {
-                            <span data-dz-description></span>
-                            }
+                            <div class="col-md-6">
+                                <p class="dz-filename" data-dz-name></p>
+                                @if (showDescription)
+                                {
+                                    <span data-dz-description></span>
+                                }
                                 <div class="dz-size" data-dz-size style="display:none;"></div>
                             </div>
                         }
                         else
                         {
-                        <div class="col-md-8">
-                            <p class="dz-filename" data-dz-name></p>
-                            @if (showDescription)
-                        {
-                        <span data-dz-description></span>
-                        }
-                            <div class="dz-size" data-dz-size style="display:none;"></div>
-                        </div>
+                            <div class="col-md-8">
+                                <p class="dz-filename" data-dz-name></p>
+                                @if (showDescription)
+                                {
+                                    <span data-dz-description></span>
+                                }
+                                <div class="dz-size" data-dz-size style="display:none;"></div>
+                            </div>
                         }
                         <div class="col-md-3 dz-click-image">
                             <span class=""><img data-dz-thumbnail /></span>
                         </div>
                         @if (IsHidden == true)
                         {
-                        <div class="col-md-2">
-                            <label>Ausblenden</label>
-                            <input class="dz-hide" type="checkbox">
-                        </div>
+                            <div class="col-md-2">
+                                <label>Ausblenden</label>
+                                <input class="dz-hide" type="checkbox">
+                            </div>
                         }
                         <div class="col-md-1">
                             <span class="actions">
@@ -517,7 +517,66 @@
 
 
 }
+@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name")
+{
+    <div class="">
+        <div class="field-set" style="padding-bottom:10px;">
+            <div class="field-group float-label-control" style="margin-bottom: 0;">
+                <label id="label-@label">@label</label>
+            </div>
+            <button class="btn-white btn btn-sm" id="add-performance" type="button">
+                <i class='fa fa-plus'></i><span> Neu</span>
+            </button>
 
+        </div>
+        @if (showHeader)
+        {
+            <div class="row b-b-2" style="">
+                <div class="col-md-6"><strong>@headerText</strong></div>
+                <div class="col-md-4"><strong>Bild</strong></div>
+                <div class="col-md-2"></div>
+            </div>
+        }
+        <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;">
+            <li class="b-b-1 preview-source data-performance" id="@name-row" data-preview style="display:none;" data-dropzone-extended="true">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="dz-description">
+                            <textarea id="description" type="text" rows="5" style="width:100%;" data-edit="true" data-filed-name="Description" data-float-label-set="true"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="@dzoneId" class="dropzone" data-maxfiles="1">
+                            <div class="dz-message">
+                                Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
+                            </div>
+                            <div id="@dzoneId-preview" class="dz-preview">
+                                <div class="table table-striped files " id="previews">
+                                    <div class="row ">
+                                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                        </button>
+                                        <p class="dz-filename" data-dz-name></p>
+                                        <div class="dz-size" data-dz-size style="display:none;"></div>
+                                        <div class=" dz-click-image">
+                                            <span class=""><img data-dz-thumbnail /></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        @WebHelpers.BoolEditor(name + "-check", path + "-check", "Ausblenden", tabindex)
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+}
 @helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999, string nameForMessage = "")
 {
     <div class="field-set">

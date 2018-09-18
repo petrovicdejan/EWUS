@@ -8,8 +8,8 @@
                 dataDocumentItems = data.DocumentItems;
         }
 
-        publicApp.initializeDropZoneApp("projectMeasureDropZone", "projectMeasurePreview", objectId, "ProjectMeasure");
-        publicApp.fillDropZoneApp(dataDocumentItems, "projectMeasureDropZone", objectId, "ProjectMeasure");
+        // publicApp.initializeDropZoneApp("projectMeasureDropZone", "projectMeasurePreview", objectId, "ProjectMeasure");
+        // publicApp.fillDropZoneApp(dataDocumentItems, "projectMeasureDropZone", objectId, "ProjectMeasure");
 
         GetProjectMeasure(dcProjectMeasure);
 
@@ -36,6 +36,27 @@
             });
 
         });
+
+
+        $("#add-performance").click(function () {
+
+            var preview = $("#rows-container").find(".preview-source[data-preview]").clone();
+            preview.removeAttr('data-preview');
+            preview.removeProp('data-preview');
+            preview.removeClass('preview-source');
+            preview.css('display', 'block');
+            $("#rows-container").append(preview);
+            preview.find(".row-delete").click(function () {
+                preview.remove();
+            });
+
+            var dropzone = preview.find(".dropzone");
+            var exactSelector = dropzone[0];
+            var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
+            publicApp.initializeMultipleDropZoneApp(exactSelector, exactPreviewSelector, objectId, "ProjectMeasure");
+        });
+    // bind click to add new row
+    // perform initialization logic to row
 
     });
     
