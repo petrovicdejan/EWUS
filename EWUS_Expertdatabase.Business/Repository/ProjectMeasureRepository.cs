@@ -271,6 +271,7 @@ namespace EWUS_Expertdatabase.Business
                             {
                                 pmp.Hide = edi.Hide;
                                 pmp.Description = edi.Description;
+                                pmp.Position = edi.Position;
                                 projectMeasurePerformances.Add(pmp);
                             }
                         }
