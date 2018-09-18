@@ -50,6 +50,7 @@
                 preview.remove();
             });
 
+            
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
             var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
