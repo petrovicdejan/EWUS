@@ -77,7 +77,7 @@
 
             preview.attr('data-id', dataDocumentItems[i].Id);
             preview.find("#description").val(dataDocumentItems[i].Description);
-            preview.find("#projectMeasureDropZone-check").attr('checked', dataDocumentItems[i].Hide);
+            preview.find("#projectMeasureDropZone-check").prop('checked', dataDocumentItems[i].Hide);
 
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];

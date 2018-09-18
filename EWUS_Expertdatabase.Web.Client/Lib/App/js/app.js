@@ -3304,6 +3304,9 @@ var publicApp = (function () {
                 if (myFile.status !== Dropzone.UPLOADING && myFile.id != file.id) {
                     myattachZ.removeFile(myFile);
                 }
+                else {
+                    myattachZ.uploadFile(file);
+                }
             }
         });
 
