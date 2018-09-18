@@ -3010,7 +3010,8 @@ var publicApp = (function () {
     }
     function getFromExtendedDropzone(el) {
         var performancesField = {};
-        performancesField.FieldType = 'ProjectMeasurePerformance';
+        performancesField.FieldType = 'ProjectMeasurePerformances';
+        performancesField.Name = 'ProjectMeasurePerformances';
         performancesField.Id = $("li[data-dropzone-extended='true']:not([data-preview])").first().attr('data-refers-to-id');
         performancesField.Value = [];
         $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {

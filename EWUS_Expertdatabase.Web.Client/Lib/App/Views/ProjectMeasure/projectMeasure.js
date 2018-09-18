@@ -5,7 +5,7 @@
             var data = JSON.parse(base64.decode(dcProjectMeasure));
 
             if (IsNullOrUndefined(data) == false)
-                dataDocumentItems = data.DocumentItems;
+                dataDocumentItems = data.ProjectMeasurePerformances;
         }
 
         // publicApp.initializeDropZoneApp("projectMeasureDropZone", "projectMeasurePreview", objectId, "ProjectMeasure");
@@ -56,9 +56,6 @@
             var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
             publicApp.initializeMultipleDropZoneApp(exactSelector, exactPreviewSelector, objectId, "ProjectMeasure");
         });
-    // bind click to add new row
-    // perform initialization logic to row
-
     });
     
 })(jQuery);
