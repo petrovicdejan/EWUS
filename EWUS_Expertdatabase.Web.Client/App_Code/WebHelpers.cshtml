@@ -551,31 +551,35 @@
                         <div id="@dzoneId-preview" class="dz-preview">
                             <div class="table table-striped files " id="previews" style="height:0px;">
                                 <div class="row">
-                                    @if (isAddEnabled == "true")
-                                    {
-                                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;display:none; float:right;position:relative;">
-                                            <i class='fa fa-plus'></i><span> Neu</span>
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
-                                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
-                                        </button>
-                                    }
-
-                                    <p class="dz-filename" data-dz-name style="display:none;"></p>
-                                    <div class="dz-size" data-dz-size style="display:none;"></div>
-                                    <div class=" dz-click-image">
-                                        <span class=""><img data-dz-thumbnail style="position:relative;z-index:3000"/></span>
+                                    <div class="col-md-12">
+                                        <div class=" dz-click-image">
+                                            <span class=""><img data-dz-thumbnail style="position:relative;z-index:3000" /></span>
+                                        </div>
+                                        <p class="dz-filename" data-dz-name style="display:none;"></p>
+                                        <div class="dz-size" data-dz-size style="display:none;"></div>
                                     </div>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="field-set">
+
+                        @if (isAddEnabled == "true")
+                        {
+                            <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
+                                <i class='fa fa-plus'></i><span> Neu</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                                <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                            </button>
+                        }
+
+                        <div class="field-set" style="margin-top:30%;">
                             <div class="field-contener">
                                 <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
                                     <label for="@name-check">Ausblenden</label>
@@ -586,6 +590,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>

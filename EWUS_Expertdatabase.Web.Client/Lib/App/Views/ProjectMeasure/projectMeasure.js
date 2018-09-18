@@ -73,6 +73,10 @@
                     $(this).parent().parent().parent().remove();
                 });
             }
+            //preview.find('.dzone-add').css('display', 'block');
+            preview.find('.dzone-add').on('click', function () {
+                $(this).parent().parent().find('.dropzone').click();
+            });
             
 
             preview.attr('data-id', dataDocumentItems[i].Id);
