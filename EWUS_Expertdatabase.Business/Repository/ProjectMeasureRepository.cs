@@ -288,6 +288,23 @@ namespace EWUS_Expertdatabase.Business
                         }
                     }
 
+                    var forDelete = from opmp in projectMeasure.ProjectMeasurePerformances
+                                    join epmp in editProjectMeasure.ProjectMeasurePerformances on
+                                       new { f1 = opmp.Id }
+                                       equals
+                                       new { f1 = epmp.Id } into cp
+                                    from q1 in cp.DefaultIfEmpty()
+                                    where q1.Id == 0
+                                    select new ProjectMeasurePerformance
+                                    {
+                                        Id = opmp.Id
+                                    };
+
+                    IEnumerable<ProjectMeasurePerformance> collForDelete = forDelete.ToList();
+                    Collection<ProjectMeasurePerformance> delPmp = new ObservableCollection<ProjectMeasurePerformance>(collForDelete.ToList().Distinct());
+                    if (delPmp.Count > 0)
+                        ctx.ProjectMeasurePerformances.RemoveRange(delPmp);
+
                     projectMeasure.ProjectMeasurePerformances = projectMeasurePerformances;
                     projectMeasure.InvestmenCost = editProjectMeasure.InvestmentCost;
                     projectMeasure.MaintenanceCompanyId = editProjectMeasure.MaintenanceCompanyId;
