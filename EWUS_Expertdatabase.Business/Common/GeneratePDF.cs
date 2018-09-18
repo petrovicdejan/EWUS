@@ -22,7 +22,7 @@ namespace EWUS_Expertdatabase.Business.Common
         {
             var memoryStream = new MemoryStream();
             var document = new iTextSharp.text.Document();
-            document.SetMargins(30, 30, 70, 30);
+            document.SetMargins(75, 75, 70, 30);
             var writer = PdfWriter.GetInstance(document, memoryStream);
             Header events = new Header();
             writer.PageEvent = events;
@@ -37,7 +37,7 @@ namespace EWUS_Expertdatabase.Business.Common
             var projectRepo = new ProjectRepository();
             logoDoc = projectRepo.GetDocumentItemForProject(projectMeasurePoco.ProjectId);    
             
-            string logoPath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_Customer"] + @"\" + logoDoc.ObjectId);
+            string logoPath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_Customer"] + @"\" + logoDoc?.ObjectId);
             
             events.setHeader(logoPath, rightLogo);
             document.NewPage();
@@ -66,12 +66,17 @@ namespace EWUS_Expertdatabase.Business.Common
             var sRootUrl = ConfigurationManager.AppSettings["rootURL"];
 
             string headerImage = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=Deutchland.png";
-            
-            html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco.OperationType)
-                        .Replace("$$$LiegenschaftsNr$$$",projectMeasurePoco.PerformanseSheetNumber.ToString())
+
+            string performanceSheetNumber = string.Empty;
+
+            if (projectMeasurePoco.PerformanseSheetNumber != 0)
+                performanceSheetNumber = projectMeasurePoco.PerformanseSheetNumber.ToString();
+
+            html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType)
+                        .Replace("$$$LiegenschaftsNr$$$", performanceSheetNumber)
                         .Replace("$$$Standort$$$", projectMeasurePoco.Location)
-                        .Replace("$$$Plz$$$", projectMeasurePoco.ZipCode)
-                        .Replace("$$$Ort$$$", projectMeasurePoco.City)
+                        .Replace("$$$Plz$$$", projectMeasurePoco?.ZipCode)
+                        .Replace("$$$Ort$$$", projectMeasurePoco?.City)
                         .Replace("$$$Wartungsfirma$$$", projectMeasurePoco?.MaintenanceCompany?.Name)
                         .Replace("$$$WartungsfirmaEmail$$$", projectMeasurePoco?.MaintenanceCompany?.Email)
                         .Replace("$$$Massnahmenart$$$", projectMeasurePoco?.OperationType)
@@ -86,34 +91,26 @@ namespace EWUS_Expertdatabase.Business.Common
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item.DocumentItem.ObjectId;
                 
-                string table = " <table class='dotted' width='604' height='500'><tbody><tr><td width ='604' valign='top'> "
-                    + "<p>" +item.Description +" </p>"
-                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='600' height='450' src='" + imagePath + "' /> </p> "
+                string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
+                    + "<p style='padding-top:9px;margin-left:7px;'>" +item.Description +" </p>"
+                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' height='395' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
                     + " </tbody> "
                     + " </table> ";
 
                 tablesCurrentSituation += table;
-
             }
-            
-            string tableBesch = "<table class='dotted'><tbody><tr><td width='604' valign='top'> <p>"+ projectMeasurePoco.Description + " "
-                          + "</p> "
-                       + "</td>"
-                    + " </tr>"
-                 + "</tbody>"
-             + "</table> ";
-
-            if (projectMeasurePoco.Description == null || string.IsNullOrWhiteSpace(projectMeasurePoco.Description))
-                tableBesch = string.Empty;
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
-                        .Replace("$$$Beschreibung$$$", tableBesch)
-                        .Replace("$$$EingereichtAm$$$", projectMeasurePoco.SubmittedOnDate.ToString()); ;
+                        .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description);
             
-            return html;
+            if (projectMeasurePoco.SubmittedOnDate == null)
+                html = html.Replace("$$$EingereichtAm$$$", "[EingereichtAm]");
+            else
+                html = html.Replace("$$$EingereichtAm$$$", projectMeasurePoco?.SubmittedOnDate.Value.ToString("dd.MM.yyy"));
 
+            return html;
         }
     }
 }
