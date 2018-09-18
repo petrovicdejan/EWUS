@@ -3632,5 +3632,8 @@ input::-webkit-inner-spin-button {
 }
 .select2-results__options {
     max-height: 400px !important;
-    overflow-y: hidden !important;
+}
+
+.select2-results__option .clearfix:after {
+    content:" " !important;
 }
