@@ -3022,6 +3022,8 @@ var publicApp = (function () {
             performance.Description = val.find("#description").val();
             performance.Hide = val.find('#' + name + '-check').is(":checked");
             performance.Position = ind + 1;
+            if(val.attr('data-id'))
+                performance.Id = val.attr('data-id');
             try {
                 performance.DocumentItem = {};
                 performance.DocumentItem.Id = val.find('[data-entityId]').attr('data-entityId');    

@@ -91,7 +91,7 @@ namespace EWUS_Expertdatabase.Business
                                           OperationType = q2.Value,
                                           InvestmentCost = pm.InvestmenCost
                                       };
-                                      
+
 
                 List<ProjectMeasurePoco> result = projectMeasures.ToList();
                 if (result != null)
@@ -146,7 +146,7 @@ namespace EWUS_Expertdatabase.Business
                 {
                     ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == Id)
                                             .FirstOrDefault();
-                    
+
                     try
                     {
                         ctx.ProjectMeasures.Remove(projectMeasure);
@@ -182,47 +182,47 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 var projectMeasure = from pm in context.ProjectMeasures.Where(pm => pm.Id == Id)
-                                      join m in context.Measures on pm.MeasureId equals m.Id
-                                      join p in context.Projects on pm.ProjectId equals p.Id
-                                      join mc in context.MaintenanceCompanies on
-                                            new { f1 = pm.MaintenanceCompanyId }
-                                            equals
-                                            new { f1 = (int?)mc.Id } into cp
-                                      from q1 in cp.DefaultIfEmpty()
-                                      join ot in context.Classifications.Where(x => x.ClassificationType == "Massnahmenart") on
-                                            new { f1 = m.OperationTypeId }
-                                            equals
-                                            new { f1 = (int?)ot.Id } into ap
-                                      from q2 in ap.DefaultIfEmpty()
-                                      join ps in context.Classifications.Where(x => x.ClassificationType == "Leistungsblattstatus") on
-                                            new { f1 = pm.PerformanseSheetStatusId }
-                                            equals
-                                            new { f1 = (int?)ps.Id } into rp
-                                      from q3 in rp.DefaultIfEmpty()
-                                      select new ProjectMeasurePoco
-                                      {
-                                          Id = pm.Id,
-                                          Name = p.Name,
-                                          PerformanseSheetNumber = pm.PerformanseSheetNumber,
-                                          MeasureName = m.Name,
-                                          PerformanseSheetStatus = q3,
-                                          MaintenanceCompany = q1,
-                                          OperationType = q2.Value,
-                                          InvestmentCost = pm.InvestmenCost,
-                                          ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
-                                          Description = pm.Description,
-                                          Specification = pm.Specification,
-                                          SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
-                                          SubmittedBy = pm.SubmittedBy,
-                                          Release = pm.Release,
-                                          Remark = pm.Remark,
-                                          ProjectMeasurePerformances = pm.ProjectMeasurePerformances,
-                                          ProjectId = p.Id,
-                                          MeasureId = m.Id,
-                                          Location = p.Location,
-                                          ZipCode = p.ZipCode,
-                                          City = p.City
-                                      };
+                                     join m in context.Measures on pm.MeasureId equals m.Id
+                                     join p in context.Projects on pm.ProjectId equals p.Id
+                                     join mc in context.MaintenanceCompanies on
+                                           new { f1 = pm.MaintenanceCompanyId }
+                                           equals
+                                           new { f1 = (int?)mc.Id } into cp
+                                     from q1 in cp.DefaultIfEmpty()
+                                     join ot in context.Classifications.Where(x => x.ClassificationType == "Massnahmenart") on
+                                           new { f1 = m.OperationTypeId }
+                                           equals
+                                           new { f1 = (int?)ot.Id } into ap
+                                     from q2 in ap.DefaultIfEmpty()
+                                     join ps in context.Classifications.Where(x => x.ClassificationType == "Leistungsblattstatus") on
+                                           new { f1 = pm.PerformanseSheetStatusId }
+                                           equals
+                                           new { f1 = (int?)ps.Id } into rp
+                                     from q3 in rp.DefaultIfEmpty()
+                                     select new ProjectMeasurePoco
+                                     {
+                                         Id = pm.Id,
+                                         Name = p.Name,
+                                         PerformanseSheetNumber = pm.PerformanseSheetNumber,
+                                         MeasureName = m.Name,
+                                         PerformanseSheetStatus = q3,
+                                         MaintenanceCompany = q1,
+                                         OperationType = q2.Value,
+                                         InvestmentCost = pm.InvestmenCost,
+                                         ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
+                                         Description = pm.Description,
+                                         Specification = pm.Specification,
+                                         SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
+                                         SubmittedBy = pm.SubmittedBy,
+                                         Release = pm.Release,
+                                         Remark = pm.Remark,
+                                         ProjectMeasurePerformances = pm.ProjectMeasurePerformances,
+                                         ProjectId = p.Id,
+                                         MeasureId = m.Id,
+                                         Location = p.Location,
+                                         ZipCode = p.ZipCode,
+                                         City = p.City
+                                     };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
                 IEnumerable<ProjectMeasurePerformance> projectMeasurePerformances = context.ProjectMeasures.Where(pm => pm.Id == Id).SelectMany(x => x.ProjectMeasurePerformances)
@@ -234,7 +234,7 @@ namespace EWUS_Expertdatabase.Business
                 {
                     result.ProjectMeasurePerformances = new Collection<ProjectMeasurePerformance>();
                     result.ProjectMeasurePerformances = pmp;
-                }                   
+                }
 
                 if (result != null)
                 {
@@ -272,6 +272,17 @@ namespace EWUS_Expertdatabase.Business
                                 pmp.Hide = edi.Hide;
                                 pmp.Description = edi.Description;
                                 pmp.Position = edi.Position;
+                                if (edi.DocumentItem != null)
+                                {
+                                    var docItem = ctx.DocumentItems.Where(x => x.Id == edi.DocumentItem.Id).FirstOrDefault();
+                                    if (docItem != null)
+                                    {
+                                        pmp.DocumentItem = docItem;
+                                    }else
+                                    {
+                                        pmp.DocumentItem = edi.DocumentItem;
+                                    }
+                                }
                                 projectMeasurePerformances.Add(pmp);
                             }
                         }
@@ -294,12 +305,12 @@ namespace EWUS_Expertdatabase.Business
                 {
                     output.Status = ResultStatus.BadRequest;
                 }
-                
+
                 ctx.SaveChanges();
 
 
-                if (!string.IsNullOrEmpty(projectMeasure.Guid.ToString()) && projectMeasure.ProjectMeasurePerformances != null 
-                    && projectMeasure.ProjectMeasurePerformances.Count>0 )
+                if (!string.IsNullOrEmpty(projectMeasure.Guid.ToString()) && projectMeasure.ProjectMeasurePerformances != null
+                    && projectMeasure.ProjectMeasurePerformances.Count > 0)
                 {
                     Task.Factory.StartNew(() =>
                     {

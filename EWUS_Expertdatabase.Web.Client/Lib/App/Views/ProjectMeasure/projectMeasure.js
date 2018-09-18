@@ -67,6 +67,7 @@
             preview.find(".row-delete").click(function () {
                 $(this).parent().parent().parent().remove();
             });
+            preview.attr('data-id', dataDocumentItems[i].Id);
             preview.find("#description").val(dataDocumentItems[i].Description);
             preview.find("#projectMeasureDropZone-check").attr('checked', dataDocumentItems[i].Hide);
 
