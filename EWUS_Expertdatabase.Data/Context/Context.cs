@@ -48,6 +48,8 @@ namespace EWUS_Expertdatabase.Data
             modelBuilder.Entity<Classification>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Classification>().Property(x => x.ClassificationType).IsRequired();
             modelBuilder.Entity<Classification>().Property(x => x.Value).IsRequired();
+
+            modelBuilder.Entity<ProjectMeasurePerformance>().HasOptional(x => x.DocumentItem).WithOptionalDependent().WillCascadeOnDelete(true);
         }
     }
 }

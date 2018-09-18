@@ -114,8 +114,7 @@ namespace EWUS_Expertdatabase.Business
 
                 projectMeasure.ProjectId = editProjectMeasurePoco.ProjectId;
                 projectMeasure.MeasureId = editProjectMeasurePoco.MeasureId;
-                //projectMeasure.ModificationDate = DateTime.Now.ToLocalTime();
-                projectMeasure.Release = true;
+                projectMeasure.Release = false;
 
                 int maxPerformanseSheetNumber = 0;
                 if (ctx.ProjectMeasures.Count() > 0)
@@ -217,7 +216,7 @@ namespace EWUS_Expertdatabase.Business
                                           SubmittedBy = pm.SubmittedBy,
                                           Release = pm.Release,
                                           Remark = pm.Remark,
-                                          DocumentItems = pm.DocumentItems,
+                                          ProjectMeasurePerformances = pm.ProjectMeasurePerformances,
                                           ProjectId = p.Id,
                                           MeasureId = m.Id,
                                           Location = p.Location,
@@ -226,14 +225,15 @@ namespace EWUS_Expertdatabase.Business
                                       };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
-                IEnumerable<DocumentItem> documentItems = context.ProjectMeasures.Where(pm => pm.Id == Id).SelectMany(x => x.DocumentItems).OrderBy(x => x.Position).ToList();
+                IEnumerable<ProjectMeasurePerformance> projectMeasurePerformances = context.ProjectMeasures.Where(pm => pm.Id == Id).SelectMany(x => x.ProjectMeasurePerformances)
+                                                                                            .Include(x => x.DocumentItem).OrderBy(x => x.Position).ToList();
 
-                Collection<DocumentItem> cdi = new ObservableCollection<DocumentItem>(documentItems.ToList().Distinct());
+                Collection<ProjectMeasurePerformance> pmp = new ObservableCollection<ProjectMeasurePerformance>(projectMeasurePerformances.ToList().Distinct());
 
-                if (documentItems != null)
+                if (projectMeasurePerformances != null)
                 {
-                    result.DocumentItems = new Collection<DocumentItem>();
-                    result.DocumentItems = cdi;
+                    result.ProjectMeasurePerformances = new Collection<ProjectMeasurePerformance>();
+                    result.ProjectMeasurePerformances = pmp;
                 }                   
 
                 if (result != null)
@@ -252,35 +252,31 @@ namespace EWUS_Expertdatabase.Business
             using (var ctx = new EWUSDbContext())
             {
                 ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == editProjectMeasure.Id)
-                                                    .Include(x => x.DocumentItems).FirstOrDefault();
+                                                    .Include(x => x.ProjectMeasurePerformances).FirstOrDefault();
 
                 if (projectMeasure != null)
                 {
-                    Collection<DocumentItem> documentItems = new Collection<DocumentItem>();
-                    if (editProjectMeasure.DocumentItems != null && editProjectMeasure.DocumentItems.Count() > 0)
+                    Collection<ProjectMeasurePerformance> projectMeasurePerformances = new Collection<ProjectMeasurePerformance>();
+                    if (editProjectMeasure.ProjectMeasurePerformances != null && editProjectMeasure.ProjectMeasurePerformances.Count() > 0)
                     {
-                        foreach (var edi in editProjectMeasure.DocumentItems)
+                        foreach (var edi in editProjectMeasure.ProjectMeasurePerformances)
                         {
-                            var di = ctx.DocumentItems.Where(x => x.Id == edi.Id).FirstOrDefault();
-                            if (di == null)
+                            var pmp = ctx.ProjectMeasurePerformances.Where(x => x.Id == edi.Id).FirstOrDefault();
+                            if (pmp == null)
                             {
-                                ctx.DocumentItems.Add(edi);
-                                documentItems.Add(edi);
+                                ctx.ProjectMeasurePerformances.Add(edi);
+                                projectMeasurePerformances.Add(edi);
                             }
                             else
                             {
-                                di.Hide = edi.Hide;
-                                documentItems.Add(di);
+                                pmp.Hide = edi.Hide;
+                                pmp.Description = edi.Description;
+                                projectMeasurePerformances.Add(pmp);
                             }
                         }
                     }
-                    //if (projectMeasure.DocumentItems != null)
-                    //{
-                    //    List<DocumentItem> documentItems = projectMeasure.DocumentItems.ToList();
-                    //    ctx.DocumentItems.RemoveRange(documentItems);
-                    //}
 
-                    projectMeasure.DocumentItems = documentItems;
+                    projectMeasure.ProjectMeasurePerformances = projectMeasurePerformances;
                     projectMeasure.InvestmenCost = editProjectMeasure.InvestmentCost;
                     projectMeasure.MaintenanceCompanyId = editProjectMeasure.MaintenanceCompanyId;
                     projectMeasure.ModificationDate = editProjectMeasure.ModificationDate;
@@ -301,16 +297,67 @@ namespace EWUS_Expertdatabase.Business
                 ctx.SaveChanges();
 
 
-                if (!string.IsNullOrEmpty(projectMeasure.Guid.ToString()) && projectMeasure.DocumentItems != null)
+                if (!string.IsNullOrEmpty(projectMeasure.Guid.ToString()) && projectMeasure.ProjectMeasurePerformances != null 
+                    && projectMeasure.ProjectMeasurePerformances.Count>0 )
                 {
                     Task.Factory.StartNew(() =>
                     {
-                        SaveFile.SaveFileInFolder(projectMeasure.Guid.ToString(), typeof(ProjectMeasure).Name, projectMeasure.DocumentItems);
+                        Collection<DocumentItem> cdi = new Collection<DocumentItem>();
+                        foreach (var pmp in projectMeasure.ProjectMeasurePerformances)
+                        {
+                            if (pmp.DocumentItem != null && !string.IsNullOrEmpty(pmp.DocumentItem.ObjectId))
+                            {
+                                cdi.Add(pmp.DocumentItem);
+                            }
+                        }
+                        SaveFile.SaveFileInFolder(projectMeasure.Guid.ToString(), typeof(ProjectMeasure).Name, cdi);
                     });
                 }
 
                 output = Result.ToResult<ProjectMeasure>(ResultStatus.OK, typeof(ProjectMeasure));
                 output.Value = new ProjectMeasure() { Id = projectMeasure.Id, Name = projectMeasure.Name };
+            }
+
+            return output;
+        }
+
+        public Result DeleteProjectMeasurePerformanceById(long Id)
+        {
+            Result output = new Result();
+            output.Status = ResultStatus.BadRequest;
+
+            try
+            {
+                using (var ctx = new EWUSDbContext())
+                {
+                    ProjectMeasurePerformance projectMeasurePerformance = ctx.ProjectMeasurePerformances.Where(x => x.Id == Id)
+                                            .FirstOrDefault();
+
+                    try
+                    {
+                        ctx.ProjectMeasurePerformances.Remove(projectMeasurePerformance);
+
+                        ctx.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.HResult == -2146233087)
+                        {
+                            output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity;
+                            output.Status = ResultStatus.Forbidden;
+                        }
+                        else
+                        {
+                            output.ExceptionMessage = "Exception could not be performed !!!";
+                            output.Status = ResultStatus.InternalServerError;
+                        }
+                    }
+                }
+                output.Status = ResultStatus.OK;
+            }
+            catch (Exception e)
+            {
+                output.Status = ResultStatus.InternalServerError;
             }
 
             return output;

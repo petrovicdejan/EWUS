@@ -20,14 +20,10 @@ namespace EWUS_Expertdatabase.Web.Client
         public Classification PerformanseSheetStatus { get; set; }
 
         public int? PerformanseSheetStatusId { get; set; }
-
-        //public string PerformanseSheetStatus { get; set; }
-
+        
         public MaintenanceCompany MaintenanceCompany { get; set; }
 
         public int? MaintenanceCompanyId { get; set; }
-
-        //public string MaintenanceCompany { get; set; }
 
         public string OperationType { get; set; }
 
@@ -51,7 +47,7 @@ namespace EWUS_Expertdatabase.Web.Client
 
         public string Remark { get; set; }
 
-        public Collection<DocumentItem> DocumentItems { get; set; }
+        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
 
     }
 }

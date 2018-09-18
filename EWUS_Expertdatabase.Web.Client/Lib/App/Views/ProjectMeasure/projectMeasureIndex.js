@@ -53,14 +53,14 @@ var projectModule = (function () {
         {
             label: 'Id',
             name: 'Id',
-            width: 7,
+            width: 10,
             editable: true,
             hidden: true
         },
         {
             label: 'LB-Nr',
             name: 'PerformanseSheetNumber',
-            width: 6,
+            width: 8,
             key: true,
             editable: true,
             searchoptions: {
@@ -70,7 +70,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 32,
+            width: 40,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -79,16 +79,7 @@ var projectModule = (function () {
         {
             label: 'Status',
             name: 'PerformanceSheetStatus',
-            width: 8,
-            editable: true,
-            searchoptions: {
-                sopt: ['cn'],
-            }
-        },
-        {
-            label: 'Wartungsfirma',
-            name: 'MaintenanceCompany',
-            width: 15,
+            width: 12,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -104,9 +95,18 @@ var projectModule = (function () {
             }
         },
         {
+            label: 'Wartungsfirma',
+            name: 'MaintenanceCompany',
+            width: 16,
+            editable: true,
+            searchoptions: {
+                sopt: ['cn'],
+            }
+        },
+        {
             label: 'Monetärer Aufwand [€]',
             name: 'InvestmentCost',
-            width: 11,
+            width: 13,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",

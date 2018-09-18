@@ -79,12 +79,12 @@ namespace EWUS_Expertdatabase.Business.Common
                         .Replace("$$$HeaderImage$$$", headerImage);
 
             string tablesCurrentSituation = string.Empty;
-            foreach (var item in projectMeasurePoco.DocumentItems)
+            foreach (var item in projectMeasurePoco.ProjectMeasurePerformances)
             {
                 if (item.Hide)
                     continue;
                 
-                string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item.ObjectId;
+                string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item.DocumentItem.ObjectId;
                 
                 string table = " <table class='dotted' width='604' height='500'><tbody><tr><td width ='604' valign='top'> "
                     + "<p>" +item.Description +" </p>"
