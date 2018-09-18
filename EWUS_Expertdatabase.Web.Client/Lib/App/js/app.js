@@ -3019,20 +3019,20 @@ var publicApp = (function () {
             val = $(val);
             var name = val.attr('data-name');
             var performance = {};
+            performance.Description = val.find("#description").val();
+            performance.Hide = val.find('#' + name + '-check').is(":checked");
+            performance.Position = ind + 1;
             try {
                 performance.DocumentItem = {};
-                performance.DocumentItem.Id = val.find('[data-entityId]').attr('data-entityId');
-                performance.Description = val.find("#description").val();
-                performance.Hide = val.find('#' + name + '-check').is(":checked");
+                performance.DocumentItem.Id = val.find('[data-entityId]').attr('data-entityId');    
                 performance.DocumentItem.DocumentSize = val.find('.dz-size[data-dz-size]')[1].innerText;
                 performance.DocumentItem.DocumentName = val.find(".dz-filename[data-dz-name]")[1].innerText;
                 performance.DocumentItem.DocumentMimeType = val.find('[data-mimetype]').attr("data-mimetype");
                 performance.DocumentItem.ObjectId = val.find('[data-objectid]').attr('data-objectid');
-                performance.Position = ind + 1;
-                performancesField.Value.push(performance);
             } catch (ex) {
-
+                performance.DocumentItem = {};
             }
+            performancesField.Value.push(performance)
         });
         if (performancesField.Value.length > 0)
             el.push(performancesField);
