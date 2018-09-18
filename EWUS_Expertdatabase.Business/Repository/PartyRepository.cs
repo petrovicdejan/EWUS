@@ -20,7 +20,7 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 List<InvolvedParty> involvedParties = new List<InvolvedParty>();
-                involvedParties = context.InvolvedPartys.AsNoTracking()
+                involvedParties = context.InvolvedPartys.AsNoTracking().OrderBy(x => x.Name)
                     .ToList();
 
                 IEnumerable<MaintenanceCompany> maintenanceCompanies = involvedParties.OfType<MaintenanceCompany>() as IEnumerable<MaintenanceCompany>;
@@ -38,7 +38,7 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 List<InvolvedParty> involvedParties = new List<InvolvedParty>();
-                involvedParties = context.InvolvedPartys.AsNoTracking()
+                involvedParties = context.InvolvedPartys.AsNoTracking().OrderBy(x => x.Name)
                     .ToList();
 
                 IEnumerable<Customer> customers = involvedParties.OfType<Customer>() as IEnumerable<Customer>;
@@ -140,7 +140,10 @@ namespace EWUS_Expertdatabase.Business
 
                 if (!string.IsNullOrEmpty(customer.Guid.ToString()) && customer.DocumentItems != null)
                 {
-                    SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    Task.Factory.StartNew(() =>
+                    {
+                        SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                    });
                 }
 
                 output = Result.ToResult<Customer>(ResultStatus.OK, typeof(Customer));

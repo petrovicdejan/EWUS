@@ -1,4 +1,54 @@
-﻿var projectModule = (function () {
+﻿var funcAddMeasureToProject = function addMeasureToProject(projectId, measureId) {
+    var sUrl = sRootUrl + 'ProjectMeasure/AddProjectToMeasure';
+    var data = new Object();
+    data.ProjectId = projectId;
+    data.MeasureId = measureId;
+
+    publicApp.postWebApi(sUrl, data, function (data) {
+        
+        publicApp.getWebApi(url, projectMeasureTransform, false, false);
+
+    }, false);
+
+};
+
+var projectMeasureTransform = function transformData(rData) {
+    setGridOptions.deleteRows('gridProjectMeasure');
+    var data = [];
+    $.each(rData, function (inx, item) {
+        var row = new Object();
+        row.Id = item.Id;
+        row.Name = item.Name;
+        row.PerformanseSheetNumber = item.PerformanseSheetNumber;
+        row.MeasureName = item.MeasureName;
+
+        if (!IsNullOrUndefined(item.PerformanseSheetStatus)) {
+            row.PerformanceSheetStatus = item.PerformanseSheetStatus.Value;
+        }
+
+        if (!IsNullOrUndefined(item.MaintenanceCompany)) {
+            row.MaintenanceCompany = item.MaintenanceCompany.Name;
+        }
+
+        if (!IsNullOrUndefined(item.OperationType)) {
+            row.OperationType = item.OperationType;
+        }
+
+        row.InvestmentCost = item.InvestmentCost;
+
+
+        data.push(row);
+    });
+
+    $('#gridProjectMeasure').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
+
+    $('#rowsNumber').text('Anzahl: ' + $('#gridProjectMeasure').getGridParam('reccount'));
+
+    publicApp.setUpSelectApp("#projectMeasureList ");
+
+}
+
+var projectModule = (function () {
     var colModel = [
         {
             label: 'Id',
@@ -10,7 +60,7 @@
         {
             label: 'LB-Nr',
             name: 'PerformanseSheetNumber',
-            width: 8,
+            width: 6,
             key: true,
             editable: true,
             searchoptions: {
@@ -20,7 +70,7 @@
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 12,
+            width: 32,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -28,8 +78,8 @@
         },
         {
             label: 'Status',
-            name: 'PerformanceStatus',
-            width: 12,
+            name: 'PerformanceSheetStatus',
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -38,7 +88,7 @@
         {
             label: 'Wartungsfirma',
             name: 'MaintenanceCompany',
-            width: 11,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -52,11 +102,11 @@
             searchoptions: {
                 sopt: ['cn'],
             }
-        }
+        },
         {
             label: 'Monetärer Aufwand [€]',
             name: 'InvestmentCost',
-            width: 12,
+            width: 11,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
@@ -69,57 +119,38 @@
         {
             label: '',
             name: '',
-            width: 4,
+            width: 3,
             formatter: function (cellvalue, options, rowObject) {
-                return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectMeasureData + ')" data-type="Project" data-url="Project/DeleteProject/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
+                return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectMeasureData + ')" data-type="Project" data-url="ProjectMeasure/DeleteProjectMeasure/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
             },
             editable: false,
             search: false
         },
     ];
 
-    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false,"/Project/ProjectEdit?key=");
+    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/leistungsblatt/");
+    
+    $("#ProjectName").val(projectName);
+
+    $("#AddMeasureToProject").on('click', function () {
+        var value = publicApp.getSelectedFieldApp('#Measure');
+        if (!IsNullOrUndefined(value)) {
+            var sUrl = sRootUrl + 'ProjectMeasure/AddProjectToMeasure';
+            var data = new Object();
+            data.ProjectId = objectId;
+            data.MeasureId = value.Value;
+
+            publicApp.postWebApi(sUrl, data, fetchProjectMeasureData, false, true, fetchProjectMeasureData);
+        }
+
+    });
 
     function fetchProjectMeasureData() {
 
         setGridOptions.deleteRows('gridProjectMeasure');
        
-        var url = sRootUrl + 'ProjectMeasure/GetProjectMeasures';
+        var url = sRootUrl + 'ProjectMeasure/GetAllProjectMeasures/' + objectId;
 
-        publicApp.getWebApi(url, function (rData) {
-            var data = [];
-            $.each(rData, function (inx, item) {
-                var row = new Object();
-                row.Id = item.Id;
-                row.Name = item.Name;
-                row.PropertyNumber = item.PropertyNumber;
-
-                if (!IsNullOrUndefined(item.Property)) {
-                    row.PropertyType = item.Property.Name;
-                }
-
-                if (!IsNullOrUndefined(item.Customer)) {
-                    row.Customer = item.Customer.Name;
-                }
-
-                if (!IsNullOrUndefined(item.Region)) {
-                    row.Region = item.Region.Name;
-                }
-
-                row.Location = item.Location;
-                row.ZipCode = item.ZipCode;
-                row.City = item.City;
-                row.InvestmentTotal = item.InvestmentTotal;
-                row.SavingTotal = item.SavingTotal;
-
-
-                data.push(row);
-            });
-
-            $('#gridProjectMeasure').jqGrid('setGridParam', { data: data }).trigger('reloadGrid');
-
-            $('#rowsNumber').text('Anzahl: ' + $('#gridProjectMeasure').getGridParam('reccount'));
-
-        }, false, false);
+        publicApp.getWebApi(url, projectMeasureTransform);
     }
 })();

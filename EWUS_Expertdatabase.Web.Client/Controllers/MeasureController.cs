@@ -34,6 +34,18 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
             return Json(lstMeasureViewModel, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("Measure/GetMeasuresNotRelatedWithProject/{projectId:long}")]
+        public JsonResult GetMeasuresNotRelatedWithProject(long projectId)
+        {
+            var measureRepo = new MeasureRepository();
+            List<MeasurePoco> measures = measureRepo.GetMeasuresNotRelatedWithProject(projectId);
+
+            List<MeasureViewModel> lstMeasureViewModel = new List<MeasureViewModel>();
+            lstMeasureViewModel = Mapper.Map<List<MeasurePoco>, List<MeasureViewModel>>(measures);
+
+            return Json(lstMeasureViewModel, JsonRequestBehavior.AllowGet);
+        }
+
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Measure()
         {

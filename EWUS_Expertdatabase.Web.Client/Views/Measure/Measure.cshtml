@@ -57,7 +57,7 @@ else
         <div class="col-md-6 half-form-wrapper-measure">
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.TextEditor("Name", "Name", "Benennung", "Benennung", "1", isRequired: true)
+                    @WebHelpers.TextEditor("Name", "Name", "Benennung", "Benennung", "1", isRequired: true, nameForMessage: "Benennung")
                 </div>
             </div>
 
@@ -68,7 +68,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.SelectEditor("OperationType", "Massnahmenart", "Massnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true)
+                    @WebHelpers.SelectEditor("OperationType", "Maßnahmenart", "Maßnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true, nameForMessage: "Massnahmenart")
                 </div>
             </div>
             <div class="row">
@@ -88,7 +88,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.jQGrid("jqGridLink", true, "MeasureLinks", "69%", "195px", "Documentlinks")
+                    @WebHelpers.jQGrid("jqGridLink", true, "MeasureLinks", "69%", "195px", "Dokumentlinks")
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@ else
             <div class="row" style="padding-top: 5px;">
 
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.DropZoneEditor("measureDropZone", "measurePreview", "Fotos und Grafiken", "300px", showHeader: true, showDescription: true)
+                    @WebHelpers.DropZoneEditor("measureDropZone", "measurePreview", "Fotos und Grafiken", "520px", showHeader: true, showDescription: true)
                 </div>
             </div>
         </div>

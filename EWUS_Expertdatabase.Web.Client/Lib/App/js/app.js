@@ -7,7 +7,8 @@ var publicApp = (function () {
         decimalCharacter: ',',
         decimalCharacterAlternative: '.',
         decimalPlaces: 0,
-        currencySymbol: '\u202f€',
+        currencySymbol:'',
+            // '\u202f€',
         currencySymbolPlacement: AutoNumeric.options.currencySymbolPlacement.suffix,
         roundingMethod: AutoNumeric.options.roundingMethod.halfUpSymmetric,
     };
@@ -860,7 +861,6 @@ var publicApp = (function () {
         TryCatchWraper(function () {
 
             $(id + '.selectTwo').each(function (i, el) {
-
                 var dataDefaultValue = $(this).attr("data-default-value");
                 var elementId = "#" + $(this).attr("Id");
 
@@ -979,6 +979,7 @@ var publicApp = (function () {
 
                                 sel.removeClass('loadinggif');
 
+                                el.html('');
                                 el.select2({
                                     id: function (bond) { return bond._id; },
                                     placeholder: placeholderText,
@@ -2113,13 +2114,16 @@ var publicApp = (function () {
         var date = getDateValue(sSelector);
         format = getDateFormat($(sSelector), format);
         var value = moment.utc(date, format).format();
+        $(sSelector).datepicker('remove');
 
         return { Name: $(sSelector).attr("data-filed-name"), Value: value + " " };
     }
     function setDate(value, sSelector) {
         if (value != null) {
             var format = getDateFormat($(sSelector));
-            $(sSelector).val(moment(value.FormattedDate).format(format));
+            $(sSelector).val(moment(value).format(format));
+            $(sSelector).datepicker({ format: format.toLowerCase() });
+            $(sSelector).datepicker('setDate', moment(value).format(format));
         }
     }
     function getDateRangeField(sSelector, format) {
@@ -2495,32 +2499,20 @@ var publicApp = (function () {
             return value;
     }
     function setBoolean(value, sSelector) {
-        if (IsNullOrUndefined($(sSelector)[0]))
+        if (IsNullOrUndefined($(sSelector)))
             return;
-
-        var rdbId = "#" + $(sSelector)[0].id;
-
-        $(rdbId + '-Null').prop('checked', false);
-        $(rdbId + '-No').prop('checked', false);
-        $(rdbId + '-Yes').prop('checked', false);
-
-        if (value || typeof (value) == 'boolean') {
-            $(sSelector).val(value);
-
-            if (value == 'Yes' || (typeof (value) == 'boolean' && value == true) || value.toString().toLowerCase() == "true") {
-                $(rdbId + '-Yes').prop('checked', true);
-            } else {
-                $(rdbId + '-No').prop('checked', true);
-            }
-        } else {
-            $(rdbId + '-Null').prop('checked', true);
-        }
+        if (value)
+            $(sSelector).prop('checked', true);
     }
     function getBooleanDisplay(sSelector) {
         return $(sSelector).attr("data-string-value");
     }
     function getBoolean(sSelector) {
-        return getValue(sSelector);
+        var value = $(sSelector).is(":checked");;
+        if (value)
+            return true;
+        else
+            return false;
     }
     function getBooleanField(sSelector) {
         return { Name: $(sSelector).attr("data-filed-name"), Value: getBoolean(sSelector) };
@@ -2927,7 +2919,7 @@ var publicApp = (function () {
     function getFormFieldsValues(el, fields) {
         var type = $(el).attr('type');
         var id = $(el).attr('id');
-        if ((type == "text" || type == "number" || type == "hidden")) {
+        if ((type == "text" || type == "number" || type == "hidden" || type == "checkbox")) {
 
 
             var value = getFormElementFiledValue(el);
@@ -2991,28 +2983,27 @@ var publicApp = (function () {
         var inx = 0;
 
         fields.push({ Name: "Object_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_Id", Value: $("div[data-dropzone='true']").attr("data-refers-to-id") });
-        //fields.push({ Name: "RefersTo_TypeName", Value: $("div[data-dropzone='true']").attr("data-refers-to-type-name") });
 
         $("div[data-dropzone='true']").find(".dz-preview").each(function (index) {
             var el = $(this);
             if (!IsNullOrUndefined(el) && !IsNullOrUndefined($(this).attr("data-mimetype"))) {
 
                 var p = new Object();
-                //p.Fields = new Array();
 
                 var dropZone = new Object();
+                dropZone.Id = $(this).attr("data-entityId");
                 dropZone.DocumentName = $(el.find(".dz-filename[data-dz-name]"))[0].innerText;
                 dropZone.DocumentSize = $(el.find(".dz-size[data-dz-size]"))[0].innerText;
                 dropZone.DocumentMimeType = $(this).attr("data-mimetype");
                 dropZone.Description = $(this).find(".dz-description").find("#description").val();
                 dropZone.ObjectId = $(this).attr("data-objectid");
-
-                //p.Fields.push({ Name: "Document", Value: JSON.stringify(dropZone) });
+                dropZone.Hide = $(el.find(".dz-hide")).is(":checked");
+                
                 p = dropZone;
 
                 items[inx] = p;
                 inx++;
+                dropZone.Position = inx;
             }
         });
 
@@ -3072,7 +3063,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
 
         },
@@ -3112,20 +3103,9 @@ var publicApp = (function () {
         if (sValue == null || sValue == 'undefined')
             sValue = null;
 
-        //var typeName = $(sSelector).attr("data-type-name");
-        //if (IsNullOrWhiteSpace(typeName) == false) {
-        //    var reference = new Object();
-        //    reference.TypeName = typeName;
-        //    reference.Id = sValue;
-
-        //    return {
-        //        Name: $(sSelector).attr("data-filed-name"), Value: JSON.stringify(reference)
-        //    }
-        //} else {
         return {
             Name: $(sSelector).attr("data-filed-name") + "Id", Value: sValue
         }
-        //};
     }
 
     function getSelected(sSelector) {
@@ -3186,6 +3166,7 @@ var publicApp = (function () {
             if (file.status == "added") {
                 file.previewElement.setAttribute("data-mimetype", file.type);
                 file.previewElement.setAttribute("data-objectid", file.id);
+                file.previewElement.setAttribute("data-entityid", file.entityId);
                 file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
 
                 $('#iddropzone').attr("data-refers-to-id", refersToId);
@@ -3224,7 +3205,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true
+                        description: value.Description, accepted: true, entityId: value.Id, isHidden: value.Hide
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3249,7 +3230,7 @@ var publicApp = (function () {
             text: "Soll der Datensatz wirklich gelöscht werden?",
             type: "warning",
             showCancelButton: true, confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Übernehmen", closeOnConfirm: true,
+            confirmButtonText: "Löschen", closeOnConfirm: true,
             cancelButtonText: "Abbrechen"
         },
             accepted,
@@ -3326,6 +3307,15 @@ var publicApp = (function () {
         },
         callSwallApp: function (accepted, rejected) {
             callSwal(accepted, rejected);
+        },
+        setSelectedApp: function (sValue, sSelector) {
+            setSelected(sValue, sSelector);
+        },
+        setUpSelectApp: function (id) {
+            setUpSelect(id);
+        },
+        getSelectedFieldApp: function (sSelector) {
+            return getSelectedField(sSelector);
         }
     }
 
@@ -3352,7 +3342,7 @@ var setGridOptions = (function () {
         var widthGrid = width;
         var widthParent = $("#" + gridId).parent().width();
 
-        if (Number(widthParent) != 0)
+        if (Number(widthParent) != 0 && widthParent > widthGrid)
             widthGrid = widthParent;
 
         var gridHeight = $(window).innerHeight() - 280;
@@ -3367,7 +3357,7 @@ var setGridOptions = (function () {
             colModel: colModel,
             width: widthGrid,
             height: gridHeight,
-            autowidth: true,
+            autowidth: false,
             pgbuttons: false,
             pginput: false, 
             shrinkToFit: true,
@@ -3675,4 +3665,14 @@ function onTextAreaChange(sender) {
 
 function TryCatchWraper(func) {
     try { func(); } catch (ex) { logConsole("TryCatchWraper", ex); }
+}
+
+function onCheckBoxClick(sender, sId) {
+    if (!sId) {
+        sId = $(sender).attr("id");
+    }
+    var elm = document.getElementById(sId);
+    if (!elm)
+        return;
+    elm.setAttribute("data-edit", "true");
 }

@@ -260,7 +260,8 @@
         if (this.previewsContainer) {
           file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
           file.previewTemplate = file.previewElement;
-          this.previewsContainer.appendChild(file.previewElement);
+          //this.previewsContainer.appendChild(file.previewElement);
+          this.previewsContainer.querySelector('.dz-list').appendChild(file.previewElement);
           _ref = file.previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
@@ -279,18 +280,17 @@
                 //file.previewElement.appendChild(file._openLink);
 
                 file._openLink = $(".dz-click-image");
-                file._openLink.dblclick(function (e) {
-                    $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
 
-                        var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
-                        if (_ref3.options.objectTypeName != '')
-                            sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+                $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
+                    //e.preventDefault();
+                    //e.stopPropagation();
 
-                        window.open(sUrl);
-                        _ref3.emit("openedfile", file);
-                    });
+                    var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
+                    if (_ref3.options.objectTypeName != '')
+                        sUrl = sRootUrl + "document/download/contentstream?Tag=" + _ref3.options.objectTypeName + "&Number=" + file.id + "&Key=" + file.name;
+
+                    window.open(sUrl);
+                    _ref3.emit("openedfile", file);
                 });
             };
           if (this.options.addRemoveLinks) {
@@ -306,11 +306,16 @@
               var descriptionEl = Dropzone.createElement("<div class=\"dz-description\"><textarea id=\"description\" type=\"text\" rows=\"4\" style=\"width:100%;\" data-edit=\"true\" data-filed-name=\"Description\" data-float-label-set=\"true\" ></textarea></div>");
 
                 file.previewElement.querySelector('[data-dz-description]').appendChild(descriptionEl);
-              if (!IsNullOrUndefined(file.description)) {
-                  $(".dz-description").find("#description").val(file.description);
+                if (!IsNullOrUndefined(file.description)) {
+                    $(descriptionEl).find('#description').val(file.description);
               }
 
           }
+
+            if (file.isHidden) {
+                file.previewElement.querySelector('.dz-hide').setAttribute('checked', 'checked');
+            }
+
 
           removeFileEvent = (function(_this) {
             return function(e) {

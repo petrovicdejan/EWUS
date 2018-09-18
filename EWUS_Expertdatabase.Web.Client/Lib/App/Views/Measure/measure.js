@@ -15,7 +15,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 24,
+                width: 10,
                 editable: true,
                 search: false              
             },
@@ -25,7 +25,7 @@
                 formatter: 'link',
                 formatoptions: { target: '_blank'},
                 editable: true,            
-                width: 15,
+                width: 30,
                 search:false
             },
             {
@@ -33,7 +33,7 @@
                 name: "",
                 editable: false,
                 search: false,
-                width: 10,
+                width: 7,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
                     return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
                         "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this)'><span class='glyphicon glyphicon-trash'></span></div>" +
@@ -43,8 +43,8 @@
             }            
         ];
         
-
-        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, 1500, 150, 15, fetchGridData, null);
+        var relativeGridWidth = $(window).width() / 3.47;
+        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, relativeGridWidth, 150, 15, fetchGridData, null);
 
         $("#jqGridLink")
             
@@ -52,14 +52,17 @@
                 caption: 'Neu',
                 buttonicon : 'glyphicon glyphicon-plus',
                 position: 'last',
+                id: 'pager-add-btn',
                 onClickButton: function () {
 
-                    $("#jqGridLink").jqGrid('addRow', { position: "last"});
+                    $("#jqGridLink").jqGrid('addRow', { position: "last" });
+                    $("#pager-add-btn").addClass('ui-disabled');
                 }
             }).navButtonAdd("#jqGridPager", {
                 caption: 'Übernehmen',
                 buttonicon: 'glyphicon glyphicon-download-alt pager-button',
                 position: 'last',
+                id: 'pager-save-btn',
                 onClickButton: function () {
                     var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
                     $("#jqGridLink").saveRow(row);
@@ -71,6 +74,7 @@
                         val = $(val);
                         val.show();
                     });
+                    $("#pager-add-btn").removeClass('ui-disabled');
 
                 }
             })
@@ -142,6 +146,7 @@
             val = $(val);
             val.show();
         });
+        $("#pager-add-btn").removeClass('ui-disabled');
     }
     return {
         saveGridRow: saveRow

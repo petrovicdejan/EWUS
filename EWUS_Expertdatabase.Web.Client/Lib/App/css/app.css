@@ -539,6 +539,10 @@ ul.message-items {
     width: 69%;
 }
 
+.field-contener .form-inline-element-wrapper.control-wrapper input[type='checkbox'] {
+    width: 5%;
+}
+
     .field-contener .form-inline-element-wrapper.control-wrapper .form-control-ew-text {
         width: 100%;
         min-width: 30%;
@@ -991,7 +995,7 @@ ui-jqgrid-view table-responsive
             }
 
             .float-label-control label:not(.error) {
-                font-weight: normal;
+                font-weight: bold;
                 font-size: 0.9em;
             }
 
@@ -3164,8 +3168,8 @@ html, body {
 }
 
 #measureDropZone {
-    max-height: 472px;
-    height: 472px;
+    max-height: 480px;
+    height: 480px;
 }
 
 #customerDropZone {
@@ -3179,6 +3183,12 @@ html, body {
 }
 
 #Project .modal-footer {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+#ProjectMeasure .modal-footer {
     width: 100%;
     bottom: 0;
     position: absolute;
@@ -3204,13 +3214,29 @@ html, body {
     font-size: 0.9em !important;
 }
 
-    .dropzone {
-        border: 1px dashed #0087F7;
-        border-radius: 5px;
-        background: white;
-        min-height: 200px;
-        padding: 0px 0px;
-    }
+#ProjectMeasure input, select, textarea, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#projectMeasureList input, select, .select2-selection {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+}
+
+#ProjectName {
+    background-color: whitesmoke;
+    border-bottom: none;
+    width: 40%;
+}
+
+.dropzone {
+    border: 1px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    min-height: 200px;
+    padding: 0px 0px;
+}
 
 .inline-form .modal-body {
     min-height: 320px;
@@ -3538,7 +3564,9 @@ circle.warning::before {
     background-color: #F6F7F8;
 }
 
-#label-wrapper-ServicedObject, #label-wrapper-ChangesOfUsage, #label-wrapper-Remark {
+#Project #label-wrapper-ServicedObject,
+#Project #label-wrapper-ChangesOfUsage,
+#Project #label-wrapper-Remark {
     min-width: 17%;
 }
 
@@ -3567,4 +3595,41 @@ html.ie10 body.modal-open {
 }
 .pager-button{
     padding-left:20px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ol.dz-list li.placeholder {
+    position: relative;
+    /** More li styles **/
+}
+
+ol.dz-list li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
+.dz-list{
+    list-style:none;
+}
+.label-wrapper label{
+    font-weight:bold;
+}
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.select2-results__options {
+    max-height: 400px !important;
 }

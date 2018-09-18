@@ -1,0 +1,183 @@
+﻿@{
+    Layout = (string)ViewData["Layout"];
+}
+@if (ViewBag.IsPopup)
+{
+
+    <script>
+        var isModify = "@ViewBag.Id";
+        isModify > 0 ? setTitle("Leistungsblatt (LB) für Energiesparamaßnahmen") : setTitle("Leistungsblatt (LB) für Energiesparamaßnahmen");
+
+        function setTitle(title) {
+            $('#modal_title').text(title);
+        }
+
+    </script>
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-5">
+                <h2 id="modal_title">@ViewBag.Title</h2>
+            </div>
+            <div class="col-md-3">
+                <a class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" href="/Report/GenerateReport?projectId=@ViewBag.Id" id="generateReport" ><span>Maßnahmensteckbrief anzeigen</span> </a>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+        </div>       
+    </div>
+}
+else
+{
+    <h2>@ViewBag.Title</h2>
+}
+<style>
+    .modal-body {
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+    }
+    #addFile-projectMeasureDropZone {
+        margin-bottom: 5px;
+    }
+
+
+</style>
+
+@using (Html.BeginForm("ProjectMeasure", "ProjectMeasure", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "ProjectMeasure", posturl = "ProjectMeasure/SaveProjectMeasure", dataname = "ProjectMeasure", objectid = ViewBag.Id }))
+{
+    if (ViewBag.IsPopup)
+    {
+        @Html.Raw("<div class='modal-body modal-layout-2 stretch'>");
+    }
+
+    Html.AntiForgeryToken();
+
+<div class="form-group">
+
+    <div class="row">
+        <div class="col-md-6 half-form-wrapper-measure">
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("Name", "Name", "Projektname", "Projektname", "1", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("MeasureName", "MeasureName", "Maßnahmenbenennung", "Maßnahmenbenennung", "2", isReadOnly: true)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("PerformanseSheetNumber", "PerformanseSheetNumber", "LB-Nr", "LB-Nr", "3", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("OperationType", "OperationType", "Maßnahmenart", "Maßnahmenart", "4", isReadOnly: true)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.SelectEditor("PerformanseSheetStatus", "Status", "Status", "Classification/GetClassificationsByType/Leistungsblattstatus", "5", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "PerformanseSheetStatus")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.SelectEditor("MaintenanceCompany", "Wartungsfirma", "Wartungsfirma", "Party/GetAllMaintenanceCompanies", "6", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "MaintenanceCompany")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DateEditor("ModificationDate", "Änderungsdatum", "Änderungsdatum", "7")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Description", "Maßnahmenbeschreibung", "Maßnahmenbeschreibung", "8")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Specification", "Spezifizierung", "Spezifizierung", "9")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "monetärer Aufwand", "monetärer Aufwand", "10", type: "number")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
+                    <div class="field-set">
+                        <div class="field-contener">
+                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="width:61%;" >
+                                <label for="Uri" id="label-SubmittedOnDate">LB eingereicht am</label>
+                            </div>
+                            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" style="width:38%;float:right;">
+                                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                                <input tabindex="11" data-tabindex="11" id="SubmittedOnDate" name="SubmittedOnDate" data-filed-name="SubmittedOnDate" type="text"
+                                        placeholder="LB eingereicht am" data-format-pattern="DD.MM.YYYY" data-edit="false" data-representing-type="Date"
+                                        class="date2 form-control-ew-text"
+                                        data-val="true"
+                                       style="">
+                                <span class="field-validation-valid" data-valmsg-for="SubmittedOnDate" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
+                    <div class="field-set">
+                        <div class="field-contener">
+                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper"  style="width:40%;padding-left:60px;" >
+                                <label for="SubmittedBy">durch</label>
+                            </div>
+                            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="max-width:54%;float:right;">
+                                <i class="fa field-icon fa-terminal fa-icon-SubmittedBy" data-edit="true" valid="true"></i>
+                                <input tabindex='12' data-tabindex='12' id="SubmittedBy" name="SubmittedBy" data-filed-name="SubmittedBy" placeholder="durch" value=""
+                                       data-edit="false"
+                                       class="form-control-ew-text"
+                                       type="text"
+                                       />
+                                <span class="field-validation-valid" data-valmsg-for="SubmittedBy" data-valmsg-replace="true"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.BoolEditor("Release", "Release", "Freigabe", "13")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "14")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 half-form-wrapper-measure">
+            <div class="row" style="padding-top: 5px;">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DropZoneEditor("projectMeasureDropZone", "projectMeasurePreview", "Text, Fotos und Grafiken für Maßnahmensteckbrief", "300px", showHeader: true, showDescription: true, IsHidden:true, headerText: "Text")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @Html.Partial("_PopupFooter");
+
+}
+<script>
+    var objectId = "@ViewBag.Id";
+    var objectTypeName = "@ViewBag.TypeName";
+    var dcProjectMeasure = "@ViewBag.Input";
+    var projectId = "@ViewBag.ProjectId";
+    var myAttachZone = null;
+    
+</script>
+
+<script type="text/javascript" src="~/Lib/App/Views/ProjectMeasure/projectMeasure.js"></script>

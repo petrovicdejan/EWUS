@@ -13,7 +13,7 @@ namespace EWUS_Expertdatabase.Business
             using (var context = new EWUSDbContext())
             {
                 List<Classification> classifications = new List<Classification>();
-                classifications = context.Classifications.Where(x => x.ClassificationType == type).AsNoTracking()
+                classifications = context.Classifications.Where(x => x.ClassificationType == type).AsNoTracking().OrderBy(x => x.Value)
                     .ToList();
 
                 if (classifications != null)
