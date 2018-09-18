@@ -3010,10 +3010,28 @@ var publicApp = (function () {
     }
     function getFromExtendedDropzone(el) {
         var performancesField = {};
-        performancesField.Name = 'ProjectMeasurePerformance';
+        performancesField.FieldType = 'ProjectMeasurePerformances';
+        performancesField.Name = 'ProjectMeasurePerformances';
+        performancesField.Id = $("li[data-dropzone-extended='true']:not([data-preview])").first().attr('data-refers-to-id');
+        performancesField.Value = [];
         $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
             console.log(val);
+            val = $(val);
+            var name = val.attr('data-name');
+            var performance = {};
+            performance.DocumentItem = {};
+            performance.DocumentItem.Id = val.find('[data-entityId]').attr('data-entityId');
+            performance.Description = val.find("#description").val();
+            performance.Hide = val.find('#' + name + '-check').is(":checked");
+            performance.DocumentItem.DocumentSize = val.find('.dz-size[data-dz-size]')[1].innerText;
+            performance.DocumentItem.DocumentName = val.find(".dz-filename[data-dz-name]")[1].innerText;
+            performance.DocumentItem.DocumentMimeType = val.find('[data-mimetype]').attr("data-mimetype");
+            performance.DocumentItem.ObjectId = val.find('[data-objectid]').attr('data-objectid');
+            performance.Position = ind;
+            performancesField.Value.push(performance);
         });
+        if (performancesField.Value.length > 0)
+            el.push(performancesField);
     }
     function getFormElementFiledValue(el) {
 

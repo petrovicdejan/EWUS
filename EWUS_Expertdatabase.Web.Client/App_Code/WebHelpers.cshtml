@@ -537,8 +537,8 @@
                 <div class="col-md-2"></div>
             </div>
         }
-        <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;">
-            <li class="b-b-1 preview-source data-performance" id="@name-row" data-preview style="display:none;" data-dropzone-extended="true">
+        <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;" >
+            <li class="b-b-1 preview-source data-performance" id="@name-row" data-name="@name" data-preview style="display:none;" data-dropzone-extended="true">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="dz-description">
@@ -567,7 +567,17 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        @WebHelpers.BoolEditor(name + "-check", path + "-check", "Ausblenden", tabindex)
+                        <div class="field-set">
+                            <div class="field-contener">
+                                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                                    <label for="@name-check">Ausblenden</label>
+                                </div>
+                                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                                    <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
+                                    <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
