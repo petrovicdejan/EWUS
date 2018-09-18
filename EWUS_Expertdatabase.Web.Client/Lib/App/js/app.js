@@ -3256,13 +3256,12 @@ var publicApp = (function () {
                 $(document).trigger("fileUpload:addedFile", eventArgs);
             }
         });
-        //myattachZ.on("maxfilesreached", function (file) {
-        //    myattachZ.removeEventListeners();
-        //    $(exactdocumentSelector).removeClass("dz-clickable");
-        //    $(exactdocumentSelector).unbind();
-        //    $("#addFile-" + exactdocumentSelector).prop('disabled', true);
-        //    //myattachZ.removeFile(file);
-        //});
+        myattachZ.on("maxfilesreached", function (file) {
+            myattachZ.removeEventListeners();
+            $(exactdocumentSelector).removeClass("dz-clickable");
+            $(exactdocumentSelector).unbind();
+            $("#addFile-" + exactdocumentSelector).prop('disabled', true);
+        });
         myattachZ.on("maxfilesexceeded", function (file) {
             _ref = myattachZ.files.slice();
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
