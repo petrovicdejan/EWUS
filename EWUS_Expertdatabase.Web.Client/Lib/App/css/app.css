@@ -539,7 +539,7 @@ ul.message-items {
     width: 69%;
 }
 
-.field-contener .form-inline-element-wrapper.control-wrapper input[type='checkbox'] {
+.field-contener .form-inline-element-wrapper.control-wrapper input[name='Release'] {
     width: 5%;
 }
 
