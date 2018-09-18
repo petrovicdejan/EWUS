@@ -3612,6 +3612,7 @@ var setGridOptions = (function () {
             var idRow = elem.parent().parent().attr("id");
 
             $('#' + gridId).jqGrid('delRowData', idRow);
+            $("#pager-add-btn").removeClass("ui-disabled");
         });
         
     }
