@@ -55,14 +55,14 @@ namespace EWUS_Expertdatabase.Model
     {
         public ProjectMeasurePerformance()
         {
-            this.ProjectMeasure = new ProjectMeasure();
+         // this.ProjectMeasure = new ProjectMeasure();
         }
 
-        [IgnoreDataMember]
-        [XmlIgnore]
-        protected ProjectMeasure ProjectMeasure { get; set; }
+        //[IgnoreDataMember]
+        //[XmlIgnore]
+        //protected ProjectMeasure ProjectMeasure { get; set; }
 
-        public int ProjectMeasureId { get; set; }
+        //public int ProjectMeasureId { get; set; }
 
         public DocumentItem DocumentItem { get; set; }
 
