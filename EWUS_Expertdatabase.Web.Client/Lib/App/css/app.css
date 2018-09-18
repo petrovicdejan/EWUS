@@ -3225,7 +3225,7 @@ html, body {
 }
 
 #ProjectName {
-    background-color: whitesmoke;
+    background-color: transparent;
     border-bottom: none;
     width: 40%;
 }
