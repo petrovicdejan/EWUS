@@ -1660,6 +1660,23 @@ var publicApp = (function () {
     }
 
     function validateForm(elForm) {
+        //validate extended 
+        var returnExtended = true;
+        $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
+            val = $(val);
+            var description = val.find("#description").val();
+            var objectId = val.find('[data-objectid]').attr('data-objectid');
+
+            if (IsNullOrEmpty(description) && IsNullOrUndefined(objectId)) {
+                returnExtended = false;
+                return false;
+            }
+        });
+
+        if (!returnExtended) {
+            alert("Entry is not valid !!!");
+            return false;
+        }
 
         fnValidateDynamicContent($(elForm));
 
@@ -1684,26 +1701,9 @@ var publicApp = (function () {
             };
           
                 for (var i = 0; i < fields.length; i++) {
-                    //if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
-                    //    $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
-                    //    int++;
-                    //}
                     setFocus("#" + fields[i].id);
                     $("#" + fields[i].id).blur();
-                   
-                    
-                }
-
-                //$.each(fields, function () {
-                //    if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
-                //        $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
-                //        int++;
-                //    }
-                //    setFocus("#" + this.id);
-                //    $("#" + this.id).blur();
-
-                //});
-                      
+                }                     
           
             if (int > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
