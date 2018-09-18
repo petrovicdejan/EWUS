@@ -6,11 +6,13 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace EWUS_Expertdatabase.Web.Client
 {
@@ -70,6 +72,21 @@ namespace EWUS_Expertdatabase.Web.Client
                 return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
         }
 
+        [HttpPost]
+        public ActionResult DeleteProjectMeasurePerformance(long Id)
+        {
+            if (Id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            var projectMeasureRepo = new ProjectMeasureRepository();
+            var item = projectMeasureRepo.DeleteProjectMeasurePerformanceById(Id);
+
+            if (item.Success)
+                return Json(item);
+            else
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
+        }
+
         [Route("leistungsblatt/{Id:long}")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ProjectMeasureEdit(long Id)
@@ -83,6 +100,10 @@ namespace EWUS_Expertdatabase.Web.Client
             ViewBag.Title = "Leistungsblatt (LB) ";
             ViewBag.TypeName = "ProjectMeasure";
             ViewBag.ProjectId = projectMeasure.ProjectId;
+            ViewBag.IsAddEnabled = ConfigurationManager.AppSettings["IsAddEnabled"].ToString();
+            var openInBrowser = ConfigurationManager.AppSettings["openInBrowser"];
+            ViewBag.OpenInBrowser = openInBrowser;
+
             if (Request.IsAjaxRequest())
             {
                 ViewBag.IsPopup = true;

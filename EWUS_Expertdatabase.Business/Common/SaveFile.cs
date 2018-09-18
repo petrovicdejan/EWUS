@@ -55,10 +55,14 @@ namespace EWUS_Expertdatabase.Business
                     }
                     if (docItem.ObjectId.StartsWith("_"))
                     {
-                        if (File.Exists(path))
+                        try
                         {
-                            File.Move(path, Path.Combine(folderName, newFileName));
+                            if (File.Exists(path))
+                            {
+                                File.Move(path, Path.Combine(folderName, newFileName));
+                            }
                         }
+                        catch { }
 
                         using (var ctx = new EWUSDbContext())
                         {
@@ -73,7 +77,7 @@ namespace EWUS_Expertdatabase.Business
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
             }
         }

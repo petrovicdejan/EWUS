@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace EWUS_Expertdatabase.Model
 {
@@ -11,8 +13,7 @@ namespace EWUS_Expertdatabase.Model
     {
         public ProjectMeasure()
         {
-            //this.PerformanseSheetStatus = new Classification();
-            this.DocumentItems = new Collection<DocumentItem>();
+            this.ProjectMeasurePerformances = new Collection<ProjectMeasurePerformance>();
         }
 
         public Project Project { get; set; }
@@ -47,22 +48,28 @@ namespace EWUS_Expertdatabase.Model
 
         public string Remark { get; set; }
 
-        public Collection<DocumentItem> DocumentItems { get; set; }
+        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
     }
 
     public class ProjectMeasurePerformance : CoreObject
     {
         public ProjectMeasurePerformance()
         {
-            this.ProjectMeasure = new ProjectMeasure();
+         // this.ProjectMeasure = new ProjectMeasure();
         }
-        
-        public ProjectMeasure ProjectMeasure { get; set; }
 
-        public int ProjectMeasureId { get; set; }
+        //[IgnoreDataMember]
+        //[XmlIgnore]
+        //protected ProjectMeasure ProjectMeasure { get; set; }
+
+        //public int ProjectMeasureId { get; set; }
 
         public DocumentItem DocumentItem { get; set; }
 
         public int? DocumentItemId { get; set; }
+
+        public int Position { get; set; }
+
+        public bool Hide { get; set; }
     }
 }

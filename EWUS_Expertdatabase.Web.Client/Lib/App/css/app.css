@@ -539,7 +539,7 @@ ul.message-items {
     width: 69%;
 }
 
-.field-contener .form-inline-element-wrapper.control-wrapper input[type='checkbox'] {
+.field-contener .form-inline-element-wrapper.control-wrapper input[name='Release'] {
     width: 5%;
 }
 
@@ -3168,8 +3168,8 @@ html, body {
 }
 
 #measureDropZone {
-    max-height: 480px;
-    height: 480px;
+    max-height: 478px;
+    height: 478px;
 }
 
 #customerDropZone {
@@ -3225,7 +3225,7 @@ html, body {
 }
 
 #ProjectName {
-    background-color: whitesmoke;
+    background-color: transparent;
     border-bottom: none;
     width: 40%;
 }

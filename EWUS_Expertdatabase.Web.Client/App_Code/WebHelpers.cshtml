@@ -515,7 +515,86 @@
 
 
 }
+@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name", string isAddEnabled = "false")
+{
+    <div class="">
+        <div class="field-set" style="padding-bottom:10px;">
+            <div class="field-group float-label-control" style="margin-bottom: 0;">
+                <label id="label-@label">@label</label>
+            </div>
+            <button class="btn-white btn btn-sm" id="add-performance" type="button">
+                <i class='fa fa-plus'></i><span> Neu</span>
+            </button>
 
+        </div>
+        @if (showHeader)
+        {
+            <div class="row b-b-2" style="">
+                <div class="col-md-5"><strong>@headerText</strong></div>
+                <div class="col-md-4"><strong>Bild</strong></div>
+                <div class="col-md-3"></div>
+            </div>
+        }
+        <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;" >
+            <li class="b-b-1 preview-source data-performance" id="@name-row" data-name="@name" data-preview style="display:none;" data-dropzone-extended="true">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="dz-description">
+                            <textarea id="description" type="text" rows="5" style="width:100%;" data-edit="true" data-filed-name="Description" data-float-label-set="true"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
+                        <div class="dz-message">
+                            Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
+                        </div>
+                        <div id="@dzoneId-preview" class="dz-preview">
+                            <div class="table table-striped files " id="previews" style="height:0px;">
+                                <div class="row">
+                                    @if (isAddEnabled == "true")
+                                    {
+                                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;display:none; float:right;position:relative;">
+                                            <i class='fa fa-plus'></i><span> Neu</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                        </button>
+                                    }
+
+                                    <p class="dz-filename" data-dz-name style="display:none;"></p>
+                                    <div class="dz-size" data-dz-size style="display:none;"></div>
+                                    <div class=" dz-click-image">
+                                        <span class=""><img data-dz-thumbnail /></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="field-set">
+                            <div class="field-contener">
+                                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                                    <label for="@name-check">Ausblenden</label>
+                                </div>
+                                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                                    <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
+                                    <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+}
 @helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999, string nameForMessage = "")
 {
     <div class="field-set">

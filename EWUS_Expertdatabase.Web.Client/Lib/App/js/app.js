@@ -361,12 +361,6 @@ var publicApp = (function () {
         aOptions.Width = $(window).width() * 0.9;
         aOptions.Height = $(window).height() *0.95;
         aOptions.MaxWidth = $(window).width() * 0.97;
-        //if (IsNullOrUndefined(aOptions))
-        //    aOptions = { Width: "640px" };
-
-        //if ($modal.find(".modal-layout-2").length > 0) {
-        //    aOptions.Width = $(window).width() * 0.9 + "px";
-        //}
 
         if (innerHeight > aOptions.Height - 200 || innerHeight < 100) {
             aOptions.MaxHeight = $(window).height() * 0.97;
@@ -1666,6 +1660,23 @@ var publicApp = (function () {
     }
 
     function validateForm(elForm) {
+        //validate extended 
+        var returnExtended = true;
+        $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
+            val = $(val);
+            var description = val.find("#description").val();
+            var objectId = val.find('[data-objectid]').attr('data-objectid');
+
+            if (IsNullOrEmpty(description) && IsNullOrUndefined(objectId)) {
+                returnExtended = false;
+                return false;
+            }
+        });
+
+        if (!returnExtended) {
+            alert("Entry is not valid !!!");
+            return false;
+        }
 
         fnValidateDynamicContent($(elForm));
 
@@ -1690,26 +1701,9 @@ var publicApp = (function () {
             };
           
                 for (var i = 0; i < fields.length; i++) {
-                    //if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
-                    //    $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
-                    //    int++;
-                    //}
                     setFocus("#" + fields[i].id);
                     $("#" + fields[i].id).blur();
-                   
-                    
-                }
-
-                //$.each(fields, function () {
-                //    if (IsNullOrWhiteSpace(this.message) == false && IsNullOrUndefined(this.isValid)) {
-                //        $("<li />").html(this.message + "! <a href='#' class='alert-link' onclick='setFocus(\"#" + this.id + "\")'>Fokus element!</a>").appendTo(list);
-                //        int++;
-                //    }
-                //    setFocus("#" + this.id);
-                //    $("#" + this.id).blur();
-
-                //});
-                      
+                }                     
           
             if (int > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
@@ -2909,7 +2903,9 @@ var publicApp = (function () {
         if ($("div[data-dropzone='true']").length > 0) {
             getFromDropzone(fields);
         }
-
+        if ($("li[data-dropzone-extended='true']:not([data-preview])").length > 0) {
+            getFromExtendedDropzone(fields);
+        }
         if ($("table[data-jqGrid='true']").length > 0) {
             getjQGridData(fields);
         }
@@ -3012,7 +3008,37 @@ var publicApp = (function () {
             fields.push(f);
         }
     }
-
+    function getFromExtendedDropzone(el) {
+        var performancesField = {};
+        performancesField.FieldType = 'ProjectMeasurePerformances';
+        performancesField.Name = 'ProjectMeasurePerformances';
+        performancesField.Id = $("li[data-dropzone-extended='true']:not([data-preview])").first().attr('data-refers-to-id');
+        performancesField.Value = [];
+        $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
+            console.log(val);
+            val = $(val);
+            var name = val.attr('data-name');
+            var performance = {};
+            performance.Description = val.find("#description").val();
+            performance.Hide = val.find('#' + name + '-check').is(":checked");
+            performance.Position = ind + 1;
+            if(val.attr('data-id'))
+                performance.Id = val.attr('data-id');
+            try {
+                performance.DocumentItem = {};
+                performance.DocumentItem.Id = val.find('[data-entityId]').attr('data-entityId');    
+                performance.DocumentItem.DocumentSize = val.find('.dz-size[data-dz-size]')[1].innerText;
+                performance.DocumentItem.DocumentName = val.find(".dz-filename[data-dz-name]")[1].innerText;
+                performance.DocumentItem.DocumentMimeType = val.find('[data-mimetype]').attr("data-mimetype");
+                performance.DocumentItem.ObjectId = val.find('[data-objectid]').attr('data-objectid');
+            } catch (ex) {
+                performance.DocumentItem = {};
+            }
+            performancesField.Value.push(performance)
+        });
+        if (performancesField.Value.length > 0)
+            el.push(performancesField);
+    }
     function getFormElementFiledValue(el) {
 
         var represent = $(el).attr('data-representing-type');
@@ -3192,6 +3218,99 @@ var publicApp = (function () {
 
 
     }
+    function initializeMultipleDropZone(exactdocumentSelector, PreviewExact, refersToId, refersToTypeName) {
+        var myattachZ = null;
+
+        var previewNode = PreviewExact;
+        if (previewNode != null && previewNode != 'undefined') {
+            //previewNode.id = "";
+            var previewTemplate = previewNode.innerHTML;
+            //previewNode.parentNode.removeChild(previewNode);
+
+            var maxfiles = null;
+
+            try {
+                maxfiles = $(exactdocumentSelector).attr('data-maxfiles');
+            } catch (ex) {
+
+            }
+            if (maxfiles == undefined || maxfiles == NaN)
+                maxfiles = null;
+
+
+            var addRemove = true
+            try {
+                if ($(exactdocumentSelector).attr('data-addenabled') == "true")
+                    addRemove = false;
+            } catch (ex) {
+
+            }
+            myattachZ = new Dropzone(exactdocumentSelector, {
+                url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
+                addRemoveLinks: addRemove,
+                dictRemoveFile: "Löschen",
+                addOpenLinks: false,
+                dictOpenLink: "Offnen",
+                sendFileId: true,
+                clickable: exactdocumentSelector,
+                acceptedFiles: "image/jpeg,image/png,image/jpg",
+                addDescription: true,
+                objectTypeName: refersToTypeName,
+                previewTemplate: previewTemplate,
+                thumbnailHeight: 80,
+                thumbnailWidth: 140,
+                thumbnailMethod: 'crop',
+                maxFiles: maxfiles,
+                dictRemoveFileConfirmation: 'Question'
+            }); 
+
+        }
+        
+        myattachZ.on("addedfile", function (file) {
+
+            if (file.status == "added") {
+                file.previewElement.setAttribute("data-mimetype", file.type);
+                file.previewElement.setAttribute("data-objectid", file.id);
+                file.previewElement.setAttribute("data-entityid", file.entityId);
+                file.previewElement.setAttribute("data-isnew", IsNullOrUndefined(file.isnew));
+
+                $(exactdocumentSelector).attr("data-refers-to-id", refersToId);
+                $(exactdocumentSelector).attr("data-refers-to-type-name", refersToTypeName);
+
+                var fileNew = refersToId == 0 ? true : false;
+
+                var eventArgs = new Object();
+                eventArgs.FileIsNew = fileNew;
+                eventArgs.RefersToTypeName = refersToTypeName;
+                eventArgs.FileName = file.name;
+                eventArgs.ObjectId = file.id;
+                $(file.previewElement).find('.dzone-add').css('display', 'block');
+                $(file.previewElement).find('.dzone-add').on('click', function () {
+                    $(this).parent().parent().parent().click();
+                });
+                $(document).trigger("fileUpload:addedFile", eventArgs);
+            }
+        });
+        myattachZ.on("maxfilesreached", function (file) {
+            myattachZ.removeEventListeners();
+            $(exactdocumentSelector).removeClass("dz-clickable");
+            $(exactdocumentSelector).unbind();
+            $("#addFile-" + exactdocumentSelector).prop('disabled', true);
+        });
+        myattachZ.on("maxfilesexceeded", function (file) {
+            _ref = myattachZ.files.slice();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                var myFile = _ref[_i];
+                if (myFile.status !== Dropzone.UPLOADING && myFile.id != file.id) {
+                    myattachZ.removeFile(myFile);
+                }
+                else {
+                    myattachZ.uploadFile(file);
+                }
+            }
+        });
+
+    }
 
     function FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName) {
 
@@ -3220,6 +3339,33 @@ var publicApp = (function () {
                     $('#' + idDropZone).attr("data-refers-to-type-name", refersToTypeName);
 
                 });
+            }
+        }
+    }
+    function fillExtendedDropZone(dcDocument, exactDropZone, refersToId, refersToTypeName) {
+        if (!IsNullOrEmpty(dcDocument)) {
+
+            var data = dcDocument;
+
+            if (!IsNullOrUndefined(data)) {
+
+                var mockfilee = {
+                    name: data.DocumentName, size: setFileSize(data.DocumentSize),
+                    type: data.DocumentMimeType, id: data.ObjectId, status: "added",
+                    accepted: true, entityId: data.Id
+                };
+                var dzone = $(exactDropZone).get(0).dropzone;
+                dzone.files.push(mockfilee);
+                dzone.emit("addedfile", mockfilee);
+                if (isImage(data.DocumentName)) {
+                    dzone.createThumbnailFromUrl(mockfilee, sRootUrl + "document/download/contentstream?Tag=" + refersToTypeName + "&Number=" + data.ObjectId);
+                }
+                dzone.emit("complete", mockfilee);
+                dzone._updateMaxFilesReachedClass();
+
+                exactDropZone.attr("data-refers-to-id", refersToId);
+                exactDropZone.attr("data-refers-to-type-name", refersToTypeName);
+
             }
         }
     }
@@ -3301,6 +3447,12 @@ var publicApp = (function () {
         },
         fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
             FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
+        },
+        fillExtendedDropZoneApp: function (dcDocument, dropzone, refersToId, refersToTypeName) {
+            fillExtendedDropZone(dcDocument, dropzone, refersToId, refersToTypeName)
+        },
+        initializeMultipleDropZoneApp: function (exactSelector, idPreview, refersToId, refersToTypeName) {
+            initializeMultipleDropZone(exactSelector, idPreview, refersToId, refersToTypeName);
         },
         windowResize: function () {
             windowResize();
@@ -3476,6 +3628,7 @@ var setGridOptions = (function () {
             var idRow = elem.parent().parent().attr("id");
 
             $('#' + gridId).jqGrid('delRowData', idRow);
+            $("#pager-add-btn").removeClass("ui-disabled");
         });
         
     }
