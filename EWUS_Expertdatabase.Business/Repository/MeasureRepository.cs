@@ -125,6 +125,7 @@ namespace EWUS_Expertdatabase.Business
                             else
                             {
                                 di.Hide = edi.Hide;
+                                di.Description = edi.Description;
                                 documentItems.Add(di);
                             }
                         }
