@@ -3282,7 +3282,13 @@ var publicApp = (function () {
         //    //myattachZ.removeFile(file);
         //});
         myattachZ.on("maxfilesexceeded", function (file) {
-            myattachZ.removeFile(file);
+            _ref = myattachZ.files.slice();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                var myFile = _ref[_i];
+                if (myFile.status !== Dropzone.UPLOADING && myFile.id != file.id) {
+                    myattachZ.removeFile(myFile);
+                }
+            }
         });
 
     }
