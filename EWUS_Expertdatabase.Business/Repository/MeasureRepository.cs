@@ -129,9 +129,7 @@ namespace EWUS_Expertdatabase.Business
                             }
                         }
                     }
-
-
-
+                    
                     if (measure != null)
                     {
                         if (measure.MeasureLinks != null)
@@ -139,12 +137,6 @@ namespace EWUS_Expertdatabase.Business
                             List<MeasureLink> measureLinks = measure.MeasureLinks.ToList();
                             ctx.MeasureLinks.RemoveRange(measureLinks);
                         }
-
-                        //if (measure.DocumentItems != null)
-                        //{
-                        //    List<DocumentItem> documents = measure.DocumentItems.ToList();
-                        //    ctx.DocumentItems.RemoveRange(documents);
-                        //}
                     }
                 }
                 else
