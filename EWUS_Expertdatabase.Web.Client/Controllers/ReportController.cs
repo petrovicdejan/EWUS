@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text;
 using EWUS_Expertdatabase.Business.Common;
+using System.Configuration;
 
 namespace EWUS_Expertdatabase.Web.Client.Controllers
 {
@@ -35,7 +36,12 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             string fileName = "ReportEWUS_" + DateTime.Now.Ticks + ".pdf";
 
-            return File(bytes, "application/pdf", fileName);
+            var openInBrowser = ConfigurationManager.AppSettings["openInBrowser"];
+
+            if (openInBrowser == "true")            
+                return File(bytes, "application/pdf");
+            else 
+                return File(bytes, "application/force-download", fileName);
         }
     }
 }
