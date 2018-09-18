@@ -261,7 +261,11 @@
           file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
           file.previewTemplate = file.previewElement;
           //this.previewsContainer.appendChild(file.previewElement);
-          this.previewsContainer.querySelector('.dz-list').appendChild(file.previewElement);
+            if (this.previewsContainer.querySelector('.dz-list')) {
+                this.previewsContainer.querySelector('.dz-list').appendChild(file.previewElement);
+            } else {
+                this.previewsContainer.appendChild(file.previewElement);
+            }
           _ref = file.previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
@@ -296,6 +300,7 @@
           if (this.options.addRemoveLinks) {
 
               file.previewElement.querySelector('[data-dz-remove]').setAttribute("title", this.options.dictRemoveFile);
+              file.previewElement.querySelector('[data-dz-remove]').style.display = 'block';
             // file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
             //  //file._removeLink = Dropzone.createElement("<button class=\"btn-white btn btn-xs pull-right dz-remove\" href=\"javascript:undefined;\" data-dz-remove title=\"" + this.options.dictRemoveFile + "\"><i class='fa fa-trash-o'></i></button>");
             //file.previewElement.appendChild(file._removeLink);
