@@ -46,15 +46,18 @@
             preview.removeClass('preview-source');
             preview.css('display', 'block');
             $("#rows-container").append(preview);
-            preview.find(".row-delete").click(function () {
-                $(this).parent().parent().parent().remove();
-            });
-
+            if (preview.find(".row-delete")) {
+                preview.find(".row-delete").click(function () {
+                    $(this).parent().parent().parent().remove();
+                });
+            }
             
+
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
             var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
             publicApp.initializeMultipleDropZoneApp(exactSelector, exactPreviewSelector, objectId, "ProjectMeasure");
+
         });
 
         for (var i = 0; i < dataDocumentItems.length; i++) {
@@ -64,9 +67,14 @@
             preview.removeClass('preview-source');
             preview.css('display', 'block');
             $("#rows-container").append(preview);
-            preview.find(".row-delete").click(function () {
-                $(this).parent().parent().parent().remove();
-            });
+
+            if (preview.find(".row-delete")) {
+                preview.find(".row-delete").click(function () {
+                    $(this).parent().parent().parent().remove();
+                });
+            }
+            
+
             preview.attr('data-id', dataDocumentItems[i].Id);
             preview.find("#description").val(dataDocumentItems[i].Description);
             preview.find("#projectMeasureDropZone-check").attr('checked', dataDocumentItems[i].Hide);
@@ -79,5 +87,5 @@
             publicApp.fillExtendedDropZoneApp(dataDocumentItems[i].DocumentItem, dropzone, objectId, "ProjectMeasure");
         }
     });
-    
+
 })(jQuery);

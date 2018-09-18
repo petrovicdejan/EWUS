@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -98,6 +99,7 @@ namespace EWUS_Expertdatabase.Web.Client
             ViewBag.Title = "Leistungsblatt (LB) ";
             ViewBag.TypeName = "ProjectMeasure";
             ViewBag.ProjectId = projectMeasure.ProjectId;
+            ViewBag.IsAddEnabled = ConfigurationManager.AppSettings["IsAddEnabled"].ToString();
             if (Request.IsAjaxRequest())
             {
                 ViewBag.IsPopup = true;

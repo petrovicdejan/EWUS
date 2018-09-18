@@ -3237,11 +3237,19 @@ var publicApp = (function () {
             if (maxfiles == undefined || maxfiles == NaN)
                 maxfiles = null;
 
+
+            var addRemove = true
+            try {
+                if ($(exactdocumentSelector).attr('data-addenabled') == "true")
+                    addRemove = false;
+            } catch (ex) {
+
+            }
             myattachZ = new Dropzone(exactdocumentSelector, {
                 url: sRootUrl + "document/insert/contentstream?Tag=" + refersToTypeName,
-                addRemoveLinks: true,
+                addRemoveLinks: addRemove,
                 dictRemoveFile: "Löschen",
-                addOpenLinks: true,
+                addOpenLinks: false,
                 dictOpenLink: "Offnen",
                 sendFileId: true,
                 clickable: exactdocumentSelector,
@@ -3249,7 +3257,7 @@ var publicApp = (function () {
                 addDescription: true,
                 objectTypeName: refersToTypeName,
                 previewTemplate: previewTemplate,
-                thumbnailHeight: 80,
+                thumbnailHeight: 100,
                 thumbnailWidth: 140,
                 thumbnailMethod: 'crop',
                 maxFiles: maxfiles,
@@ -3257,7 +3265,7 @@ var publicApp = (function () {
             }); 
 
         }
-
+        
         myattachZ.on("addedfile", function (file) {
 
             if (file.status == "added") {
@@ -3276,7 +3284,10 @@ var publicApp = (function () {
                 eventArgs.RefersToTypeName = refersToTypeName;
                 eventArgs.FileName = file.name;
                 eventArgs.ObjectId = file.id;
-
+                $(file.previewElement).find('.dzone-add').css('display', 'block');
+                $(file.previewElement).find('.dzone-add').on('click', function () {
+                    $(this).parent().parent().parent().click();
+                });
                 $(document).trigger("fileUpload:addedFile", eventArgs);
             }
         });

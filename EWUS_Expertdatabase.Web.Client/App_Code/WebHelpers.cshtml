@@ -517,7 +517,7 @@
 
 
 }
-@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name")
+@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name", string isAddEnabled = "false")
 {
     <div class="">
         <div class="field-set" style="padding-bottom:10px;">
@@ -546,25 +546,35 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div id="@dzoneId" class="dropzone" data-maxfiles="1">
-                            <div class="dz-message">
-                                Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
-                            </div>
-                            <div id="@dzoneId-preview" class="dz-preview">
-                                <div class="table table-striped files " id="previews">
-                                    <div class="row ">
+                        <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
+                        <div class="dz-message">
+                            Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
+                        </div>
+                        <div id="@dzoneId-preview" class="dz-preview">
+                            <div class="table table-striped files " id="previews">
+                                <div class="row">
+                                    @if (isAddEnabled == "true")
+                                    {
+                                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;display:none; float:right;">
+                                            <i class='fa fa-plus'></i><span> Neu</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
                                         <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
                                             <i class='fa fa-trash-o' style="cursor: pointer"></i>
                                         </button>
-                                        <p class="dz-filename" data-dz-name></p>
-                                        <div class="dz-size" data-dz-size style="display:none;"></div>
-                                        <div class=" dz-click-image">
-                                            <span class=""><img data-dz-thumbnail /></span>
-                                        </div>
+                                    }
+
+                                    <p class="dz-filename" data-dz-name style="display:none;"></p>
+                                    <div class="dz-size" data-dz-size style="display:none;"></div>
+                                    <div class=" dz-click-image">
+                                        <span class=""><img data-dz-thumbnail /></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div class="col-md-1">
                         <div class="field-set">
