@@ -3027,7 +3027,7 @@ var publicApp = (function () {
             performance.DocumentItem.DocumentName = val.find(".dz-filename[data-dz-name]")[1].innerText;
             performance.DocumentItem.DocumentMimeType = val.find('[data-mimetype]').attr("data-mimetype");
             performance.DocumentItem.ObjectId = val.find('[data-objectid]').attr('data-objectid');
-            performance.Position = ind;
+            performance.Position = ind+1;
             performancesField.Value.push(performance);
         });
         if (performancesField.Value.length > 0)
@@ -3323,6 +3323,33 @@ var publicApp = (function () {
             }
         }
     }
+    function fillExtendedDropZone(dcDocument, exactDropZone, refersToId, refersToTypeName) {
+        if (!IsNullOrEmpty(dcDocument)) {
+
+            var data = dcDocument;
+
+            if (!IsNullOrUndefined(data)) {
+
+                var mockfilee = {
+                    name: data.DocumentName, size: setFileSize(data.DocumentSize),
+                    type: data.DocumentMimeType, id: data.ObjectId, status: "added",
+                    accepted: true, entityId: data.Id
+                };
+                var dzone = $(exactDropZone).get(0).dropzone;
+                dzone.files.push(mockfilee);
+                dzone.emit("addedfile", mockfilee);
+                if (isImage(data.DocumentName)) {
+                    dzone.createThumbnailFromUrl(mockfilee, sRootUrl + "document/download/contentstream?Tag=" + refersToTypeName + "&Number=" + data.ObjectId);
+                }
+                dzone.emit("complete", mockfilee);
+                dzone._updateMaxFilesReachedClass();
+
+                exactDropZone.attr("data-refers-to-id", refersToId);
+                exactDropZone.attr("data-refers-to-type-name", refersToTypeName);
+
+            }
+        }
+    }
 
     function callSwal(accepted, rejected) {
         swalCall({
@@ -3401,6 +3428,9 @@ var publicApp = (function () {
         },
         fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
             FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
+        },
+        fillExtendedDropZoneApp: function (dcDocument, dropzone, refersToId, refersToTypeName) {
+            fillExtendedDropZone(dcDocument, dropzone, refersToId, refersToTypeName)
         },
         initializeMultipleDropZoneApp: function (exactSelector, idPreview, refersToId, refersToTypeName) {
             initializeMultipleDropZone(exactSelector, idPreview, refersToId, refersToTypeName);
