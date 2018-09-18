@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace EWUS_Expertdatabase.Web.Client
 {
@@ -98,6 +99,9 @@ namespace EWUS_Expertdatabase.Web.Client
             ViewBag.Title = "Leistungsblatt (LB) ";
             ViewBag.TypeName = "ProjectMeasure";
             ViewBag.ProjectId = projectMeasure.ProjectId;
+            var openInBrowser = ConfigurationManager.AppSettings["openInBrowser"];
+            ViewBag.OpenInBrowser = openInBrowser;
+
             if (Request.IsAjaxRequest())
             {
                 ViewBag.IsPopup = true;
