@@ -70,6 +70,21 @@ namespace EWUS_Expertdatabase.Web.Client
                 return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
         }
 
+        [HttpPost]
+        public ActionResult DeleteProjectMeasurePerformance(long Id)
+        {
+            if (Id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            var projectMeasureRepo = new ProjectMeasureRepository();
+            var item = projectMeasureRepo.DeleteProjectMeasurePerformanceById(Id);
+
+            if (item.Success)
+                return Json(item);
+            else
+                return new HttpStatusCodeResult(Utils.ToHttpCode(item.Status), item.ExceptionMessage);
+        }
+
         [Route("leistungsblatt/{Id:long}")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ProjectMeasureEdit(long Id)

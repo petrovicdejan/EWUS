@@ -361,12 +361,6 @@ var publicApp = (function () {
         aOptions.Width = $(window).width() * 0.9;
         aOptions.Height = $(window).height() *0.95;
         aOptions.MaxWidth = $(window).width() * 0.97;
-        //if (IsNullOrUndefined(aOptions))
-        //    aOptions = { Width: "640px" };
-
-        //if ($modal.find(".modal-layout-2").length > 0) {
-        //    aOptions.Width = $(window).width() * 0.9 + "px";
-        //}
 
         if (innerHeight > aOptions.Height - 200 || innerHeight < 100) {
             aOptions.MaxHeight = $(window).height() * 0.97;
@@ -3279,13 +3273,16 @@ var publicApp = (function () {
                 $(document).trigger("fileUpload:addedFile", eventArgs);
             }
         });
-        myattachZ.on("maxfilesreached", function (file) {
-            myattachZ.removeEventListeners();
-            $(exactdocumentSelector).removeClass("dz-clickable");
-            $(exactdocumentSelector).unbind();
-            $("#addFile-" + exactdocumentSelector).prop('disabled', true);
+        //myattachZ.on("maxfilesreached", function (file) {
+        //    myattachZ.removeEventListeners();
+        //    $(exactdocumentSelector).removeClass("dz-clickable");
+        //    $(exactdocumentSelector).unbind();
+        //    $("#addFile-" + exactdocumentSelector).prop('disabled', true);
+        //    //myattachZ.removeFile(file);
+        //});
+        myattachZ.on("maxfilesexceeded", function (file) {
+            myattachZ.removeFile(file);
         });
-
 
     }
 

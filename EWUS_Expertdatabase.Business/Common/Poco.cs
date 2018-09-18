@@ -52,7 +52,7 @@ namespace EWUS_Expertdatabase.Business
 
         public string Remark { get; set; }
 
-        public Collection<DocumentItem> DocumentItems { get; set; }
+        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
 
         public string Location { get; set; }
 

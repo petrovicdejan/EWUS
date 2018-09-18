@@ -11,8 +11,7 @@ namespace EWUS_Expertdatabase.Model
     {
         public ProjectMeasure()
         {
-            //this.PerformanseSheetStatus = new Classification();
-            this.DocumentItems = new Collection<DocumentItem>();
+            this.ProjectMeasurePerformances = new Collection<ProjectMeasurePerformance>();
         }
 
         public Project Project { get; set; }
@@ -47,7 +46,7 @@ namespace EWUS_Expertdatabase.Model
 
         public string Remark { get; set; }
 
-        public Collection<DocumentItem> DocumentItems { get; set; }
+        public Collection<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
     }
 
     public class ProjectMeasurePerformance : CoreObject
@@ -64,5 +63,9 @@ namespace EWUS_Expertdatabase.Model
         public DocumentItem DocumentItem { get; set; }
 
         public int? DocumentItemId { get; set; }
+
+        public int Position { get; set; }
+
+        public bool Hide { get; set; }
     }
 }

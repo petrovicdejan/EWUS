@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,31 +23,27 @@ namespace EWUS_Expertdatabase.Business
 
         public override void OnEndPage(PdfWriter writer, Document document)
         {
-            iTextSharp.text.Image logoFirst = iTextSharp.text.Image.GetInstance(this.logoImg);
-            iTextSharp.text.Image logoSecond = iTextSharp.text.Image.GetInstance(this.rightLogo);
+            iTextSharp.text.Image logoFirst = null;
+            iTextSharp.text.Image logoSecond = null;
+
+            if (File.Exists(this.logoImg))
+                logoFirst = iTextSharp.text.Image.GetInstance(this.logoImg);
+
+            if(File.Exists(this.rightLogo))
+                logoSecond = iTextSharp.text.Image.GetInstance(this.rightLogo);
             
             PdfPTable table = new PdfPTable(2);
-            
             table.DefaultCell.Border = Rectangle.NO_BORDER;
             PdfPCell cell = new PdfPCell(logoFirst,true);            
-            cell.FixedHeight = 43;
-
-            cell.CellEvent = new dot();
-            cell.Border = Rectangle.NO_BORDER;
-                     
-            //Paragraph p = new Paragraph();             
-            //p.Add(new Chunk(logoFirst, 0, -15));
-            //cell.AddElement(p);
+            cell.FixedHeight = 43;           
+            cell.Border = Rectangle.NO_BORDER;                     
             table.AddCell(cell);
             
             PdfPCell cellTwo = new PdfPCell(logoSecond,true);
             cellTwo.HorizontalAlignment = Element.ALIGN_RIGHT;
             cellTwo.FixedHeight = 43;
-            cellTwo.CellEvent = new dot();
+           
             cellTwo.Border = Rectangle.NO_BORDER;
-            //Paragraph p1 = new Paragraph();
-            //p1.Add(new Chunk(logoSecond, 180, -15));
-            //cellTwo.AddElement(p1);
             table.AddCell(cellTwo);
             
             table.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin; 
