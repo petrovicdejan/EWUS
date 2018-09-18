@@ -35,6 +35,9 @@ namespace EWUS_Expertdatabase.Business
         {
             DocumentItem logoDoc = null;
 
+            if (projectId == 0)
+                return logoDoc;
+
             using (var context = new EWUSDbContext())
             {
                 List<DocumentItem> documentItemsList = context.Projects.Where(i => i.Id == projectId).Include(x => x.Customer).Select(x=> x.Customer).SelectMany(x => x.DocumentItems).ToList();
