@@ -47,7 +47,7 @@ namespace EWUS_Expertdatabase.Business
             table.AddCell(cellTwo);
             
             table.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin; 
-            table.WriteSelectedRows(0, -1, document.LeftMargin, document.PageSize.Height-3, writer.DirectContent);
+            table.WriteSelectedRows(0, -1, document.LeftMargin, document.PageSize.Height-30, writer.DirectContent);
         }
     }
 
