@@ -1658,12 +1658,8 @@
   };
 
   Dropzone.confirm = function (question, accepted, rejected) {
-      publicApp.callSwallApp(accepted, rejected);
-    //if (window.confirm(question)) {
-    //  return accepted();
-    //} else if (rejected != null) {
-    //  return rejected();
-    //}
+      publicApp.callSwalDeleteApp(accepted, rejected);
+
   };
 
   Dropzone.isValidFile = function(file, acceptedFiles) {
