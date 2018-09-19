@@ -44,9 +44,10 @@
             $("#rows-container").append(preview);
             if (preview.find(".row-delete")) {
                 preview.find(".row-delete").on('click', function () {
+                    var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            preview.find(".row-delete").parent().parent().parent().remove();
+                            el.parent().parent().parent().remove();
                         },
                         function () { });
                 });
@@ -72,9 +73,10 @@
 
             if (preview.find(".row-delete")) {
                 preview.find(".row-delete").on('click', function () {
+                    var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            preview.find(".row-delete").parent().parent().parent().remove();
+                            el.parent().parent().parent().remove();
                         },
                         function () { });
                 });
