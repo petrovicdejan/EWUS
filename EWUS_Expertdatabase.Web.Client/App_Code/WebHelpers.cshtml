@@ -431,7 +431,7 @@
     <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; position:absolute !important; top:0;">
         <label id="label-@label" for="gridContainer">@label</label>
     </div>
-    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block; margin-left: 20.4%;" </text> }>
+    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block; margin-left: 150px;" </text> }>
         <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text> }></table>
         @if (appearToolbar == true)
         {<text> <div id="jqGridPager"></div> </text>}
