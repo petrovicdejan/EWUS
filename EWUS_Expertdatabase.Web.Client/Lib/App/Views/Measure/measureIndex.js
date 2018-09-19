@@ -30,7 +30,7 @@
             }
         },
         {
-            label: 'Maßnahmenart',
+            label: 'Energie/Medium',
             name: 'OperationType',
             width: 15,
             editable: true,

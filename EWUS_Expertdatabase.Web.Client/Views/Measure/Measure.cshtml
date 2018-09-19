@@ -39,7 +39,32 @@ else
         max-height: calc(100vh - 160px);
         overflow-y: auto;
     }
-  
+
+    .field-contener .label-wrapper.form-inline-element-wrapper {
+        min-width:20% !important;
+    }
+
+    label {
+        color:black !important;
+    }
+
+    #Measure input, select, textarea, .select2-selection {
+        color:black;
+    }
+
+    #Measure .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color:black;
+    }
+
+    #Measure .select2-selection__rendered {
+        color: black !important;
+    }
+
+     .select2-results__option {
+        color: black !important;
+    }
+
+
 </style>
 
 @using (Html.BeginForm("Measure", "Measure", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "Measure", posturl = "Measure/SaveMeasure", dataname = "Measure", objectid = ViewBag.Id }))
@@ -68,7 +93,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.SelectEditor("OperationType", "Maßnahmenart", "Maßnahmenart", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true, nameForMessage: "Massnahmenart")
+                    @WebHelpers.SelectEditor("OperationType", "Energie/Medium", "Energie/Medium", "Classification/GetClassificationsByType/Massnahmenart", "3", dataFormat: "formatWithoutId", dataFormatSelection: "formatWithoutIdSelection", dataTypeName: "OperationType", isRequired: true, nameForMessage: "Massnahmenart")
                 </div>
             </div>
             <div class="row">
