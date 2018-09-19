@@ -8,9 +8,6 @@
                 dataDocumentItems = data.ProjectMeasurePerformances;
         }
 
-        // publicApp.initializeDropZoneApp("projectMeasureDropZone", "projectMeasurePreview", objectId, "ProjectMeasure");
-        // publicApp.fillDropZoneApp(dataDocumentItems, "projectMeasureDropZone", objectId, "ProjectMeasure");
-
         GetProjectMeasure(dcProjectMeasure);
 
         function GetProjectMeasure(dcProjectMeasure) {
@@ -70,10 +67,13 @@
 
             if (preview.find(".row-delete")) {
                 preview.find(".row-delete").click(function () {
-                    $(this).parent().parent().parent().remove();
+                    publicApp.callSwalDeleteApp(
+                        function () {
+                            preview.find(".row-delete").parent().parent().parent().remove();
+                        },
+                        function () { });
                 });
             }
-            //preview.find('.dzone-add').css('display', 'block');
             preview.find('.dzone-add').on('click', function () {
                 $(this).parent().parent().find('.dropzone').click();
             });

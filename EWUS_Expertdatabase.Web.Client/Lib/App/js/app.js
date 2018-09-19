@@ -125,7 +125,6 @@ var publicApp = (function () {
         try {
             if (bCloseModalDialog)
                 closeModalDialog();
-            //if (data.Success) {
             var nextLink = "";
 
             TryCatchWraper(function () {
@@ -151,9 +150,6 @@ var publicApp = (function () {
                     + " RecordsAffected: "
                     + data.RecordsAffected + "</span>");
             }
-            //} else {
-            //    webApiPostOnSuccessFalse("ErrorGeneral", data, bShowAlert);
-            //}
         } catch (e) {
             console.log('webApiPost: ' + e.message);
         }
@@ -183,7 +179,6 @@ var publicApp = (function () {
 
         var i = new Object();
         i.Id = objectId;
-        //i.Name = objectType;
 
         var sUri = $el.attr("data-url");
 
@@ -215,16 +210,6 @@ var publicApp = (function () {
                     if ($.isFunction(fOnSuccess)) {
                         nextLink = fOnSuccess(data);
                     }
-
-                    //if (IsNullOrUndefined(nextLink) || nextLink == "undefined")
-                    //    nextLink = "";
-
-                    //alertshow(1, "Successfully Deleted", "Recommended Action",
-                    //    nextLink
-                    //    + "<br/><span class='pull-right'>" + "ExecuteTime"
-                    //    + data.FormatedExecuteTime
-                    //    + " RecordsAffected: "
-                    //    + data.RecordsAffected + "</span>");
                 } else {
 
                     alertshow(2, "FailedDeleting", getErrorMessageForUser(data));
@@ -408,10 +393,6 @@ var publicApp = (function () {
         height = $modal.height();
         $modal.css('max-height', aOptions.MaxHeight + "px");
         var body = $modal.find('.modal-body')[0];
-        //if ((height + 10) > ($(window).height() * 0.9)) {
-        //    //$(body).css('height', $(window).height() *0.57);
-        //} else
-        //    // $(body).css('max-height', $(window).height() * 0.57);
 
         $(body).css('width', aOptions.Width + "px");
         $(body).css('overflow-y', 'auto');
@@ -553,19 +534,7 @@ var publicApp = (function () {
         TryCatchWraper(function () {
             $(id + '.dropdown-toggle').dropdown();
         });
-
-        //TryCatchWraper(function () {
-        //    $(id + '.money2').autoNumeric('init');
-        //});
-
-        //TryCatchWraper(function () {
-        //    $(id + '.money4').autoNumeric('init', { mDec: 4 });
-        //});
-
-        //TryCatchWraper(function () {
-        //    $(id + ".starrr").starrr();
-        //});
-
+        
         TryCatchWraper(function () {
             $(id).find('[data-money]').each(function (index) {
                 var th = $(this);
@@ -613,9 +582,6 @@ var publicApp = (function () {
         });
         
         setupValidate(id);
-        // setUpEditable(id);
-
-       // $("#Name").trigger("click");
         
     }
 
@@ -775,41 +741,8 @@ var publicApp = (function () {
         var icon = $($(elem).parent().find("i")[0]);
 
         var isEdit = true;
-
-        //if (isEdit) {
-        //    if (IsNullOrUndefined(isValid)) {
-        //        isValid = elem.checkValidity();
-        //        if (!isValid)
-        //            isValid = $(elem).valid();
-        //    }
-        //    try {
-        //        if ($(elem).val() == '' && isValid) {
-        //            isValid = $(elem).valid();
-        //        }
-        //    } catch (e1) {
-
-        //    }
-        //}
-
+        
         icon.attr('valid', isValid);
-
-        //if (icon.hasClass("fa-terminal")) {
-        //    if (isValid && isEdit)
-        //        icon.removeClass('fa-terminal').addClass('fa-check');
-        //    else
-        //        icon.removeClass('fa-check').addClass('fa-terminal');
-        //}
-        icon.css('color', '');
-        //if (isValid) {
-        //    icon.css('color', '#5cb85c');
-        //}
-
-        //if (isValid && !isEdit) {
-        //    icon.css('color', '#999');
-        //}
-
-        //if (!isValid && isEdit)
-        //    icon.css('color', '#d9534f');
 
         if (isEdit) {
             $(elem).attr('data-edit', 'true');
@@ -859,7 +792,6 @@ var publicApp = (function () {
                 var elementId = "#" + $(this).attr("Id");
 
                 var url = $(this).attr("data-url");
-                //var inqInputProps = $(this).attr("data-inquiry-input-props");
 
                 var dataFormat = $(this).attr("data-format");
                 var dataFormatSelection = $(this).attr("data-format-selection");
@@ -1128,8 +1060,7 @@ var publicApp = (function () {
                 }).on('typeahead:selected', function (obj, data) {
 
                     TryCatchWraper(function () {
-
-                        //var recentItems = $.sessionStorage.get(sessionKey)
+                        
                         var recentItems = sessionStorage.getItem(sessionKey)
                         if (!recentItems)
                             recentItems = new Array();
@@ -1149,8 +1080,7 @@ var publicApp = (function () {
                                 var i = recentItems.shift();
 
                             recentItems.push(data);
-
-                            //$.sessionStorage.set(sessionKey, recentItems);
+                            
                             sessionStorage.setItem(sessionKey, JSON.stringify(recentItems));
                         }
                     });
@@ -1342,8 +1272,7 @@ var publicApp = (function () {
         $(id + '.typeahead2').on('focus', function () {
 
             var sKey = $(this).attr("data-recent");
-
-            //var dataRecent = $.sessionStorage.get(sKey);
+            
             var dataRecent = sessionStorage.getItem(sKey);
 
             var hasRecent = false
@@ -1707,7 +1636,6 @@ var publicApp = (function () {
           
             if (int > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
-                // location.href = "#innerBehaviorTaskHtml";
 
                 return false;
             }
@@ -1723,7 +1651,6 @@ var publicApp = (function () {
 
             if ($(".validation-summary-errors-sw li").length > 0) {
                 $(".validation-summary-errors-sw").css("display", "block");
-                // location.href = "#innerBehaviorTaskHtml";
             }
 
             setTimeout(function () {
@@ -2265,13 +2192,7 @@ var publicApp = (function () {
     }
     function setValue(value, sSelector, bDefault) {
         if (!IsNullOrUndefined(value)) {
-
-            //if (typeof $(sSelector).attr('type') != 'undefined') {
-            //    if ($(sSelector).attr('type') === 'number') {
-            //        value = numberWithCommas(value);
-            //    }
-            //}
-
+            
             $(sSelector).val(value);
             var sId = $(sSelector).attr('id')
             if ($('#' + sId + "-mlt").length)
@@ -2666,7 +2587,6 @@ var publicApp = (function () {
         TryCatchWraper(function () {
             var an = new AutoNumeric(sSelector);
             currencyAmount.Amount = an.getNumber();
-            //currencyAmount.Amount = parseFloat($(sSelector).autoNumeric("get"));
         });
         currencyAmount.Code = $(sSelector).attr("data-currency-code");
         var currencyId = $(sSelector).attr("data-currency-id");
@@ -2686,10 +2606,6 @@ var publicApp = (function () {
             console.log(value);
             $(sSelector).val(value.Amount);
             $(sSelector).attr("data-default-value", value.Amount);
-            //TryCatchWraper(function () {
-            //    $(sSelector).autoNumeric('init');
-            //    $(sSelector).autoNumeric('set', value.Amount);
-            //});
             $(sSelector).attr("data-currency-code", value.Code);
 
             var lId = value.CurrencyId;
@@ -2946,11 +2862,9 @@ var publicApp = (function () {
 
         $.each(gridModel, function (index, value) {
             var p = new Object();
-
-            //p.Fields = new Array();
+            
             $.each(columnNames, function (ind, val) {
                 if (!IsNullOrEmpty(val) && !IsNullOrWhiteSpace(val) && val != "Actions") {
-                    //p.Fields.push({ Name: val, Value: value[val] });
                     p[val] = value[val];
                 }
             });
@@ -3223,9 +3137,7 @@ var publicApp = (function () {
 
         var previewNode = PreviewExact;
         if (previewNode != null && previewNode != 'undefined') {
-            //previewNode.id = "";
             var previewTemplate = previewNode.innerHTML;
-            //previewNode.parentNode.removeChild(previewNode);
 
             var maxfiles = null;
 
@@ -3379,7 +3291,16 @@ var publicApp = (function () {
             accepted,
             rejected
         )
-    }
+    };
+
+    var deleteOptions = {
+        title: "Löschen",
+        text: "Soll der Datensatz wirklich gelöscht werden?",
+        type: "warning",
+        showCancelButton: true, confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Löschen", closeOnConfirm: true,
+        cancelButtonText: "Abbrechen"
+    };
 
     return {
         getWebApi: function (sUri, fOnData, bShowError, bAsync) {
@@ -3454,8 +3375,8 @@ var publicApp = (function () {
         windowResize: function () {
             windowResize();
         },
-        callSwallApp: function (accepted, rejected) {
-            callSwal(accepted, rejected);
+        callSwalDeleteApp: function (fnSuccess, fnError) {
+            swalCall(deleteOptions, fnSuccess, fnError)
         },
         setSelectedApp: function (sValue, sSelector) {
             setSelected(sValue, sSelector);
@@ -3500,7 +3421,6 @@ var setGridOptions = (function () {
             gridHeight = height;
 
         $("#" + gridId).jqGrid({
-            // data: mydata,
             editurl: 'clientArray',
             datatype: "local",
             colModel: colModel,
@@ -3538,7 +3458,6 @@ var setGridOptions = (function () {
 
         delSettings = {
             afterShowForm: function ($form) {
-                // delete button: "#dData", cancel button: "#eData"
                 $("#dData", $form.parent()).click();
             }
         };
@@ -3590,8 +3509,6 @@ var setGridOptions = (function () {
                 addRowParams: { extraparam: {} }
             };
         }
-
-        //$("#" + gridId).jqGrid('setGridHeight', heightParent);
 
         $("#" + gridId).trigger("resize");
 
