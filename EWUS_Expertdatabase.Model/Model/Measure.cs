@@ -43,6 +43,11 @@ namespace EWUS_Expertdatabase.Model
         public int InvestmentCost { get; set; }
 
         /// <summary>
+        ///     Get or set Saving Percent  of the measure
+        /// </summary>
+        public int SavingPercent { get; set; }
+
+        /// <summary>
         ///     Get or set collection of measure's pictures
         /// </summary>
         public Collection<MeasurePicture> MeasurePictures { get; set; }

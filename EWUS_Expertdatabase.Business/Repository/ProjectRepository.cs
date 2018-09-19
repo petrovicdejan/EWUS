@@ -128,7 +128,11 @@ namespace EWUS_Expertdatabase.Business
             {
                 using (var ctx = new EWUSDbContext())
                 {
-                    Project project = ctx.Projects.Where(x => x.Id == Id).FirstOrDefault();
+                    Project project = ctx.Projects.Where(x => x.Id == Id)
+                                 .Include(x => x.Region)
+                                  .Include(x => x.Property)
+                                  .Include(x => x.Customer)
+                                  .FirstOrDefault();
 
                     try
                     {

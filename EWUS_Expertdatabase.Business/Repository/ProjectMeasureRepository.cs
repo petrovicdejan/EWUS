@@ -295,13 +295,12 @@ namespace EWUS_Expertdatabase.Business
                                        new { f1 = epmp.Id } into cp
                                     from q1 in cp.DefaultIfEmpty()
                                     where q1 == null
-                                    select new ProjectMeasurePerformance
+                                    select new 
                                     {
                                         Id = opmp.Id
                                     };
 
-                    List<long> idForDelete = forDelete.Select(x => new ProjectMeasurePerformance { Id = x.Id }).Select(x => x.Id).ToList();
-                    //Collection<ProjectMeasurePerformance> delPmp = new ObservableCollection<ProjectMeasurePerformance>(collForDelete.ToList().Distinct());
+                    List<long> idForDelete = forDelete.Select(x => x.Id).ToList();
                     
                     if (idForDelete.Count() > 0)
                     {

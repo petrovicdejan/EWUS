@@ -104,6 +104,7 @@ namespace EWUS_Expertdatabase.Business
             {
                 Measure measure = null;
                 Collection<DocumentItem> documentItems = new Collection<DocumentItem>();
+                Collection<MeasureLink> measureLinks = new Collection<MeasureLink>();
                 if (editMeasure.Id > 0)
                 {
                     measure = ctx.Measures.Where(x => x.Id == editMeasure.Id)
@@ -130,14 +131,64 @@ namespace EWUS_Expertdatabase.Business
                             }
                         }
                     }
-                    
-                    if (measure != null)
+
+                    var forDelete = from odi in measure.DocumentItems
+                                    join edi in editMeasure.DocumentItems on
+                                       new { f1 = odi.Id }
+                                       equals
+                                       new { f1 = edi.Id } into cp
+                                    from q1 in cp.DefaultIfEmpty()
+                                    where q1 == null
+                                    select new 
+                                    {
+                                        Id = odi.Id
+                                    };
+
+                    List<long> idForDelete = forDelete.Select(x => x.Id ).ToList();
+
+                    if (idForDelete.Count() > 0)
                     {
-                        if (measure.MeasureLinks != null)
+                        List<DocumentItem> collDi = ctx.DocumentItems.Where(x => idForDelete.Contains(x.Id)).ToList();
+                        ctx.DocumentItems.RemoveRange(collDi);
+                    }
+
+                    if (editMeasure.MeasureLinks != null && editMeasure.MeasureLinks.Count() > 0)
+                    {
+                        foreach (var eml in editMeasure.MeasureLinks)
                         {
-                            List<MeasureLink> measureLinks = measure.MeasureLinks.ToList();
-                            ctx.MeasureLinks.RemoveRange(measureLinks);
+                            var ml = ctx.MeasureLinks.Where(x => x.Id == eml.Id).FirstOrDefault();
+                            if (ml == null)
+                            {
+                                ctx.MeasureLinks.Add(eml);
+                                measureLinks.Add(eml);
+                            }
+                            else
+                            {
+                                ml.Name = eml.Name;
+                                ml.Link = eml.Link;
+                                measureLinks.Add(ml);
+                            }
                         }
+                    }
+
+                    forDelete = from oml in measure.MeasureLinks
+                                join eml in editMeasure.MeasureLinks on
+                                   new { f1 = oml.Id }
+                                   equals
+                                   new { f1 = eml.Id } into cp
+                                from q1 in cp.DefaultIfEmpty()
+                                where q1 == null
+                                select new
+                                {
+                                    Id = oml.Id
+                                };
+
+                    idForDelete = forDelete.Select(x => x.Id).ToList();
+
+                    if (idForDelete.Count() > 0)
+                    {
+                        List<MeasureLink> collMl = ctx.MeasureLinks.Where(x => idForDelete.Contains(x.Id)).ToList();
+                        ctx.MeasureLinks.RemoveRange(collMl);
                     }
                 }
                 else
@@ -153,7 +204,8 @@ namespace EWUS_Expertdatabase.Business
                 measure.SerialNumber = editMeasure.SerialNumber;
                 measure.Description = editMeasure.Description;
                 measure.InvestmentCost = editMeasure.InvestmentCost;
-                measure.MeasureLinks = editMeasure.MeasureLinks;
+                measure.SavingPercent = editMeasure.SavingPercent;
+                measure.MeasureLinks = measureLinks;
                 measure.DocumentItems = documentItems;
 
                 if (measure.Id == 0)

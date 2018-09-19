@@ -44,12 +44,15 @@
             preview.css('display', 'block');
             $("#rows-container").append(preview);
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").click(function () {
-                    $(this).parent().parent().parent().remove();
+                preview.find(".row-delete").on('click',function () {
+                    publicApp.callSwalDeleteApp(
+                        function () {
+                            preview.find(".row-delete").parent().parent().parent().remove();
+                        },
+                        function () { });
                 });
             }
             
-
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
             var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
@@ -66,7 +69,7 @@
             $("#rows-container").append(preview);
 
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").click(function () {
+                preview.find(".row-delete").on('click',function () {
                     publicApp.callSwalDeleteApp(
                         function () {
                             preview.find(".row-delete").parent().parent().parent().remove();

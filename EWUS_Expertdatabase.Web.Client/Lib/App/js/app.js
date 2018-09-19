@@ -1589,23 +1589,23 @@ var publicApp = (function () {
     }
 
     function validateForm(elForm) {
-        //validate extended 
-        var returnExtended = true;
-        $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
-            val = $(val);
-            var description = val.find("#description").val();
-            var objectId = val.find('[data-objectid]').attr('data-objectid');
+        //validate extended pod komentarom ako se predomisle
+        //var returnExtended = true;
+        //$("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
+        //    val = $(val);
+        //    var description = val.find("#description").val();
+        //    var objectId = val.find('[data-objectid]').attr('data-objectid');
 
-            if (IsNullOrEmpty(description) && IsNullOrUndefined(objectId)) {
-                returnExtended = false;
-                return false;
-            }
-        });
+        //    if (IsNullOrEmpty(description) && IsNullOrUndefined(objectId)) {
+        //        returnExtended = false;
+        //        return false;
+        //    }
+        //});
 
-        if (!returnExtended) {
-            alert("Entry is not valid !!!");
-            return false;
-        }
+        //if (!returnExtended) {
+        //    alert("Entry is not valid !!!");
+        //    return false;
+        //}
 
         fnValidateDynamicContent($(elForm));
 
@@ -2859,6 +2859,8 @@ var publicApp = (function () {
 
         var gridModel = jQuery("#" + gridId).jqGrid('getGridParam', 'data');
         var columnNames = $("#" + gridId).jqGrid('getGridParam', 'colNames');
+        columnNames.push("Id");
+
 
         $.each(gridModel, function (index, value) {
             var p = new Object();
@@ -2929,7 +2931,7 @@ var publicApp = (function () {
         performancesField.Id = $("li[data-dropzone-extended='true']:not([data-preview])").first().attr('data-refers-to-id');
         performancesField.Value = [];
         $("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
-            console.log(val);
+
             val = $(val);
             var name = val.attr('data-name');
             var performance = {};
@@ -2948,7 +2950,12 @@ var publicApp = (function () {
             } catch (ex) {
                 performance.DocumentItem = {};
             }
-            performancesField.Value.push(performance)
+
+            if (IsNullOrEmpty(performance.Description) && IsNullOrUndefined(performance.DocumentItem.ObjectId)) {
+                return true;
+            }
+
+            performancesField.Value.push(performance);
         });
         if (performancesField.Value.length > 0)
             el.push(performancesField);
