@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using EWUS_Expertdatabase.Model;
+﻿using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Data;
-using EWUS_Expertdatabase.Common;
-using System.Data.SqlClient;
+using EWUS_Expertdatabase.Model;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -20,6 +19,7 @@ namespace EWUS_Expertdatabase.Business
                     .Include(x => x.Region)
                     .Include(x => x.Property)
                     .Include(x => x.Customer)
+                    .Include(x => x.DocumentItem)
                     .ToList();
 
                 if (projects != null)
@@ -56,6 +56,7 @@ namespace EWUS_Expertdatabase.Business
                     .Include(x => x.Region)
                     .Include(x => x.Property)
                     .Include(x => x.Customer)
+                    .Include(x => x.DocumentItem)
                     .FirstOrDefault();
 
                 if (project != null)
@@ -81,6 +82,7 @@ namespace EWUS_Expertdatabase.Business
                           .Include(x => x.Region)
                           .Include(x => x.Property)
                           .Include(x => x.Customer)
+                          .Include(x => x.DocumentItem)
                           .FirstOrDefault();
                 }
                 else
@@ -106,6 +108,8 @@ namespace EWUS_Expertdatabase.Business
                 project.ServicedObject = editProject.ServicedObject;
                 project.Remark = editProject.Remark;
                 project.PropertyNumber = editProject.PropertyNumber;
+                project.DocumentItemId = editProject.DocumentItemId;
+                project.DocumentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItemId).FirstOrDefault();
 
                 if (project.Id == 0)
                     ctx.Projects.Add(project);
@@ -132,6 +136,7 @@ namespace EWUS_Expertdatabase.Business
                                  .Include(x => x.Region)
                                   .Include(x => x.Property)
                                   .Include(x => x.Customer)
+                                  .Include(x => x.DocumentItem)
                                   .FirstOrDefault();
 
                     try

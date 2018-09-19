@@ -7,6 +7,9 @@
 (function ($) {
     $(document).ready(function () {
 
+        publicApp.initializeDropZoneApp("projectDropZone", "projectPreview", objectId, "Project");
+       // publicApp.fillDropZoneApp(dataDocumentItems, "projectDropZone", objectId, "Project"); 
+
         GetProject(dcProject);
 
         function GetProject(dcProject) {
@@ -23,7 +26,7 @@
                 
                 publicApp.getWebApi(url, projectTransform, false, false);
                 
-            },false);
+            },false,null,null,false);
             
         });
     });

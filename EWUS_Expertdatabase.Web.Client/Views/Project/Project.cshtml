@@ -95,7 +95,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @WebHelpers.TextEditor("ZipCode", "ZipCode", "Plz", "Plz", "7", isRequired: true, maxLength:10, nameForMessage: "Plz")
+                    @WebHelpers.TextEditor("ZipCode", "ZipCode", "Plz", "Plz", "7", isRequired: true, maxLength: 10, nameForMessage: "Plz")
                 </div>
             </div>
             <div class="row">
@@ -105,12 +105,27 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @WebHelpers.TextEditor("Telephone", "Telephone", "Telefon", "Telefon", "9", maxLength:50)
+                    @WebHelpers.TextEditor("Telephone", "Telephone", "Telefon", "Telefon", "9", maxLength: 50)
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @WebHelpers.TextEditor("ContactPerson", "ContactPerson", "Ansprechpartner", "Ansprechpartner", "10", maxLength:50)
+                    @WebHelpers.TextEditor("ContactPerson", "ContactPerson", "Ansprechpartner", "Ansprechpartner", "10", maxLength: 50)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextAreaEditor("ServicedObject", "Versorgte Objekte", "Versorgte Objekte", "11")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextAreaEditor("ChangesOfUsage", "Nutzungsänderungen", "Nutzungsänderungen", "12")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "13")
                 </div>
             </div>
         </div>
@@ -125,23 +140,14 @@ else
                     @WebHelpers.TextEditor("SavingTotal", "SavingTotal", "Einsparung [€/a]", "Einsparung [€/a]", "15", type: "number")
                 </div>
             </div>
+            <div class="row" style="padding-top: 5px;">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.DropZoneEditor("projectDropZone", "projectPreview", "Fotos und Grafiken", "520px", showHeader: true, maxFiles: "1")
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            @WebHelpers.TextAreaEditor("ServicedObject", "Versorgte Objekte", "Versorgte Objekte", "11")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            @WebHelpers.TextAreaEditor("ChangesOfUsage", "Nutzungsänderungen", "Nutzungsänderungen", "12")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "13")
-        </div>
-    </div>
+    
 </div>
 
    @Html.Partial("_PopupFooter");
@@ -151,6 +157,7 @@ else
     var objectId = "@ViewBag.Id";
     var objectTypeName = "@ViewBag.TypeName";
     var dcProject = "@ViewBag.Input";
+    var myAttachZone = null;
 </script>
 
 <script type="text/javascript" src="~/Lib/App/Views/Project/project.js"></script>

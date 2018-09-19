@@ -107,5 +107,9 @@ namespace EWUS_Expertdatabase.Model
         public int? CustomerId { get; set; }
 
         public Collection<ProjectMeasure> ProjectMeasures { get; set; }
+
+        public DocumentItem DocumentItem { get; set; }
+
+        public int? DocumentItemId { get; set; }
     }
 }

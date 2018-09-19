@@ -48,5 +48,9 @@ namespace EWUS_Expertdatabase.Web.Client
 
         public string PropertyNumber { get; set; }
 
+        public DocumentItem DocumentItem { get; set; }
+
+        public int? DocumentItemId { get; set; }
+
     }
 }
