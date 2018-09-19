@@ -7,9 +7,13 @@
             if (IsNullOrUndefined(data) == false)
                 dataDocumentItems = data.ProjectMeasurePerformances;
         }
+        
+        $(function () {
+            $("ol.dz-list").sortable({
+                handle: " .col-md-2, .col-md-5, .col-md-4"
+            });
 
-        // publicApp.initializeDropZoneApp("projectMeasureDropZone", "projectMeasurePreview", objectId, "ProjectMeasure");
-        // publicApp.fillDropZoneApp(dataDocumentItems, "projectMeasureDropZone", objectId, "ProjectMeasure");
+        });
 
         GetProjectMeasure(dcProjectMeasure);
 
@@ -29,15 +33,7 @@
                 publicApp.getWebApi(url, projectMeasureTransform, false);
             }, false, true);
         });
-
-        $(function () {
-            $("ol.dz-list").sortable({
-
-            });
-
-        });
-
-
+        
         $("#add-performance").click(function () {
 
             var preview = $("#rows-container").find(".preview-source[data-preview]").clone();
@@ -47,11 +43,17 @@
             preview.css('display', 'block');
             $("#rows-container").append(preview);
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").click(function () {
-                    $(this).parent().parent().parent().remove();
+                preview.find(".row-delete").on('click', function () {
+                    publicApp.callSwalDeleteApp(
+                        function () {
+                            preview.find(".row-delete").parent().parent().parent().remove();
+                        },
+                        function () { });
                 });
-            }
-            
+            };
+            preview.find('.dzone-add').on('click', function () {
+                $(this).parent().parent().find('.dropzone').click();
+            });
 
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
@@ -69,8 +71,12 @@
             $("#rows-container").append(preview);
 
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").click(function () {
-                    $(this).parent().parent().parent().remove();
+                preview.find(".row-delete").on('click', function () {
+                    publicApp.callSwalDeleteApp(
+                        function () {
+                            preview.find(".row-delete").parent().parent().parent().remove();
+                        },
+                        function () { });
                 });
             }
             //preview.find('.dzone-add').css('display', 'block');

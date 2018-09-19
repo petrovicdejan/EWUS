@@ -3034,6 +3034,11 @@ var publicApp = (function () {
             } catch (ex) {
                 performance.DocumentItem = {};
             }
+
+            if (IsNullOrEmpty(performance.Description) && IsNullOrUndefined(performance.DocumentItem.ObjectId)) {
+                return true;
+            };
+
             performancesField.Value.push(performance)
         });
         if (performancesField.Value.length > 0)
@@ -3381,6 +3386,15 @@ var publicApp = (function () {
         )
     }
 
+    var deleteOptions = {
+        title: "Löschen",
+        text: "Soll der Datensatz wirklich gelöscht werden?",
+        type: "warning",
+        showCancelButton: true, confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Löschen", closeOnConfirm: true,
+        cancelButtonText: "Abbrechen"
+    };
+
     return {
         getWebApi: function (sUri, fOnData, bShowError, bAsync) {
             webApiGet(sUri, fOnData, bShowError, bAsync);
@@ -3454,8 +3468,8 @@ var publicApp = (function () {
         windowResize: function () {
             windowResize();
         },
-        callSwallApp: function (accepted, rejected) {
-            callSwal(accepted, rejected);
+        callSwalDeleteApp: function (fnSuccess, fnError) {
+            swalCall(deleteOptions, fnSuccess, fnError);
         },
         setSelectedApp: function (sValue, sSelector) {
             setSelected(sValue, sSelector);

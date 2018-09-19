@@ -1658,7 +1658,7 @@
   };
 
   Dropzone.confirm = function (question, accepted, rejected) {
-      publicApp.callSwallApp(accepted, rejected);
+      publicApp.callSwalDeleteApp(accepted, rejected);
     //if (window.confirm(question)) {
     //  return accepted();
     //} else if (rejected != null) {

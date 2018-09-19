@@ -144,7 +144,7 @@ namespace EWUS_Expertdatabase.Business
             {
                 using (var ctx = new EWUSDbContext())
                 {
-                    ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == Id)
+                    ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == Id).Include(x => x.ProjectMeasurePerformances)
                                             .FirstOrDefault();
 
                     try
