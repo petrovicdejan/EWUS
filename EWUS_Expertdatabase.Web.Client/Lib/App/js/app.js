@@ -2769,11 +2769,13 @@ var publicApp = (function () {
             return false;
     }
 
-    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError) {
+    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection) {
         if (IsNullOrUndefined(bShowAlertOnSuccess))
             bShowAlertOnSuccess = true;
         if (IsNullOrUndefined(bShowAlertOnFailure))
             bShowAlertOnFailure = true;
+        if (IsNullOrUndefined(isCollection))
+            isCollection = true;
         var formId = $(form).attr("Id");
         e.preventDefault();
         ShowPageLoader();
@@ -2791,7 +2793,7 @@ var publicApp = (function () {
         i.Data = $(form).serialize();
         i.Name = $(form).attr("dataname");
 
-        i.Fields = getFormFields(form, true);
+        i.Fields = getFormFields(form, true, isCollection);
 
         var dataObject = new Object();
         dataObject.Id = i.ObjectId;
@@ -2806,7 +2808,7 @@ var publicApp = (function () {
         return false;
     }
 
-    function getFormFields(elForm, bAll) {
+    function getFormFields(elForm, bAll, isCollection) {
         var fields = new Array();
         var sInputSelector = "input[data-edit='true'][data-child-id='']" + ", " + "div.collection.display-field-container[data-partially-edit='true']";
         if (bAll)
@@ -2817,7 +2819,7 @@ var publicApp = (function () {
         });
 
         if ($("div[data-dropzone='true']").length > 0) {
-            getFromDropzone(fields);
+            getFromDropzone(fields, isCollection);
         }
         if ($("li[data-dropzone-extended='true']:not([data-preview])").length > 0) {
             getFromExtendedDropzone(fields);
@@ -2881,11 +2883,15 @@ var publicApp = (function () {
         }
     }
 
-    function getFromDropzone(fields) {
+    function getFromDropzone(fields, isCollection) {
 
         var f = new Object();
-        f.Name = "DocumentItems";
-        f.FieldType = "ItemCollection";
+        if (isCollection)
+            f.Name = "DocumentItems";
+        else
+            f.Name = "DocumentItem";
+
+        f.FieldType = isCollection;
         f.DataType = "AttachmentCollection";
         f.Id = $("div[data-dropzone='true']").attr("data-refers-to-id");
 
@@ -2912,6 +2918,13 @@ var publicApp = (function () {
                 dropZone.Hide = $(el.find(".dz-hide")).is(":checked");
                 
                 p = dropZone;
+
+                if (!isCollection) {
+                    f.Value = p;
+                    fields.push(f);
+
+                    return true;
+                }
 
                 items[inx] = p;
                 inx++;
@@ -3358,8 +3371,8 @@ var publicApp = (function () {
             setForm(elForm, oData, behDefValues);
         },
 
-        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError) {
-            onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError);
+        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection) {
+            onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection);
         },
         deleteObjectApp: function (el, fOnSuccess) {
             deleteObject(el, fOnSuccess);
