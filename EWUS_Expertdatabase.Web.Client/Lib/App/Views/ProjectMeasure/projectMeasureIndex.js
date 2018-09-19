@@ -86,7 +86,7 @@ var projectModule = (function () {
             }
         },
         {
-            label: 'Maßnahmenart',
+            label: 'Energie/Medium',
             name: 'OperationType',
             width: 10,
             editable: true,

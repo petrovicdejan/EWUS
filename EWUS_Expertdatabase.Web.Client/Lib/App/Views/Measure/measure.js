@@ -25,7 +25,7 @@
                 formatter: 'link',
                 formatoptions: { target: '_blank'},
                 editable: true,            
-                width: 30,
+                width: 27,
                 search:false
             },
             {

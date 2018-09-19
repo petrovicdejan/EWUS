@@ -116,7 +116,7 @@ var projectModule = (function () {
             }
         },
         {
-            label: 'Investition [€]',
+            label: 'Investition (netto) [€]',
             name: 'InvestmentTotal',
             width: 12,
             classes: "grid-col",
