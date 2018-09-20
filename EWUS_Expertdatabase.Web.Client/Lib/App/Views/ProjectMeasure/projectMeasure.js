@@ -1,4 +1,9 @@
-﻿(function ($) {
+﻿var openReport = function openPerformanceReport(Id) {
+    var sUrl = sRootUrl + 'Report/GenerateReport?projectId=' + Id;
+    window.location.href = sUrl;
+};
+
+(function ($) {
     $(document).ready(function () {
         var dataDocumentItems = null;
         if (IsNullOrEmpty(dcProjectMeasure) == false) {
