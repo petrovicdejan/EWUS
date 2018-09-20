@@ -6,6 +6,7 @@
                 label: 'Id',
                 name: 'Id',
                 width: 7,
+                key: true,
                 editable: true,
                 hidden: true
             },
@@ -13,7 +14,6 @@
                 label: 'Name',
                 name: 'Name',
                 width: 35,
-                key: true,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'], // ge = greater or equal to, le = less or equal to, eq = equal to

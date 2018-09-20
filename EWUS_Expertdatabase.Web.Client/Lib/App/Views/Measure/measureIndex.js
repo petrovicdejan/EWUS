@@ -4,6 +4,7 @@
             label: 'Id',
             name: 'Id',
             width: 7,
+            key: true,
             editable: true,
             hidden: true
         },
@@ -23,7 +24,6 @@
             sorttype: "number",
             width: 7,
             classes: "grid-col",
-            key: true,
             editable: true,
             searchoptions: {
                 sopt: ['cn'], 
@@ -37,7 +37,6 @@
             sorttype: "number",
             width: 7,
             classes: "grid-col",
-            key: true,
             editable: true,
             searchoptions: {
                 sopt: ['bw', "ge", "le", "eq"],

@@ -57,6 +57,7 @@ var projectModule = (function () {
             label: 'Id',
             name: 'Id',
             width: 10,
+            key: true,
             editable: true,
             hidden: true
         },
@@ -64,7 +65,6 @@ var projectModule = (function () {
             label: 'LB-Nr',
             name: 'PerformanseSheetNumber',
             width: 8,
-            key: true,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],

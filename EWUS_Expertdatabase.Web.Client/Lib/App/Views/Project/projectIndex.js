@@ -39,6 +39,7 @@ var projectModule = (function () {
             label: 'Id',
             name: 'Id',
             width: 7,
+            key: true,
             editable: true,
             hidden: true
         },
@@ -46,7 +47,6 @@ var projectModule = (function () {
             label: 'Projekt',
             name: 'Name',
             width: 15,
-            key: true,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
