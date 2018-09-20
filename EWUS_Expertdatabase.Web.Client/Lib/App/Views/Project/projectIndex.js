@@ -45,7 +45,7 @@ var projectModule = (function () {
         {
             label: 'Projekt',
             name: 'Name',
-            width: 25,
+            width: 15,
             key: true,
             editable: true,
             searchoptions: {
@@ -55,7 +55,7 @@ var projectModule = (function () {
         {
             label: 'Liegenschafts-Nr',
             name: 'PropertyNumber',
-            width: 15,
+            width: 14,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -109,7 +109,7 @@ var projectModule = (function () {
         {
             label: 'Ort',
             name: 'City',
-            width: 10,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -118,7 +118,7 @@ var projectModule = (function () {
         {
             label: 'Investition (netto) [€]',
             name: 'InvestmentTotal',
-            width: 12,
+            width: 17,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
