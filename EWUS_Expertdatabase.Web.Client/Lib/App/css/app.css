@@ -3661,3 +3661,17 @@ input, select, textarea, .select2-selection {
 #MaintenanceCompany .field-contener .label-wrapper.form-inline-element-wrapper {
     min-width:26%;
 }
+
+#Project #previews {
+    margin-top:15px;
+}
+
+#projectDropZone {
+    margin-top: 15px;
+    max-height: 440px;
+    height: 440px;
+}
+
+#Project .col-md-1 {
+    margin-right: 15px;
+}

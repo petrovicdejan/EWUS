@@ -91,9 +91,7 @@ var publicApp = (function () {
             }
         }
         var type = "POST"
-        //if (bHasKey && sUri.indexOf("command") == -1) {
-        //    type = "PUT";
-        //}
+        var result = null;
         $.ajax({
             url: sUri,
             type: type,
@@ -104,12 +102,15 @@ var publicApp = (function () {
             headers: GetWebApiHeaders(),
             contentType: 'application/json; charset=utf-8',
             success: function (data, textStatus, xhr) {
-                webApiPostOnSuccess(data, textStatus, xhr, bShowAlertOnSuccess, fOnData, bCloseModalDialog, sUri, sFormId)
+                webApiPostOnSuccess(data, textStatus, xhr, bShowAlertOnSuccess, fOnData, bCloseModalDialog, sUri, sFormId);
+                result = data;
             },
             error: function (xhr, textStatus, errorThrown) {
                 webApiPostOnError(null, xhr, textStatus, errorThrown, bShowAlertOnFailure, fOnError, sUri);
+                result = null;
             }
         });
+        return result;
     }
 
     function webApiPostOnSuccess(data, textStatus, xhr, bShowAlert, fOnData, bCloseModalDialog, sUri, sFormId) {
@@ -2769,19 +2770,25 @@ var publicApp = (function () {
             return false;
     }
 
-    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection) {
+    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync) {
         if (IsNullOrUndefined(bShowAlertOnSuccess))
             bShowAlertOnSuccess = true;
         if (IsNullOrUndefined(bShowAlertOnFailure))
             bShowAlertOnFailure = true;
         if (IsNullOrUndefined(isCollection))
             isCollection = true;
+        if (IsNullOrUndefined(isAsync))
+            isAsync = true;
         var formId = $(form).attr("Id");
+        if (IsNullOrUndefined(idForm))
+            formId = $(form).attr("Id")
+        else
+            formId = idForm;
         e.preventDefault();
         ShowPageLoader();
         if (!validateForm(document.getElementById(formId))) {
             ClosePageLoader();
-            return false;
+            return null;
         }
         var i = new Object();
 
@@ -2802,10 +2809,10 @@ var publicApp = (function () {
         });
 
         var url = sRootUrl + $(form).attr("posturl");
+        var result = null;
+        result = webApiPost(url, dataObject, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, true, formId, isAsync);
 
-        webApiPost(url, dataObject, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, true, formId);
-
-        return false;
+        return result;
     }
 
     function getFormFields(elForm, bAll, isCollection) {
@@ -3380,8 +3387,8 @@ var publicApp = (function () {
             setForm(elForm, oData, behDefValues);
         },
 
-        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection) {
-            onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection);
+        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync) {
+            return onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync);
         },
         deleteObjectApp: function (el, fOnSuccess) {
             deleteObject(el, fOnSuccess);

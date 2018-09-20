@@ -3,8 +3,10 @@ using EWUS_Expertdatabase.Data;
 using EWUS_Expertdatabase.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -109,14 +111,18 @@ namespace EWUS_Expertdatabase.Business
                 project.ServicedObject = editProject.ServicedObject;
                 project.Remark = editProject.Remark;
                 project.PropertyNumber = editProject.PropertyNumber;
-                project.DocumentItemId = editProject.DocumentItemId;
 
-                if (editProject.DocumentItemId != null && editProject.DocumentItemId != 0)
+
+                if (editProject.DocumentItem != null && editProject.DocumentItem.Id != 0)
+                {
                     documentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItemId).FirstOrDefault();
-                else
+                    project.DocumentItemId = editProject.DocumentItemId;
+                }
+                else if (editProject.DocumentItem != null && editProject.DocumentItem.Id == 0)
                 {
                     documentItem = editProject.DocumentItem;
                     ctx.DocumentItems.Add(documentItem);
+                    project.DocumentItemId = (int?)documentItem.Id;
                 }
                 project.DocumentItem = documentItem;
 
@@ -124,6 +130,17 @@ namespace EWUS_Expertdatabase.Business
                     ctx.Projects.Add(project);
 
                 ctx.SaveChanges();
+
+                if (!string.IsNullOrEmpty(project.Guid.ToString()) && project.DocumentItem != null)
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        Collection<DocumentItem> collDocumentItem = new Collection<DocumentItem>();
+                        collDocumentItem.Add(project.DocumentItem);
+
+                        SaveFile.SaveFileInFolder(project.Guid.ToString(), typeof(Project).Name, collDocumentItem);
+                    });
+                }
 
                 output = Result.ToResult<Project>(ResultStatus.OK, typeof(Project));
                 output.Value = project;

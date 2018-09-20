@@ -77,6 +77,7 @@ namespace EWUS_Expertdatabase.Business
                                             new { f1 = pm.MeasureId } into cp
                                from q1 in cp.DefaultIfEmpty()
                                where q1.Measure == null
+                               orderby m.Name
                                select new MeasurePoco
                                {
                                    Id = m.Id,
