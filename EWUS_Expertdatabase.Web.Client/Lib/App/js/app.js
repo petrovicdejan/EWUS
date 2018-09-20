@@ -3235,12 +3235,15 @@ var publicApp = (function () {
         });
         myattachZ.on("maxfilesexceeded", function (file) {
             _ref = myattachZ.files.slice();
+
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                 var myFile = _ref[_i];
-                if (myFile.status !== Dropzone.UPLOADING && myFile.id != file.id) {
+                if (myFile.id != file.id) {
                     myattachZ.removeFile(myFile);
                 }
                 else {
+                    file.accepted = true;
+                    
                     myattachZ.uploadFile(file);
                 }
             }
