@@ -586,7 +586,7 @@ var publicApp = (function () {
                     autoclose: true,
                     container: "body",
                     disableEntry: false,
-                    orientation: "auto",
+                    orientation: "bottom",
                     keyboardNavigation: true,
                     disableTouchKeyboard: false
                 });

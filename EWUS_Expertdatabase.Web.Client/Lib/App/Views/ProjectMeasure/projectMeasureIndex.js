@@ -46,6 +46,8 @@ var projectMeasureTransform = function transformData(rData) {
 
     publicApp.setUpSelectApp("#projectMeasureList ");
 
+    $("#AddMeasureToProject").prop("disabled", true);
+
 }
 
 var projectModule = (function () {
@@ -144,6 +146,10 @@ var projectModule = (function () {
         }
 
     });
+
+    $("#Measure-ddl").on('select2:select', function () {
+        $("#AddMeasureToProject").prop("disabled", false);
+    })
 
     function fetchProjectMeasureData() {
 

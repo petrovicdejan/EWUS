@@ -44,7 +44,7 @@
         ];
         
         var relativeGridWidth = $(window).width() / 3.47;
-        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, relativeGridWidth, 150, 15, fetchGridData, null);
+        setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, relativeGridWidth, 120, 15, fetchGridData, null);
 
         $("#jqGridLink")
             
