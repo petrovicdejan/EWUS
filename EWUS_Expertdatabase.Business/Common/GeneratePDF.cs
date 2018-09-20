@@ -95,9 +95,13 @@ namespace EWUS_Expertdatabase.Business.Common
                     continue;
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
-                
+
+                string description = item.Description;
+
+                var encodedDesc = HttpUtility.HtmlEncode(description);
+
                 string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
-                    + "<p style='padding-top:9px;margin-left:7px;'>" +item.Description +" </p>"
+                    + "<p style='padding-top:9px;margin-left:7px;'>" + encodedDesc + " </p>"
                     + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' height='395' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
