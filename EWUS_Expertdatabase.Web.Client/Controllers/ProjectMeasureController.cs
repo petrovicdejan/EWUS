@@ -4,19 +4,14 @@ using EWUS_Expertdatabase.Common;
 using EWUS_Expertdatabase.Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using System.Configuration;
 
 namespace EWUS_Expertdatabase.Web.Client
 {
-    //[RoutePrefix("projektmitmassnahmen")]
     public class ProjectMeasureController : Controller
     {
         // GET: ProjectMeasure

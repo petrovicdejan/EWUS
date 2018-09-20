@@ -164,8 +164,8 @@ var projectModule = (function () {
 
     $("#Measure-ddl").on('select2:select', function () {
         $("#AddMeasureToProject").prop("disabled", false);
-    })
-
+    });
+    
     function fetchProjectMeasureData() {
 
         setGridOptions.deleteRows('gridProjectMeasure');
