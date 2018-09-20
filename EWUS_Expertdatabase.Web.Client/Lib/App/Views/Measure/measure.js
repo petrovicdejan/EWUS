@@ -116,6 +116,7 @@
                         row.Id = item.Id;
                         row.Name = item.Name;
                         row.SerialNumber = item.SerialNumber;
+                        row.SavingPercent = item.SavingPercent;
                         row.InvestmentCost = item.InvestmentCost;
                         row.Saving = item.Saving;
 

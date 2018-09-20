@@ -18,6 +18,8 @@ namespace EWUS_Expertdatabase.Business
 
         public string MeasureName { get; set; }
 
+        public int SavingPercent { get; set; }
+
         //public string PerformanseSheetStatus { get; set; }
 
         //public string MaintenanceCompany { get; set; }

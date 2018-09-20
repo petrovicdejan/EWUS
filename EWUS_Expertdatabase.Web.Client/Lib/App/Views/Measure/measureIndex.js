@@ -10,7 +10,7 @@
         {
             label: 'Benennung',
             name: 'Name',
-            width: 26,
+            width: 33,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -21,7 +21,7 @@
             name: 'SerialNumber',
             align: 'left',
             sorttype: "number",
-            width: 15,
+            width: 7,
             classes: "grid-col",
             key: true,
             editable: true,
@@ -30,9 +30,23 @@
             }
         },
         {
+            label: 'Einsparung [%]',
+            name: 'SavingPercent',
+            align: 'right',
+            formatter: 'number',
+            sorttype: "number",
+            width: 7,
+            classes: "grid-col",
+            key: true,
+            editable: true,
+            searchoptions: {
+                sopt: ['bw', "ge", "le", "eq"],
+            }
+        },
+        {
             label: 'Energie/Medium',
             name: 'OperationType',
-            width: 15,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'], 
@@ -44,7 +58,7 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-            width: 14,
+            width: 10,
             align: 'right',
             editable: true,
             searchoptions: {
@@ -63,7 +77,7 @@
         },
     ];
 
-    setGridOptions.setUpGrid("jqGrid", "jqGridPager", colModel, 1400, 0, 15, fetchGridData, false,"/Measure/MeasureEdit?key=");
+    setGridOptions.setUpGrid("jqGrid", "jqGridPager", colModel, 1400, 0, 100, fetchGridData, false,"/Measure/MeasureEdit?key=");
 
     function fetchGridData() {
 
@@ -79,6 +93,7 @@
                 row.Id = item.Id;
                 row.Name = item.Name;
                 row.SerialNumber = item.SerialNumber;
+                row.SavingPercent = item.SavingPercent;
                 row.InvestmentCost = item.InvestmentCost;
                 row.Saving = item.Saving;
 

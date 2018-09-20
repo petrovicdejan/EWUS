@@ -17,6 +17,8 @@ namespace EWUS_Expertdatabase.Web.Client
 
         public string MeasureName { get; set; }
 
+        public int SavingPercent { get; set; }
+
         public Classification PerformanseSheetStatus { get; set; }
 
         public int? PerformanseSheetStatusId { get; set; }
