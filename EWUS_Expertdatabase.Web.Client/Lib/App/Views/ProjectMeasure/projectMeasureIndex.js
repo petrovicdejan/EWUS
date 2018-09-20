@@ -73,7 +73,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 40,
+            width: 25,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -100,7 +100,7 @@ var projectModule = (function () {
         {
             label: 'Wartungsfirma',
             name: 'MaintenanceCompany',
-            width: 16,
+            width: 14,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
