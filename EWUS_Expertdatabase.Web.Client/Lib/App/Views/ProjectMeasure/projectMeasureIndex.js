@@ -21,6 +21,7 @@ var projectMeasureTransform = function transformData(rData) {
         row.Name = item.Name;
         row.PerformanseSheetNumber = item.PerformanseSheetNumber;
         row.MeasureName = item.MeasureName;
+        row.SavingPercent = item.SavingPercent;
 
         if (!IsNullOrUndefined(item.PerformanseSheetStatus)) {
             row.PerformanceSheetStatus = item.PerformanseSheetStatus.Value;
@@ -72,7 +73,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 40,
+            width: 25,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -99,10 +100,24 @@ var projectModule = (function () {
         {
             label: 'Wartungsfirma',
             name: 'MaintenanceCompany',
-            width: 16,
+            width: 14,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
+            }
+        },
+        {
+            label: 'Einsparung [%]',
+            name: 'SavingPercent',
+            align: 'right',
+            formatter: 'number',
+            sorttype: "number",
+            width: 10,
+            classes: "grid-col",
+            key: true,
+            editable: true,
+            searchoptions: {
+                sopt: ['bw', "ge", "le", "eq"],
             }
         },
         {
@@ -130,7 +145,7 @@ var projectModule = (function () {
         },
     ];
 
-    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 15, fetchProjectMeasureData, false, "/leistungsblatt/");
+    setGridOptions.setUpGrid("gridProjectMeasure", "jqGridPager", colModel, 1500, 0, 100, fetchProjectMeasureData, false, "/leistungsblatt/");
     
     $("#ProjectName").val(projectName);
 

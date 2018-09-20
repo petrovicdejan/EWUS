@@ -88,6 +88,12 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("SavingPercent", "SavingPercent", "Einsparung [%]", "Einsparung [%]", "7", type: "number")
+                </div>
+            </div>          
+
+            <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
                     @WebHelpers.jQGrid("jqGridLink", true, "MeasureLinks", "69%", "195px", "Dokumentlinks")
                 </div>
             </div>

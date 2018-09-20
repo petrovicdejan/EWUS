@@ -86,6 +86,7 @@ namespace EWUS_Expertdatabase.Business
                                           Name = pm.Name,
                                           PerformanseSheetNumber = pm.PerformanseSheetNumber,
                                           MeasureName = m.Name,
+                                          SavingPercent = m.SavingPercent,
                                           PerformanseSheetStatus = q3,
                                           MaintenanceCompany = q1,
                                           OperationType = q2.Value,
