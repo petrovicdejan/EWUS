@@ -10,7 +10,7 @@
         {
             label: 'Benennung',
             name: 'Name',
-            width: 33,
+            width: 20,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -58,7 +58,7 @@
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
-            width: 10,
+            width: 8,
             align: 'right',
             editable: true,
             searchoptions: {
