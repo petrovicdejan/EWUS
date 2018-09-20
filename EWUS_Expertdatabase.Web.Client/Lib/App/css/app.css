@@ -3230,6 +3230,12 @@ html, body {
     width: 40%;
 }
 
+#ProjectMeasure #Name, #MeasureName, #PerformanseSheetNumber,
+#Measure #SerialNumber {
+    background-color: transparent;
+    border-bottom: none;
+}
+
 .dropzone {
     border: 1px dashed #0087F7;
     border-radius: 5px;

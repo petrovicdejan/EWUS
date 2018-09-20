@@ -51,6 +51,8 @@
                 else
                     projectId = result.Id;
             }
+            else
+                projectId = objectId;
 
             publicApp.modalDialogClose();
             var sUrl = sRootUrl + 'projektmitmassnahmen/' + projectId;
