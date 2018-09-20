@@ -133,11 +133,11 @@ namespace EWUS_Expertdatabase.Business
                 using (var ctx = new EWUSDbContext())
                 {
                     Project project = ctx.Projects.Where(x => x.Id == Id)
-                                 .Include(x => x.Region)
-                                  .Include(x => x.Property)
-                                  .Include(x => x.Customer)
-                                  .Include(x => x.DocumentItem)
-                                  .FirstOrDefault();
+                                    .Include(x => x.Region)
+                                      .Include(x => x.Property)
+                                      .Include(x => x.Customer)
+                                      .Include(x => x.ProjectMeasures)
+                                      .FirstOrDefault();
 
                     try
                     {
@@ -146,7 +146,7 @@ namespace EWUS_Expertdatabase.Business
                     }
                     catch (Exception ex)
                     {
-                        if (ex.HResult == -2146233087)
+                        if (ex.HResult == -2146233087 || ex.HResult == -2146233079)
                         {
                             output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity; ;
                             output.Status = ResultStatus.Forbidden;

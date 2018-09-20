@@ -72,13 +72,18 @@ namespace EWUS_Expertdatabase.Business.Common
             if (projectMeasurePoco.PerformanseSheetNumber != 0)
                 performanceSheetNumber = projectMeasurePoco.PerformanseSheetNumber.ToString();
 
+            string companyEmail = string.Empty;
+
+            if(!string.IsNullOrWhiteSpace(projectMeasurePoco?.MaintenanceCompany?.Email))
+                companyEmail = "(" + projectMeasurePoco?.MaintenanceCompany?.Email + ")";
+
             html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType)
                         .Replace("$$$LiegenschaftsNr$$$", performanceSheetNumber)
                         .Replace("$$$Standort$$$", projectMeasurePoco.Location)
                         .Replace("$$$Plz$$$", projectMeasurePoco?.ZipCode)
                         .Replace("$$$Ort$$$", projectMeasurePoco?.City)
                         .Replace("$$$Wartungsfirma$$$", projectMeasurePoco?.MaintenanceCompany?.Name)
-                        .Replace("$$$WartungsfirmaEmail$$$", projectMeasurePoco?.MaintenanceCompany?.Email)
+                        .Replace("$$$WartungsfirmaEmail$$$", companyEmail)
                         .Replace("$$$Massnahmenart$$$", projectMeasurePoco?.OperationType)
                         .Replace("$$$Massnahme$$$", projectMeasurePoco?.MeasureName)
                         .Replace("$$$HeaderImage$$$", headerImage);

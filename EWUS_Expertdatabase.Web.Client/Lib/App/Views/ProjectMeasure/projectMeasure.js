@@ -1,4 +1,9 @@
-﻿(function ($) {
+﻿var openReport = function openPerformanceReport(Id) {
+    var sUrl = sRootUrl + 'Report/GenerateReport?projectId=' + Id;
+    window.location.href = sUrl;
+};
+
+(function ($) {
     $(document).ready(function () {
         var dataDocumentItems = null;
         if (IsNullOrEmpty(dcProjectMeasure) == false) {
@@ -7,6 +12,13 @@
             if (IsNullOrUndefined(data) == false)
                 dataDocumentItems = data.ProjectMeasurePerformances;
         }
+        
+        $(function () {
+            $("ol.dz-list").sortable({
+                handle: " .col-md-2, .col-md-5, .col-md-4"
+            });
+
+        });
 
         GetProjectMeasure(dcProjectMeasure);
 
@@ -26,15 +38,7 @@
                 publicApp.getWebApi(url, projectMeasureTransform, false);
             }, false, true);
         });
-
-        $(function () {
-            $("ol.dz-list").sortable({
-
-            });
-
-        });
-
-
+        
         $("#add-performance").click(function () {
 
             var preview = $("#rows-container").find(".preview-source[data-preview]").clone();
@@ -44,15 +48,19 @@
             preview.css('display', 'block');
             $("#rows-container").append(preview);
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").on('click',function () {
+                preview.find(".row-delete").on('click', function () {
+                    var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            preview.find(".row-delete").parent().parent().parent().remove();
+                            el.parent().parent().parent().remove();
                         },
                         function () { });
                 });
-            }
-            
+            };
+            preview.find('.dzone-add').on('click', function () {
+                $(this).parent().parent().find('.dropzone').click();
+            });
+
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
             var exactPreviewSelector = dropzone.find("#dz-projectMeasureDropZone-preview")[0];
@@ -69,10 +77,11 @@
             $("#rows-container").append(preview);
 
             if (preview.find(".row-delete")) {
-                preview.find(".row-delete").on('click',function () {
+                preview.find(".row-delete").on('click', function () {
+                    var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            preview.find(".row-delete").parent().parent().parent().remove();
+                            el.parent().parent().parent().remove();
                         },
                         function () { });
                 });

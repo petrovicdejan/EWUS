@@ -144,7 +144,7 @@ namespace EWUS_Expertdatabase.Business
             {
                 using (var ctx = new EWUSDbContext())
                 {
-                    ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == Id)
+                    ProjectMeasure projectMeasure = ctx.ProjectMeasures.Where(x => x.Id == Id).Include(x => x.ProjectMeasurePerformances)
                                             .FirstOrDefault();
 
                     try
@@ -155,7 +155,7 @@ namespace EWUS_Expertdatabase.Business
                     }
                     catch (Exception ex)
                     {
-                        if (ex.HResult == -2146233087)
+                        if (ex.HResult == -2146233087 || ex.HResult == -2146233079)
                         {
                             output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity;
                             output.Status = ResultStatus.Forbidden;
@@ -373,7 +373,7 @@ namespace EWUS_Expertdatabase.Business
                     }
                     catch (Exception ex)
                     {
-                        if (ex.HResult == -2146233087)
+                        if (ex.HResult == -2146233087 || ex.HResult == -2146233079)
                         {
                             output.ExceptionMessage = Constants.ErrorMessageReferentialIntegrity;
                             output.Status = ResultStatus.Forbidden;

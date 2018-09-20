@@ -555,7 +555,7 @@ var publicApp = (function () {
                     autoclose: true,
                     container: "body",
                     disableEntry: false,
-                    orientation: "auto",
+                    orientation: "bottom",
                     keyboardNavigation: true,
                     disableTouchKeyboard: false
                 });
@@ -1589,7 +1589,7 @@ var publicApp = (function () {
     }
 
     function validateForm(elForm) {
-        //validate extended pod komentarom ako se predomisle
+        //validate extended 
         //var returnExtended = true;
         //$("li[data-dropzone-extended='true']:not([data-preview])").each(function (ind, val) {
         //    val = $(val);
@@ -3311,6 +3311,15 @@ var publicApp = (function () {
             accepted,
             rejected
         )
+    };
+
+    var deleteOptions = {
+        title: "Löschen",
+        text: "Soll der Datensatz wirklich gelöscht werden?",
+        type: "warning",
+        showCancelButton: true, confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Löschen", closeOnConfirm: true,
+        cancelButtonText: "Abbrechen"
     };
 
     var deleteOptions = {
