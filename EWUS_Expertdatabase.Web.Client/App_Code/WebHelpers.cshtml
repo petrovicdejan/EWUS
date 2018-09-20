@@ -1,57 +1,57 @@
 ﻿@helper LookupEditor(string name,
-                     string path,
-                     string label,
-                     string objectType,
-                     string uri,
-                     string tabIndex,
-                     string description,
-                     bool isRequired = false,
-                     string dataLocalizedPlaceholder = null,
-                     string dataLocalizedLabel = null,
-                     string dataLocalizedDescription = null,
-                     string alternateName = "",
-                     string searchMethodName = "getSearchByScope",
-                     bool showOptions = true)
-{
-    string searchMethod = searchMethodName + "(this)";
+                         string path,
+                         string label,
+                         string objectType,
+                         string uri,
+                         string tabIndex,
+                         string description,
+                         bool isRequired = false,
+                         string dataLocalizedPlaceholder = null,
+                         string dataLocalizedLabel = null,
+                         string dataLocalizedDescription = null,
+                         string alternateName = "",
+                         string searchMethodName = "getSearchByScope",
+                         bool showOptions = true)
+    {
+        string searchMethod = searchMethodName + "(this)";
 
-    <div class="field-set" style="padding-bottom: 20px">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
-            </div>
-            <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
-                <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
-                <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
-                       data-remote="remote_@name" data-recent="recent_@name"
-                       data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false"
-                       class="typeahead2 form-control-ew-text"
-                       data-representing-type="Lookup"
-                       data-type-name="@objectType"
-                       placeholder="@label"
-                       data-localized-placeholder="@dataLocalizedPlaceholder"
-                       data-name="@path"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                       data-path="@path" />
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;@if (showOptions == false) { <text>display:none;</text>}">
-                    <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
-                </a>
-                <input id="@name-Url" type="hidden" value="" />
-                <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri">
-                    <li><a onclick="@searchMethod" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
-                    <li><a onclick="@searchMethod" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
-                    <li class="divider"></li>
-                    <li><a onclick="@searchMethod" data-fileds="Name,Number" data-localized="All">All</a></li>
-                </ul>
-                <br />
-                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
-                    @description
-                </small>
+        <div class="field-set" style="padding-bottom: 20px">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+                </div>
+                <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                    <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
+                    <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
+                           data-remote="remote_@name" data-recent="recent_@name"
+                           data-filed-name="@path" data-filed-alternate-name="@alternateName" type="text" data-edit="false"
+                           class="typeahead2 form-control-ew-text"
+                           data-representing-type="Lookup"
+                           data-type-name="@objectType"
+                           placeholder="@label"
+                           data-localized-placeholder="@dataLocalizedPlaceholder"
+                           data-name="@path"
+                           @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                           data-path="@path" />
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;@if (showOptions == false) { <text>display:none;</text>}">
+                        <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                    </a>
+                    <input id="@name-Url" type="hidden" value="" />
+                    <ul id="@name-ddl" class="dropdown-menu animated fadeInRight m-t-xs" data-uri="@uri">
+                        <li><a onclick="@searchMethod" data-fileds="Name" data-localized="GRID_NAME">Name</a></li>
+                        <li><a onclick="@searchMethod" data-fileds="Number" data-localized="GRID_NUMBER">Number</a></li>
+                        <li class="divider"></li>
+                        <li><a onclick="@searchMethod" data-fileds="Name,Number" data-localized="All">All</a></li>
+                    </ul>
+                    <br />
+                    <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                        @description
+                    </small>
+                </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
+        <script type="text/javascript">
         var remote_@(name)_Uri = eval("@searchMethodName" + "($('#@name-ddl li a').first())");
 
         var recent_@name = getRecent('recent-@name');
@@ -77,41 +77,41 @@
             uri = uri.replace("%QUERY", encodeURIComponent(value.toLowerCase()));
             return uri;
         }, map_@name);
-    </script>
+        </script>
 }
 
 @helper LookupEditorWithUri(string name, string path, string label, string objectType, string uri, string tabIndex, string description, bool isRequired = false, string dataLocalizedPlaceholder = null, string dataLocalizedLabel = null, string dataLocalizedDescription = null)
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
-            </div>
-            <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
-                <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
-                <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
-                       data-remote="remote_@name" data-recent="recent_@name"
-                       data-filed-name="@path" type="text" data-edit="false"
-                       class="typeahead2-@name"
-                       data-representing-type="Lookup"
-                       data-type-name="@objectType"
-                       placeholder="@label"
-                       data-localized-placeholder="@dataLocalizedPlaceholder"
-                       data-name="@path"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                       data-path="@path" />
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;">
-                    <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
-                </a>
-                <br />
-                <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
-                    @description
-                </small>
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name" data-localized="@dataLocalizedLabel">@label</label>
+                </div>
+                <div id="typeahead-group" class="field-group float-label-control tt-input-group ">
+                    <span class="fa fa-search field-icon" data-edit="true" valid="true"></span>
+                    <input id="@name" name="@name" tabindex='@tabIndex' data-tabindex='@tabIndex'
+                           data-remote="remote_@name" data-recent="recent_@name"
+                           data-filed-name="@path" type="text" data-edit="false"
+                           class="typeahead2-@name"
+                           data-representing-type="Lookup"
+                           data-type-name="@objectType"
+                           placeholder="@label"
+                           data-localized-placeholder="@dataLocalizedPlaceholder"
+                           data-name="@path"
+                           @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                           data-path="@path" />
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-target="#" style="text-decoration:none;margin-left:10px;">
+                        <span class="field-subitems" style="padding-bottom:2px;"><span id="@name-Scope" class="truncate" style="width:60px;">Name</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                    </a>
+                    <br />
+                    <small id="@name-Description" class="field-description" style="padding-top:5px;" data-localized="@dataLocalizedDescription">
+                        @description
+                    </small>
+                </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
+        <script type="text/javascript">
         var remote_@(name)_Uri = sRootUrl + "@uri";
 
         var recent_@name = getRecent('recent-@name');
@@ -138,94 +138,94 @@
 
             return uri;
         }, map_@name);
-    </script>
+        </script>
 }
 
 @helper BoolEditor(string name, string path, string label, string tabIndex, string localizedKey = "")
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input id="@name" data-filed-name="@name" type="checkbox" name="@name" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input id="@name" data-filed-name="@name" type="checkbox" name="@name" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                </div>
             </div>
         </div>
-    </div>
 }
 
 @helper TextEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null
-    , string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999, string nameForMessage = "", bool inline = false)
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
-                <label for="@name">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
-                <i class="fa field-icon fa-terminal fa-icon-@name" data-edit="true" valid="true"></i>
-                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
-                       data-edit="false"
-                       class="form-control-ew-@type"
-                       @if (isRequired == true) { <text> data-val-required="@nameForMessage Eingabe erforderlich" data-val="true" </text> }
-                       type="text"
-                       @if (type == "number") { <text> data-val-number="@name must be a number" data-money="true" </text> }
-                       @if (isReadOnly == true) { <text> readonly </text> }
-                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                @if (description != null)
-                {
-                    <small id="@name-Description" class="field-description" style="padding-top:5px;">
-                        @description
-                    </small>
-                }
+        , string dataLocalizedDescription = null, bool isReadOnly = false, int maxLength = 999, string nameForMessage = "", bool inline = false)
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
+                    <label for="@name">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
+                    <i class="fa field-icon fa-terminal fa-icon-@name" data-edit="true" valid="true"></i>
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                           data-edit="false"
+                           class="form-control-ew-@type"
+                           @if (isRequired == true) { <text> data-val-required="@nameForMessage Eingabe erforderlich" data-val="true" </text> }
+                           type="text"
+                           @if (type == "number") { <text> data-val-number="@name must be a number" data-money="true" </text> }
+                           @if (isReadOnly == true) { <text> readonly </text> }
+                           @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    @if (description != null)
+                    {
+                        <small id="@name-Description" class="field-description" style="padding-top:5px;">
+                            @description
+                        </small>
+                    }
+                </div>
             </div>
         </div>
-    </div>
 }
 
 @helper HeaderDisplay(string title, string caption, string dataLocalizedTitle = null, string dataLocalizedCaption = null)
-{
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h2 data-localized="@dataLocalizedTitle">@title</h2>
-        <h4 data-localized="@dataLocalizedCaption">@caption</h4>
-    </div>
+    {
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h2 data-localized="@dataLocalizedTitle">@title</h2>
+            <h4 data-localized="@dataLocalizedCaption">@caption</h4>
+        </div>
 }
 
 @helper SubmitScript(string formName)
-{
-    <script>
+    {
+        <script>
         $('#@formName').submit(function (e) {
             onFormSubmit($(this), e);
         });
-    </script>
+        </script>
 }
 
 @helper AmountEditor(string name, string label, string placeholder, string tabIndex, string labelLocalized = "", string placeholderLocalized = "")
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
-            </div>
-            <div class="field-group float-label-control">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
-                       data-representing-type="Amount"
-                       class="form-control-ew-text"
-                       data-filed-name="@name" data-currency-code="" type="text"
-                       placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
-                <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
-                    <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
-                </a>
-                <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name" id="label-@name" data-localized="@labelLocalized">@label</label>
+                </div>
+                <div class="field-group float-label-control">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@name"
+                           data-representing-type="Amount"
+                           class="form-control-ew-text"
+                           data-filed-name="@name" data-currency-code="" type="text"
+                           placeholder="@placeholder" data-localized-placeholder="@placeholderLocalized" data-edit="false" class="money2">
+                    <a id="@name-DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                        <span class="field-subitems"><span id="@(name)Code" class="truncate">Eur</span><span class="field-subitems-selector fa fa-caret-down"></span></span>
+                    </a>
+                    <ul id="@name-DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+                </div>
             </div>
         </div>
-    </div>
-    <script>
+        <script>
 
             $('#' + '@name' + 'DropDownButton').hide();
             GetCurrencyList($('#@name'), onItem@(name)CurrencyData@(tabIndex));
@@ -259,94 +259,94 @@
 
                 }
             }
-    </script>
+        </script>
 }
 
 
 
 @helper DateEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string labelLocalized = "", string placeholderLocalized = "", bool inline = false)
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
-                <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
-                       placeholder="@placeholder" data-format-pattern="DD.MM.YYYY" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
-                       class="date2 form-control-ew-text"
-                       @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
-                       data-val="true"
-                       @if (inline) { <text> style="max-width:50%;" </text> }>
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" @if (inline) { <text> style="width:61%;" </text> }>
+                    <label for="Uri" id="label-@name" data-localized="@labelLocalized">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" @if (inline) { <text> style="max-width:50%;width:auto;" </text> }>
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex="@tabindex" data-tabindex="@tabindex" id="@name" name="@name" data-filed-name="@name" type="text"
+                           placeholder="@placeholder" data-format-pattern="DD.MM.YYYY" data-localized-placeholder="@placeholderLocalized" data-edit="false" data-representing-type="Date"
+                           class="date2 form-control-ew-text"
+                           @if (isRequired == true) { <text> data-val-required="@name Is Required" </text> }
+                           data-val="true"
+                           @if (inline) { <text> style="max-width:50%;" </text> }>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                </div>
             </div>
         </div>
-    </div>
 
 }
 
 
 @helper TextAreaEditor(string name, string placeholder, string label, string tabindex, bool isRequired = false, string localizedLabel = "", string localizedPlaceholder = "", string localizedrequired = "", bool isReadOnly = false)
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div id="label-wrapper-@name" class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper form-inline-element-wrapper-textarea">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input id="@name" data-filed-name="@name" type="hidden" name="@name"
-                       data-representing-type="MultilineText"
-                       placeholder="@placeholder"
-                       data-edit="false"
-                       data-localized-placeholder="@localizedPlaceholder">
-                <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
-                          onchange="onTextAreaChange(this)"
-                          data-representing-type="MultiLineText"
-                          type="text"
-                          data-localized-placeholder="@localizedPlaceholder"
-                          rows="3"
-                          class="form-control-ew-textarea"
-                          @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
-                          @if (isReadOnly == true) { <text> readonly </text> }
-                          placeholder="@placeholder" data-edit="false"></textarea>
-                <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div id="label-wrapper-@name" class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name-mlt" id="label-@name" data-localized="@localizedLabel">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper form-inline-element-wrapper-textarea">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input id="@name" data-filed-name="@name" type="hidden" name="@name"
+                           data-representing-type="MultilineText"
+                           placeholder="@placeholder"
+                           data-edit="false"
+                           data-localized-placeholder="@localizedPlaceholder">
+                    <textarea tabindex="@tabindex" data-tabindex="@tabindex" id="@name-mlt" name="@name-mlt"
+                              onchange="onTextAreaChange(this)"
+                              data-representing-type="MultiLineText"
+                              type="text"
+                              data-localized-placeholder="@localizedPlaceholder"
+                              rows="3"
+                              class="form-control-ew-textarea"
+                              @if (isRequired == true) { <text> data-val-required="@name Is Required" data-val="true" </text> }
+                              @if (isReadOnly == true) { <text> readonly </text> }
+                              placeholder="@placeholder" data-edit="false"></textarea>
+                    <span class="field-validation-valid" data-valmsg-for="@name-mlt" data-valmsg-replace="true"></span>
+                </div>
             </div>
         </div>
-    </div>
 
 }
 
 
 
 @helper QuantityEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", bool isReadOnly = false)
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@(name)" data-localized="@labelLocalized">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
-                       data-filed-name="@name"
-                       placeholder="@placeholder"
-                       class="form-control-ew-text"
-                       data-localized-placeholder="@placeholderLocalized"
-                       type="number" data-edit="false"
-                       data-name="@name"
-                       data-url="@uri"
-                       data-val="true"
-                       @if (isReadOnly == true) { <text> readonly </text> } />
-                <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
-                    <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
-                </a>
-                <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@(name)" data-localized="@labelLocalized">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input data-tabindex="@tabindex" id="@name" name="@name" data-path="@name"
+                           data-filed-name="@name"
+                           placeholder="@placeholder"
+                           class="form-control-ew-text"
+                           data-localized-placeholder="@placeholderLocalized"
+                           type="number" data-edit="false"
+                           data-name="@name"
+                           data-url="@uri"
+                           data-val="true"
+                           @if (isReadOnly == true) { <text> readonly </text> } />
+                    <a id="@(name)DropDownButton" href="http://example.com" data-toggle="dropdown" class="dropdown-toggle" data-target="#">
+                        <span style="color:#999;padding-left:5px;margin-left:0px;border-bottom:1px solid #999;border-right:1px solid #999;padding-bottom:3px;padding-right:6px;" id="@(name)Code"><span class="fa fa-caret-down" style="color:#999;padding-left:5px;margin-left:0px;"></span></span>
+                    </a>
+                    <ul id="@(name)DropDown" class="dropdown-menu animated fadeInRight m-t-xs"></ul>
+                </div>
             </div>
         </div>
-    </div>
-    <script>
+        <script>
             function on@(name)QuantityUnitOfMeasureList(data) {
                 if (IsNullOrUndefined(data))
                     return;
@@ -382,251 +382,297 @@
 
                 }
             });
-    </script>
+        </script>
 }
 
 @helper SelectEditor(string name, string placeholder, string label, string uri, string tabindex, string labelLocalized = "", string placeholderLocalized = "", string dataValueIdentifier = "", string dataFormat = "", string dataFormatSelection = "", string dataTypeName = "", bool isRequired = false, string nameForMessage = "")
-{
-    <div class="field-set">
-        <div class="field-contener field-select-wrapper-ew">
-            <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-            <input id="@name"
-                   data-filed-name="@name"
-                   data-representing-type="Select"
-                   type="hidden">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label data-localized="@labelLocalized"
-                       for="@(name)-ddl">
-                    @label
-                </label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper">
-                <select id="@(name)-ddl"
-                        data-filed-name="@name"
-                        data-tabindex="@tabindex"
-                        tabindex="@tabindex"
-                        data-localized-placeholder="@placeholderLocalized"
-                        placeholder="@placeholder"
-                        data-value-identifier="@dataValueIdentifier"
-                        name="@name"
-                        @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
-                        @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
-                        @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
-                        @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" data-val="true" </text> }
-                        data-url="@uri"
-                        style="width:90%; height: auto;"
-                        data-representing-type="Select"
-                        onchange="publicApp.onSelectChangeApp(this)"
-                        class="selectTwo form-control-ew-select"></select>
-            </div>
-            <div id="field-spinner"></div>
-            <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+    {
+        <div class="field-set">
+            <div class="field-contener field-select-wrapper-ew">
+                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                <input id="@name"
+                       data-filed-name="@name"
+                       data-representing-type="Select"
+                       type="hidden">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label data-localized="@labelLocalized"
+                           for="@(name)-ddl">
+                        @label
+                    </label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper">
+                    <select id="@(name)-ddl"
+                            data-filed-name="@name"
+                            data-tabindex="@tabindex"
+                            tabindex="@tabindex"
+                            data-localized-placeholder="@placeholderLocalized"
+                            placeholder="@placeholder"
+                            data-value-identifier="@dataValueIdentifier"
+                            name="@name"
+                            @if (dataTypeName != string.Empty) { <text> data-type-name="@dataTypeName" </text> }
+                            @if (dataFormat != string.Empty) { <text> data-format="@dataFormat" </text> }
+                            @if (dataFormatSelection != string.Empty) { <text> data-format-selection="@dataFormatSelection" </text> }
+                            @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" data-val="true" </text> }
+                            data-url="@uri"
+                            style="width:90%; height: auto;"
+                            data-representing-type="Select"
+                            onchange="publicApp.onSelectChangeApp(this)"
+                            class="selectTwo form-control-ew-select"></select>
+                </div>
+                <div id="field-spinner"></div>
+                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
 
+            </div>
         </div>
-    </div>
 }
 
 @helper jQGrid(string gridId, bool appearToolbar, string dataType = "", string width = "", string height = "", string label = "")
-{
-    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; position:absolute !important; top:0;">
-        <label id="label-@label" for="gridContainer">@label</label>
-    </div>
-    <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block; margin-left: 150px;" </text> }>
-        <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text> }></table>
-        @if (appearToolbar == true)
-        {<text> <div id="jqGridPager"></div> </text>}
+    {
+        <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="display: inline-block; min-width: 30%; position:absolute !important; top:0;">
+            <label id="label-@label" for="gridContainer">@label</label>
+        </div>
+        <div id="gridContainer" class="field-group float-label-control form-inline-element-wrapper @gridId" @if (!string.IsNullOrWhiteSpace(width)) { <text> style="width:@width;max-height:@height; display:inline-block; margin-left: 150px;" </text> }>
+            <table id="@gridId" data-jqGrid="true" @if (dataType != string.Empty) { <text> data-type-name="@dataType" </text> }></table>
+            @if (appearToolbar == true)
+            {<text> <div id="jqGridPager"></div> </text>}
 
-    </div>
+        </div>
 }
 
 @helper DropZoneEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string maxFiles = null, bool IsHidden = false, string headerText = "Name")
-{
-    <div class="field-set">
-        <div class="field-group float-label-control" style="margin-bottom: 0;">
-            <label id="label-@label">@label</label>
-        </div>
-        <button class="btn-white btn btn-sm" id="addFile-@idDropZone" type="button">
-            <i class='fa fa-plus'></i><span> Neu</span>
-        </button>
-    </div>
-    <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles" </text> }>
-        <div class="dz-message">
-            Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
-        </div>
-        @if (showHeader)
-        {
-            <div class="row b-b-2" data-dz-showheader style="display:none;">
-                <div class="col-md-8"><strong>@headerText</strong></div>
-                <div class="col-md-3"><strong>Bild</strong></div>
-                <div class="col-md-1"></div>
-            </div>
-        }
-        <ol class="dz-list" style="padding-left:10px">
-            <li id="@idPreview" class="dz-preview">
-                <div class="table table-striped files " id="previews">
-                    <div class="row b-b-1">
-                        @if (IsHidden == true)
-                        {
-                            <div class="col-md-6">
-                                <p class="dz-filename" data-dz-name></p>
-                                @if (showDescription)
-                                {
-                                    <span data-dz-description></span>
-                                }
-                                <div class="dz-size" data-dz-size style="display:none;"></div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-md-8">
-                                <p class="dz-filename" data-dz-name></p>
-                                @if (showDescription)
-                                {
-                                    <span data-dz-description></span>
-                                }
-                                <div class="dz-size" data-dz-size style="display:none;"></div>
-                            </div>
-                        }
-                        <div class="col-md-3 dz-click-image">
-                            <span class=""><img data-dz-thumbnail /></span>
-                        </div>
-                        @if (IsHidden == true)
-                        {
-                            <div class="col-md-2">
-                                <label>Ausblenden</label>
-                                <input class="dz-hide" type="checkbox">
-                            </div>
-                        }
-                        <div class="col-md-1">
-                            <span class="actions">
-                                <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer" type="button">
-                                    <i class='fa fa-trash-o' style="cursor: pointer"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ol>
-    </div>
-
-
-
-
-
-}
-@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name", string isAddEnabled = "false")
-{
-    <div class="">
-        <div class="field-set" style="padding-bottom:10px;">
+    {
+        <div class="field-set">
             <div class="field-group float-label-control" style="margin-bottom: 0;">
                 <label id="label-@label">@label</label>
             </div>
-            <button class="btn-white btn btn-sm" id="add-performance" type="button">
+            <button class="btn-white btn btn-sm" id="addFile-@idDropZone" type="button">
                 <i class='fa fa-plus'></i><span> Neu</span>
             </button>
-
         </div>
-        @if (showHeader)
-        {
-            <div class="row b-b-2" style="">
-                <div class="col-md-5"><strong>@headerText</strong></div>
-                <div class="col-md-4"><strong>Bild</strong></div>
-                <div class="col-md-3"></div>
+        <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" @if (maxFiles != null) { <text> data-maxfiles="@maxFiles" </text> }>
+            <div class="dz-message">
+                Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
             </div>
-        }
-        <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;" >
-            <li class="b-b-1 preview-source data-performance" id="@name-row" data-name="@name" data-preview style="display:none;" data-dropzone-extended="true">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="dz-description">
-                            <textarea id="description" type="text" rows="5" style="width:100%;" data-edit="true" data-filed-name="Description" data-float-label-set="true"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
-                        <div class="dz-message">
-                            Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
-                        </div>
-                        <div id="@dzoneId-preview" class="dz-preview">
-                            <div class="table table-striped files " id="previews" style="height:0px;">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class=" dz-click-image">
-                                            <span class=""><img data-dz-thumbnail style="position:relative;z-index:3000" /></span>
-                                        </div>
-                                        <p class="dz-filename" data-dz-name style="display:none;"></p>
-                                        <div class="dz-size" data-dz-size style="display:none;"></div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-md-2">
-
-                        @if (isAddEnabled == "true")
-                        {
-                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
-                            Bild ändern
-                        </button>
-                        }
-                        else
-                        {
-                            <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
-                                <i class='fa fa-trash-o' style="cursor: pointer"></i>
-                            </button>
-                        }
-
-                        <div class="field-set" style="margin-top:30%;">
-                            <div class="field-contener">
-                                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                                    <label for="@name-check">Ausblenden</label>
-                                </div>
-                                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
-                                    <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
-                                    <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
-                    </div>
+            @if (showHeader)
+            {
+                <div class="row b-b-2" data-dz-showheader style="display:none;">
+                    <div class="col-md-8"><strong>@headerText</strong></div>
+                    <div class="col-md-3"><strong>Bild</strong></div>
+                    <div class="col-md-1"></div>
                 </div>
-            </li>
-        </ol>
-    </div>
+            }
+            <ol class="dz-list" style="padding-left:10px">
+                <li id="@idPreview" class="dz-preview">
+                    <div class="table table-striped files " id="previews">
+                        <div class="row b-b-1">
+                            @if (IsHidden == true)
+                            {
+                                <div class="col-md-6">
+                                    <p class="dz-filename" data-dz-name></p>
+                                    @if (showDescription)
+                                    {
+                                        <span data-dz-description></span>
+                                    }
+                                    <div class="dz-size" data-dz-size style="display:none;"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-8">
+                                    <p class="dz-filename" data-dz-name></p>
+                                    @if (showDescription)
+                                    {
+                                        <span data-dz-description></span>
+                                    }
+                                    <div class="dz-size" data-dz-size style="display:none;"></div>
+                                </div>
+                            }
+                            <div class="col-md-3 dz-click-image">
+                                <span class=""><img data-dz-thumbnail /></span>
+                            </div>
+                            @if (IsHidden == true)
+                            {
+                                <div class="col-md-2">
+                                    <label>Ausblenden</label>
+                                    <input class="dz-hide" type="checkbox">
+                                </div>
+                            }
+                            <div class="col-md-1">
+                                <span class="actions">
+                                    <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer" type="button">
+                                        <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+}
+
+@helper DropZoneOneFileEditor(string idDropZone, string idPreview, string label, string height = "", string typeName = "", bool showHeader = false, bool showDescription = false, string headerText = "Name")
+    {
+        <div class="field-set">
+            <div class="field-group float-label-control" style="margin-bottom: 0;">
+                <label id="label-@label">@label</label>
+            </div>
+            <button class="btn-white btn btn-sm" id="addFile-@idDropZone" type="button">
+                <i class='fa fa-plus'></i><span> Neu</span>
+            </button>
+        </div>
+        <div id="@idDropZone" class="dropzone center-div" data-dropzone="true" data-maxfiles="1">
+            <div class="dz-message">
+                Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
+            </div>
+            @if (showHeader)
+            {
+                <div class="row b-b-2" data-dz-showheader style="display:none;">
+                    <div class="col-md-11"><strong>@headerText</strong></div>
+                    <div class="col-md-1"></div>
+                </div>
+            }
+            <ol class="dz-list" style="padding-left:10px">
+                <li id="@idPreview" class="dz-preview">
+                    <div class="table table-striped files " id="previews">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <p class="dz-filename" data-dz-name style="display:none;"></p>
+                                @if (showDescription)
+                                {
+                                    <span data-dz-description></span>
+                                }
+                                <div class="dz-size" data-dz-size style="display:none;"></div>
+                            </div>
+                            <div class="col-md-8 dz-click-image">
+                                <span class=""><img data-dz-thumbnail /></span>
+                            </div>
+                            <div class="col-md-1 pull-right">
+                                <span class="actions">
+                                    <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer" type="button">
+                                        <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+}
+
+@helper PerformanceEditor(string name, string path, string label, string tabindex, string dzoneId, bool showHeader = false, string headerText = "Name", string isAddEnabled = "false")
+    {
+        <div class="">
+            <div class="field-set" style="padding-bottom:10px;">
+                <div class="field-group float-label-control" style="margin-bottom: 0;">
+                    <label id="label-@label">@label</label>
+                </div>
+                <button class="btn-white btn btn-sm" id="add-performance" type="button">
+                    <i class='fa fa-plus'></i><span> Neu</span>
+                </button>
+
+            </div>
+            @if (showHeader)
+            {
+                <div class="row b-b-2" style="">
+                    <div class="col-md-5"><strong>@headerText</strong></div>
+                    <div class="col-md-4"><strong>Bild</strong></div>
+                    <div class="col-md-3"></div>
+                </div>
+            }
+            <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;">
+                <li class="b-b-1 preview-source data-performance" id="@name-row" data-name="@name" data-preview style="display:none;" data-dropzone-extended="true">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="dz-description">
+                                <textarea id="description" type="text" rows="5" style="width:100%;" data-edit="true" data-filed-name="Description" data-float-label-set="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
+                                <div class="dz-message">
+                                    Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
+                                </div>
+                                <div id="@dzoneId-preview" class="dz-preview">
+                                    <div class="table table-striped files " id="previews" style="height:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class=" dz-click-image">
+                                                    <span class=""><img data-dz-thumbnail style="position:relative;z-index:3000" /></span>
+                                                </div>
+                                                <p class="dz-filename" data-dz-name style="display:none;"></p>
+                                                <div class="dz-size" data-dz-size style="display:none;"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            @if (isAddEnabled == "true")
+                            {
+                                <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
+                                    Bild ändern
+                                </button>
+                            }
+                            else
+                            {
+                                <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                                    <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                </button>
+                            }
+
+                            <div class="field-set" style="margin-top:30%;">
+                                <div class="field-contener">
+                                    <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                                        <label for="@name-check">Ausblenden</label>
+                                    </div>
+                                    <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                                        <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
+                                        <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
 }
 @helper EmailEditor(string name, string path, string label, string placeholder, string tabIndex, string value = "", bool isRequired = false, string labelLocalized = null, string placeholderLocalized = null, string requiredplaceholder = null, string type = "text", string description = null, string dataLocalizedDescription = null, bool isReadOnly = false, bool isEmail = false, int maxLength = 999, string nameForMessage = "")
-{
-    <div class="field-set">
-        <div class="field-contener">
-            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
-                <label for="@name">@label</label>
-            </div>
-            <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
-                <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
-                       data-edit="false"
-                       class="form-control-ew-text"
-                       @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" </text> }
-                       type=@type
-                       @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
-                       @if (isReadOnly == true) { <text> readonly </text> }
-                       @if (isEmail == true) { <text> data-val-email="@nameForMessage ungültiges Format" data-val="true" </text> }
-                       @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
-                <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
-                @if (description != null)
-                {
-                    <small id="@name-Description" class="field-description" style="padding-top:5px;">
-                        @description
-                    </small>
-                }
+    {
+        <div class="field-set">
+            <div class="field-contener">
+                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper">
+                    <label for="@name">@label</label>
+                </div>
+                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper">
+                    <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
+                    <input tabindex='@tabIndex' data-tabindex='@tabIndex' id="@name" name="@path" data-filed-name="@path" placeholder="@placeholder" value="@value"
+                           data-edit="false"
+                           class="form-control-ew-text"
+                           @if (isRequired == true) { <text> data-val-required="@nameForMessage eingabe erforderlich" </text> }
+                           type=@type
+                           @if (type == "number") { <text> data-val-number="@name must be a number" </text> }
+                           @if (isReadOnly == true) { <text> readonly </text> }
+                           @if (isEmail == true) { <text> data-val-email="@nameForMessage ungültiges Format" data-val="true" </text> }
+                           @if (maxLength > 0) { <text> data-val-length="Das Feld @nameForMessage muss ein Text mit maximal @maxLength Zeichen sein!" data-val-length-max=@maxLength </text> }>
+                    <span class="field-validation-valid" data-valmsg-for="@name" data-valmsg-replace="true"></span>
+                    @if (description != null)
+                    {
+                        <small id="@name-Description" class="field-description" style="padding-top:5px;">
+                            @description
+                        </small>
+                    }
+                </div>
             </div>
         </div>
-    </div>
 }

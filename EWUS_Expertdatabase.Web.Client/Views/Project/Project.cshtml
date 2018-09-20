@@ -20,7 +20,7 @@
                 <h2 id="modal_title">@ViewBag.Title</h2>
             </div>
             <div class="col-md-4" style="padding-bottom: 2px;">
-                <button class="assign-role-link btn btn-primary btn-outline pull-left" id="buttonAddMeasure" onclick="openFormAddMeasure(@ViewBag.Id); false;"><span>Maßnahmen erfassen</span> </button>
+                <button class="assign-role-link btn btn-primary btn-outline pull-left" id="buttonAddMeasure"><span>Maßnahmen erfassen</span> </button>
             </div>
             <div class="col-md-4">
                 <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -144,7 +144,7 @@ else
             </div>
             <div class="row" style="padding-top: 5px;">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.DropZoneEditor("projectDropZone", "projectPreview", "Fotos und Grafiken", "520px", showHeader: true, maxFiles: "1")
+                    @WebHelpers.DropZoneOneFileEditor("projectDropZone", "projectPreview", "Bild des Objekts", "520px", showHeader: true)
                 </div>
             </div>
         </div>

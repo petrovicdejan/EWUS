@@ -1,4 +1,9 @@
-﻿var openFormAddMeasure = function addMeasure(projectId) {
+﻿var openFormAddMeasure = function addMeasure(projectId,e) {
+
+    if (IsNullOrUndefined(projectId) || projectId == 0) {
+        publicApp.onFormSubmitApp($('#Project'), e, null);
+    }
+
     publicApp.modalDialogClose();
     var sUrl = sRootUrl + 'projektmitmassnahmen/' + projectId;
     window.location.href = sUrl;
@@ -7,7 +12,7 @@
 (function ($) {
     $(document).ready(function () {
         var dataDocumentItems = [];
-        if (IsNullOrEmpty(dcMeasure) == false) {
+        if (IsNullOrEmpty(dcProject) == false) {
             var data = JSON.parse(base64.decode(dcProject));
 
             if (IsNullOrUndefined(data) == false)
@@ -35,6 +40,21 @@
                 
             },false,null,null,false);
             
+        });
+
+        $('#buttonAddMeasure').on('click', function (e) {
+            var projectId = 0
+            if (IsNullOrUndefined(objectId) || objectId == 0) {
+                var result = publicApp.onFormSubmitApp($('#Project'), e, null, false, false, null, null, "Project", false);
+                if (IsNullOrUndefined(result))
+                    return false;
+                else
+                    projectId = result.Id;
+            }
+
+            publicApp.modalDialogClose();
+            var sUrl = sRootUrl + 'projektmitmassnahmen/' + projectId;
+            window.location.href = sUrl;
         });
     });
 
