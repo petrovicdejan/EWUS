@@ -75,6 +75,7 @@ namespace EWUS_Expertdatabase.Business
             using (var ctx = new EWUSDbContext())
             {
                 Project project = null;
+                DocumentItem documentItem = null;
 
                 if (editProject.Id > 0)
                 {
@@ -109,7 +110,15 @@ namespace EWUS_Expertdatabase.Business
                 project.Remark = editProject.Remark;
                 project.PropertyNumber = editProject.PropertyNumber;
                 project.DocumentItemId = editProject.DocumentItemId;
-                project.DocumentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItemId).FirstOrDefault();
+
+                if (editProject.DocumentItemId != null && editProject.DocumentItemId != 0)
+                    documentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItemId).FirstOrDefault();
+                else
+                {
+                    documentItem = editProject.DocumentItem;
+                    ctx.DocumentItems.Add(documentItem);
+                }
+                project.DocumentItem = documentItem;
 
                 if (project.Id == 0)
                     ctx.Projects.Add(project);
@@ -136,6 +145,7 @@ namespace EWUS_Expertdatabase.Business
                                     .Include(x => x.Region)
                                       .Include(x => x.Property)
                                       .Include(x => x.Customer)
+                                      .Include(x => x.DocumentItem)
                                       .Include(x => x.ProjectMeasures)
                                       .FirstOrDefault();
 

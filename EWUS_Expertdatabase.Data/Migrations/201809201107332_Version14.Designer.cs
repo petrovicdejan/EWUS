@@ -13,7 +13,7 @@ namespace EWUS_Expertdatabase.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201809191543432_Version14"; }
+            get { return "201809201107332_Version14"; }
         }
         
         string IMigrationMetadata.Source

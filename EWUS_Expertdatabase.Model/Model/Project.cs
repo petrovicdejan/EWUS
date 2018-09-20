@@ -15,7 +15,7 @@ namespace EWUS_Expertdatabase.Model
             //this.Region = new Classification();
             //this.Property = new Classification();
             //this.Customer = new Customer();
-            this.ProjectMeasures = new Collection<ProjectMeasure>();
+            //this.ProjectMeasures = new Collection<ProjectMeasure>();
         }
 
         /// <summary>

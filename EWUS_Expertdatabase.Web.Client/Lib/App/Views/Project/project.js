@@ -6,9 +6,16 @@
 
 (function ($) {
     $(document).ready(function () {
+        var dataDocumentItems = [];
+        if (IsNullOrEmpty(dcMeasure) == false) {
+            var data = JSON.parse(base64.decode(dcProject));
+
+            if (IsNullOrUndefined(data) == false)
+                dataDocumentItems.push(data.DocumentItem);
+        }
 
         publicApp.initializeDropZoneApp("projectDropZone", "projectPreview", objectId, "Project");
-       // publicApp.fillDropZoneApp(dataDocumentItems, "projectDropZone", objectId, "Project"); 
+        publicApp.fillDropZoneApp(dataDocumentItems, "projectDropZone", objectId, "Project"); 
 
         GetProject(dcProject);
 
