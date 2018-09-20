@@ -114,7 +114,6 @@ var projectModule = (function () {
             sorttype: "number",
             width: 10,
             classes: "grid-col",
-            key: true,
             editable: true,
             searchoptions: {
                 sopt: ['bw', "ge", "le", "eq"],
