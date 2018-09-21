@@ -73,7 +73,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 25,
+            width: 15,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -82,7 +82,7 @@ var projectModule = (function () {
         {
             label: 'Status',
             name: 'PerformanceSheetStatus',
-            width: 12,
+            width: 9,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
