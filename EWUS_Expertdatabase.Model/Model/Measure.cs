@@ -15,7 +15,7 @@ namespace EWUS_Expertdatabase.Model
         {
             this.MeasureLinks = new Collection<MeasureLink>();
             this.MeasurePictures = new Collection<MeasurePicture>();
-            this.OperationType = new Classification();
+            //this.OperationType = new Classification();
             this.DocumentItems = new Collection<DocumentItem>();
             this.ProjectMeasures = new Collection<ProjectMeasure>();
         }

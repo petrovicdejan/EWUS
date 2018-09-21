@@ -3230,7 +3230,7 @@ html, body {
     width: 40%;
 }
 
-#ProjectMeasure #Name, #MeasureName, #PerformanseSheetNumber,
+#ProjectMeasure #Name, #ProjectMeasure #MeasureName, #ProjectMeasure #PerformanseSheetNumber, #ProjectMeasure #SavingPercent,
 #Measure #SerialNumber {
     background-color: transparent;
     border-bottom: none;

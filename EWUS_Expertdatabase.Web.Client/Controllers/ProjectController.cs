@@ -47,9 +47,9 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
         public ActionResult ProjectEdit(string key)
         {
             var projectRepo = new ProjectRepository();
-            Project measure = projectRepo.GetProjectById(key.ToLong(0)) as Project;
+            Project project = projectRepo.GetProjectById(key.ToLong(0)) as Project;
 
-            ViewBag.Input = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(measure)));
+            ViewBag.Input = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(project)));
 
             ViewBag.Id = key.ToLong(0);
             ViewBag.Title = "Projekt";
