@@ -3681,3 +3681,8 @@ input, select, textarea, .select2-selection {
 #Project .col-md-1 {
     margin-right: 15px;
 }
+
+#modal_title {
+    color:black;
+    padding-top:5px;
+}

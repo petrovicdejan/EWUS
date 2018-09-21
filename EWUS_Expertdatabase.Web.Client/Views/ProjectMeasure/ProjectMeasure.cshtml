@@ -16,7 +16,7 @@
 
     <div class="modal-header" style="padding-top: 8px;">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-7">
                 <h2 id="modal_title">@ViewBag.Title</h2>
             </div>
             <div class="col-md-3" style="padding-bottom: 2px;">
@@ -31,7 +31,7 @@
                 }
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
         </div>       
@@ -62,7 +62,9 @@ else
         max-height: 105px;
     }
 
-
+    #ModificationDate {
+        width:146px;
+    }
 
 </style>
 
@@ -127,7 +129,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "Monetärer Aufwand [€]", "Monetärer Aufwand [€]", "10", type: "number")
+                    @WebHelpers.TextEditor("InvestmentCost", "InvestmentCost", "monetärer Aufwand [€]", "monetärer Aufwand [€]", "10", type: "number")
                 </div>
             </div>
             <div class="row">
