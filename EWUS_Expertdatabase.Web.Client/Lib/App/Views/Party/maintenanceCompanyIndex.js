@@ -11,7 +11,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 25,
+                width: 27,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'], // ge = greater or equal to, le = less or equal to, eq = equal to
@@ -20,7 +20,7 @@
             {
                 label: 'Email',
                 name: 'Email',
-                width: 12,
+                width: 10,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'],

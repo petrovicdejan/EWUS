@@ -18,7 +18,7 @@ namespace EWUS_Expertdatabase.Web.Client
         [Route("projektmitmassnahmen/{projectId:long}")]
         public ActionResult ProjectMeasureIndex(long projectId)
         {
-            ViewBag.Id = projectId;
+            ViewBag.ProjectId = projectId;
             var projectRepo = new ProjectRepository();
             Project project = projectRepo.GetProjectById(projectId);
             ViewBag.ProjectName = project != null ? project.Name : string.Empty;

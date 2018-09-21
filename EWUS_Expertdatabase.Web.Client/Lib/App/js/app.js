@@ -3500,6 +3500,23 @@ var setGridOptions = (function () {
             },
             rowNum: rowsPerPage,
             pager: "#jqGridPager",
+            beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+                //get Row data and check current Status
+                var rowData = jQuery(this).getRowData(rowid);
+                var CurrentStatus = rowData['Status'];
+                if (CurrentStatus != "Rejected") {
+                    editCell(iRow, iCol, false);
+                    //jQuery(this).jqGrid('editRow', rowid, false);
+                    jQuery(this).jqGrid("restoreCell", iRow, iCol);
+                }
+            },
+            //onCellSelect: function (rowid, index, contents, event) {
+            //    var el = this.rows[this.rows.length - 1];
+            //    if (el.id == rowid)
+            //        $("#pager-add-btn").removeClass('ui-disabled');
+            //    else
+            //        $("#pager-add-btn").addClass('ui-disabled');
+            //}
         });
 
         delSettings = {

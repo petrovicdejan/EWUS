@@ -41,7 +41,7 @@
                                 data-type-name="Measure"
                                 data-format="formatWithoutId"
                                 data-format-selection="formatWithoutIdSelection"
-                                data-url="Measure/GetMeasuresNotRelatedWithProject/@ViewBag.Id"
+                                data-url="Measure/GetMeasuresNotRelatedWithProject/@ViewBag.ProjectId"
                                 style="width:90%"
                                 data-representing-type="Select"
                                 onchange="publicApp.onSelectChangeApp(this)"
@@ -51,7 +51,7 @@
                         <button id="AddMeasureToProject" type="button" class="assign-role-link btn btn-primary btn-outline" style="margin-top:4px;"><span>Hinzufügen</span></button>
                     </div>
                     <div class="field-group float-label-control form-inline-element-wrapper" style="margin-left:-4%;">
-                        <button id="EditProject" type="button" class="assign-role-link btn btn-primary btn-outline" data-url="/Project/ProjectEdit?key=@ViewBag.Id" onclick="publicApp.openModalForm(this); false;" style="margin-top:4px;"><span>Projekt erfassen/ändern</span></button>
+                        <button id="EditProject" type="button" class="assign-role-link btn btn-primary btn-outline" data-url="/Project/ProjectEdit?key=@ViewBag.ProjectId" onclick="publicApp.openModalForm(this); false;" style="margin-top:4px;"><span>Projekt erfassen/ändern</span></button>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
     </script>
 
     <script>
-        var objectId = "@ViewBag.Id";
+        var projectId = "@ViewBag.ProjectId";
         var projectName = "@ViewBag.ProjectName";
     </script>
     <script src="~/Lib/App/Views/ProjectMeasure/projectMeasureIndex.js"></script>

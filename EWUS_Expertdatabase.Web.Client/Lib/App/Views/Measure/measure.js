@@ -17,7 +17,7 @@
                 name: 'Name',
                 width: 10,
                 editable: true,
-                search: false              
+                search: false
             },
             {
                 label: 'Link',
@@ -26,14 +26,14 @@
                 formatoptions: { target: '_blank'},
                 editable: true,            
                 width: 30,
-                search:false
+                search: false
             },
             {
                 label: "",
                 name: "",
                 editable: false,
                 search: false,
-                width: 10,
+                width: 8,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
                     return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
                         "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId + "' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this);'><span class='glyphicon glyphicon-trash'></span></div>" +
@@ -73,13 +73,17 @@
                         val = $(val);
                         val.show();
                     });
-                    $("#pager-add-btn").removeClass('ui-disabled');
+
+                    //var rows = $("#jqGridLink")[0].rows;
+                    //var el = rows[rows.length - 1];
+                    //if(el.id == row)
+                        $("#pager-add-btn").removeClass('ui-disabled');
 
                 }
             });
         
         jQuery("#jqGridLink").setGridParam({ 'scrollOffset': 0 }).trigger("reloadGrid"); 
-           
+        
         function fetchGridData() {
         }
 
@@ -95,6 +99,9 @@
                 var data = JSON.parse(base64.decode(dcMeasure));
              
                 $('#jqGridLink').jqGrid('setGridParam', { data: data.MeasureLinks }).trigger('reloadGrid');
+                //if (data.MeasureLinks.length > 0)
+                //    $("#pager-add-btn").addClass('ui-disabled');
+
                 publicApp.setFormApp($("#Measure"), data);
             }
         }
@@ -150,6 +157,7 @@
         });
         $("#pager-add-btn").removeClass('ui-disabled');
     }
+    
     return {
         saveGridRow: saveRow
     }

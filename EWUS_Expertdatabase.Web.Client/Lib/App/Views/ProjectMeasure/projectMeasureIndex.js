@@ -59,7 +59,7 @@ var projectModule = (function () {
         {
             label: 'Maßnahmenbenennung',
             name: 'MeasureName',
-            width: 15,
+            width: 13,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -68,7 +68,7 @@ var projectModule = (function () {
         {
             label: 'Status',
             name: 'PerformanceSheetStatus',
-            width: 9,
+            width: 8,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -77,7 +77,7 @@ var projectModule = (function () {
         {
             label: 'Energie/Medium',
             name: 'OperationType',
-            width: 10,
+            width: 9,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -108,7 +108,7 @@ var projectModule = (function () {
         {
             label: 'monetärer Aufwand [€]',
             name: 'InvestmentCost',
-            width: 13,
+            width: 10,
             classes: "grid-col",
             formatter: 'number',
             sorttype: "number",
@@ -121,7 +121,7 @@ var projectModule = (function () {
         {
             label: '',
             name: '',
-            width: 3,
+            width: 2,
             formatter: function (cellvalue, options, rowObject) {
                 return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchProjectMeasureData + ')" data-type="Project" data-url="ProjectMeasure/DeleteProjectMeasure/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
             },
@@ -139,7 +139,7 @@ var projectModule = (function () {
         if (!IsNullOrUndefined(value)) {
             var sUrl = sRootUrl + 'ProjectMeasure/AddProjectToMeasure';
             var data = new Object();
-            data.ProjectId = objectId;
+            data.ProjectId = projectId;
             data.MeasureId = value.Value;
 
             publicApp.postWebApi(sUrl, data, fetchProjectMeasureData, false, true, fetchProjectMeasureData);
@@ -155,7 +155,7 @@ var projectModule = (function () {
 
         setGridOptions.deleteRows('gridProjectMeasure');
        
-        var url = sRootUrl + 'ProjectMeasure/GetAllProjectMeasures/' + objectId;
+        var url = sRootUrl + 'ProjectMeasure/GetAllProjectMeasures/' + projectId;
 
         publicApp.getWebApi(url, projectMeasureTransform);
     }
