@@ -3475,6 +3475,7 @@ var setGridOptions = (function () {
             pgbuttons: false,
             pginput: false, 
             shrinkToFit: true,
+            //scrollOffset: 0,
             ondblClickRow: function (rowId) {
 
                 if (IsNullOrUndefined(editUrl))

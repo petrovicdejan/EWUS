@@ -47,10 +47,10 @@
         setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, relativeGridWidth, 120, 15, fetchGridData, null);
         $(".ui-search-toolbar").hide();
         $("#jqGridLink")
-            
+
             .navButtonAdd("#jqGridPager", {
                 caption: 'Neu',
-                buttonicon : 'glyphicon glyphicon-plus',
+                buttonicon: 'glyphicon glyphicon-plus',
                 position: 'last',
                 id: 'pager-add-btn',
                 onClickButton: function () {
@@ -65,18 +65,21 @@
                 onClickButton: function () {
                     var row = $("#jqGridLink").jqGrid('getGridParam', 'selrow');
                     $("#jqGridLink").saveRow(row);
-                    $("#jqGridLink").find(".ui-inline-save").each(function(ind, val) {
+                    $("#jqGridLink").find(".ui-inline-save").each(function (ind, val) {
                         val = $(val);
                         val.hide();
                     });
-                    $("#jqGridLink").find(".ui-inline-edit").each(function(ind, val) {
+                    $("#jqGridLink").find(".ui-inline-edit").each(function (ind, val) {
                         val = $(val);
                         val.show();
                     });
                     $("#pager-add-btn").removeClass('ui-disabled');
 
                 }
-            })
+            });
+
+
+        jQuery("#jqGridLink").setGridParam({ 'scrollOffset': 0 }).trigger("reloadGrid"); 
            
         function fetchGridData() {
         }
