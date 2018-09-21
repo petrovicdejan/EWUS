@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace System
 {
@@ -91,6 +92,11 @@ namespace System
             {
                 return defaultValue;
             }
+        }
+
+        public static string HtmlEncode(this string s)
+        {
+            return HttpUtility.HtmlEncode(s);
         }
     }
 }

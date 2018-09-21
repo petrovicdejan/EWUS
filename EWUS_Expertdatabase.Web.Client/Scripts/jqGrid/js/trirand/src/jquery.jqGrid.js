@@ -13746,7 +13746,7 @@ $.jgrid.extend({
 							$($t).jqGrid('delRowData', $t.p.selrow);
 						} else {
 							if(o.restoreAfterSelect === true) {
-								$($t).jqGrid('restoreRow', $t.p.selrow, o.editParams);
+								//$($t).jqGrid('restoreRow', $t.p.selrow, o.editParams);
 							} else {
 								success = $($t).jqGrid('saveRow', $t.p.selrow, o.editParams);
 							}

@@ -120,7 +120,7 @@ var projectModule = (function () {
             }
         },
         {
-            label: 'Monetärer Aufwand [€]',
+            label: 'monetärer Aufwand [€]',
             name: 'InvestmentCost',
             width: 13,
             classes: "grid-col",

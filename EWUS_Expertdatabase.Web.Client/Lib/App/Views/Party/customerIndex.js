@@ -5,7 +5,7 @@
             {
                 label: 'Id',
                 name: 'Id',
-                width: 7,
+                width: 2,
                 key: true,
                 editable: true,
                 hidden: true
@@ -13,7 +13,7 @@
             {
                 label: 'Name',
                 name: 'Name',
-                width: 35,
+                width: 55,
                 searchoptions: {
                     // show search options
                     sopt: ['cn'], // ge = greater or equal to, le = less or equal to, eq = equal to
@@ -22,7 +22,7 @@
             {
                 label: '',
                 name: '',
-                width: 1,
+                width: 2.5,
                 formatter: function (cellvalue, options, rowObject) {
                     return '<a href="#" class="btn btn-xs" onclick="publicApp.deleteObjectApp(this,' + fetchGridData + ')" data-type="Customer" data-url="Party/DeleteCustomer/' + rowObject.Id + '" data-Id=' + rowObject.Id + '><i class="fa fa-trash-o"></i></a>';
                 },

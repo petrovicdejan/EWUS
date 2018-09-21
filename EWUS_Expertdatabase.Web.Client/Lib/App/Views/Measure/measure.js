@@ -33,7 +33,7 @@
                 name: "",
                 editable: false,
                 search: false,
-                width: 7,
+                width: 10,
                 formatter: function (rowId, cellval, colpos, rwdat, _act) {
                     return "<div title='Bearbeiten' class='ui-pg-div ui-inline-edit' id='jEditButton_" + cellval.rowId+"' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='jQuery.fn.fmatter.rowactions.call(this,\"edit\"); '><span class='glyphicon glyphicon-edit'></span></div>" +
                         "<div title='Löschen' class='ui-pg-div ui-inline-del' id='jDeleteButton_" + cellval.rowId + "' style='float: left; cursor: pointer;' onmouseover='jQuery(this).addClass(\"active\"); ' onmouseout='jQuery(this).removeClass(\"active\"); ' onclick='setGridOptions.deleteRowById(\"jqGridLink\",this);'><span class='glyphicon glyphicon-trash'></span></div>" +
@@ -45,7 +45,7 @@
         
         var relativeGridWidth = $(window).width() / 3.47;
         setGridOptions.setUpGrid("jqGridLink", "jqGridPager", colModel, relativeGridWidth, 120, 15, fetchGridData, null);
-
+        $(".ui-search-toolbar").hide();
         $("#jqGridLink")
             
             .navButtonAdd("#jqGridPager", {
@@ -54,7 +54,6 @@
                 position: 'last',
                 id: 'pager-add-btn',
                 onClickButton: function () {
-
                     $("#jqGridLink").jqGrid('addRow', { position: "last" });
                     $("#pager-add-btn").addClass('ui-disabled');
                 }
