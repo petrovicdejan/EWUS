@@ -28,7 +28,7 @@ namespace EWUS_Expertdatabase.Web.Client.Controllers
 
             string logo = System.Web.HttpContext.Current.Server.MapPath("~/Lib/images/logo.png");
 
-            string rightLogo = System.Web.HttpContext.Current.Server.MapPath("~/Lib/images/rightLogo.png");
+            string rightLogo = System.Web.HttpContext.Current.Server.MapPath("~/Lib/images/ewus.png");
 
             html = html.Replace("$$$CSS$$$", cssString);           
 

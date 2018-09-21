@@ -16,6 +16,10 @@ namespace EWUS_Expertdatabase.Business
 
         public int PerformanseSheetNumber { get; set; }
 
+        public string PropertyNumber { get; set; }
+
+        public int? PropertyId { get; set; }
+
         public string MeasureName { get; set; }
 
         public int SavingPercent { get; set; }

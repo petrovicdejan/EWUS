@@ -205,6 +205,8 @@ namespace EWUS_Expertdatabase.Business
                                          Id = pm.Id,
                                          Name = p.Name,
                                          PerformanseSheetNumber = pm.PerformanseSheetNumber,
+                                         PropertyNumber = p.PropertyNumber,
+                                         PropertyId = p.PropertyId,
                                          MeasureName = m.Name,
                                          PerformanseSheetStatus = q3,
                                          MaintenanceCompany = q1,

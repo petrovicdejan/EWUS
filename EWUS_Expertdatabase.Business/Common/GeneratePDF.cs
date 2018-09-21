@@ -65,7 +65,7 @@ namespace EWUS_Expertdatabase.Business.Common
 
             var sRootUrl = ConfigurationManager.AppSettings["rootURL"];
 
-            string headerImage = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=Deutchland.png";
+            string headerImage = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=Deutschland.png";
 
             string performanceSheetNumber = string.Empty;
 
@@ -77,11 +77,26 @@ namespace EWUS_Expertdatabase.Business.Common
             if(!string.IsNullOrWhiteSpace(projectMeasurePoco?.MaintenanceCompany?.Email))
                 companyEmail = "(" + projectMeasurePoco?.MaintenanceCompany?.Email + ")";
 
+            string zipCode = string.Empty;
+            string ort = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(projectMeasurePoco?.ZipCode))
+                zipCode = ", " + projectMeasurePoco?.ZipCode.HtmlEncode();
+
+            if (!string.IsNullOrWhiteSpace(projectMeasurePoco?.City))
+                ort = ", " + projectMeasurePoco?.City.HtmlEncode();
+
+            string propertyId = string.Empty;
+
+            if (projectMeasurePoco?.PropertyId != 0)
+                propertyId = projectMeasurePoco?.PropertyId.ToString();
+
             html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType.HtmlEncode())
-                        .Replace("$$$LiegenschaftsNr$$$", performanceSheetNumber.HtmlEncode())
+                        .Replace("$$$PropertyId$$$", propertyId)
+                        .Replace("$$$LiegenschaftsNr$$$", projectMeasurePoco?.PropertyNumber.HtmlEncode())
                         .Replace("$$$Standort$$$", projectMeasurePoco.Location.HtmlEncode())
-                        .Replace("$$$Plz$$$", projectMeasurePoco?.ZipCode.HtmlEncode())
-                        .Replace("$$$Ort$$$", projectMeasurePoco?.City.HtmlEncode())
+                        .Replace("$$$Plz$$$", zipCode)
+                        .Replace("$$$Ort$$$", ort)
                         .Replace("$$$Wartungsfirma$$$", projectMeasurePoco?.MaintenanceCompany?.Name.HtmlEncode())
                         .Replace("$$$WartungsfirmaEmail$$$", companyEmail.HtmlEncode())
                         .Replace("$$$Massnahmenart$$$", projectMeasurePoco?.OperationType.HtmlEncode())
@@ -95,7 +110,11 @@ namespace EWUS_Expertdatabase.Business.Common
                     continue;
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
-                
+
+                // ako treba da se omoguci pagebreak posle svakog boxa sa tekstom i slikama potrebno je
+                // da tag table linija ispod izgleda ovako <table class='dotted' height='400' style='page-break-after:always'>
+                // znaci samo dodati style='page-break-after:always'
+
                 string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
                     + "<p style='padding-top:9px;margin-left:7px;'>" + item.Description.HtmlEncode() + " </p>"
                     + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' height='395' src='" + imagePath + "' /> </p> "
@@ -104,7 +123,7 @@ namespace EWUS_Expertdatabase.Business.Common
                     + " </tbody> "
                     + " </table> ";
 
-                tablesCurrentSituation += table;
+                tablesCurrentSituation += "<br/>" + table;
             }
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)

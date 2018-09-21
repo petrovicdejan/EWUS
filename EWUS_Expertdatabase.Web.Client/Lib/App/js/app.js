@@ -3491,13 +3491,6 @@ var setGridOptions = (function () {
                 publicApp.openModalForm(btn);
 
             },
-            beforeSelectRow: function (rowid, e) {
-                if (gridId === "jqGridLink") {
-                    $("#pager-add-btn").removeClass('ui-disabled');
-                    return false;
-                }                 
-               
-            },
             rowNum: rowsPerPage,
             pager: "#jqGridPager",
         });
