@@ -77,15 +77,15 @@ namespace EWUS_Expertdatabase.Business.Common
             if(!string.IsNullOrWhiteSpace(projectMeasurePoco?.MaintenanceCompany?.Email))
                 companyEmail = "(" + projectMeasurePoco?.MaintenanceCompany?.Email + ")";
 
-            html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType)
-                        .Replace("$$$LiegenschaftsNr$$$", performanceSheetNumber)
-                        .Replace("$$$Standort$$$", projectMeasurePoco.Location)
-                        .Replace("$$$Plz$$$", projectMeasurePoco?.ZipCode)
-                        .Replace("$$$Ort$$$", projectMeasurePoco?.City)
-                        .Replace("$$$Wartungsfirma$$$", projectMeasurePoco?.MaintenanceCompany?.Name)
-                        .Replace("$$$WartungsfirmaEmail$$$", companyEmail)
-                        .Replace("$$$Massnahmenart$$$", projectMeasurePoco?.OperationType)
-                        .Replace("$$$Massnahme$$$", projectMeasurePoco?.MeasureName)
+            html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType.HtmlEncode())
+                        .Replace("$$$LiegenschaftsNr$$$", performanceSheetNumber.HtmlEncode())
+                        .Replace("$$$Standort$$$", projectMeasurePoco.Location.HtmlEncode())
+                        .Replace("$$$Plz$$$", projectMeasurePoco?.ZipCode.HtmlEncode())
+                        .Replace("$$$Ort$$$", projectMeasurePoco?.City.HtmlEncode())
+                        .Replace("$$$Wartungsfirma$$$", projectMeasurePoco?.MaintenanceCompany?.Name.HtmlEncode())
+                        .Replace("$$$WartungsfirmaEmail$$$", companyEmail.HtmlEncode())
+                        .Replace("$$$Massnahmenart$$$", projectMeasurePoco?.OperationType.HtmlEncode())
+                        .Replace("$$$Massnahme$$$", projectMeasurePoco?.MeasureName.HtmlEncode())
                         .Replace("$$$HeaderImage$$$", headerImage);
 
             string tablesCurrentSituation = string.Empty;
@@ -95,13 +95,9 @@ namespace EWUS_Expertdatabase.Business.Common
                     continue;
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
-
-                string description = item.Description;
-
-                var encodedDesc = HttpUtility.HtmlEncode(description);
-
+                
                 string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
-                    + "<p style='padding-top:9px;margin-left:7px;'>" + encodedDesc + " </p>"
+                    + "<p style='padding-top:9px;margin-left:7px;'>" + item.Description.HtmlEncode() + " </p>"
                     + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' height='395' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
@@ -112,7 +108,7 @@ namespace EWUS_Expertdatabase.Business.Common
             }
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
-                        .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description);
+                        .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());
             
             if (projectMeasurePoco.SubmittedOnDate == null)
                 html = html.Replace("$$$EingereichtAm$$$", "[EingereichtAm]");
