@@ -25,7 +25,7 @@
                 formatter: 'link',
                 formatoptions: { target: '_blank'},
                 editable: true,            
-                width: 27,
+                width: 30,
                 search:false
             },
             {
@@ -77,8 +77,7 @@
 
                 }
             });
-
-
+        
         jQuery("#jqGridLink").setGridParam({ 'scrollOffset': 0 }).trigger("reloadGrid"); 
            
         function fetchGridData() {
