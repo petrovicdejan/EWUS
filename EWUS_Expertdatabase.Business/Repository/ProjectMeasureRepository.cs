@@ -114,7 +114,11 @@ namespace EWUS_Expertdatabase.Business
                 ProjectMeasure projectMeasure = new ProjectMeasure();
 
                 projectMeasure.ProjectId = editProjectMeasurePoco.ProjectId;
+                Project project = ctx.Projects.Where(x => x.Id == projectMeasure.ProjectId).FirstOrDefault();
+                projectMeasure.Project = project;
                 projectMeasure.MeasureId = editProjectMeasurePoco.MeasureId;
+                Measure measure = ctx.Measures.Where(x => x.Id == projectMeasure.MeasureId).FirstOrDefault();
+                projectMeasure.Measure = measure;
                 projectMeasure.Release = false;
 
                 int maxPerformanseSheetNumber = 0;
@@ -124,13 +128,15 @@ namespace EWUS_Expertdatabase.Business
                 }
 
                 projectMeasure.PerformanseSheetNumber = ++maxPerformanseSheetNumber;
+                                
+                projectMeasure.Description = measure != null ? measure.Description : string.Empty;
 
                 ctx.ProjectMeasures.Add(projectMeasure);
 
                 ctx.SaveChanges();
 
                 output = Result.ToResult<ProjectMeasure>(ResultStatus.OK, typeof(ProjectMeasure));
-                output.Value = projectMeasure;
+                output.Value = new ProjectMeasure() { Id = projectMeasure.Id, Name = projectMeasure.Name }; ;
             }
 
             return output;
@@ -214,6 +220,7 @@ namespace EWUS_Expertdatabase.Business
                                          InvestmentCost = pm.InvestmenCost,
                                          ModificationDate = pm.ModificationDate ?? pm.ModificationDate.Value,
                                          Description = pm.Description,
+                                         MeasureDescription = m.Description,
                                          Specification = pm.Specification,
                                          SubmittedOnDate = pm.SubmittedOnDate ?? pm.SubmittedOnDate.Value,
                                          SubmittedBy = pm.SubmittedBy,
@@ -224,7 +231,8 @@ namespace EWUS_Expertdatabase.Business
                                          MeasureId = m.Id,
                                          Location = p.Location,
                                          ZipCode = p.ZipCode,
-                                         City = p.City
+                                         City = p.City,
+                                         SavingPercent = m.SavingPercent
                                      };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();

@@ -48,6 +48,8 @@ namespace EWUS_Expertdatabase.Business
 
         public string Description { get; set; }
 
+        public string MeasureDescription { get; set; }
+
         public string Specification { get; set; }
 
         public DateTime? SubmittedOnDate { get; set; }

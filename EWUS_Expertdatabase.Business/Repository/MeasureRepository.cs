@@ -81,7 +81,7 @@ namespace EWUS_Expertdatabase.Business
                                select new MeasurePoco
                                {
                                    Id = m.Id,
-                                   Name = m.Description
+                                   Name = m.Name
                                };
 
                 List<MeasurePoco> result = measures.ToList();

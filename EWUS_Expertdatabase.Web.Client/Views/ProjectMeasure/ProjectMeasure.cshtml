@@ -133,38 +133,42 @@ else
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-12 row-control-main-wrapper">
+                    @WebHelpers.TextEditor("SavingPercent", "SavingPercent", "Einsparung [%]", "Einsparung [%]", "11", type: "number", isReadOnly:true)
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
                     <div class="field-set">
                         <div class="field-contener">
-                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:25%;" >
+                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:25%;">
                                 <label for="Uri" id="label-SubmittedOnDate">LB eingereicht am</label>
                             </div>
                             <div class="field-group float-label-control form-inline-element-wrapper control-wrapper field-date" style="width:85px; margin-left:45px;">
                                 <i class="fa field-icon fa-terminal" data-edit="true" valid="true"></i>
-                                <input tabindex="11" data-tabindex="11" id="SubmittedOnDate" name="SubmittedOnDate" data-filed-name="SubmittedOnDate" type="text"
-                                        placeholder="LB eingereicht am" data-format-pattern="DD.MM.YYYY" data-edit="false" data-representing-type="Date"
-                                        class="date2 form-control-ew-text"
-                                        data-val="true"
+                                <input tabindex="12" data-tabindex="12" id="SubmittedOnDate" name="SubmittedOnDate" data-filed-name="SubmittedOnDate" type="text"
+                                       placeholder="LB eingereicht am" data-format-pattern="DD.MM.YYYY" data-edit="false" data-representing-type="Date"
+                                       class="date2 form-control-ew-text"
+                                       data-val="true"
                                        style="">
                                 <span class="field-validation-valid" data-valmsg-for="SubmittedOnDate" data-valmsg-replace="true"></span>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6 col-lg-6 col-xs-6 row-control-main-wrapper">
                     <div class="field-set">
                         <div class="field-contener">
-                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:25%;" >
+                            <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:25%;">
                                 <label for="SubmittedBy">durch</label>
                             </div>
                             <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="max-width:188px;">
                                 <i class="fa field-icon fa-terminal fa-icon-SubmittedBy" data-edit="true" valid="true"></i>
-                                <input tabindex='12' data-tabindex='12' id="SubmittedBy" name="SubmittedBy" data-filed-name="SubmittedBy" placeholder="durch" value=""
+                                <input tabindex='13' data-tabindex='13' id="SubmittedBy" name="SubmittedBy" data-filed-name="SubmittedBy" placeholder="durch" value=""
                                        data-edit="false"
                                        class="form-control-ew-text"
-                                       type="text"
-                                       />
+                                       type="text" />
                                 <span class="field-validation-valid" data-valmsg-for="SubmittedBy" data-valmsg-replace="true"></span>
 
                             </div>
@@ -174,19 +178,19 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.BoolEditor("Release", "Release", "Freigabe", "13")
+                    @WebHelpers.BoolEditor("Release", "Release", "Freigabe", "14")
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "14")
+                    @WebHelpers.TextAreaEditor("Remark", "Bemerkung", "Bemerkung", "15")
                 </div>
             </div>
         </div>
         <div class="col-md-6 half-form-wrapper-measure">
             <div class="row" style="padding-top: 5px;">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.PerformanceEditor("projectMeasureDropZone", "projectMeasurePreview", "Texte, Fotos und Grafiken für Maßnahmensteckbrief","15", "dz-projectMeasureDropZone", showHeader: true, headerText: "Text", isAddEnabled: ViewBag.IsAddEnabled)
+                    @WebHelpers.PerformanceEditor("projectMeasureDropZone", "projectMeasurePreview", "Texte, Fotos und Grafiken für Maßnahmensteckbrief","16", "dz-projectMeasureDropZone", showHeader: true, headerText: "Text", isAddEnabled: ViewBag.IsAddEnabled)
                 </div>
             </div>
         </div>
