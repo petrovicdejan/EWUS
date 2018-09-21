@@ -1,18 +1,4 @@
-﻿var funcAddMeasureToProject = function addMeasureToProject(projectId, measureId) {
-    var sUrl = sRootUrl + 'ProjectMeasure/AddProjectToMeasure';
-    var data = new Object();
-    data.ProjectId = projectId;
-    data.MeasureId = measureId;
-
-    publicApp.postWebApi(sUrl, data, function (data) {
-        
-        publicApp.getWebApi(url, projectMeasureTransform, false, false);
-
-    }, false);
-
-};
-
-var projectMeasureTransform = function transformData(rData) {
+﻿var projectMeasureTransform = function transformData(rData) {
     setGridOptions.deleteRows('gridProjectMeasure');
     var data = [];
     $.each(rData, function (inx, item) {

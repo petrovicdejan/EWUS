@@ -19,7 +19,7 @@
                 dataDocumentItems.push(data.DocumentItem);
         }
 
-        publicApp.initializeDropZoneApp("projectDropZone", "projectPreview", objectId, "Project");
+        publicApp.initializeDropZoneApp("projectDropZone", "projectPreview", objectId, "Project", 400, 350);
         publicApp.fillDropZoneApp(dataDocumentItems, "projectDropZone", objectId, "Project"); 
 
         GetProject(dcProject);

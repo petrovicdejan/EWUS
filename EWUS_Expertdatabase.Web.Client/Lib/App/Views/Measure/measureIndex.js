@@ -11,7 +11,7 @@
         {
             label: 'Benennung',
             name: 'Name',
-            width: 20,
+            width: 28,
             editable: true,
             searchoptions: {
                 sopt: ['cn'],
@@ -22,7 +22,7 @@
             name: 'SerialNumber',
             align: 'left',
             sorttype: "number",
-            width: 7,
+            width: 8,
             classes: "grid-col",
             editable: true,
             searchoptions: {
@@ -35,7 +35,7 @@
             align: 'right',
             formatter: 'number',
             sorttype: "number",
-            width: 7,
+            width: 8,
             classes: "grid-col",
             editable: true,
             searchoptions: {

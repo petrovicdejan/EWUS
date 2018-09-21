@@ -3080,13 +3080,19 @@ var publicApp = (function () {
         return $(sId).val();
     }
 
-    function initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName) {
+    function initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName, thumbHeight, thumbWidth) {
         var firstTime = myAttachZone == null;
 
         if (!firstTime) {
             myAttachZone.destroy();
         }
-        
+
+        if (IsNullOrUndefined(thumbHeight))
+            thumbHeight = 120;
+
+        if (IsNullOrUndefined(thumbWidth))
+            thumbWidth = 140;
+
         var previewNode = document.querySelector("#" + idPreview);
         if (previewNode != null && previewNode != 'undefined') {
             previewNode.id = "";
@@ -3115,8 +3121,8 @@ var publicApp = (function () {
                 addDescription: true,
                 objectTypeName: refersToTypeName,
                 previewTemplate: previewTemplate,
-                thumbnailHeight: 120,
-                thumbnailWidth: 140,
+                thumbnailHeight: thumbHeight,
+                thumbnailWidth: thumbWidth,
                 thumbnailMethod: 'crop',
                 maxFiles: maxfiles,
                 dictRemoveFileConfirmation: 'Question'
@@ -3399,8 +3405,8 @@ var publicApp = (function () {
         onSelectChangeApp: function (sender, sId) {
             onSelectChange(sender, sId);
         },
-        initializeDropZoneApp: function (idDropZone, idPreview, refersToId, refersToTypeName) {
-            initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName);
+        initializeDropZoneApp: function (idDropZone, idPreview, refersToId, refersToTypeName, thumbHeight, thumbWidth) {
+            initializeDropZone(idDropZone, idPreview, refersToId, refersToTypeName, thumbHeight, thumbWidth);
         },
         fillDropZoneApp: function (dcDocument, idDropZone, refersToId, refersToTypeName) {
             FillDocumentDropzone(dcDocument, idDropZone, refersToId, refersToTypeName);
