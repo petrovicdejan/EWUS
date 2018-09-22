@@ -3227,11 +3227,11 @@ html, body {
 #ProjectName {
     background-color: transparent;
     border-bottom: none;
-    width: 40%;
+    width: 90%;
 }
 
 #ProjectMeasure #Name, #ProjectMeasure #MeasureName, #ProjectMeasure #PerformanseSheetNumber, #ProjectMeasure #SavingPercent,
-#Measure #SerialNumber {
+#Measure #SerialNumber, #ProjectMeasure #OperationType {
     background-color: transparent;
     border-bottom: none;
 }

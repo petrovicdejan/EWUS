@@ -18,6 +18,8 @@ namespace EWUS_Expertdatabase.Business
 
         public string PropertyNumber { get; set; }
 
+        public Classification Property { get; set; }
+
         public int? PropertyId { get; set; }
 
         public string MeasureName { get; set; }

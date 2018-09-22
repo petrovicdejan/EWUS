@@ -15,7 +15,8 @@
         
         $(function () {
             $("ol.dz-list").sortable({
-                handle: " .col-md-2, .col-md-5, .col-md-4"
+                handle: 'div',
+                cancel: ''
             });
 
         });

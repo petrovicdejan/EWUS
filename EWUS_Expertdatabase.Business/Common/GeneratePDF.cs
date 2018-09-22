@@ -77,8 +77,8 @@ namespace EWUS_Expertdatabase.Business.Common
             if(!string.IsNullOrWhiteSpace(projectMeasurePoco?.MaintenanceCompany?.Email))
                 companyEmail = "(" + projectMeasurePoco?.MaintenanceCompany?.Email + ")";
 
-            string zipCode = string.Empty;
-            string ort = string.Empty;
+            string zipCode = "";
+            string ort = "";
 
             if (!string.IsNullOrWhiteSpace(projectMeasurePoco?.ZipCode))
                 zipCode = ", " + projectMeasurePoco?.ZipCode.HtmlEncode();
@@ -86,13 +86,13 @@ namespace EWUS_Expertdatabase.Business.Common
             if (!string.IsNullOrWhiteSpace(projectMeasurePoco?.City))
                 ort = ", " + projectMeasurePoco?.City.HtmlEncode();
 
-            string propertyId = string.Empty;
+            string property = string.Empty;
 
-            if (projectMeasurePoco?.PropertyId != 0)
-                propertyId = projectMeasurePoco?.PropertyId.ToString();
+            if (projectMeasurePoco?.Property != null)
+                property = projectMeasurePoco?.Property.Value.ToString();
 
-            html = html.Replace("$$$Liegenschaftstyp$$$", projectMeasurePoco?.OperationType.HtmlEncode())
-                        .Replace("$$$PropertyId$$$", propertyId)
+            html = html.Replace("$$$Liegenschaftstyp$$$", property.HtmlEncode())
+                        //.Replace("$$$PropertyId$$$", propertyId)
                         .Replace("$$$LiegenschaftsNr$$$", projectMeasurePoco?.PropertyNumber.HtmlEncode())
                         .Replace("$$$Standort$$$", projectMeasurePoco.Location.HtmlEncode())
                         .Replace("$$$Plz$$$", zipCode)
