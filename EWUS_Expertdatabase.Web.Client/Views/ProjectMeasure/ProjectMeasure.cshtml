@@ -6,7 +6,7 @@
 
     <script>
         var isModify = "@ViewBag.Id";
-        isModify > 0 ? setTitle("Leistungsblatt (LB) für Energiesparamaßnahmen") : setTitle("Leistungsblatt (LB) für Energiesparamaßnahmen");
+        isModify > 0 ? setTitle("Leistungsblatt (LB) für Energiesparmaßnahmen") : setTitle("Leistungsblatt (LB) für Energiesparmaßnahmen");
 
         function setTitle(title) {
             $('#modal_title').text(title);
@@ -23,11 +23,11 @@
 
                 @if (@ViewBag.OpenInBrowser == "true")
                 {
-                    <a target="_blank" rel="noopener noreferrer" class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" onclick="openReport(@ViewBag.Id)" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
+                    <a target="_blank" rel="noopener noreferrer" class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
                 }
                 else
                 {
-                    <a class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" onclick="openReport(@ViewBag.Id)" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
+                    <a class="assign-role-link btn btn-primary btn-outline pull-left" style="margin-left:34%;" id="generateReport"><span>Maßnahmensteckbrief anzeigen</span> </a>
                 }
 
             </div>
@@ -135,7 +135,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-12 row-control-main-wrapper">
-                    @WebHelpers.TextEditor("SavingPercent", "SavingPercent", "Einsparung [%]", "Einsparung [%]", "11", type: "number", isReadOnly:true)
+                    @WebHelpers.TextEditor("SavingPercent", "SavingPercent", "Einsparung [%]", "Einsparung [%]", "11", type: "number")
                 </div>
             </div>
             <div class="row">

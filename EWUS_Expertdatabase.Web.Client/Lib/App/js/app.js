@@ -2957,6 +2957,7 @@ var publicApp = (function () {
             var performance = {};
             performance.Description = val.find("#description").val();
             performance.Hide = val.find('#' + name + '-check').is(":checked");
+            performance.PageBreak = val.find('#' + name + '-PageBreakCheck').is(":checked");
             performance.Position = ind + 1;
             if(val.attr('data-id'))
                 performance.Id = val.attr('data-id');
@@ -3269,7 +3270,7 @@ var publicApp = (function () {
                     var mockfilee = {
                         name: value.DocumentName, size: setFileSize(value.DocumentSize),
                         type: value.DocumentMimeType, id: value.ObjectId, status: "added",
-                        description: value.Description, accepted: true, entityId: value.Id, isHidden: value.Hide
+                        description: value.Description, accepted: true, entityId: value.Id, isHidden: value.Hide, isPageBreak: value.PageBreak
                     };
 
                     myAttachZone.files.push(mockfilee);
@@ -3500,23 +3501,16 @@ var setGridOptions = (function () {
             },
             rowNum: rowsPerPage,
             pager: "#jqGridPager",
-            beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
-                //get Row data and check current Status
-                var rowData = jQuery(this).getRowData(rowid);
-                var CurrentStatus = rowData['Status'];
-                if (CurrentStatus != "Rejected") {
-                    editCell(iRow, iCol, false);
-                    //jQuery(this).jqGrid('editRow', rowid, false);
-                    jQuery(this).jqGrid("restoreCell", iRow, iCol);
-                }
-            },
-            //onCellSelect: function (rowid, index, contents, event) {
-            //    var el = this.rows[this.rows.length - 1];
-            //    if (el.id == rowid)
-            //        $("#pager-add-btn").removeClass('ui-disabled');
-            //    else
-            //        $("#pager-add-btn").addClass('ui-disabled');
-            //}
+            beforeSelectRow: function (rowid, e) {
+                var $self = $(this);
+                jQuery("#" + gridId).jqGrid('setSelection', rowid);
+
+                //var el = this.rows[this.rows.length - 1];
+                //if (el.id == rowid)
+                //    $("#pager-add-btn").removeClass('ui-disabled');
+                //else
+                //    $("#pager-add-btn").addClass('ui-disabled');
+            }
         });
 
         delSettings = {

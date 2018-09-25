@@ -104,16 +104,24 @@ namespace EWUS_Expertdatabase.Business.Common
                         .Replace("$$$HeaderImage$$$", headerImage);
 
             string tablesCurrentSituation = string.Empty;
+            string sPageBreak = string.Empty;
+            int ind = 0;
             foreach (var item in projectMeasurePoco.ProjectMeasurePerformances)
             {
+                ++ind;
                 if (item.Hide)
                     continue;
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
-                
-                string table = " <table class='dotted' height='400'><tbody><tr><td width='610' style='padding-top:9px;'> "
+
+                if (item.PageBreak && ind < projectMeasurePoco.ProjectMeasurePerformances.Count())
+                    sPageBreak = " style='page-break-after:always'";
+                else
+                    sPageBreak = string.Empty;
+
+                string table = " <table class='dotted' max-height='700'" + sPageBreak +  "><tbody><tr><td width='610' style='padding-top:9px;'> "
                     + "<p style='padding-top:9px;margin-left:7px;'>" + item.Description.HtmlEncode() + " </p>"
-                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' height='395' src='" + imagePath + "' /> </p> "
+                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' max-height='695' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
                     + " </tbody> "
@@ -121,6 +129,11 @@ namespace EWUS_Expertdatabase.Business.Common
 
                 tablesCurrentSituation += "<br/>" + table;
             }
+
+            //if (!string.IsNullOrEmpty(sPageBreak))
+            //    html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
+            //else
+            //    html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
                         .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());

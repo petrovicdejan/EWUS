@@ -49,6 +49,8 @@ namespace EWUS_Expertdatabase.Model
         public string Remark { get; set; }
 
         public Collection<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
+
+        public int SavingPercent { get; set; }
     }
 
     public class ProjectMeasurePerformance : CoreObject
@@ -65,5 +67,7 @@ namespace EWUS_Expertdatabase.Model
         public int Position { get; set; }
 
         public bool Hide { get; set; }
+
+        public bool PageBreak { get; set; }
     }
 }

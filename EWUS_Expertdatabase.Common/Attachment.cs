@@ -14,9 +14,6 @@ namespace EWUS_Expertdatabase.Common
     public class Attachment 
     {
         [DataMember]
-        public byte[] BinaryValue { get; set; }
-
-        [DataMember]
         public string DocumentName { get; set; }
 
         [DataMember]
@@ -24,10 +21,7 @@ namespace EWUS_Expertdatabase.Common
 
         [DataMember]
         public string DocumentSize { get; set; }
-
-        [DataMember]
-        public Reference DocumentBehaviorSpecification { get; set; }
-
+        
         [DataMember]
         public string ObjectId { get; set; }
 
@@ -45,5 +39,8 @@ namespace EWUS_Expertdatabase.Common
 
         [DataMember]
         public bool Hide { get; set; }
+
+        [DataMember]
+        public bool PageBreak { get; set; }
     }
 }

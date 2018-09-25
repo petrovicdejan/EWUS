@@ -95,6 +95,7 @@
             preview.attr('data-id', dataDocumentItems[i].Id);
             preview.find("#description").val(dataDocumentItems[i].Description);
             preview.find("#projectMeasureDropZone-check").prop('checked', dataDocumentItems[i].Hide);
+            preview.find("#projectMeasureDropZone-PageBreakCheck").prop('checked', dataDocumentItems[i].PageBreak);
 
             var dropzone = preview.find(".dropzone");
             var exactSelector = dropzone[0];
@@ -103,6 +104,14 @@
             publicApp.initializeMultipleDropZoneApp(exactSelector, exactPreviewSelector, objectId, "ProjectMeasure");
             publicApp.fillExtendedDropZoneApp(dataDocumentItems[i].DocumentItem, dropzone, objectId, "ProjectMeasure");
         }
+
+        $('#generateReport').on('click', function (e) {
+            if (!IsNullOrUndefined(objectId) && objectId != 0) {
+                var result = publicApp.onFormSubmitApp($('#ProjectMeasure'), e, null, false, false, null, null, "ProjectMeasure", false);
+                openReport(objectId);
+            }
+            
+        });
     });
 
 })(jQuery);

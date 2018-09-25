@@ -74,9 +74,9 @@
                         val.show();
                     });
 
-                    //var rows = $("#jqGridLink")[0].rows;
-                    //var el = rows[rows.length - 1];
-                    //if(el.id == row)
+                    var rows = $("#jqGridLink")[0].rows;
+                    var el = rows[rows.length - 1];
+                    if(el.id == row)
                         $("#pager-add-btn").removeClass('ui-disabled');
 
                 }

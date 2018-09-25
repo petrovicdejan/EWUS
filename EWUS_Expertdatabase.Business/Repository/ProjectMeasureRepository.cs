@@ -86,7 +86,7 @@ namespace EWUS_Expertdatabase.Business
                                           Name = pm.Name,
                                           PerformanseSheetNumber = pm.PerformanseSheetNumber,
                                           MeasureName = m.Name,
-                                          SavingPercent = m.SavingPercent,
+                                          SavingPercent = pm.SavingPercent,
                                           PerformanseSheetStatus = q3,
                                           MaintenanceCompany = q1,
                                           OperationType = q2.Value,
@@ -130,6 +130,7 @@ namespace EWUS_Expertdatabase.Business
                 projectMeasure.PerformanseSheetNumber = ++maxPerformanseSheetNumber;
                                 
                 projectMeasure.Description = measure != null ? measure.Description : string.Empty;
+                projectMeasure.SavingPercent = measure != null ? measure.SavingPercent : 0;
 
                 ctx.ProjectMeasures.Add(projectMeasure);
 
@@ -233,7 +234,7 @@ namespace EWUS_Expertdatabase.Business
                                          Location = p.Location,
                                          ZipCode = p.ZipCode,
                                          City = p.City,
-                                         SavingPercent = m.SavingPercent
+                                         SavingPercent = pm.SavingPercent
                                      };
 
                 ProjectMeasurePoco result = projectMeasure.FirstOrDefault();
@@ -282,6 +283,7 @@ namespace EWUS_Expertdatabase.Business
                             else
                             {
                                 pmp.Hide = edi.Hide;
+                                pmp.PageBreak = edi.PageBreak;
                                 pmp.Description = edi.Description;
                                 pmp.Position = edi.Position;
                                 if (edi.DocumentItem != null)
@@ -332,6 +334,7 @@ namespace EWUS_Expertdatabase.Business
                     projectMeasure.Specification = editProjectMeasure.Specification;
                     projectMeasure.SubmittedBy = editProjectMeasure.SubmittedBy;
                     projectMeasure.SubmittedOnDate = editProjectMeasure.SubmittedOnDate;
+                    projectMeasure.SavingPercent = editProjectMeasure.SavingPercent;
                 }
                 else
                 {
