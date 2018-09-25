@@ -21,7 +21,7 @@ namespace EWUS_Expertdatabase.Business.Common
         public static byte[] MakePDF(string htmlString,string cssText,string header,string logo,string rightLogo,long projectId)
         {
             var memoryStream = new MemoryStream();
-            var document = new iTextSharp.text.Document();
+            var document = new iTextSharp.text.Document(PageSize.A4);
             document.SetMargins(75, 75, 90, 30);
             var writer = PdfWriter.GetInstance(document, memoryStream);
             Header events = new Header();
@@ -119,9 +119,9 @@ namespace EWUS_Expertdatabase.Business.Common
                 else
                     sPageBreak = string.Empty;
 
-                string table = " <table class='dotted' max-height='700'" + sPageBreak +  "><tbody><tr><td width='610' style='padding-top:9px;'> "
+                string table = " <table class='dotted' min-height='400'" + sPageBreak +  "><tbody><tr><td width='610' style='padding-top:9px;'> "
                     + "<p style='padding-top:9px;margin-left:7px;'>" + item.Description.HtmlEncode() + " </p>"
-                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='603' max-height='695' src='" + imagePath + "' /> </p> "
+                    + "<p align='center' style='margin-top:50px;'> <img border='0' width='553' min-height='395' src='" + imagePath + "' /> </p> "
                     + " </td> "
                     + " </tr> "
                     + " </tbody> "
@@ -130,10 +130,10 @@ namespace EWUS_Expertdatabase.Business.Common
                 tablesCurrentSituation += "<br/>" + table;
             }
 
-            //if (!string.IsNullOrEmpty(sPageBreak))
-            //    html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
-            //else
-            //    html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
+            if (!string.IsNullOrEmpty(sPageBreak))
+                html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
+            else
+                html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
                         .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());

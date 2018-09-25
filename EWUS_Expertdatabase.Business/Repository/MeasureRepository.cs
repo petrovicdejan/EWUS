@@ -19,7 +19,6 @@ namespace EWUS_Expertdatabase.Business
                 List<Measure> measures = new List<Measure>();
                 measures = context.Measures.AsNoTracking()
                     .Include(x => x.MeasureLinks)
-                    .Include(x => x.MeasurePictures)
                     .Include(x => x.OperationType)
                     .Include(x => x.DocumentItems)
                     .ToList();
@@ -53,7 +52,6 @@ namespace EWUS_Expertdatabase.Business
                 Measure measure = new Measure();
                 measure = context.Measures.Where(x => x.Id == Id)
                     .Include(x => x.MeasureLinks)
-                    .Include(x => x.MeasurePictures)
                     .Include(x => x.OperationType)
                     .Include(x => x.DocumentItems)
                     .FirstOrDefault();
@@ -97,8 +95,6 @@ namespace EWUS_Expertdatabase.Business
         public Result SaveMeasure(Measure editMeasure)
         {
             Result output = new Result();
-            Result<DocumentInstance> outputDocInstance = new Result<DocumentInstance>();
-            outputDocInstance.Status = ResultStatus.OK;
             output.Status = ResultStatus.BadRequest;
 
             using (var ctx = new EWUSDbContext())
@@ -196,6 +192,7 @@ namespace EWUS_Expertdatabase.Business
                 {
                     measure = new Measure();
                     documentItems = editMeasure.DocumentItems;
+                    measureLinks = editMeasure.MeasureLinks;
                 }
                 
                 measure.Name = editMeasure.Name;

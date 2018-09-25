@@ -22,9 +22,7 @@ namespace EWUS_Expertdatabase.Web.Client
         public int InvestmentCost { get; set; }
 
         public int SavingPercent { get; set; }
-
-        public Collection<MeasurePicture> MeasurePictures { get; set; }
-        
+                
         public Collection<MeasureLink> MeasureLinks { get; set; }
         
         public Collection<DocumentItem> DocumentItems { get; set; }

@@ -115,14 +115,14 @@ namespace EWUS_Expertdatabase.Business
 
                 if (editProject.DocumentItem != null && editProject.DocumentItem.Id != 0)
                 {
-                    documentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItemId).FirstOrDefault();
-                    project.DocumentItemId = editProject.DocumentItemId;
+                    documentItem = ctx.DocumentItems.Where(x => x.Id == editProject.DocumentItem.Id).FirstOrDefault();
+                    //project.DocumentItemId = editProject.DocumentItemId;
                 }
                 else if (editProject.DocumentItem != null && editProject.DocumentItem.Id == 0)
                 {
                     documentItem = editProject.DocumentItem;
                     ctx.DocumentItems.Add(documentItem);
-                    project.DocumentItemId = (int?)documentItem.Id;
+                    //project.DocumentItemId = (int?)documentItem.Id;
                 }
                 project.DocumentItem = documentItem;
 

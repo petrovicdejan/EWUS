@@ -8,28 +8,14 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace EWUS_Expertdatabase.Model
-{
-    public class DocumentInstance : CoreObject
-    {
-        public DocumentInstance()
-        {
-            this.DocumentItems = new Collection<DocumentItem>();
-        }
-        
-        public Collection<DocumentItem> DocumentItems { get; set; }
-        
-        //public Reference RefersTo { get; set; }
-    }
-    
+{    
     public class DocumentItem : CoreObject
     {
         public DocumentItem()
         {
 
         }
-        
-        public byte[] BinaryValue { get; set; }
-        
+                
         public string DocumentName { get; set; }
                
         public string DocumentMimeType { get; set; }

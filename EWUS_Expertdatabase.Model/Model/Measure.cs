@@ -14,7 +14,6 @@ namespace EWUS_Expertdatabase.Model
         public Measure()
         {
             this.MeasureLinks = new Collection<MeasureLink>();
-            this.MeasurePictures = new Collection<MeasurePicture>();
             //this.OperationType = new Classification();
             this.DocumentItems = new Collection<DocumentItem>();
             this.ProjectMeasures = new Collection<ProjectMeasure>();
@@ -46,12 +45,7 @@ namespace EWUS_Expertdatabase.Model
         ///     Get or set Saving Percent  of the measure
         /// </summary>
         public int SavingPercent { get; set; }
-
-        /// <summary>
-        ///     Get or set collection of measure's pictures
-        /// </summary>
-        public Collection<MeasurePicture> MeasurePictures { get; set; }
-
+        
         /// <summary>
         ///     Get or set collection of measure's links
         /// </summary>
@@ -63,24 +57,6 @@ namespace EWUS_Expertdatabase.Model
         public Collection<DocumentItem> DocumentItems { get; set; }
 
         public Collection<ProjectMeasure> ProjectMeasures { get; set; }
-    }
-    
-    public class MeasurePicture : CoreObject
-    {
-        public MeasurePicture()
-        {
-        }
-
-        /// <summary>
-        ///     Get or set file name of measure's pictures
-        /// </summary>
-        public string Filename { get; set; }
-
-        [IgnoreDataMember]
-        [XmlIgnore]
-        protected Measure Measure { get; set; }
-        
-        public long MeasureId { get; set; }
     }
     
     public class MeasureLink : CoreObject

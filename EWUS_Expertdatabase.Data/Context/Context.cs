@@ -16,9 +16,7 @@ namespace EWUS_Expertdatabase.Data
         public DbSet<MaintenanceCompany> MaintenanceCompanies { get; set; }
         public DbSet<Individual> Individuals { get; set; }
         public DbSet<Measure> Measures { get; set; }
-        public DbSet<MeasurePicture> MeasurePictures { get; set; }
         public DbSet<MeasureLink> MeasureLinks { get; set; }
-        public DbSet<DocumentInstance> DocumentInstances { get; set; }
         public DbSet<DocumentItem> DocumentItems { get; set; }
         public DbSet<ProjectMeasure> ProjectMeasures { get; set; }
         public DbSet<ProjectMeasurePerformance> ProjectMeasurePerformances { get; set; }
@@ -48,8 +46,7 @@ namespace EWUS_Expertdatabase.Data
             modelBuilder.Entity<Classification>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Classification>().Property(x => x.ClassificationType).IsRequired();
             modelBuilder.Entity<Classification>().Property(x => x.Value).IsRequired();
-
-            //modelBuilder.Entity<ProjectMeasurePerformance>().HasOptional(x => x.DocumentItem).WithOptionalDependent().WillCascadeOnDelete(true);
+            
         }
     }
 }
