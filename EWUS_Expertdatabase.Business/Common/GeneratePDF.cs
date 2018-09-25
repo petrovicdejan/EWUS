@@ -92,7 +92,6 @@ namespace EWUS_Expertdatabase.Business.Common
                 property = projectMeasurePoco?.Property.Value.ToString();
 
             html = html.Replace("$$$Liegenschaftstyp$$$", property.HtmlEncode())
-                        //.Replace("$$$PropertyId$$$", propertyId)
                         .Replace("$$$LiegenschaftsNr$$$", projectMeasurePoco?.PropertyNumber.HtmlEncode())
                         .Replace("$$$Standort$$$", projectMeasurePoco.Location.HtmlEncode())
                         .Replace("$$$Plz$$$", zipCode)
@@ -105,16 +104,14 @@ namespace EWUS_Expertdatabase.Business.Common
 
             string tablesCurrentSituation = string.Empty;
             string sPageBreak = string.Empty;
-            int ind = 0;
             foreach (var item in projectMeasurePoco.ProjectMeasurePerformances)
             {
-                ++ind;
                 if (item.Hide)
                     continue;
                 
                 string imagePath = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=" + item?.DocumentItem?.ObjectId;
 
-                if (item.PageBreak && ind < projectMeasurePoco.ProjectMeasurePerformances.Count())
+                if (item.PageBreak)
                     sPageBreak = " style='page-break-after:always'";
                 else
                     sPageBreak = string.Empty;
@@ -129,12 +126,7 @@ namespace EWUS_Expertdatabase.Business.Common
 
                 tablesCurrentSituation += "<br/>" + table;
             }
-
-            if (!string.IsNullOrEmpty(sPageBreak))
-                html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
-            else
-                html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
-
+            
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
                         .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());
             
