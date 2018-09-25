@@ -712,7 +712,6 @@
     <Content Include="Scripts\gentelella\vendors\nprogress\Notes.md" />
     <Content Include="Scripts\gentelella\vendors\nprogress\Readme.md" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\gentelella\build\css\custom.css" />
     <Content Include="Scripts\gentelella\build\css\custom.min.css" />
     <Content Include="Scripts\gentelella\build\images\back_disabled.png" />
@@ -941,6 +940,7 @@
     <Content Include="Scripts\jqGrid\js\trirand\i18n\grid.locale-sr.js" />
     <Content Include="Scripts\jqGrid\js\trirand\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jqGrid\js\trirand\src\jquery.jqGrid.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -976,6 +976,7 @@
     <Content Include="Views\Project\ProjectIndex.cshtml" />
     <Content Include="Views\ProjectMeasure\ProjectMeasureIndex.cshtml" />
     <Content Include="Views\ProjectMeasure\ProjectMeasure.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -996,7 +997,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EWUS_Expertdatabase.Business\EWUS_Expertdatabase.Business.csproj">
