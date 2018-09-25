@@ -15,7 +15,7 @@
         
         $(function () {
             $("ol.dz-list").sortable({
-                handle: 'div',
+                handle: '.data-drag',
                 cancel: ''
             });
 
@@ -53,13 +53,13 @@
                     var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            el.parent().parent().parent().remove();
+                            el.parent().parent().parent().parent().parent().remove();
                         },
                         function () { });
                 });
             };
             preview.find('.dzone-add').on('click', function () {
-                $(this).parent().parent().find('.dropzone').click();
+                $(this).parent().parent().parent().parent().find('.dropzone').click();
             });
 
             var dropzone = preview.find(".dropzone");
@@ -82,13 +82,13 @@
                     var el = $(this);
                     publicApp.callSwalDeleteApp(
                         function () {
-                            el.parent().parent().parent().remove();
+                            el.parent().parent().parent().parent().parent().remove();
                         },
                         function () { });
                 });
             }
             preview.find('.dzone-add').on('click', function () {
-                $(this).parent().parent().find('.dropzone').click();
+                $(this).parent().parent().parent().parent().find('.dropzone').click();
             });
             
 
@@ -107,8 +107,10 @@
 
         $('#generateReport').on('click', function (e) {
             if (!IsNullOrUndefined(objectId) && objectId != 0) {
-                var result = publicApp.onFormSubmitApp($('#ProjectMeasure'), e, null, false, false, null, null, "ProjectMeasure", false);
+                var result = publicApp.onFormSubmitApp($('#ProjectMeasure'), e, null, false, false, null, null, "ProjectMeasure", false, false);
                 openReport(objectId);
+                publicApp.setUpModelFormApp($('#ProjectMeasure'));
+                
             }
             
         });

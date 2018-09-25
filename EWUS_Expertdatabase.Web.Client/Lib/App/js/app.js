@@ -2770,7 +2770,7 @@ var publicApp = (function () {
             return false;
     }
 
-    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync) {
+    function onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync, bCloseModal) {
         if (IsNullOrUndefined(bShowAlertOnSuccess))
             bShowAlertOnSuccess = true;
         if (IsNullOrUndefined(bShowAlertOnFailure))
@@ -2779,6 +2779,8 @@ var publicApp = (function () {
             isCollection = true;
         if (IsNullOrUndefined(isAsync))
             isAsync = true;
+        if (IsNullOrUndefined(bCloseModal))
+            bCloseModal = true;
         var formId = $(form).attr("Id");
         if (IsNullOrUndefined(idForm))
             formId = $(form).attr("Id")
@@ -2810,7 +2812,7 @@ var publicApp = (function () {
 
         var url = sRootUrl + $(form).attr("posturl");
         var result = null;
-        result = webApiPost(url, dataObject, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, true, formId, isAsync);
+        result = webApiPost(url, dataObject, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, bCloseModal, formId, isAsync);
 
         return result;
     }
@@ -3397,8 +3399,8 @@ var publicApp = (function () {
             setForm(elForm, oData, behDefValues);
         },
 
-        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync) {
-            return onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync);
+        onFormSubmitApp: function (form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync, bCloseModal) {
+            return onFormSubmit(form, e, fOnData, bShowAlertOnSuccess, bShowAlertOnFailure, fOnError, isCollection, idForm, isAsync, bCloseModal);
         },
         deleteObjectApp: function (el, fOnSuccess) {
             deleteObject(el, fOnSuccess);
@@ -3432,6 +3434,12 @@ var publicApp = (function () {
         },
         getSelectedFieldApp: function (sSelector) {
             return getSelectedField(sSelector);
+        },
+        getDateFormatApp: function (el, defaultFormat) {
+            return getDateFormat(el, defaultFormat);
+        },
+        setUpModelFormApp: function (el) {
+            setUpModelForm(el);
         }
     }
 

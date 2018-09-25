@@ -126,7 +126,13 @@ namespace EWUS_Expertdatabase.Business.Common
 
                 tablesCurrentSituation += "<br/>" + table;
             }
-            
+
+            if (!string.IsNullOrEmpty(sPageBreak))
+                html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
+            else
+                html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
+
+
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
                         .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());
             

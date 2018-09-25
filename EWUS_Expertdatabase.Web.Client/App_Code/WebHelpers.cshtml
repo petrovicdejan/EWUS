@@ -487,7 +487,7 @@
                                     <div class="dz-size" data-dz-size style="display:none;"></div>
                                 </div>
                             }
-                            <div class="col-md-3 dz-click-image">
+                            <div class="col-md-3 dz-click-image" style="padding-left:2px;">
                                 <span class=""><img data-dz-thumbnail /></span>
                             </div>
                             @if (IsHidden == true)
@@ -584,17 +584,17 @@
             <ol class="dz-list" id="rows-container" style="margin-top:6px;padding-left:0px;">
                 <li class="b-b-1 preview-source data-performance" id="@name-row" data-name="@name" data-preview style="display:none;" data-dropzone-extended="true">
                     <div class="row">
-                        <div class="col-md-5" style="width:40%">
+                        <div class="col-md-5 data-drag">
                             <div class="dz-description">
                                 <textarea id="description" type="text" rows="5" style="width:100%;" data-edit="true" data-filed-name="Description" data-float-label-set="true"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-4" style="width:30%">
+                        <div class="col-md-4">
                             <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
                                 <div class="dz-message">
                                     Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
                                 </div>
-                                <div id="@dzoneId-preview" class="dz-preview">
+                                <div id="@dzoneId-preview" class="dz-preview data-drag">
                                     <div class="table table-striped files " id="previews" style="height:0px;">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -610,50 +610,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2" style="width:20%; padding-left:2px; padding-right:2px;">
+                        <div class="col-md-3" style="padding-right:2px;">
+                            <div class="row">
+                                <div class="col-md-8" style="padding-left:1px;">
 
-                        @if (isAddEnabled == "true")
-                        {
-                            <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
-                                Bild ändern
-                            </button>
-                        }
-                        else
-                        {
-                            <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
-                                <i class='fa fa-trash-o' style="cursor: pointer"></i>
-                            </button>
-                        }
-
-                        <div class="field-set" style="margin-top:20%;">
-                            <div class="field-contener">
-                                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:50px;">
-                                    <label for="@name-check" style="padding-right:18px;">Ausblenden</label>
+                                    @if (isAddEnabled == "true")
+            {
+                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
+                            Bild ändern
+                        </button>
+}
+else
+{
+                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                        </button>
+}
                                 </div>
-                                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="width:20%;">
-                                    <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
-                                    <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
+                                </div>
+                            </div>
+                            <div class="row data-drag">
+                                <div class="field-set" style="margin-top:20%;">
+                                    <div class="field-contener">
+                                        <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:70%;">
+                                            <label for="@name-check" style="padding-right:18px;">Ausblenden</label>
+                                        </div>
+                                        <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="width:20%;">
+                                            <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
+                                            <input id="@name-check" data-filed-name="@name-check" type="checkbox" name="@name-check" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field-set">
+                                    <div class="field-contener">
+                                        <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:70%;">
+                                            <label for="@name-PageBreakCheck">Seitenumbruch</label>
+                                        </div>
+                                        <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="width:20%;">
+                                            <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
+                                            <input id="@name-PageBreakCheck" data-filed-name="@name-PageBreakCheck" type="checkbox" name="@name-PageBreakcheck" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="field-set">
-                            <div class="field-contener">
-                                <div class="field-group float-label-control form-inline-element-wrapper label-wrapper" style="min-width:50px;">
-                                    <label for="@name-PageBreakCheck">Seitenumbruch</label>
-                                </div>
-                                <div class="field-group float-label-control form-inline-element-wrapper control-wrapper" style="width:20%;">
-                                    <i class="fa field-icon fa-terminal" data-edit="false" valid="true"></i>
-                                    <input id="@name-PageBreakCheck" data-filed-name="@name-PageBreakCheck" type="checkbox" name="@name-PageBreakcheck" onclick="onCheckBoxClick(this)" data-representing-type="Boolean" data-edit="false">
-                                </div>
-                            </div>
                         </div>
-
-                        </div>
-                        <div class="col-md-1">
-                            <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
-                        </div>
-                    </div>
-                </li>
+</li>
             </ol>
         </div>
 }
