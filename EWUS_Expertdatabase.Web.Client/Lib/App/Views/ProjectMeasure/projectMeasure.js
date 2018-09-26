@@ -108,13 +108,18 @@
         $('#generateReport').on('click', function (e) {
             if (!IsNullOrUndefined(objectId) && objectId != 0) {
                 var result = publicApp.onFormSubmitApp($('#ProjectMeasure'), e, null, false, false, null, null, "ProjectMeasure", false, false);
-                openReport(objectId);
+                
                 publicApp.setUpModelFormApp($('#ProjectMeasure'));
-               
+
                 setTimeout(function () {
-                    $("#ModificationDate").datepicker('hide');
-                    $("#SubmittedOnDate").datepicker('hide');
-                }, 1);
+                    openReport(objectId);
+                }, 1000);
+
+                //setTimeout(function () {
+                //    $("#ModificationDate").datepicker('hide');
+                //    $("#SubmittedOnDate").datepicker('hide');
+                //}, 1);
+                
             }            
         });
     });

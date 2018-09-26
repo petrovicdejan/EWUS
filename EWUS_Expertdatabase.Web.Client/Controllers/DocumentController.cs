@@ -50,16 +50,16 @@ namespace EWUS_Expertdatabase.Web.Client
                 }
             }
             
-            string folder = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag]);
+            string folder = Server.MapPath("~/"+ Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag]));
 
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
+            //if (!Directory.Exists(folder))
+            //{
+            //    Directory.CreateDirectory(folder);
+            //}
 
             var streamInput = objItem.GetValue("InputStream") as Stream;
             var fileName = objItem.GetValue("ObjectId") as String;
-            var path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName);
+            var path = Server.MapPath("~/" + Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName));
 
             using (var fileStream = System.IO.File.Create(path))
             {
@@ -85,7 +85,7 @@ namespace EWUS_Expertdatabase.Web.Client
                 if (!string.IsNullOrWhiteSpace(objectId))
                     fileName = objectId;
 
-                var localFilePath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName);
+                var localFilePath = Server.MapPath("~/" + Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + tag], fileName));
 
                 if (!System.IO.File.Exists(localFilePath))
                 {

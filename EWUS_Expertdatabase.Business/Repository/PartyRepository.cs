@@ -142,7 +142,7 @@ namespace EWUS_Expertdatabase.Business
                 {
                     Task.Factory.StartNew(() =>
                     {
-                        SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Measure).Name, customer.DocumentItems);
+                        SaveFile.SaveFileInFolder(customer.Guid.ToString(), typeof(Customer).Name, customer.DocumentItems);
                     });
                 }
 

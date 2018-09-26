@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Web;
 
 namespace EWUS_Expertdatabase.Business
 {
@@ -20,8 +21,8 @@ namespace EWUS_Expertdatabase.Business
             {
                 foreach (var docItem in documentItems)
                 {
-                    string path = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName] + @"\" + docItem.ObjectId);
-                    string folderName = ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName];
+                    string path = System.Web.Hosting.HostingEnvironment.MapPath("~/" + Path.Combine(ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName] + @"\" + docItem.ObjectId));
+                    string folderName = System.Web.Hosting.HostingEnvironment.MapPath("~/" + ConfigurationManager.AppSettings["SharedFolder_" + objectTypeName]);
                     string newFileName = string.Empty;
 
                     using (var stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))

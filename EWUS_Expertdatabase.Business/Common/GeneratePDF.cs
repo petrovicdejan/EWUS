@@ -37,7 +37,7 @@ namespace EWUS_Expertdatabase.Business.Common
             var projectRepo = new ProjectRepository();
             logoDoc = projectRepo.GetDocumentItemForProject(projectMeasurePoco.ProjectId);    
             
-            string logoPath = Path.Combine(ConfigurationManager.AppSettings["SharedFolder_Customer"] + @"\" + logoDoc?.ObjectId);
+            string logoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + Path.Combine(ConfigurationManager.AppSettings["SharedFolder_Customer"] + @"\" + logoDoc?.ObjectId));
             
             events.setHeader(logoPath, rightLogo);
             document.NewPage();
