@@ -200,7 +200,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\PdfReports\Header.html" />
     <Content Include="Content\PdfReports\report.css" />
     <Content Include="Content\PdfReports\ReportEWUS.html" />
     <Content Include="favicon.ico" />
