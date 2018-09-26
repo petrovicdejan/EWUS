@@ -18,7 +18,7 @@ namespace EWUS_Expertdatabase.Business.Common
 {
    public static class GeneratePDF
     {
-        public static byte[] MakePDF(string htmlString,string cssText,string header,string logo,string rightLogo,long projectId)
+        public static byte[] MakePDF(string htmlString,string cssText,string logo,string rightLogo,long projectId)
         {
             var memoryStream = new MemoryStream();
             var document = new iTextSharp.text.Document(PageSize.A4);
@@ -127,14 +127,17 @@ namespace EWUS_Expertdatabase.Business.Common
                 tablesCurrentSituation += "<br/>" + table;
             }
 
-            if (!string.IsNullOrEmpty(sPageBreak))
-                html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
-            else
-                html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
+            if (string.IsNullOrEmpty(sPageBreak))
+                tablesCurrentSituation += "<br/>";
+
+            //if (!string.IsNullOrEmpty(sPageBreak))
+            //    html = html.Replace("$$$PageBreakStyle$$$", string.Empty);
+            //else
+            //    html = html.Replace("$$$PageBreakStyle$$$", "style='page-break-before:always'");
 
 
             html = html.Replace("$$$TableSituation$$$", tablesCurrentSituation)
-                        .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());
+                    .Replace("$$$Beschreibung$$$", projectMeasurePoco.Description.HtmlEncode());
             
             if (projectMeasurePoco.SubmittedOnDate == null)
                 html = html.Replace("$$$EingereichtAm$$$", "[EingereichtAm]");
