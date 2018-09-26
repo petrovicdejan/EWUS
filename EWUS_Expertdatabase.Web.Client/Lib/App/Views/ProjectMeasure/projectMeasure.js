@@ -110,9 +110,12 @@
                 var result = publicApp.onFormSubmitApp($('#ProjectMeasure'), e, null, false, false, null, null, "ProjectMeasure", false, false);
                 openReport(objectId);
                 publicApp.setUpModelFormApp($('#ProjectMeasure'));
-                
-            }
-            
+               
+                setTimeout(function () {
+                    $("#ModificationDate").datepicker('hide');
+                    $("#SubmittedOnDate").datepicker('hide');
+                }, 1);
+            }            
         });
     });
 
