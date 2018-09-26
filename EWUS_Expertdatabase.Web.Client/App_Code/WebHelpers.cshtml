@@ -591,7 +591,7 @@
                         </div>
                         <div class="col-md-4">
                             <div id="@dzoneId" class="dropzone" data-maxfiles="1" data-addenabled="@if (isAddEnabled=="true") {<text>true</text>} else {<text>false</text>}">
-                                <div class="dz-message">
+                                <div class="dz-message data-drag">
                                     Bild zum Hochladen auswählen oder per Drag & Drop einfügen<br>
                                 </div>
                                 <div id="@dzoneId-preview" class="dz-preview data-drag">
@@ -613,19 +613,18 @@
                         <div class="col-md-3" style="padding-right:2px;">
                             <div class="row">
                                 <div class="col-md-8" style="padding-left:1px;">
-
-                                    @if (isAddEnabled == "true")
-            {
-                        <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
-                            Bild ändern
-                        </button>
-}
-else
-{
-                        <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
-                            <i class='fa fa-trash-o' style="cursor: pointer"></i>
-                        </button>
-}
+                                 @if (isAddEnabled == "true")
+                                 {
+                                    <button class="btn-white btn btn-sm dzone-add" id="addFile-@dzoneId" type="button" style="z-index:1999; cursor: pointer;">
+                                        Bild ändern
+                                    </button>
+                                 }
+                                 else
+                                 {
+                                    <button data-dz-remove class="btn-white btn btn-sm dz-remove" style="z-index:1999; cursor: pointer; display:none;float:right;" type="button">
+                                        <i class='fa fa-trash-o' style="cursor: pointer"></i>
+                                    </button>
+                                 }
                                 </div>
                                 <div class="col-md-4">
                                     <button type="button" class="btn-white btn btn-sm dz-remove row-delete"><i class='fa fa-trash-o' style="cursor: pointer"></i></button>
