@@ -448,7 +448,7 @@
     <Content Include="Lib\bootstrap-modal\bootstrap-modalmanager.js" />
     <Content Include="Lib\fullcalendar\fullcalendar.min.js" />
     <Content Include="Lib\fullcalendar\moment.min.js" />
-    <Content Include="Lib\images\Deutchland.png" />
+    <Content Include="Lib\images\Deutschland.png" />
     <Content Include="Lib\images\ewus.png" />
     <Content Include="Lib\images\img.jpg" />
     <Content Include="Lib\images\logo.png" />

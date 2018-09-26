@@ -65,7 +65,7 @@ namespace EWUS_Expertdatabase.Business.Common
 
             var sRootUrl = ConfigurationManager.AppSettings["rootURL"];
 
-            string headerImage = sRootUrl + "document/download/contentstream?Tag=ProjectMeasure&Number=Deutschland.png";
+            string headerImage = sRootUrl + "Lib/images/Deutschland.png";
 
             string performanceSheetNumber = string.Empty;
 
