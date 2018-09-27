@@ -280,14 +280,10 @@
                 this.previewsContainer.querySelector('[data-dz-showheader]').style.display = 'block';
 
             if (this.options.addOpenLinks) {
-                //file._openLink = Dropzone.createElement("<a class=\"dz-open\" href=\"javascript:undefined;\" style=\"padding-right: 5px\" data-dz-open>" + this.options.dictOpenLink + "</a>");
-                //file.previewElement.appendChild(file._openLink);
 
                 file._openLink = $(".dz-click-image");
 
-                $(file.previewElement.querySelector('[data-dz-thumbnail]')).dblclick(function (e) {
-                    //e.preventDefault();
-                    //e.stopPropagation();
+                $(file.previewElement.querySelector('.dz-click-image')).dblclick(function (e) {
 
                     var sUrl = sRootUrl + "document/download/contentstream?Number=" + file.id + "&Key=" + file.name;
                     if (_ref3.options.objectTypeName != '')
@@ -301,9 +297,6 @@
 
               file.previewElement.querySelector('[data-dz-remove]').setAttribute("title", this.options.dictRemoveFile);
               file.previewElement.querySelector('[data-dz-remove]').style.display = 'block';
-            // file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
-            //  //file._removeLink = Dropzone.createElement("<button class=\"btn-white btn btn-xs pull-right dz-remove\" href=\"javascript:undefined;\" data-dz-remove title=\"" + this.options.dictRemoveFile + "\"><i class='fa fa-trash-o'></i></button>");
-            //file.previewElement.appendChild(file._removeLink);
           }
 
             if (file.previewElement.querySelector('[data-dz-description]')){
